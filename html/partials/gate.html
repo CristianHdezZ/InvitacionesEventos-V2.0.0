@@ -24,8 +24,8 @@
   </svg>-->
   </div>
 
-  <svg class="gate__butterfly gate__butterfly--left" viewBox="0 0 60 40" aria-hidden="true"><g class="butterfly__wings"><path d="M28,20 C10,0 0,5 4,20 C0,35 10,40 28,20Z" class="wing wing--l"/><path d="M32,20 C50,0 60,5 56,20 C60,35 50,40 32,20Z" class="wing wing--r"/></g><line x1="30" y1="8" x2="30" y2="32" class="butterfly__body"/></svg>
-  <svg class="gate__butterfly gate__butterfly--right" viewBox="0 0 60 40" aria-hidden="true"><g class="butterfly__wings"><path d="M28,20 C10,0 0,5 4,20 C0,35 10,40 28,20Z" class="wing wing--l"/><path d="M32,20 C50,0 60,5 56,20 C60,35 50,40 32,20Z" class="wing wing--r"/></g><line x1="30" y1="8" x2="30" y2="32" class="butterfly__body"/></svg>
+  <!--<svg class="gate__butterfly gate__butterfly--left" viewBox="0 0 60 40" aria-hidden="true"><g class="butterfly__wings"><path d="M28,20 C10,0 0,5 4,20 C0,35 10,40 28,20Z" class="wing wing--l"/><path d="M32,20 C50,0 60,5 56,20 C60,35 50,40 32,20Z" class="wing wing--r"/></g><line x1="30" y1="8" x2="30" y2="32" class="butterfly__body"/></svg>-->
+  <!--svg class="gate__butterfly gate__butterfly--right" viewBox="0 0 60 40" aria-hidden="true"><g class="butterfly__wings"><path d="M28,20 C10,0 0,5 4,20 C0,35 10,40 28,20Z" class="wing wing--l"/><path d="M32,20 C50,0 60,5 56,20 C60,35 50,40 32,20Z" class="wing wing--r"/></g><line x1="30" y1="8" x2="30" y2="32" class="butterfly__body"/></svg>-->
 
   <!-- Animación Lottie decorativa (brillos/corazones flotando). Si no carga
        (por ejemplo sin conexión), simplemente no se ve nada — no rompe el
@@ -47,7 +47,7 @@
       <circle cx="65" cy="15" r="4" fill="var(--color-gold, var(--oro, #B8935C))"/>
       <line x1="15" y1="50" x2="85" y2="50" stroke="var(--color-gold, var(--oro, #B8935C))" stroke-width="4" stroke-linecap="round"/>
     </svg>-->
-    <img class="gate__crown gate__crown--img" id="gateCoronaImg" src="" alt="" hidden>
+    <img class="gate__crown gate__crown--img" id="gateCoronaImg" src="" alt="" hidden loading="eager" fetchpriority="high" decoding="async">
     <h1 class="gate__name">Linda</h1>
     <p class="gate__xv">XV AÑOS</p>
     <p class="gate__quote">
@@ -133,16 +133,18 @@
     <g class="rose" transform="translate(35,225) scale(0.55)"><path d="M0,-28 C14,-28 24,-16 22,-2 C20,10 8,18 -4,16 C-18,14 -26,2 -22,-12 C-19,-22 -10,-28 0,-28 Z" class="rose__c1"/><path d="M-2,-18 C10,-20 18,-10 15,2 C12,12 0,16 -9,11 C-17,6 -18,-6 -12,-13 C-9,-16 -6,-18 -2,-18 Z" class="rose__c2"/><path d="M2,-10 C9,-9 12,-2 9,4 C6,9 -1,10 -5,5 C-8,1 -6,-5 -1,-7" class="rose__spiral"/><ellipse cx="-8" cy="-10" rx="5" ry="3" class="rose__c3" transform="rotate(-30 -8 -10)"/></g>
     <g class="rose" transform="translate(185,222) scale(0.6)"><path d="M0,-28 C14,-28 24,-16 22,-2 C20,10 8,18 -4,16 C-18,14 -26,2 -22,-12 C-19,-22 -10,-28 0,-28 Z" class="rose__c1"/><path d="M-2,-18 C10,-20 18,-10 15,2 C12,12 0,16 -9,11 C-17,6 -18,-6 -12,-13 C-9,-16 -6,-18 -2,-18 Z" class="rose__c2"/><path d="M2,-10 C9,-9 12,-2 9,4 C6,9 -1,10 -5,5 C-8,1 -6,-5 -1,-7" class="rose__spiral"/><ellipse cx="-8" cy="-10" rx="5" ry="3" class="rose__c3" transform="rotate(-30 -8 -10)"/></g>
   </svg>-->
-  <img class="gate__dress gate__dress-img" id="gateDressImg" src="" alt="" hidden>
+  <img class="gate__dress gate__dress-img" id="gateDressImg" src="" alt="" hidden loading="eager"
+    fetchpriority="high"
+    decoding="async">
   </div>
 
   <!-- Fila 4 -->
-  <div class="gate__bottom">
+  <!--<div class="gate__bottom">
   <img class="garland garland--bottom garland-img" id="gateFloralBottomImg" src="" alt="" hidden>
   <svg class="garland garland--bottom" id="gateFloralBottomSvg" viewBox="0 0 500 140" aria-hidden="true">
     <g class="rose" transform="translate(70,110) scale(0.8)"><path d="M0,-28 C14,-28 24,-16 22,-2 C20,10 8,18 -4,16 C-18,14 -26,2 -22,-12 C-19,-22 -10,-28 0,-28 Z" class="rose__c1"/><path d="M-2,-18 C10,-20 18,-10 15,2 C12,12 0,16 -9,11 C-17,6 -18,-6 -12,-13 C-9,-16 -6,-18 -2,-18 Z" class="rose__c2"/><path d="M2,-10 C9,-9 12,-2 9,4 C6,9 -1,10 -5,5 C-8,1 -6,-5 -1,-7" class="rose__spiral"/><ellipse cx="-8" cy="-10" rx="5" ry="3" class="rose__c3" transform="rotate(-30 -8 -10)"/></g>
     <g class="rose" transform="translate(420,105) scale(0.9)"><path d="M0,-28 C14,-28 24,-16 22,-2 C20,10 8,18 -4,16 C-18,14 -26,2 -22,-12 C-19,-22 -10,-28 0,-28 Z" class="rose__c1"/><path d="M-2,-18 C10,-20 18,-10 15,2 C12,12 0,16 -9,11 C-17,6 -18,-6 -12,-13 C-9,-16 -6,-18 -2,-18 Z" class="rose__c2"/><path d="M2,-10 C9,-9 12,-2 9,4 C6,9 -1,10 -5,5 C-8,1 -6,-5 -1,-7" class="rose__spiral"/><ellipse cx="-8" cy="-10" rx="5" ry="3" class="rose__c3" transform="rotate(-30 -8 -10)"/></g>
     <path d="M0,100 Q150,60 250,95 T500,100" class="garland__vine"/>
   </svg>
-  </div>
+  </div>-->
 </div>
