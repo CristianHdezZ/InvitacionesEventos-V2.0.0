@@ -1466,19 +1466,20 @@
 
     }
 
+    /* El badge NO se apila en móvil: sigue siendo una pastilla
+       horizontal, igual que en escritorio. Al ponerlo en columna
+       quedaba más alto que ancho y, con el radio al máximo, se
+       convertía en un óvalo — otra forma distinta en cada
+       tamaño. Solo se ajustan las medidas.
+
+       Cabe de sobra: ocupa unos 200px de los 339 disponibles a
+       375px de ancho. */
+
     .hero__badge{
 
-        flex-direction:column;
+        gap:12px;
 
-        gap:8px;
-
-        padding:16px 22px;
-
-    }
-
-    .hero__badge-label{
-
-        text-align:center;
+        padding:12px 20px;
 
     }
 
