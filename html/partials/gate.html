@@ -12,7 +12,7 @@
        entonces esta se oculta. En V1 pasaba al revés: el SVG nacía con
        display:none y scriptOld.js lo destapaba, así que al retirar ese
        archivo la portada se quedó sin decoración. -->
-  <svg class="garland garland--top" id="gateFloralTopSvg" viewBox="0 0 500 140" aria-hidden="true">
+  <!--<svg class="garland garland--top" id="gateFloralTopSvg" viewBox="0 0 500 140" aria-hidden="true">
     <g class="rose" transform="translate(60,20)"><path d="M0,-28 C14,-28 24,-16 22,-2 C20,10 8,18 -4,16 C-18,14 -26,2 -22,-12 C-19,-22 -10,-28 0,-28 Z" class="rose__c1"/><path d="M-2,-18 C10,-20 18,-10 15,2 C12,12 0,16 -9,11 C-17,6 -18,-6 -12,-13 C-9,-16 -6,-18 -2,-18 Z" class="rose__c2"/><path d="M2,-10 C9,-9 12,-2 9,4 C6,9 -1,10 -5,5 C-8,1 -6,-5 -1,-7" class="rose__spiral"/><ellipse cx="-8" cy="-10" rx="5" ry="3" class="rose__c3" transform="rotate(-30 -8 -10)"/></g>
     <g class="rose" transform="translate(150,-10) scale(0.8)"><path d="M0,-28 C14,-28 24,-16 22,-2 C20,10 8,18 -4,16 C-18,14 -26,2 -22,-12 C-19,-22 -10,-28 0,-28 Z" class="rose__c1"/><path d="M-2,-18 C10,-20 18,-10 15,2 C12,12 0,16 -9,11 C-17,6 -18,-6 -12,-13 C-9,-16 -6,-18 -2,-18 Z" class="rose__c2"/><path d="M2,-10 C9,-9 12,-2 9,4 C6,9 -1,10 -5,5 C-8,1 -6,-5 -1,-7" class="rose__spiral"/><ellipse cx="-8" cy="-10" rx="5" ry="3" class="rose__c3" transform="rotate(-30 -8 -10)"/></g>
     <g class="rose" transform="translate(350,15) scale(0.9)"><path d="M0,-28 C14,-28 24,-16 22,-2 C20,10 8,18 -4,16 C-18,14 -26,2 -22,-12 C-19,-22 -10,-28 0,-28 Z" class="rose__c1"/><path d="M-2,-18 C10,-20 18,-10 15,2 C12,12 0,16 -9,11 C-17,6 -18,-6 -12,-13 C-9,-16 -6,-18 -2,-18 Z" class="rose__c2"/><path d="M2,-10 C9,-9 12,-2 9,4 C6,9 -1,10 -5,5 C-8,1 -6,-5 -1,-7" class="rose__spiral"/><ellipse cx="-8" cy="-10" rx="5" ry="3" class="rose__c3" transform="rotate(-30 -8 -10)"/></g>
@@ -21,7 +21,7 @@
     <ellipse cx="110" cy="45" rx="14" ry="6" class="leaf" transform="rotate(20 110 45)"/>
     <ellipse cx="260" cy="50" rx="14" ry="6" class="leaf" transform="rotate(-15 260 50)"/>
     <ellipse cx="400" cy="42" rx="14" ry="6" class="leaf" transform="rotate(30 400 42)"/>
-  </svg>
+  </svg>-->
   </div>
 
   <svg class="gate__butterfly gate__butterfly--left" viewBox="0 0 60 40" aria-hidden="true"><g class="butterfly__wings"><path d="M28,20 C10,0 0,5 4,20 C0,35 10,40 28,20Z" class="wing wing--l"/><path d="M32,20 C50,0 60,5 56,20 C60,35 50,40 32,20Z" class="wing wing--r"/></g><line x1="30" y1="8" x2="30" y2="32" class="butterfly__body"/></svg>
@@ -31,22 +31,22 @@
        (por ejemplo sin conexión), simplemente no se ve nada — no rompe el
        diseño. Puedes cambiar el src por cualquier animación gratuita de
        https://lottiefiles.com (botón "Embed" → copia la URL .json/.lottie). -->
-  <lottie-player
+  <!--<lottie-player
     id="gateLottie"
     class="gate__lottie"
     src="assets/flor.json"
     background="transparent" speed="0.6" loop autoplay>
-  </lottie-player>
+  </lottie-player>-->
 
   <div class="gate__content">
     <p class="gate__eyebrow">Con la bendición de Dios y mi familia</p>
-    <svg class="gate__crown" id="gateCoronaSvg" viewBox="0 0 100 60" aria-hidden="true">
+    <!--<svg class="gate__crown" id="gateCoronaSvg" viewBox="0 0 100 60" aria-hidden="true">
       <path d="M10,50 L10,30 L25,42 L35,15 L50,35 L65,15 L75,42 L90,30 L90,50 Z" fill="none" stroke="var(--color-gold, var(--oro, #B8935C))" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
       <circle cx="35" cy="15" r="4" fill="var(--color-gold, var(--oro, #B8935C))"/>
       <circle cx="50" cy="10" r="5" fill="var(--color-primary-dark, var(--rosa-deep, #C97D95))"/>
       <circle cx="65" cy="15" r="4" fill="var(--color-gold, var(--oro, #B8935C))"/>
       <line x1="15" y1="50" x2="85" y2="50" stroke="var(--color-gold, var(--oro, #B8935C))" stroke-width="4" stroke-linecap="round"/>
-    </svg>
+    </svg>-->
     <img class="gate__crown gate__crown--img" id="gateCoronaImg" src="" alt="" hidden>
     <h1 class="gate__name">Linda</h1>
     <p class="gate__xv">XV AÑOS</p>
@@ -83,7 +83,7 @@
        así nunca se monta sobre el sobre ni sobre la guirnalda inferior,
        sin necesidad de márgenes negativos. -->
   <div class="gate__illustration">
-  <svg class="gate__dress" id="gateDressSvg" viewBox="0 -10 220 270" aria-hidden="true">
+  <!--<svg class="gate__dress" id="gateDressSvg" viewBox="0 -10 220 270" aria-hidden="true">
     <ellipse cx="110" cy="250" rx="95" ry="10" class="dress__shadow"/>
     <path d="M100,6 C88,10 78,24 80,42 C82,58 76,80 82,100 C87,84 92,66 89,50 C91,42 93,32 96,24 C98,17 99,11 100,6Z" class="dress__hair"/>
     <path d="M120,6 C132,10 142,24 140,42 C138,58 144,80 138,100 C133,84 128,66 131,50 C129,42 127,32 124,24 C122,17 121,11 120,6Z" class="dress__hair"/>
@@ -132,7 +132,7 @@
     <circle cx="45" cy="190" r="2" class="dress__sparkle" style="animation-delay:1.6s"/>
     <g class="rose" transform="translate(35,225) scale(0.55)"><path d="M0,-28 C14,-28 24,-16 22,-2 C20,10 8,18 -4,16 C-18,14 -26,2 -22,-12 C-19,-22 -10,-28 0,-28 Z" class="rose__c1"/><path d="M-2,-18 C10,-20 18,-10 15,2 C12,12 0,16 -9,11 C-17,6 -18,-6 -12,-13 C-9,-16 -6,-18 -2,-18 Z" class="rose__c2"/><path d="M2,-10 C9,-9 12,-2 9,4 C6,9 -1,10 -5,5 C-8,1 -6,-5 -1,-7" class="rose__spiral"/><ellipse cx="-8" cy="-10" rx="5" ry="3" class="rose__c3" transform="rotate(-30 -8 -10)"/></g>
     <g class="rose" transform="translate(185,222) scale(0.6)"><path d="M0,-28 C14,-28 24,-16 22,-2 C20,10 8,18 -4,16 C-18,14 -26,2 -22,-12 C-19,-22 -10,-28 0,-28 Z" class="rose__c1"/><path d="M-2,-18 C10,-20 18,-10 15,2 C12,12 0,16 -9,11 C-17,6 -18,-6 -12,-13 C-9,-16 -6,-18 -2,-18 Z" class="rose__c2"/><path d="M2,-10 C9,-9 12,-2 9,4 C6,9 -1,10 -5,5 C-8,1 -6,-5 -1,-7" class="rose__spiral"/><ellipse cx="-8" cy="-10" rx="5" ry="3" class="rose__c3" transform="rotate(-30 -8 -10)"/></g>
-  </svg>
+  </svg>-->
   <img class="gate__dress gate__dress-img" id="gateDressImg" src="" alt="" hidden>
   </div>
 
