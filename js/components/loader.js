@@ -13,25 +13,17 @@ const Loader = (() => {
        CONFIG
     ========================================================== */
 
+    
+
     const CONFIG = {
 
-        typingSpeed: 42,
+        typingSpeed:42,
 
-        finishDelay: 700,
+        finishDelay:2500,
 
-        fadeDuration: 900,
+        fadeDuration:900,
 
-        resources: [
-
-            "assets/gallery/CoronaElegante03.png",
-
-            "assets/gallery/quince03.png",
-
-            "assets/gallery/Linda03.png"
-
-        ],
-
-        messages: [
+        messages:[
 
             "Cada historia tiene\nun momento inolvidable...",
 
@@ -44,6 +36,7 @@ const Loader = (() => {
         ]
 
     };
+    
 
     /* ==========================================================
        ELEMENTS
@@ -73,7 +66,7 @@ const Loader = (() => {
        INIT
     ========================================================== */
 
-    async function start() {
+    /*async function start() {
 
         loader = document.getElementById("pageLoader");
 
@@ -93,13 +86,36 @@ const Loader = (() => {
 
         preloadResources();
 
+    }*/
+    async function start() {
+
+        loader = document.getElementById("pageLoader");
+
+        typing = document.getElementById("loaderTyping");
+
+        bar = document.getElementById("loaderBar");
+
+        percent = document.getElementById("loaderPercent");
+
+        name = document.getElementById("loaderName");
+
+        if (!loader) return;
+
+        updateProgress(0);
+
+        listenBootstrap();
+
+        runAnimation();
+
+        preloadResources();
+
     }
 
     /* ==========================================================
        TYPEWRITER
     ========================================================== */
 
-    async function runAnimation() {
+    /*async function runAnimation() {
 
         typing.innerHTML = "";
 
@@ -110,6 +126,21 @@ const Loader = (() => {
             await wait(500);
 
             typing.innerHTML += "<br>";
+
+        }
+
+    }*/
+   async function runAnimation(){
+
+        typing.innerHTML="";
+
+        for(const message of CONFIG.messages){
+
+            await typeLine(message);
+
+            await wait(700);
+
+            typing.innerHTML+="<br>";
 
         }
 
@@ -145,7 +176,7 @@ const Loader = (() => {
        PRELOAD
     ========================================================== */
 
-    async function preloadResources() {
+    /*async function preloadResources() {
 
         const total = CONFIG.resources.length;
 
@@ -167,21 +198,148 @@ const Loader = (() => {
 
         finishIfReady();
 
+    }*/
+   /* async function preloadResources() {
+
+        const total = CONFIG.resources.length;
+
+        let loaded = 0;
+
+        for (const src of CONFIG.resources) {
+
+            await loadImage(src);
+
+            loaded++;
+
+            /*
+            * El loader utilizará el 80%
+            * para la carga de recursos.
+            *
+            * El 20% restante se reserva
+            * para Bootstrap.
+            */
+
+/*            const value = Math.round(
+
+                (loaded / total) * 80
+
+            );
+
+            updateProgress(value);
+
+        }
+
+        resourcesReady = true;
+
+        finishIfReady();
+
+    }*/
+   async function preloadResources(){
+
+        const images=getCriticalImages();
+
+        if(images.length===0){
+
+            resourcesReady=true;
+
+            finishIfReady();
+
+            return;
+
+        }
+
+        let loaded=0;
+
+        const total=images.length;
+
+        for(const src of images){
+
+            await loadImage(src);
+
+            loaded++;
+
+            updateProgress(
+
+                Math.round(
+
+                    (loaded/total)*80
+
+                )
+
+            );
+
+        }
+
+        resourcesReady=true;
+
+        finishIfReady();
+
     }
 
-    function loadImage(src) {
+    
+   function loadImage(src){
 
-        return new Promise(resolve => {
+        return new Promise(resolve=>{
 
-            const img = new Image();
+            const img=new Image();
 
-            img.onload = resolve;
+            img.decoding="async";
 
-            img.onerror = resolve;
+            img.fetchPriority="high";
 
-            img.src = src;
+            img.onload=resolve;
+
+            img.onerror=resolve;
+
+            img.src=src;
 
         });
+
+    }
+
+    function getCriticalImages(){
+
+        const selectors=[
+
+            "#gateCoronaImg",
+
+            "#gateDressImg",
+
+            ".hero img",
+
+            ".hero picture img",
+
+            ".hero__image",
+
+            ".hero__portrait"
+
+        ];
+
+        const images=[];
+
+        selectors.forEach(selector=>{
+
+            document.querySelectorAll(selector)
+
+                .forEach(img=>{
+
+                    if(
+
+                        img.src &&
+
+                        !images.includes(img.src)
+
+                    ){
+
+                        images.push(img.src);
+
+                    }
+
+                });
+
+        });
+
+        return images;
 
     }
 
@@ -189,7 +347,24 @@ const Loader = (() => {
        PROGRESS
     ========================================================== */
 
-    function updateProgress(value) {
+    /*function updateProgress(value) {
+
+        if (bar) {
+
+            bar.style.width = value + "%";
+
+        }
+
+        if (percent) {
+
+            percent.textContent = value + "%";
+
+        }
+
+    }*/
+   function updateProgress(value) {
+
+        progress = value;
 
         if (bar) {
 
@@ -209,7 +384,7 @@ const Loader = (() => {
        BOOTSTRAP
     ========================================================== */
 
-    function listenBootstrap() {
+    /*function listenBootstrap() {
 
         document.addEventListener(
 
@@ -225,34 +400,84 @@ const Loader = (() => {
 
         );
 
+    }*/
+    function listenBootstrap() {
+
+        document.addEventListener(
+
+            "bootstrap:ready",
+
+            async () => {
+
+                bootstrapReady = true;
+
+                animateBootstrapProgress();
+
+            },
+
+            {
+
+                once: true
+
+            }
+
+        );
+
+    }
+
+    async function animateBootstrapProgress() {
+
+        let current = progress;
+
+        while (current < 100) {
+
+            current++;
+
+            updateProgress(current);
+
+            await wait(18);
+
+        }
+
+        finishIfReady();
+
     }
 
     /* ==========================================================
        FINISH
     ========================================================== */
 
-    function finishIfReady() {
-
-        if (!bootstrapReady) return;
+   function finishIfReady() {
 
         if (!resourcesReady) return;
 
-        updateProgress(100);
+        if (!bootstrapReady) return;
 
-        setTimeout(hide, CONFIG.finishDelay);
+        /*
+        * Espera a que termine la máquina
+        * de escribir y deja el mensaje
+        * visible unos segundos.
+        */
+
+        setTimeout(() => {
+
+            updateProgress(100);
+
+            hide();
+
+        }, CONFIG.finishDelay);
 
     }
 
     function hide() {
-
+    if (!loader) return;
         loader.classList.add("hidden");
-
         setTimeout(() => {
-
             loader.remove();
-
+            document.body.classList.add(
+                "loader-finished"
+            );
         }, CONFIG.fadeDuration);
-
     }
 
     /* ==========================================================

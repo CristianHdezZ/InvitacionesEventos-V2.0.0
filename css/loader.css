@@ -5,8 +5,14 @@
 
 :root{
 
-    --loader-bg:#faf7f3;
+    /*--loader-bg:#faf7f3;
     --loader-gold:#c9a227;
+    --loader-gold-light:#e7c96b;
+    --loader-text:#5d5147;
+    --loader-divider:#d8c9b3;
+    --loader-shadow:rgba(201,162,39,.18);*/
+    --loader-bg:#faf7f3;
+    --loader-gold:#cc87ad;
     --loader-gold-light:#e7c96b;
     --loader-text:#5d5147;
     --loader-divider:#d8c9b3;

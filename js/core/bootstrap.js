@@ -337,23 +337,49 @@ Bootstrap.finish = function () {
 
     this.initialized = true;
 
+    const detail = {
+
+        version: AppConfig.version,
+
+        initialized: true,
+
+        timestamp: Date.now()
+
+    };
+
+    /* =====================================
+       Evento para el Loader
+    ====================================== */
+
+    document.dispatchEvent(
+
+        new CustomEvent(
+
+            "bootstrap:ready",
+
+            {
+
+                detail
+
+            }
+
+        )
+
+    );
+
+    /* =====================================
+       Compatibilidad con el motor
+    ====================================== */
+
     this.emit(
 
         "bootstrap:ready",
 
-        {
-
-            version: AppConfig.version
-
-        }
+        detail
 
     );
 
-    this.log(
-
-        "Bootstrap initialized."
-
-    );
+    this.log("Bootstrap initialized.");
 
 };
 
@@ -405,7 +431,7 @@ window.Bootstrap = Bootstrap;
    AUTO START
 ========================================================== */
 
-if (
+/*if (
 
     document.readyState === "loading"
 
@@ -423,7 +449,7 @@ if (
 
     Bootstrap.init();
 
-}
+}*/
 
 /* ==========================================================
    END OF FILE
