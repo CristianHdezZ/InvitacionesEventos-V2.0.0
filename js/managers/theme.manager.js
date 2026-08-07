@@ -137,6 +137,8 @@ ThemeManager.apply = function (config) {
 
     this.applyTypography(config.tipografia, config.estilos);
 
+    this.applyElementStyles(config.estilos);
+
     this.applyIllustrations(config);
 
     this.applyFloral(
@@ -311,6 +313,137 @@ ThemeManager.setFontOrClear = function (variable, familia) {
         this.root.removeProperty(variable);
 
     }
+
+};
+
+/* ==========================================================
+   ESTILOS POR ELEMENTO
+
+   El panel deja afinar color, fuente y tamaño de cada texto por
+   separado, además de los ajustes generales. Los tres campos
+   son opcionales: vacío significa "hereda lo global".
+
+   Se escribe en una hoja propia en vez de tocar cada elemento:
+   así el CSS de los módulos sigue mandando cuando el panel no
+   dice nada, y basta con reemplazar el contenido de esa hoja
+   para volver a aplicar todo de golpe.
+
+   El tamaño se aplica como factor sobre lo que ya tenga el
+   elemento (em), no como medida fija: así cada texto conserva
+   su proporción dentro de su sección.
+========================================================== */
+
+ThemeManager.ELEMENT_SELECTORS = {
+
+    nombre: ".hero__name, .gate__name",
+
+    apellido: ".hero__lastname",
+
+    fraseInvitacion: ".hero__eyebrow",
+
+    fraseFecha: ".hero__subtitle",
+
+    fraseGate: ".gate__quote",
+
+    carta: ".letter__text",
+
+    hashtag: ".footer__hashtag, #albumHashtagText",
+
+    footerMensaje: ".footer__mensaje",
+
+    vestimentaNota: "#vestimentaNota",
+
+    regalosTitulo: "#regalosTitulo",
+
+    regalosMensaje: "#regalosMensaje",
+
+    regalosDetalle: "#regalosDetalle",
+
+    itinerarioTitulo: ".timeline__text strong",
+
+    itinerarioHora: ".timeline__text em",
+
+    ubicacionLugar: ".detalle-card h3",
+
+    ubicacionDireccion: ".ubicacion__direccion",
+
+    ubicacionHora: ".detalle-card__hora"
+
+};
+
+ThemeManager.applyElementStyles = function (estilos) {
+
+    if (!estilos) {
+
+        return;
+
+    }
+
+    const reglas = [];
+
+    Object.keys(this.ELEMENT_SELECTORS).forEach(clave => {
+
+        const estilo = estilos[clave];
+
+        const selector = this.ELEMENT_SELECTORS[clave];
+
+        if (!estilo || !selector) {
+
+            return;
+
+        }
+
+        const declaraciones = [];
+
+        if (estilo.color) {
+
+            declaraciones.push("color:" + estilo.color + " !important");
+
+        }
+
+        if (estilo.fuente) {
+
+            declaraciones.push(
+
+                "font-family:'" + estilo.fuente + "' !important"
+
+            );
+
+        }
+
+        const factor = this.SCALES[estilo.escala];
+
+        if (factor && factor !== 1) {
+
+            declaraciones.push("font-size:" + factor + "em !important");
+
+        }
+
+        if (declaraciones.length) {
+
+            reglas.push(
+
+                selector + "{" + declaraciones.join(";") + ";}"
+
+            );
+
+        }
+
+    });
+
+    let hoja = document.getElementById("estilosPorElemento");
+
+    if (!hoja) {
+
+        hoja = document.createElement("style");
+
+        hoja.id = "estilosPorElemento";
+
+        document.head.appendChild(hoja);
+
+    }
+
+    hoja.textContent = reglas.join("\n");
 
 };
 

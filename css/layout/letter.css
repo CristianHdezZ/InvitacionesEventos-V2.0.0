@@ -65,6 +65,13 @@
 
     overflow:hidden;
 
+    /* La ilustración ya cierra la sección visualmente, así que
+       no hace falta el padding inferior completo de .section:
+       sumado al superior del itinerario dejaba un hueco enorme
+       entre la quinceañera y el programa. */
+
+    padding-bottom:clamp(16px,2.5vw,32px);
+
 }
 
 
@@ -201,21 +208,30 @@
    entra en la misma caja con object-fit:contain.
 ========================================================== */
 
+/* Se mide igual que la de la portada —por alto, con el token
+   compartido --quinceanera-alto— para que las dos salgan del
+   mismo tamaño. Antes esta iba por ancho y quedaba mucho más
+   grande que la otra. */
+
 .letter__dress{
 
     display:block;
 
-    width:
+    width:auto;
+
+    height:auto;
+
+    max-height:
 
         calc(
 
-            min(var(--letter-dress-width),50vw)
+            var(--quinceanera-alto)
 
             * var(--letter-dress-scale)
 
         );
 
-    height:auto;
+    max-width:min(var(--letter-dress-width),50vw);
 
     aspect-ratio:220 / 270;
 
@@ -301,15 +317,7 @@
 
     .letter__dress{
 
-        width:
-
-            calc(
-
-                min(var(--letter-dress-width),55vw)
-
-                * var(--letter-dress-scale)
-
-            );
+        max-width:min(var(--letter-dress-width),55vw);
 
     }
 

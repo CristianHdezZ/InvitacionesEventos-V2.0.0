@@ -118,7 +118,11 @@
 
     font-style:italic;
 
-    font-size:1rem;
+    /* Es la primera frase que se lee del hero, así que arranca
+       algo mayor que un párrafo normal. Desde el panel se puede
+       subir más con el tamaño de "Frase de invitación". */
+
+    font-size:clamp(1.05rem,1.5vw,1.25rem);
 
     line-height:1.8;
 

@@ -2281,7 +2281,7 @@
 
         calc(
 
-            clamp(110px,18vh,220px)
+            var(--quinceanera-alto)
 
             * var(--gate-dress-scale)
 

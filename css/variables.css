@@ -166,6 +166,16 @@
 
 --ease:cubic-bezier(.22,.61,.36,1);
 
+/* Alto de la ilustración de la quinceañera. Lo comparten la
+   portada y la carta para que salga igual en las dos: antes
+   cada módulo la medía a su manera —una por alto disponible y
+   otra por ancho— y quedaban de tamaños muy distintos.
+
+   Va en vh porque en la portada tiene que caber en pantalla
+   junto al resto; el tope en px evita que se agigante en
+   monitores altos. */
+--quinceanera-alto:clamp(150px,26vh,300px);
+
 
 /* ==========================================================
    Z INDEX
