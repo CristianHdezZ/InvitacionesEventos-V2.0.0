@@ -425,11 +425,10 @@
       <div class="field"><label>Fondo secundario</label><div class="color-field"><input type="color" id="colBlush2"></div><p class="hint">Bordes suaves y detalles del fondo.</p></div>
     </div>
 
-    <h3 class="sub">Nombre de la quinceañera</h3>
-    <div class="color-grid">
-      <div class="field"><label>Nombre</label><div class="color-field"><input type="color" id="colNombre"></div><p class="hint">El nombre grande de la portada (usa el tono más oscuro).</p></div>
-      <div class="field"><label>Apellido</label><div class="color-field"><input type="color" id="colApellido"></div><p class="hint">El apellido, debajo del nombre.</p></div>
-    </div>
+    <!-- El color del nombre y del apellido se controla en
+         "Datos principales", junto a su fuente y su tamaño.
+         Estaba también aquí y eran dos sitios para lo mismo:
+         el de allí ganaba siempre y este no se notaba. -->
 
     <h3 class="sub">Textos</h3>
     <div class="color-grid">
@@ -888,8 +887,6 @@ function iconoSvg(id, extraClass) {
     document.getElementById('colOro').value = tpl.colores.oro;
     document.getElementById('colVestido').value = tpl.colores.vestido;
     document.getElementById('colIcono').value = tpl.colores.icono;
-    document.getElementById('colNombre').value = tpl.colores.nombre;
-    document.getElementById('colApellido').value = tpl.colores.apellido;
     document.getElementById('colIconoVestimenta').value = tpl.colores.iconoVestimenta;
     document.getElementById('fontDisplay').value = tpl.tipografia.display;
     document.getElementById('fontScript').value = tpl.tipografia.script;
@@ -1551,8 +1548,6 @@ function iconoSvg(id, extraClass) {
     document.getElementById('colOro').value = c.oro || '#B8935C';
     document.getElementById('colVestido').value = c.vestido || c.rosa || '#E9AABB';
     document.getElementById('colIcono').value = c.icono || c.vino || '#8B4F62';
-    document.getElementById('colNombre').value = c.nombre || c.vino || '#8B4F62';
-    document.getElementById('colApellido').value = c.apellido || c.rosaDeep || '#C97D95';
     document.getElementById('colIconoVestimenta').value = c.iconoVestimenta || c.icono || '#8B4F62';
 
     const t = config.tipografia || {};
@@ -1677,8 +1672,6 @@ function iconoSvg(id, extraClass) {
         oro: document.getElementById('colOro').value,
         vestido: document.getElementById('colVestido').value,
         icono: document.getElementById('colIcono').value,
-        nombre: document.getElementById('colNombre').value,
-        apellido: document.getElementById('colApellido').value,
         iconoVestimenta: document.getElementById('colIconoVestimenta').value
       },
       tipografia: {

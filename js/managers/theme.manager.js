@@ -111,13 +111,18 @@ ThemeManager.COLOR_MAP = {
 
     icono: "--icono",
 
-    nombre: "--color-nombre",
-
-    apellido: "--color-apellido",
-
     iconoVestimenta: "--icono-vestimenta"
 
 };
+
+/* colores.nombre y colores.apellido ya no se escriben: su color
+   se controla desde "Datos principales" del panel, que es el
+   mismo ajuste y además manda sobre este.
+
+   Sin la variable, .hero__name y .gate__name caen al color del
+   tema activo, que da exactamente el mismo tono que había
+   guardado. El campo sigue en el esquema para no romper
+   configuraciones anteriores; simplemente no se usa. */
 
 /* ==========================================================
    APPLY
@@ -328,9 +333,18 @@ ThemeManager.setFontOrClear = function (variable, familia) {
    dice nada, y basta con reemplazar el contenido de esa hoja
    para volver a aplicar todo de golpe.
 
-   El tamaño se aplica como factor sobre lo que ya tenga el
-   elemento (em), no como medida fija: así cada texto conserva
-   su proporción dentro de su sección.
+   El color y la fuente van en esa hoja. El TAMAÑO no: se aplica
+   aparte, midiendo primero el tamaño real del elemento y
+   multiplicándolo.
+
+   Por qué no vale una regla CSS: 'font-size:0.9em' es relativo
+   al PADRE, no al propio elemento. Como el nombre se dimensiona
+   con clamp() y el padre hereda los 16px del body, poner "0.9"
+   lo dejaba en 14px en vez de reducirlo un 10%. Se veía como si
+   el texto se hubiera roto.
+
+   Al depender de una medida, hay que rehacerlo al cambiar el
+   tamaño de la ventana: el clamp() da otro valor base.
 ========================================================== */
 
 ThemeManager.ELEMENT_SELECTORS = {
@@ -411,14 +425,6 @@ ThemeManager.applyElementStyles = function (estilos) {
 
         }
 
-        const factor = this.SCALES[estilo.escala];
-
-        if (factor && factor !== 1) {
-
-            declaraciones.push("font-size:" + factor + "em !important");
-
-        }
-
         if (declaraciones.length) {
 
             reglas.push(
@@ -444,6 +450,112 @@ ThemeManager.applyElementStyles = function (estilos) {
     }
 
     hoja.textContent = reglas.join("\n");
+
+    this.applyElementSizes(estilos);
+
+};
+
+/* ==========================================================
+   TAMAÑO POR ELEMENTO
+
+   Se mide el tamaño que el CSS le da al elemento y se
+   multiplica por el factor del panel. Hay que limpiar el valor
+   anterior antes de medir, o se mediría el resultado de la
+   pasada previa y el texto encogería en cada aplicación.
+========================================================== */
+
+ThemeManager.applyElementSizes = function (estilos) {
+
+    this.sizeFactors = {};
+
+    Object.keys(this.ELEMENT_SELECTORS).forEach(clave => {
+
+        const estilo = estilos[clave];
+
+        const factor = estilo && this.SCALES[estilo.escala];
+
+        if (factor && factor !== 1) {
+
+            this.sizeFactors[clave] = factor;
+
+        }
+
+    });
+
+    this.resizeElements();
+
+    /* El tamaño base sale de clamp() y vw, así que cambia con la
+       ventana: hay que volver a medir. */
+
+    if (!this.sizeListener) {
+
+        this.sizeListener = () => {
+
+            clearTimeout(this.sizeTimer);
+
+            this.sizeTimer = setTimeout(
+
+                () => this.resizeElements(),
+
+                150
+
+            );
+
+        };
+
+        window.addEventListener(
+
+            "resize",
+
+            this.sizeListener,
+
+            { passive: true }
+
+        );
+
+    }
+
+};
+
+ThemeManager.resizeElements = function () {
+
+    Object.keys(this.ELEMENT_SELECTORS).forEach(clave => {
+
+        const factor = this.sizeFactors[clave];
+
+        document
+
+            .querySelectorAll(this.ELEMENT_SELECTORS[clave])
+
+            .forEach(el => {
+
+                /* Sin factor se retira el ajuste y manda el CSS. */
+
+                el.style.fontSize = "";
+
+                if (!factor) {
+
+                    return;
+
+                }
+
+                const base = parseFloat(
+
+                    getComputedStyle(el).fontSize
+
+                );
+
+                if (base) {
+
+                    el.style.fontSize =
+
+                        (base * factor).toFixed(2) + "px";
+
+                }
+
+            });
+
+    });
 
 };
 
