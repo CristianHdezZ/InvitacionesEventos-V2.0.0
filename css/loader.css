@@ -11,12 +11,24 @@
     --loader-text:#5d5147;
     --loader-divider:#d8c9b3;
     --loader-shadow:rgba(201,162,39,.18);*/
+
+    
     --loader-bg:#faf7f3;
-    --loader-gold:#cc87ad;
-    --loader-gold-light:#e7c96b;
-    --loader-text:#5d5147;
-    --loader-divider:#d8c9b3;
-    --loader-shadow:rgba(201,162,39,.18);
+    --loader-gold:#c97d95;
+    --loader-gold-light:#b8935c;
+    --loader-text:#774957;
+    --loader-divider:#e4bbc5;
+    --loader-shadow:rgba(233, 197, 80, 0.18);
+
+    
+    --loader-bg:#faf7f3;
+    --loader-rose:#b77b8d;
+    --loader-rose-light:#d6a7b4;
+    
+   
+  
+
+    
 
 }
 
