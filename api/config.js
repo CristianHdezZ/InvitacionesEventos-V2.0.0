@@ -220,6 +220,24 @@ function estilosPorDefecto() {
 // Rellenar los estilos por defecto una vez definidas las constantes.
 DEFAULT_CONFIG.estilos = estilosPorDefecto();
 
+// Mueve fuente y tamaño de tipografia.* al estilo por elemento, solo
+// si este todavía está en su valor por defecto — nunca pisa una
+// elección explícita del usuario.
+function migrarEstiloGlobal(estilos, tipografia, elemento, claveFuente, claveEscala) {
+  const destino = estilos[elemento];
+  if (!destino) return;
+
+  if (!destino.fuente && tipografia[claveFuente]) {
+    destino.fuente = tipografia[claveFuente];
+  }
+  tipografia[claveFuente] = '';
+
+  if (destino.escala === 'normal' && tipografia[claveEscala] !== 'normal') {
+    destino.escala = tipografia[claveEscala];
+  }
+  tipografia[claveEscala] = 'normal';
+}
+
 function sanitizeEstilos(entrada, defecto) {
   const out = {};
   const fuentesOk = ['', ...FUENTES_SCRIPT, ...FUENTES_DISPLAY, ...FUENTES_BODY];
@@ -270,6 +288,17 @@ function sanitizeConfig(body) {
   };
 
   const estilos = sanitizeEstilos(b.estilos, estilosPorDefecto());
+
+  // El nombre y el apellido tenían fuente y tamaño en dos sitios del
+  // panel: aquí, en "Tipografía", y en su bloque de "Datos
+  // principales". Se dejó solo el segundo, así que lo que hubiera
+  // guardado en el primero se traslada.
+  //
+  // Al vaciar el campo de origen la migración no se repite: la
+  // siguiente vez ya no hay nada que mover y manda lo que el usuario
+  // elija en el bloque que queda.
+  migrarEstiloGlobal(estilos, tipografia, 'nombre', 'fuenteNombre', 'escalaNombre');
+  migrarEstiloGlobal(estilos, tipografia, 'apellido', 'fuenteApellido', 'escalaApellido');
 
   const itinerarioAnimado = typeof b.itinerarioAnimado === 'boolean' ? b.itinerarioAnimado : d.itinerarioAnimado;
   const disenoTarjetas = typeof b.disenoTarjetas === 'boolean' ? b.disenoTarjetas : d.disenoTarjetas;

@@ -42,48 +42,22 @@ const Bootstrap = {
 Bootstrap.init = async function () {
 
     if (this.initialized) {
+
         return;
+
     }
 
     this.log("Initializing Bootstrap...");
 
-    try {
+    this.detectLibraries();
 
-        /* ==============================
-           Detectar librerías
-        ============================== */
+    this.initializeLibraries();
 
-        this.detectLibraries();
+    await this.loadSiteConfig();
 
-        /* ==============================
-           Inicializar librerías
-        ============================== */
+    this.initializeApplication();
 
-        this.initializeLibraries();
-
-        /* ==============================
-           Cargar configuración
-        ============================== */
-
-        await this.loadSiteConfig();
-
-        /* ==============================
-           Inicializar aplicación
-        ============================== */
-
-        this.initializeApplication();
-
-        /* ==============================
-           Finalizar
-        ============================== */
-
-        this.finish();
-
-    } catch (error) {
-
-        this.error(error);
-
-    }
+    this.finish();
 
 };
 

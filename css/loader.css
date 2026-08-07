@@ -1,0 +1,372 @@
+/* ==========================================================
+   LOADER PREMIUM
+   VERSION: 1.0.0
+========================================================== */
+
+:root{
+
+    --loader-bg:#faf7f3;
+    --loader-gold:#c9a227;
+    --loader-gold-light:#e7c96b;
+    --loader-text:#5d5147;
+    --loader-divider:#d8c9b3;
+    --loader-shadow:rgba(201,162,39,.18);
+
+}
+
+.loader{
+
+    position:fixed;
+    inset:0;
+    z-index:999999;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    overflow:hidden;
+
+    background:var(--loader-bg);
+
+    transition:
+        opacity .9s ease,
+        visibility .9s ease;
+
+}
+
+.loader.hidden{
+
+    opacity:0;
+    visibility:hidden;
+
+}
+
+.loader__background{
+
+    position:absolute;
+    inset:0;
+
+    background:
+
+        radial-gradient(circle at top,#ffffff 0%,#faf7f3 42%,#f5efe8 100%);
+
+}
+
+.loader__content{
+
+    position:relative;
+
+    width:min(460px,92vw);
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+
+    text-align:center;
+
+    z-index:5;
+
+}
+
+.loader__crown-wrapper{
+
+    position:relative;
+
+    width:160px;
+    height:140px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+}
+
+.loader__crown{
+
+    width:130px;
+
+    user-select:none;
+    pointer-events:none;
+
+    filter:
+
+        drop-shadow(0 10px 22px var(--loader-shadow));
+
+    animation:
+
+        loaderFloat 3.6s ease-in-out infinite;
+
+}
+
+.loader__shine{
+
+    position:absolute;
+
+    width:180px;
+    height:180px;
+
+    border-radius:50%;
+
+    background:
+
+        radial-gradient(circle,
+
+            rgba(255,255,255,.85),
+
+            rgba(255,255,255,0));
+
+    opacity:0;
+
+    animation:
+
+        loaderShine 2.8s infinite;
+
+}
+
+.loader__name{
+
+    margin-top:10px;
+
+    color:var(--loader-gold);
+
+    font-family:var(--f-display);
+
+    font-size:clamp(2rem,5vw,2.7rem);
+
+    letter-spacing:1px;
+
+    opacity:0;
+
+    animation:
+
+        fadeUp .8s forwards;
+
+    animation-delay:.4s;
+
+}
+
+.loader__divider{
+
+    width:220px;
+    height:1px;
+
+    background:var(--loader-divider);
+
+    margin:20px auto 24px;
+
+    opacity:0;
+
+    animation:
+
+        fadeUp .8s forwards;
+
+    animation-delay:.7s;
+
+}
+
+.loader__typing{
+
+    min-height:72px;
+
+    color:var(--loader-text);
+
+    font-family:var(--f-body);
+
+    font-size:1.15rem;
+
+    line-height:1.9;
+
+    max-width:360px;
+
+    white-space:pre-line;
+
+}
+
+.loader__typing::after{
+
+    content:"|";
+
+    animation:cursor .8s infinite;
+
+    color:var(--loader-gold);
+
+}
+
+.loader__subtitle{
+
+    margin-top:30px;
+
+    color:#8d7e6f;
+
+    font-size:.95rem;
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+
+    opacity:.8;
+
+}
+
+.loader__progress{
+
+    width:100%;
+
+    height:8px;
+
+    margin-top:26px;
+
+    border-radius:50px;
+
+    overflow:hidden;
+
+    background:#ece4da;
+
+}
+
+.loader__progress-fill{
+
+    width:0;
+
+    height:100%;
+
+    border-radius:50px;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            var(--loader-gold),
+            var(--loader-gold-light)
+        );
+
+    transition:width .25s linear;
+
+}
+
+.loader__percent{
+
+    margin-top:16px;
+
+    color:var(--loader-gold);
+
+    font-weight:600;
+
+    letter-spacing:2px;
+
+}
+
+@keyframes loaderFloat{
+
+    0%{
+
+        transform:
+            translateY(0);
+
+    }
+
+    50%{
+
+        transform:
+            translateY(-8px);
+
+    }
+
+    100%{
+
+        transform:
+            translateY(0);
+
+    }
+
+}
+
+@keyframes loaderShine{
+
+    0%{
+
+        transform:scale(.6);
+
+        opacity:0;
+
+    }
+
+    45%{
+
+        opacity:.45;
+
+    }
+
+    100%{
+
+        transform:scale(1.4);
+
+        opacity:0;
+
+    }
+
+}
+
+@keyframes cursor{
+
+    50%{
+
+        opacity:0;
+
+    }
+
+}
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:
+
+            translateY(20px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+
+            translateY(0);
+
+    }
+
+}
+
+@media(max-width:768px){
+
+    .loader__crown{
+
+        width:105px;
+
+    }
+
+    .loader__name{
+
+        font-size:2rem;
+
+    }
+
+    .loader__typing{
+
+        font-size:1rem;
+
+        padding:0 20px;
+
+    }
+
+    .loader__divider{
+
+        width:170px;
+
+    }
+
+}

@@ -114,6 +114,7 @@ const LIBRARIES = [
 /* ==========================================================
    CORE + APP (ORDEN OBLIGATORIO)
 ========================================================== */
+const LOADER_PARTIAL="html/partials/loader.html";
 
 const CORE_SCRIPTS = [
 
@@ -234,45 +235,124 @@ function loadScript(src) {
 }
 
 /* ==========================================================
+   LOADLOADER
+========================================================== */
+
+async function loadLoader() {
+
+    const container = document.getElementById("loader-container");
+
+    if (!container) return;
+
+    try {
+
+        const response = await fetch(LOADER_PARTIAL, {
+
+            cache: "no-cache"
+
+        });
+
+        if (!response.ok) {
+
+            throw new Error("Loader no encontrado.");
+
+        }
+
+        container.innerHTML = await response.text();
+
+    } catch (error) {
+
+        console.error("[Loader]", error);
+
+    }
+
+}
+
+async function loadLoaderScript(){
+
+    await loadScript("js/components/loader.js");
+
+}
+
+/* ==========================================================
+   BOOTSTRAP
+========================================================== */
+
+
+/* ==========================================================
    BOOTSTRAP
 ========================================================== */
 
 async function bootstrap() {
 
+    /* ==========================================
+       LOADER
+    ========================================== */
+
+    await loadLoader();
+
+    await loadLoaderScript();
+
+    if (window.Loader) {
+
+        Loader.start();
+
+    }
+
+    /* ==========================================
+       PARTIALS
+    ========================================== */
+
     const include = new HtmlInclude();
 
     await include.load();
 
-    /* CSS EN PARALELO */
+    /* ==========================================
+       CSS
+    ========================================== */
 
     await Promise.all(
+
         STYLES.map(loadStyle)
+
     );
 
-    /* LIBRERÍAS EN PARALELO */
+    /* ==========================================
+       LIBRERÍAS
+    ========================================== */
 
     await Promise.all(
+
         LIBRARIES.map(loadScript)
+
     );
 
-    /* CORE EN ORDEN */
+    /* ==========================================
+       CORE
+    ========================================== */
 
     for (const script of CORE_SCRIPTS) {
+
         await loadScript(script);
+
     }
 
+    /* ==========================================
+       BOOTSTRAP
+    ========================================== */
+
     if (
+
         window.Bootstrap &&
         typeof Bootstrap.init === "function"
+
     ) {
 
         await Bootstrap.init();
 
     } else {
 
-        console.error(
-            "[Bootstrap] Bootstrap no fue encontrado."
-        );
+        console.error("[Bootstrap] Bootstrap no encontrado.");
 
     }
 
@@ -294,3 +374,4 @@ if (document.readyState === "loading") {
     bootstrap();
 
 }
+
