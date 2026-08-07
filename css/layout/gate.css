@@ -2371,13 +2371,18 @@ body.gate-active{
 
 /* El ancho lo fija el bloque ENCAJE VERTICAL (en vh). */
 
+/* El margen inferior es el control "espacio entre la corona y
+   el nombre" del panel. Cuando la corona es un PNG con margen
+   transparente, ContentManager.adjustCrownSpacing() le descuenta
+   ese aire para que el número represente el espacio visible. */
+
 .gate__crown{
 
     display:block;
 
     height:auto;
 
-    margin:0 auto;
+    margin:0 auto var(--espacio-corona,14px);
 
 }
 

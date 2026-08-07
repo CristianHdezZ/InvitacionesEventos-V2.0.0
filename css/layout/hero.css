@@ -1567,6 +1567,17 @@
 }
 
 
+/* Mismo control que en la portada: el margen inferior es el
+   "espacio entre la corona y el nombre" del panel, y
+   ContentManager le descuenta el aire transparente del PNG. */
+
+.hero__crown{
+
+    margin-bottom:var(--espacio-corona,14px);
+
+}
+
+
 /* ==========================================================
    NOMBRE Y APELLIDO — control del admin
 

@@ -715,6 +715,170 @@ ContentManager.resolveArtwork = function () {
 
     this.applyButterflies();
 
+    this.adjustCrownSpacing();
+
+};
+
+/* ==========================================================
+   AIRE DE LA CORONA
+
+   Los PNG de corona traen mucho margen transparente alrededor
+   del dibujo (sombras, decoración, el lienzo de origen). Ese
+   aire cuenta como alto del elemento, así que el control de
+   "espacio entre la corona y el nombre" del panel acababa
+   sumando aire + espacio, y la corona parecía flotar lejos.
+
+   Aquí se mide el margen inferior transparente y se descuenta,
+   para que el número del panel sea el espacio que de verdad se
+   ve. Es la lógica que hacía scriptOld.js y que se perdió.
+
+   Si la imagen viene de otro dominio sin CORS el canvas queda
+   bloqueado y la medición falla en silencio: se deja el margen
+   tal cual y el resto sigue funcionando.
+========================================================== */
+
+ContentManager.CROWNS = ["gateCoronaImg", "heroCoronaImg"];
+
+ContentManager.adjustCrownSpacing = function () {
+
+    this.CROWNS.forEach(id => {
+
+        const img = document.getElementById(id);
+
+        if (!img) {
+
+            return;
+
+        }
+
+        /* Se limpia siempre: si se vuelve al dibujo SVG no debe
+           quedar el ajuste del PNG anterior. */
+
+        img.style.marginBottom = "";
+
+        const src = img.getAttribute("src");
+
+        if (!src || img.hasAttribute("hidden")) {
+
+            return;
+
+        }
+
+        this.measureAlphaTrim(src).then(recorte => {
+
+            if (!recorte || img.getAttribute("src") !== src) {
+
+                return;
+
+            }
+
+            requestAnimationFrame(() => {
+
+                const alto = img.getBoundingClientRect().height;
+
+                const aire = recorte.abajo * alto;
+
+                img.style.marginBottom =
+
+                    "calc(var(--espacio-corona, 14px) - " +
+
+                    aire.toFixed(1) +
+
+                    "px)";
+
+            });
+
+        });
+
+    });
+
+};
+
+/* Mide qué fracción del alto ocupa el margen transparente,
+   arriba y abajo. Se analiza sobre una copia pequeña: para
+   hallar dónde empieza el dibujo no hace falta más detalle. */
+
+ContentManager.measureAlphaTrim = function (src) {
+
+    return new Promise(resolve => {
+
+        const img = new Image();
+
+        img.crossOrigin = "anonymous";
+
+        img.onload = () => {
+
+            try {
+
+                const lado = 200;
+
+                const canvas = document.createElement("canvas");
+
+                canvas.width = lado;
+
+                canvas.height = lado;
+
+                const ctx = canvas.getContext("2d");
+
+                ctx.drawImage(img, 0, 0, lado, lado);
+
+                const datos = ctx.getImageData(0, 0, lado, lado).data;
+
+                let arriba = lado;
+
+                let abajo = 0;
+
+                for (let y = 0; y < lado; y++) {
+
+                    for (let x = 0; x < lado; x++) {
+
+                        /* Umbral 10: ignora el halo casi
+                           transparente de algunos exportadores. */
+
+                        if (datos[(y * lado + x) * 4 + 3] > 10) {
+
+                            if (y < arriba) { arriba = y; }
+
+                            if (y > abajo) { abajo = y; }
+
+                        }
+
+                    }
+
+                }
+
+                if (abajo < arriba) {
+
+                    resolve(null);
+
+                    return;
+
+                }
+
+                resolve({
+
+                    arriba: arriba / lado,
+
+                    abajo: (lado - 1 - abajo) / lado
+
+                });
+
+            }
+
+            catch (error) {
+
+                resolve(null);
+
+            }
+
+        };
+
+        img.onerror = () => resolve(null);
+
+        img.src = src;
+
+    });
+
 };
 
 /* ==========================================================
