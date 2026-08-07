@@ -39,8 +39,9 @@
    carta.
    ---------------------------------------------------------- */
 
-/*@import url("components/artwork.css");*/
+@import url("components/artwork.css");
 
+@import url("layout/gallery.css");
 @import url("layout/gate.css");
 /* ----------------------------------------------------------
    3. Envoltorio de sección
@@ -62,7 +63,7 @@
 @import url("layout/dresscode.css");
 @import url("layout/gifts.css");
 @import url("layout/location.css");
-@import url("layout/gallery.css");
+
 @import url("layout/album.css");
 @import url("layout/playlist.css");
 @import url("layout/modal.css");
