@@ -804,7 +804,21 @@ ContentManager.measureAlphaTrim = function (src) {
 
         const img = new Image();
 
-        img.crossOrigin = "anonymous";
+        /* crossOrigin solo para imágenes de otro dominio: en las
+           propias crea una entrada de caché distinta y provoca una
+           segunda petición de la misma imagen. */
+
+        if (/^https?:\/\//i.test(src)) {
+
+            const mismoOrigen = src.indexOf(location.origin) === 0;
+
+            if (!mismoOrigen) {
+
+                img.crossOrigin = "anonymous";
+
+            }
+
+        }
 
         img.onload = () => {
 

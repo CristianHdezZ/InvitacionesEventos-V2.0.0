@@ -16,7 +16,11 @@
       <p class="hero__eyebrow">Tenemos el honor de invitarlos a la celebración de los XV años de nuestra hija</p>
 
       <div class="hero__frame">
-        <img id="fotoPrincipal" src="assets/gallery/Linda04.png" alt="Retrato de Linda Hernández">
+        <!-- Debe coincidir con fotoPrincipal de la configuración: si
+             no, el navegador descarga esta y luego la del panel. -->
+        <img id="fotoPrincipal" src="assets/gallery/Linda02.png"
+             alt="Retrato de Linda Hernández"
+             loading="eager" fetchpriority="high" decoding="async">
       </div>
 
       <!-- La corona y los nombres van juntos en .hero__name-wrapper para

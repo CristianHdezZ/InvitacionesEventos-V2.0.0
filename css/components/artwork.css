@@ -40,9 +40,16 @@
    ContentManager, pase lo que pase con la petición.
 ========================================================== */
 
-.artwork-pendiente .gate__crown,
+/* La corona y la quinceañera de la PORTADA quedan fuera de esta
+   lista a propósito: llevan su src escrito en el parcial y el
+   <head> las precarga, así que se pintan en cuanto se inserta el
+   marcado. Taparlas aquí anulaba esa ganancia.
+
+   El precio es que si el panel apunta a otra imagen —o al dibujo
+   SVG— se ve un instante la del HTML antes de cambiar. Se asume
+   a cambio de que la primera pantalla aparezca de inmediato. */
+
 .artwork-pendiente .hero__crown,
-.artwork-pendiente .gate__dress,
 .artwork-pendiente .letter__dress,
 .artwork-pendiente .garland,
 .artwork-pendiente .letter__garland,

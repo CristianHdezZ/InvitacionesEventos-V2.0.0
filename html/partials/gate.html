@@ -47,7 +47,18 @@
       <circle cx="65" cy="15" r="4" fill="var(--color-gold, var(--oro, #B8935C))"/>
       <line x1="15" y1="50" x2="85" y2="50" stroke="var(--color-gold, var(--oro, #B8935C))" stroke-width="4" stroke-linecap="round"/>
     </svg>-->
-    <img class="gate__crown gate__crown--img" id="gateCoronaImg" src="" alt="" hidden loading="eager" fetchpriority="high" decoding="async">
+    <!-- Lleva el src escrito, no vacío, para aprovechar el
+         <link rel="preload"> del <head>: así se pinta en cuanto
+         se inserta el parcial, sin esperar a la configuración.
+         Si el panel apunta a otra imagen, ContentManager la
+         cambia después.
+
+         OJO: al cambiar la corona desde el panel hay que
+         actualizar también el preload de index.html y este src,
+         o se descargarán dos imágenes. -->
+    <img class="gate__crown gate__crown--img" id="gateCoronaImg"
+         src="assets/gallery/CoronaElegante03.png" alt=""
+         loading="eager" fetchpriority="high" decoding="async">
     <h1 class="gate__name">Linda</h1>
     <p class="gate__xv">XV AÑOS</p>
     <p class="gate__quote">
@@ -133,7 +144,11 @@
     <g class="rose" transform="translate(35,225) scale(0.55)"><path d="M0,-28 C14,-28 24,-16 22,-2 C20,10 8,18 -4,16 C-18,14 -26,2 -22,-12 C-19,-22 -10,-28 0,-28 Z" class="rose__c1"/><path d="M-2,-18 C10,-20 18,-10 15,2 C12,12 0,16 -9,11 C-17,6 -18,-6 -12,-13 C-9,-16 -6,-18 -2,-18 Z" class="rose__c2"/><path d="M2,-10 C9,-9 12,-2 9,4 C6,9 -1,10 -5,5 C-8,1 -6,-5 -1,-7" class="rose__spiral"/><ellipse cx="-8" cy="-10" rx="5" ry="3" class="rose__c3" transform="rotate(-30 -8 -10)"/></g>
     <g class="rose" transform="translate(185,222) scale(0.6)"><path d="M0,-28 C14,-28 24,-16 22,-2 C20,10 8,18 -4,16 C-18,14 -26,2 -22,-12 C-19,-22 -10,-28 0,-28 Z" class="rose__c1"/><path d="M-2,-18 C10,-20 18,-10 15,2 C12,12 0,16 -9,11 C-17,6 -18,-6 -12,-13 C-9,-16 -6,-18 -2,-18 Z" class="rose__c2"/><path d="M2,-10 C9,-9 12,-2 9,4 C6,9 -1,10 -5,5 C-8,1 -6,-5 -1,-7" class="rose__spiral"/><ellipse cx="-8" cy="-10" rx="5" ry="3" class="rose__c3" transform="rotate(-30 -8 -10)"/></g>
   </svg>-->
-  <img class="gate__dress gate__dress-img" id="gateDressImg" src="" alt="" hidden loading="eager"
+  <!-- Mismo caso que la corona: src escrito para aprovechar el
+       preload del <head> y pintarse sin esperar a la config. -->
+  <img class="gate__dress gate__dress-img" id="gateDressImg"
+    src="assets/gallery/quince03.png" alt=""
+    loading="eager"
     fetchpriority="high"
     decoding="async">
   </div>
