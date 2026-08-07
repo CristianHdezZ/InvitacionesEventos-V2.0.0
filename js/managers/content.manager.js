@@ -412,6 +412,19 @@ ContentManager.applyGifts = function () {
 
     seccion.hidden = activo === false;
 
+    /* Icono del sobre. El panel lo llama "ícono de la sección" y
+       es el que va dentro del círculo, encima del mensaje. */
+
+    const icono = ConfigService.get("regalos.icono");
+
+    const hueco = seccion.querySelector(".regalos__sobre");
+
+    if (icono && hueco && typeof IconService !== "undefined") {
+
+        IconService.inject(hueco, icono);
+
+    }
+
 };
 
 /* ==========================================================
