@@ -1,0 +1,750 @@
+/* ==========================================================
+   INVITATION ENGINE V2
+   FILE        : modal.css
+   VERSION     : 2.0.2
+   MODULE      : MODAL
+========================================================== */
+
+
+/* ==========================================================
+   VARIABLES
+========================================================== */
+
+:root{
+
+    --modal-width:520px;
+
+    --modal-radius:28px;
+
+    --modal-padding:42px;
+
+}
+
+
+/* ==========================================================
+   MODAL
+========================================================== */
+
+.modal{
+
+    position:fixed;
+
+    inset:0;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:32px;
+
+    opacity:0;
+
+    visibility:hidden;
+
+    pointer-events:none;
+
+    z-index:9999;
+
+    transition:
+
+        opacity var(--transition-normal),
+
+        visibility var(--transition-normal);
+
+}
+
+
+/* ==========================================================
+   OPEN
+========================================================== */
+
+.modal.is-open{
+
+    opacity:1;
+
+    visibility:visible;
+
+    pointer-events:auto;
+
+}
+
+
+/* ==========================================================
+   BACKDROP
+========================================================== */
+
+.modal__backdrop{
+
+    position:absolute;
+
+    inset:0;
+
+    background:rgba(25,25,25,.55);
+
+    backdrop-filter:blur(8px);
+
+}
+
+
+/* ==========================================================
+   CARD
+========================================================== */
+
+.modal__card{
+
+    position:relative;
+
+    width:100%;
+
+    max-width:var(--modal-width);
+
+    padding:var(--modal-padding);
+
+    background:var(--color-white);
+
+    border-radius:var(--modal-radius);
+
+    box-shadow:var(--shadow-xl);
+
+    display:grid;
+
+    gap:28px;
+
+    text-align:center;
+
+    transform:translateY(40px);
+
+    transition:
+
+        transform var(--transition-normal);
+
+}
+
+.modal.is-open .modal__card{
+
+    transform:translateY(0);
+
+}
+
+
+/* ==========================================================
+   HEADER
+========================================================== */
+
+.modal__header{
+
+    display:grid;
+
+    justify-items:center;
+
+    gap:16px;
+
+}
+
+
+/* ==========================================================
+   ICON
+========================================================== */
+
+.modal__icon{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    width:84px;
+
+    height:84px;
+
+    border-radius:50%;
+
+    background:var(--color-primary-light);
+
+    color:var(--color-secondary);
+
+    box-shadow:var(--shadow-md);
+
+}
+
+.modal__icon svg,
+
+.modal__icon img{
+
+    width:38px;
+
+    height:38px;
+
+}
+
+/* ==========================================================
+   TITLE
+========================================================== */
+
+.modal__title{
+
+    margin:0;
+
+    font-family:var(--font-title);
+
+    font-size:2rem;
+
+    color:var(--color-primary-dark);
+
+}
+
+
+/* ==========================================================
+   SUBTITLE
+========================================================== */
+
+.modal__subtitle{
+
+    margin:0;
+
+    font-size:1rem;
+
+    line-height:1.8;
+
+    color:var(--color-text-light);
+
+}
+
+
+/* ==========================================================
+   BODY
+========================================================== */
+
+.modal__body{
+
+    display:grid;
+
+    gap:24px;
+
+}
+
+
+/* ==========================================================
+   MESSAGE
+========================================================== */
+
+.modal__message{
+
+    margin:0;
+
+    line-height:1.9;
+
+    color:var(--color-text);
+
+}
+
+
+/* ==========================================================
+   ACTIONS
+========================================================== */
+
+.modal__actions{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:18px;
+
+    flex-wrap:wrap;
+
+}
+
+
+/* ==========================================================
+   CLOSE BUTTON
+========================================================== */
+
+.modal__close{
+
+    position:absolute;
+
+    top:18px;
+
+    right:18px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    width:42px;
+
+    height:42px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:transparent;
+
+    color:var(--color-secondary);
+
+    cursor:pointer;
+
+    transition:
+
+        transform var(--transition-normal),
+
+        background var(--transition-normal);
+
+}
+
+.modal__close:hover{
+
+    background:rgba(184,147,92,.10);
+
+    transform:rotate(90deg);
+
+}
+
+.modal__close svg,
+
+.modal__close img{
+
+    width:18px;
+
+    height:18px;
+
+}
+
+
+/* ==========================================================
+   FOOTER
+========================================================== */
+
+.modal__footer{
+
+    display:grid;
+
+    gap:14px;
+
+}
+
+
+/* ==========================================================
+   STATUS
+========================================================== */
+
+.modal__status{
+
+    font-size:.88rem;
+
+    color:var(--color-secondary);
+
+}
+
+
+/* ==========================================================
+   HINT
+========================================================== */
+
+.modal__hint{
+
+    font-size:.78rem;
+
+    color:var(--color-text-light);
+
+}
+
+
+/* ==========================================================
+   SUCCESS
+========================================================== */
+
+.modal--success .modal__icon{
+
+    background:#EAF8EF;
+
+    color:#28A745;
+
+}
+
+
+/* ==========================================================
+   ERROR
+========================================================== */
+
+.modal--error .modal__icon{
+
+    background:#FCECEC;
+
+    color:#D9534F;
+
+}
+
+
+/* ==========================================================
+   WARNING
+========================================================== */
+
+.modal--warning .modal__icon{
+
+    background:#FFF6E5;
+
+    color:#E6A400;
+
+}
+
+
+/* ==========================================================
+   INFO
+========================================================== */
+
+.modal--info .modal__icon{
+
+    background:#EEF6FF;
+
+    color:#4285F4;
+
+}
+/* ==========================================================
+   MODAL SHINE
+========================================================== */
+
+.modal__card::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+        linear-gradient(
+
+            120deg,
+
+            transparent 20%,
+
+            rgba(255,255,255,.10) 45%,
+
+            rgba(255,255,255,.24) 50%,
+
+            rgba(255,255,255,.10) 55%,
+
+            transparent 80%
+
+        );
+
+    background-size:240% 100%;
+
+    opacity:0;
+
+    pointer-events:none;
+
+}
+
+.modal.is-open .modal__card::before{
+
+    opacity:1;
+
+    animation:
+
+        modalShine
+
+        1.1s linear;
+
+}
+
+@keyframes modalShine{
+
+    from{
+
+        background-position:220% 0;
+
+    }
+
+    to{
+
+        background-position:-220% 0;
+
+    }
+
+}
+
+
+/* ==========================================================
+   OPEN ANIMATION
+========================================================== */
+
+.modal.is-open .modal__icon{
+
+    animation:
+
+        modalPop
+
+        .45s ease;
+
+}
+
+@keyframes modalPop{
+
+    0%{
+
+        transform:scale(.65);
+
+        opacity:0;
+
+    }
+
+    70%{
+
+        transform:scale(1.10);
+
+    }
+
+    100%{
+
+        transform:scale(1);
+
+        opacity:1;
+
+    }
+
+}
+
+
+/* ==========================================================
+   ADMIN ENGINE
+========================================================== */
+
+.modal{
+
+    --modal-scale:1;
+
+    --modal-opacity:1;
+
+    --modal-radius-engine:var(--modal-radius);
+
+}
+
+.modal__card{
+
+    transform:
+
+        translateY(0)
+
+        scale(var(--modal-scale));
+
+    opacity:var(--modal-opacity);
+
+    border-radius:var(--modal-radius-engine);
+
+}
+
+
+/* ==========================================================
+   THEMES
+========================================================== */
+
+.theme-pink-gold{
+
+    --modal-title:#8B4F62;
+
+    --modal-text:#6E4B54;
+
+    --modal-gold:#B8935C;
+
+}
+
+.theme-royal{
+
+    --modal-title:#5A4B91;
+
+    --modal-text:#5C5C5C;
+
+    --modal-gold:#D4B15A;
+
+}
+
+.theme-classic{
+
+    --modal-title:#8B4F62;
+
+    --modal-text:#6E4B54;
+
+    --modal-gold:#B8935C;
+
+}
+
+.theme-luxury{
+
+    --modal-title:#433228;
+
+    --modal-text:#615246;
+
+    --modal-gold:#D2A84E;
+
+}
+
+.theme-silver{
+
+    --modal-title:#666666;
+
+    --modal-text:#7A7A7A;
+
+    --modal-gold:#C6C6C6;
+
+}
+
+.theme-minimal{
+
+    --modal-title:#444444;
+
+    --modal-text:#777777;
+
+    --modal-gold:#DDDDDD;
+
+}
+
+
+/* ==========================================================
+   APPLY THEME
+========================================================== */
+
+[class*="theme-"] .modal__title{
+
+    color:var(--modal-title);
+
+}
+
+[class*="theme-"] .modal__message,
+
+[class*="theme-"] .modal__subtitle{
+
+    color:var(--modal-text);
+
+}
+
+[class*="theme-"] .modal__status{
+
+    color:var(--modal-gold);
+
+}
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media(max-width:768px){
+
+    .modal{
+
+        padding:20px;
+
+    }
+
+    .modal__card{
+
+        padding:32px 24px;
+
+        gap:22px;
+
+    }
+
+    .modal__icon{
+
+        width:72px;
+
+        height:72px;
+
+    }
+
+    .modal__icon svg,
+
+    .modal__icon img{
+
+        width:32px;
+
+        height:32px;
+
+    }
+
+    .modal__title{
+
+        font-size:1.7rem;
+
+    }
+
+}
+
+@media(max-width:576px){
+
+    .modal{
+
+        padding:16px;
+
+    }
+
+    .modal__card{
+
+        padding:24px 20px;
+
+    }
+
+    .modal__actions{
+
+        flex-direction:column;
+
+        align-items:stretch;
+
+    }
+
+    .modal__close{
+
+        top:14px;
+
+        right:14px;
+
+    }
+
+}
+
+
+/* ==========================================================
+   REDUCED MOTION
+========================================================== */
+
+@media(prefers-reduced-motion:reduce){
+
+    .modal *{
+
+        animation:none !important;
+
+        transition:none !important;
+
+    }
+
+}
+
+
+/* ==========================================================
+   PRINT
+========================================================== */
+
+@media print{
+
+    .modal{
+
+        display:none;
+
+    }
+
+}
+
+
+/* ==========================================================
+   END OF FILE
+========================================================== */

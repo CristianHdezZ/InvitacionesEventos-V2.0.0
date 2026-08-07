@@ -1,0 +1,748 @@
+/* ==========================================================
+   INVITATION ENGINE V2
+   FILE        : countdown.css
+   VERSION     : 2.0.2
+   MODULE      : COUNTDOWN
+========================================================== */
+
+
+/* ==========================================================
+   VARIABLES
+========================================================== */
+
+:root{
+
+    --countdown-width:900px;
+
+    --countdown-gap:26px;
+
+    --countdown-card-width:150px;
+
+    --countdown-card-height:170px;
+
+    --countdown-radius:26px;
+
+}
+
+
+/* ==========================================================
+   COUNTDOWN
+========================================================== */
+
+.countdown{
+
+    width:100%;
+
+    max-width:var(--countdown-width);
+
+    margin:0 auto;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    flex-wrap:wrap;
+
+    gap:var(--countdown-gap);
+
+}
+
+
+/* ==========================================================
+   ITEM
+========================================================== */
+
+.countdown__item{
+
+    position:relative;
+
+    display:grid;
+
+    justify-items:center;
+
+    align-content:center;
+
+    width:var(--countdown-card-width);
+
+    height:var(--countdown-card-height);
+
+    background:var(--color-white);
+
+    border-radius:var(--countdown-radius);
+
+    border:1px solid rgba(184,147,92,.12);
+
+    box-shadow:var(--shadow-lg);
+
+    overflow:hidden;
+
+    transition:
+
+        transform var(--transition-normal),
+
+        box-shadow var(--transition-normal);
+
+}
+
+.countdown__item:hover{
+
+    transform:
+
+        translateY(-6px);
+
+    box-shadow:var(--shadow-xl);
+
+}
+
+
+/* ==========================================================
+   NUMBER
+========================================================== */
+
+.countdown__number{
+
+    font-family:var(--font-title);
+
+    font-size:4rem;
+
+    line-height:1;
+
+    color:var(--color-primary-dark);
+
+    font-weight:600;
+
+}
+
+
+/* ==========================================================
+   LABEL
+========================================================== */
+
+.countdown__label{
+
+    margin-top:12px;
+
+    font-size:.82rem;
+
+    letter-spacing:.24em;
+
+    text-transform:uppercase;
+
+    color:var(--color-secondary);
+
+}
+
+
+/* ==========================================================
+   DIVIDER
+========================================================== */
+
+.countdown__divider{
+
+    width:56px;
+
+    height:2px;
+
+    margin:14px auto;
+
+    background:var(--color-gold);
+
+    opacity:.35;
+
+}
+
+
+/* ==========================================================
+   ICON
+========================================================== */
+
+.countdown__icon{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    width:54px;
+
+    height:54px;
+
+    margin-bottom:18px;
+
+    border-radius:50%;
+
+    background:var(--color-primary-light);
+
+}
+
+.countdown__icon img,
+
+.countdown__icon svg{
+
+    width:26px;
+
+    height:26px;
+
+}
+
+/* ==========================================================
+   COUNTDOWN HEADER
+========================================================== */
+
+.countdown__header{
+
+    display:grid;
+
+    justify-items:center;
+
+    gap:18px;
+
+    margin-bottom:42px;
+
+}
+
+
+/* ==========================================================
+   TITLE
+========================================================== */
+
+.countdown__title{
+
+    margin:0;
+
+    font-family:var(--font-title);
+
+    font-size:2.4rem;
+
+    color:var(--color-primary-dark);
+
+}
+
+
+/* ==========================================================
+   SUBTITLE
+========================================================== */
+
+.countdown__subtitle{
+
+    max-width:620px;
+
+    margin:0;
+
+    line-height:1.8;
+
+    color:var(--color-text-light);
+
+}
+
+
+/* ==========================================================
+   VALUE
+========================================================== */
+
+.countdown__value{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    width:100%;
+
+    flex:1;
+
+}
+
+
+/* ==========================================================
+   LABEL CONTAINER
+========================================================== */
+
+.countdown__footer{
+
+    display:grid;
+
+    justify-items:center;
+
+    gap:10px;
+
+}
+
+
+/* ==========================================================
+   BADGE
+========================================================== */
+
+.countdown__badge{
+
+    display:inline-flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:
+
+        6px
+
+        16px;
+
+    border-radius:999px;
+
+    background:var(--color-primary-light);
+
+    color:var(--color-secondary);
+
+    font-size:.72rem;
+
+    text-transform:uppercase;
+
+    letter-spacing:.12em;
+
+}
+
+
+/* ==========================================================
+   CARD TOP BORDER
+========================================================== */
+
+.countdown__item::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:0;
+
+    width:100%;
+
+    height:4px;
+
+    background:
+
+        linear-gradient(
+
+            90deg,
+
+            transparent,
+
+            var(--color-gold),
+
+            var(--color-secondary),
+
+            transparent
+
+        );
+
+}
+
+
+/* ==========================================================
+   SHINE
+========================================================== */
+
+.countdown__item::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+        linear-gradient(
+
+            120deg,
+
+            transparent 20%,
+
+            rgba(255,255,255,.12) 45%,
+
+            rgba(255,255,255,.26) 50%,
+
+            rgba(255,255,255,.12) 55%,
+
+            transparent 80%
+
+        );
+
+    background-size:240% 100%;
+
+    opacity:0;
+
+    pointer-events:none;
+
+}
+
+.countdown__item:hover::after{
+
+    opacity:1;
+
+    animation:
+
+        countdownShine
+
+        1.2s linear;
+
+}
+
+@keyframes countdownShine{
+
+    from{
+
+        background-position:220% 0;
+
+    }
+
+    to{
+
+        background-position:-220% 0;
+
+    }
+
+}
+
+
+/* ==========================================================
+   HOVER ICON
+========================================================== */
+
+.countdown__item:hover .countdown__icon{
+
+    transform:
+
+        translateY(-4px)
+
+        scale(1.05);
+
+}
+
+.countdown__icon{
+
+    transition:
+
+        transform var(--transition-normal);
+
+}
+
+
+/* ==========================================================
+   HOVER NUMBER
+========================================================== */
+
+.countdown__item:hover .countdown__number{
+
+    transform:scale(1.05);
+
+}
+
+.countdown__number{
+
+    transition:
+
+        transform var(--transition-normal);
+
+}
+
+/* ==========================================================
+   ADMIN ENGINE
+========================================================== */
+
+.countdown{
+
+    --countdown-scale:1;
+
+    --countdown-opacity:1;
+
+    --countdown-radius-engine:var(--countdown-radius);
+
+    --countdown-shadow-engine:var(--shadow-lg);
+
+}
+
+.countdown__item{
+
+    transform:scale(var(--countdown-scale));
+
+    opacity:var(--countdown-opacity);
+
+    border-radius:var(--countdown-radius-engine);
+
+    box-shadow:var(--countdown-shadow-engine);
+
+}
+
+
+/* ==========================================================
+   THEMES
+========================================================== */
+
+.theme-pink-gold{
+
+    --countdown-title:#8B4F62;
+
+    --countdown-number:#8B4F62;
+
+    --countdown-label:#C97D95;
+
+    --countdown-gold:#B8935C;
+
+}
+
+.theme-royal{
+
+    --countdown-title:#5A4B91;
+
+    --countdown-number:#5A4B91;
+
+    --countdown-label:#7B6BC5;
+
+    --countdown-gold:#D4B15A;
+
+}
+
+.theme-classic{
+
+    --countdown-title:#8B4F62;
+
+    --countdown-number:#8B4F62;
+
+    --countdown-label:#B46B86;
+
+    --countdown-gold:#B8935C;
+
+}
+
+.theme-luxury{
+
+    --countdown-title:#433228;
+
+    --countdown-number:#433228;
+
+    --countdown-label:#8A7352;
+
+    --countdown-gold:#D2A84E;
+
+}
+
+.theme-silver{
+
+    --countdown-title:#666666;
+
+    --countdown-number:#666666;
+
+    --countdown-label:#999999;
+
+    --countdown-gold:#C6C6C6;
+
+}
+
+.theme-minimal{
+
+    --countdown-title:#444444;
+
+    --countdown-number:#444444;
+
+    --countdown-label:#777777;
+
+    --countdown-gold:#DDDDDD;
+
+}
+
+
+/* ==========================================================
+   APPLY THEME
+========================================================== */
+
+[class*="theme-"] .countdown__title{
+
+    color:var(--countdown-title);
+
+}
+
+[class*="theme-"] .countdown__number{
+
+    color:var(--countdown-number);
+
+}
+
+[class*="theme-"] .countdown__label{
+
+    color:var(--countdown-label);
+
+}
+
+[class*="theme-"] .countdown__divider,
+
+[class*="theme-"] .countdown__item::before{
+
+    background:var(--countdown-gold);
+
+}
+
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media(max-width:992px){
+
+    .countdown{
+
+        gap:20px;
+
+    }
+
+    .countdown__item{
+
+        width:130px;
+
+        height:155px;
+
+    }
+
+    .countdown__number{
+
+        font-size:3.3rem;
+
+    }
+
+}
+
+@media(max-width:768px){
+
+    .countdown{
+
+        gap:18px;
+
+    }
+
+    .countdown__item{
+
+        width:115px;
+
+        height:140px;
+
+    }
+
+    .countdown__number{
+
+        font-size:2.9rem;
+
+    }
+
+    .countdown__icon{
+
+        width:46px;
+
+        height:46px;
+
+    }
+
+    .countdown__icon svg,
+
+    .countdown__icon img{
+
+        width:22px;
+
+        height:22px;
+
+    }
+
+}
+
+@media(max-width:576px){
+
+    .countdown{
+
+        display:grid;
+
+        grid-template-columns:
+
+            repeat(2,1fr);
+
+        gap:16px;
+
+    }
+
+    .countdown__item{
+
+        width:100%;
+
+        height:130px;
+
+    }
+
+    .countdown__number{
+
+        font-size:2.5rem;
+
+    }
+
+    .countdown__label{
+
+        font-size:.72rem;
+
+    }
+
+    .countdown__title{
+
+        font-size:1.8rem;
+
+    }
+
+}
+
+
+/* ==========================================================
+   REDUCED MOTION
+========================================================== */
+
+@media(prefers-reduced-motion:reduce){
+
+    .countdown *{
+
+        animation:none !important;
+
+        transition:none !important;
+
+    }
+
+}
+
+
+/* ==========================================================
+   PRINT
+========================================================== */
+
+@media print{
+
+    .countdown{
+
+        gap:12px;
+
+    }
+
+    .countdown__item{
+
+        box-shadow:none;
+
+        border:1px solid #CCCCCC;
+
+        break-inside:avoid;
+
+    }
+
+}
+
+
+/* ==========================================================
+   END OF FILE
+========================================================== */

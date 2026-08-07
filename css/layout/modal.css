@@ -1,0 +1,414 @@
+/* ==========================================================
+   INVITATION ENGINE V2
+   FILE        : layout/modal.css
+   VERSION     : 2.0.0
+   MODULE      : MODAL (confirmación del RSVP)
+
+   ESTE es el módulo en uso. El motor trae otro en
+   components/modal.css, con .modal__header, .modal__body y
+   .modal__close; cambiar a él supondría reescribir el markup
+   del popup. Queda ahí, sin activar.
+========================================================== */
+
+
+/* ==========================================================
+   CAPA
+
+   Se oculta con visibility además de opacity para que no
+   quede capturando clics ni foco cuando está cerrado.
+========================================================== */
+
+.modal{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:120;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:24px;
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transition:
+
+        opacity var(--transition-normal),
+
+        visibility var(--transition-normal);
+
+}
+
+.modal.is-open{
+
+    opacity:1;
+
+    visibility:visible;
+
+}
+
+.modal__backdrop{
+
+    position:absolute;
+
+    inset:0;
+
+    background:rgba(110,75,84,.45);
+
+    backdrop-filter:blur(4px);
+
+}
+
+
+/* ==========================================================
+   TARJETA
+========================================================== */
+
+.modal__card{
+
+    position:relative;
+
+    z-index:1;
+
+    width:min(420px,100%);
+
+    padding:38px 30px 30px;
+
+    border-radius:20px;
+
+    background:var(--color-white);
+
+    text-align:center;
+
+    box-shadow:0 30px 70px -24px rgba(139,79,98,.6);
+
+    opacity:0;
+
+    transform:
+
+        translateY(24px)
+
+        scale(.94);
+
+    transition:
+
+        transform .45s var(--ease, ease),
+
+        opacity .45s var(--ease, ease);
+
+}
+
+.modal.is-open .modal__card{
+
+    opacity:1;
+
+    transform:
+
+        translateY(0)
+
+        scale(1);
+
+}
+
+
+/* ==========================================================
+   ICONO
+========================================================== */
+
+.modal__icon{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    width:76px;
+
+    height:76px;
+
+    margin:0 auto 18px;
+
+    border-radius:50%;
+
+    color:var(--rosa-deep, var(--color-primary-dark));
+
+    background:
+
+        radial-gradient(
+
+            circle at 35% 28%,
+
+            var(--color-white),
+
+            var(--blush, var(--color-background)) 68%,
+
+            var(--blush-2, var(--color-primary-light))
+
+        );
+
+    box-shadow:
+
+        0 14px 30px -14px rgba(139,79,98,.5),
+
+        inset 0 2px 6px rgba(255,255,255,.9);
+
+}
+
+.modal__icon svg{
+
+    width:40px;
+
+    height:40px;
+
+}
+
+.modal.is-open .modal__icon{
+
+    animation:
+
+        modalLatido
+
+        .9s var(--ease, ease) .2s both;
+
+}
+
+@keyframes modalLatido{
+
+    0%{
+
+        opacity:0;
+
+        transform:scale(.6);
+
+    }
+
+    55%{
+
+        opacity:1;
+
+        transform:scale(1.12);
+
+    }
+
+    100%{
+
+        opacity:1;
+
+        transform:scale(1);
+
+    }
+
+}
+
+
+/* ==========================================================
+   TEXTOS
+========================================================== */
+
+.modal__titulo{
+
+    margin:0 0 8px;
+
+    color:var(--rosa-deep, var(--color-primary-dark));
+
+    font-family:var(--f-script, var(--font-script));
+
+    font-size:calc(2.2rem * var(--scale-titulos,1));
+
+}
+
+.modal__mensaje{
+
+    margin:0 0 26px;
+
+    color:var(--tinta, var(--color-text));
+
+    font-family:var(--f-body, var(--font-body));
+
+    font-size:calc(.98rem * var(--scale-mensajes,1));
+
+    line-height:1.6;
+
+}
+
+
+/* ==========================================================
+   BOTONES
+========================================================== */
+
+.modal__btn{
+
+    padding:13px 40px;
+
+    border:0;
+
+    border-radius:40px;
+
+    cursor:pointer;
+
+    color:var(--color-white);
+
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            var(--rosa-deep, var(--color-primary-dark)),
+
+            var(--vino, var(--color-secondary))
+
+        );
+
+    font-family:var(--f-body, var(--font-body));
+
+    font-size:.86rem;
+
+    letter-spacing:.1em;
+
+    text-transform:uppercase;
+
+    box-shadow:0 14px 30px -14px rgba(139,79,98,.7);
+
+    transition:
+
+        transform var(--transition-normal),
+
+        box-shadow var(--transition-normal);
+
+}
+
+.modal__btn:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:0 20px 38px -16px rgba(139,79,98,.8);
+
+}
+
+.modal__btn--ghost{
+
+    padding:11px 32px;
+
+    border:1px solid var(--oro, var(--color-gold));
+
+    background:transparent;
+
+    color:var(--vino, var(--color-secondary));
+
+    box-shadow:none;
+
+}
+
+.modal__btn--ghost:hover{
+
+    background:var(--blush, var(--color-background));
+
+    box-shadow:none;
+
+}
+
+.modal__btn--whatsapp{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    padding:11px 32px;
+
+    background:#25D366;
+
+    color:#fff;
+
+    box-shadow:0 14px 30px -16px rgba(37,211,102,.7);
+
+}
+
+.modal__btn--whatsapp:hover{
+
+    box-shadow:0 20px 36px -16px rgba(37,211,102,.85);
+
+}
+
+
+/* ==========================================================
+   ACCIONES DE LA TARJETA DESCARGABLE
+========================================================== */
+
+.modal__tarjeta-acciones{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:10px;
+
+    margin:0 0 20px;
+
+}
+
+.modal__tarjeta-status{
+
+    margin:0;
+
+    color:var(--tinta-suave, var(--color-text-light));
+
+    font-size:.82rem;
+
+    font-style:italic;
+
+}
+
+.modal__tarjeta-hint{
+
+    margin:2px 0 0;
+
+    max-width:280px;
+
+    color:var(--tinta-suave, var(--color-text-light));
+
+    font-size:.72rem;
+
+    line-height:1.4;
+
+}
+
+
+/* ==========================================================
+   REDUCED MOTION
+========================================================== */
+
+@media (prefers-reduced-motion:reduce){
+
+    .modal,
+
+    .modal__card{
+
+        transition:none;
+
+    }
+
+    .modal.is-open .modal__icon{
+
+        animation:none;
+
+    }
+
+}
+
+
+/* ==========================================================
+   END OF FILE
+========================================================== */

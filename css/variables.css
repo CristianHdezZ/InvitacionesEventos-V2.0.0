@@ -1,0 +1,288 @@
+/* ==========================================================
+   INVITATION ENGINE V2
+   VARIABLES.CSS
+   VERSION : 2.0.1
+   ========================================================== */
+
+:root{
+
+/* ==========================================================
+   COLORS
+   ========================================================== */
+
+--color-primary:#E9AABB;
+--color-primary-light:#F8D8E0;
+--color-primary-dark:#C97D95;
+
+--color-secondary:#8B4F62;
+--color-secondary-light:#A86B7E;
+--color-secondary-dark:#6A3347;
+
+--color-gold:#B8935C;
+--color-gold-light:#D8BE92;
+--color-gold-dark:#8E6C3D;
+
+--color-background:#FBEAEE;
+--color-surface:#FFFFFF;
+--color-surface-alt:#FFF8FA;
+
+/* Alias de --color-surface. Las hojas de components/ y layout/
+   piden var(--color-white) en 20 sitios; sin esta línea todas
+   esas reglas resuelven a vacío y los fondos quedan
+   transparentes al activar el Engine V2. */
+--color-white:#FFFFFF;
+
+--color-text:#6E4B54;
+--color-text-light:#9C7680;
+--color-text-inverse:#FFFFFF;
+
+--color-success:#4CAF50;
+--color-warning:#FF9800;
+--color-danger:#E53935;
+--color-info:#2196F3;
+
+
+/* ==========================================================
+   TYPOGRAPHY
+   ========================================================== */
+
+--font-title:'Cormorant Garamond',serif;
+--font-script:'Alex Brush',cursive;
+--font-body:'Jost',sans-serif;
+
+--font-weight-light:300;
+--font-weight-normal:400;
+--font-weight-medium:500;
+--font-weight-bold:700;
+
+
+/* ==========================================================
+   FONT SIZE
+   ========================================================== */
+
+--fs-xs:.75rem;
+--fs-sm:.875rem;
+--fs-md:1rem;
+--fs-lg:1.25rem;
+--fs-xl:1.5rem;
+--fs-2xl:2rem;
+--fs-3xl:2.5rem;
+--fs-4xl:3rem;
+--fs-5xl:4rem;
+
+
+/* ==========================================================
+   LINE HEIGHT
+   ========================================================== */
+
+--lh-tight:1.1;
+--lh-normal:1.5;
+--lh-relaxed:1.8;
+
+
+/* ==========================================================
+   SPACING
+   ========================================================== */
+
+--space-0:0;
+
+--space-1:4px;
+--space-2:8px;
+--space-3:12px;
+--space-4:16px;
+--space-5:20px;
+--space-6:24px;
+--space-7:32px;
+--space-8:40px;
+--space-9:48px;
+--space-10:56px;
+--space-11:64px;
+--space-12:72px;
+--space-13:80px;
+
+
+/* ==========================================================
+   CONTAINERS
+   ========================================================== */
+
+--container-xs:480px;
+--container-sm:640px;
+--container-md:768px;
+--container-lg:1024px;
+--container-xl:1200px;
+
+
+/* ==========================================================
+   BORDER RADIUS
+   ========================================================== */
+
+--radius-none:0;
+--radius-xs:4px;
+--radius-sm:8px;
+--radius-md:12px;
+--radius-lg:18px;
+--radius-xl:28px;
+--radius-pill:999px;
+--radius-circle:50%;
+
+
+/* ==========================================================
+   BORDER
+   ========================================================== */
+
+--border-light:1px solid rgba(0,0,0,.08);
+--border-gold:1px solid var(--color-gold);
+
+
+/* ==========================================================
+   SHADOW
+   ========================================================== */
+
+--shadow-xs:0 2px 6px rgba(0,0,0,.05);
+
+--shadow-sm:0 8px 20px rgba(0,0,0,.08);
+
+--shadow-md:0 18px 40px rgba(0,0,0,.12);
+
+--shadow-lg:0 26px 60px rgba(0,0,0,.16);
+
+--shadow-xl:0 36px 80px rgba(0,0,0,.20);
+
+
+/* ==========================================================
+   TRANSITIONS
+   ========================================================== */
+
+--transition-fast:.18s ease;
+
+--transition-normal:.35s ease;
+
+--transition-slow:.55s ease;
+
+/* Curva propia de la invitación: arranca rápido y frena suave.
+   Venía de style.css y varios módulos la piden como
+   var(--ease); al vaciar aquella hoja se quedó sin definir y
+   caían todos a un 'ease' genérico. */
+
+--ease:cubic-bezier(.22,.61,.36,1);
+
+
+/* ==========================================================
+   Z INDEX
+   ========================================================== */
+
+--z-base:1;
+--z-content:10;
+--z-overlay:100;
+--z-modal:500;
+--z-loader:900;
+--z-toast:950;
+
+
+/* ==========================================================
+   GRID
+   ========================================================== */
+
+--grid-gap-xs:8px;
+--grid-gap-sm:16px;
+--grid-gap-md:24px;
+--grid-gap-lg:32px;
+--grid-gap-xl:48px;
+
+
+/* ==========================================================
+   DECORATIONS
+   ========================================================== */
+
+--decor-xs:60px;
+--decor-sm:90px;
+--decor-md:140px;
+--decor-lg:190px;
+--decor-xl:260px;
+
+
+/* ==========================================================
+   ICONS
+   ========================================================== */
+
+--icon-xs:18px;
+--icon-sm:24px;
+--icon-md:32px;
+--icon-lg:48px;
+--icon-xl:64px;
+
+
+/* ==========================================================
+   BUTTONS
+   ========================================================== */
+
+--button-height:52px;
+
+--button-padding:0 28px;
+
+
+/* ==========================================================
+   SECTION
+   ========================================================== */
+
+--section-padding:clamp(60px,8vw,110px);
+
+--section-gap:clamp(48px,6vw,80px);
+
+
+/* ==========================================================
+   COMPONENT SCALE
+   ========================================================== */
+
+--scale-name:1;
+--scale-title:1;
+--scale-message:1;
+--scale-icons:1;
+--scale-flowers:1;
+--scale-illustration:1;
+--scale-crown:1;
+
+
+/* ==========================================================
+   GATE
+   ========================================================== */
+
+--gate-width:min(100%,620px);
+
+--gate-illustration-width:clamp(180px,24vw,260px);
+
+--gate-envelope-width:clamp(170px,18vw,220px);
+
+--gate-gap:24px;
+
+
+/* ==========================================================
+   TIMELINE
+   ========================================================== */
+
+--timeline-icon:58px;
+
+
+/* ==========================================================
+   COUNTDOWN
+   ========================================================== */
+
+--countdown-number:clamp(2.5rem,6vw,4rem);
+
+
+/* ==========================================================
+   MODAL
+   ========================================================== */
+
+--modal-width:460px;
+
+
+/* ==========================================================
+   GALLERY
+   ========================================================== */
+
+--gallery-item-width:280px;
+
+--gallery-radius:18px;
+
+}

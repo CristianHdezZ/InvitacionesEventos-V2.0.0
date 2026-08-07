@@ -1,0 +1,590 @@
+/* ==========================================================
+   INVITATION ENGINE V2
+   FILE        : responsive.css
+   VERSION     : 2.0.2
+   MODULE      : GLOBAL RESPONSIVE
+========================================================== */
+
+
+/* ==========================================================
+   BREAKPOINTS
+
+   XL  1400
+   LG  1200
+   MD   992
+   TB   768
+   SM   576
+   XS   420
+========================================================== */
+
+
+/* ==========================================================
+   DESKTOP LARGE
+========================================================== */
+
+@media (max-width:1400px){
+
+    :root{
+
+        --container-width:1200px;
+
+        --section-padding-y:100px;
+
+    }
+
+}
+
+
+/* ==========================================================
+   DESKTOP
+========================================================== */
+
+@media (max-width:1200px){
+
+    :root{
+
+        --container-width:1080px;
+
+        --section-padding-y:90px;
+
+        --space-8:56px;
+
+        --space-9:72px;
+
+    }
+
+}
+
+
+/* ==========================================================
+   LAPTOP
+========================================================== */
+
+@media (max-width:992px){
+
+    :root{
+
+        --container-width:920px;
+
+        --section-padding-y:82px;
+
+        --space-7:42px;
+
+        --space-8:52px;
+
+    }
+
+    html{
+
+        font-size:15px;
+
+    }
+
+    .container{
+
+        width:min(100% - 56px,var(--container-width));
+
+    }
+
+}
+/* ==========================================================
+   TABLET
+========================================================== */
+
+@media (max-width:768px){
+
+    :root{
+
+        --container-width:100%;
+
+        --section-padding-x:24px;
+
+        --section-padding-y:72px;
+
+        --space-6:28px;
+
+        --space-7:36px;
+
+        --space-8:44px;
+
+    }
+
+    html{
+
+        font-size:15px;
+
+    }
+
+    body{
+
+        overflow-x:hidden;
+
+    }
+
+    .container{
+
+        width:calc(100% - 48px);
+
+    }
+
+    .section{
+
+        padding:
+
+            var(--section-padding-y)
+
+            var(--section-padding-x);
+
+    }
+
+    .section__header{
+
+        margin-bottom:40px;
+
+    }
+
+    .section__title{
+
+        font-size:
+
+            clamp(
+
+                2rem,
+
+                6vw,
+
+                2.6rem
+
+            );
+
+    }
+
+    .section__subtitle{
+
+        font-size:.95rem;
+
+    }
+
+}
+
+
+/* ==========================================================
+   MOBILE
+========================================================== */
+
+@media (max-width:576px){
+
+    :root{
+
+        --section-padding-x:18px;
+
+        --section-padding-y:60px;
+
+        --space-5:20px;
+
+        --space-6:24px;
+
+        --space-7:30px;
+
+    }
+
+    html{
+
+        font-size:14px;
+
+    }
+
+    .container{
+
+        width:calc(100% - 36px);
+
+    }
+
+    .section{
+
+        padding:
+
+            var(--section-padding-y)
+
+            var(--section-padding-x);
+
+    }
+
+    .section__header{
+
+        gap:14px;
+
+        margin-bottom:32px;
+
+    }
+
+    .section__title{
+
+        line-height:1.15;
+
+    }
+
+    .section__subtitle{
+
+        font-size:.90rem;
+
+        line-height:1.7;
+
+    }
+
+}
+
+
+/* ==========================================================
+   SMALL MOBILE
+========================================================== */
+
+@media (max-width:420px){
+
+    :root{
+
+        --section-padding-x:16px;
+
+        --section-padding-y:52px;
+
+    }
+
+    html{
+
+        font-size:13.5px;
+
+    }
+
+    .container{
+
+        width:calc(100% - 32px);
+
+    }
+
+}
+/* ==========================================================
+   GLOBAL GRID
+========================================================== */
+
+@media (max-width:992px){
+
+    .grid{
+
+        grid-template-columns:
+
+            repeat(2,minmax(0,1fr));
+
+    }
+
+}
+
+@media (max-width:768px){
+
+    .grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+
+/* ==========================================================
+   FLEX HELPERS
+========================================================== */
+
+@media (max-width:768px){
+
+    .flex-row{
+
+        flex-direction:column;
+
+    }
+
+    .flex-column{
+
+        flex-direction:column;
+
+    }
+
+    .justify-between{
+
+        justify-content:center;
+
+    }
+
+    .align-center{
+
+        align-items:center;
+
+    }
+
+}
+
+
+/* ==========================================================
+   TEXT
+========================================================== */
+
+@media (max-width:768px){
+
+    .text-left-tablet{
+
+        text-align:left;
+
+    }
+
+    .text-center-tablet{
+
+        text-align:center;
+
+    }
+
+}
+
+@media (max-width:576px){
+
+    .text-left-mobile{
+
+        text-align:left;
+
+    }
+
+    .text-center-mobile{
+
+        text-align:center;
+
+    }
+
+}
+
+
+/* ==========================================================
+   HIDE / SHOW
+========================================================== */
+
+.desktop-only{
+
+    display:block;
+
+}
+
+.tablet-only,
+
+.mobile-only{
+
+    display:none;
+
+}
+
+@media(max-width:992px){
+
+    .desktop-only{
+
+        display:none !important;
+
+    }
+
+    .tablet-only{
+
+        display:block !important;
+
+    }
+
+}
+
+@media(max-width:576px){
+
+    .tablet-only{
+
+        display:none !important;
+
+    }
+
+    .mobile-only{
+
+        display:block !important;
+
+    }
+
+}
+
+/* ==========================================================
+   SPACING UTILITIES
+========================================================== */
+
+@media(max-width:768px){
+
+    .mt-responsive-0{margin-top:0!important;}
+
+    .mt-responsive-1{margin-top:var(--space-1)!important;}
+
+    .mt-responsive-2{margin-top:var(--space-2)!important;}
+
+    .mt-responsive-3{margin-top:var(--space-3)!important;}
+
+    .mb-responsive-0{margin-bottom:0!important;}
+
+    .mb-responsive-1{margin-bottom:var(--space-1)!important;}
+
+    .mb-responsive-2{margin-bottom:var(--space-2)!important;}
+
+    .mb-responsive-3{margin-bottom:var(--space-3)!important;}
+
+}
+
+
+/* ==========================================================
+   RESPONSIVE WIDTH
+========================================================== */
+
+@media(max-width:768px){
+
+    .w-tablet-100{
+
+        width:100%!important;
+
+    }
+
+    .w-tablet-auto{
+
+        width:auto!important;
+
+    }
+
+}
+
+@media(max-width:576px){
+
+    .w-mobile-100{
+
+        width:100%!important;
+
+    }
+
+}
+
+
+/* ==========================================================
+   RESPONSIVE ORDER
+========================================================== */
+
+@media(max-width:768px){
+
+    .order-1-tablet{
+
+        order:1;
+
+    }
+
+    .order-2-tablet{
+
+        order:2;
+
+    }
+
+    .order-3-tablet{
+
+        order:3;
+
+    }
+
+}
+
+
+/* ==========================================================
+   RESPONSIVE IMAGES
+========================================================== */
+
+@media(max-width:768px){
+
+    img{
+
+        max-width:100%;
+
+        height:auto;
+
+    }
+
+}
+
+
+/* ==========================================================
+   SAFE AREA (IOS)
+========================================================== */
+
+@supports(padding:max(0px)){
+
+    .safe-top{
+
+        padding-top:
+
+            max(
+
+                var(--space-4),
+
+                env(safe-area-inset-top)
+
+            );
+
+    }
+
+    .safe-bottom{
+
+        padding-bottom:
+
+            max(
+
+                var(--space-4),
+
+                env(safe-area-inset-bottom)
+
+            );
+
+    }
+
+}
+
+
+/* ==========================================================
+   LANDSCAPE
+========================================================== */
+
+@media (orientation:landscape) and (max-height:600px){
+
+    .section{
+
+        padding-top:48px;
+
+        padding-bottom:48px;
+
+    }
+
+    .hero{
+
+        min-height:auto;
+
+    }
+
+}
+
+
+/* ==========================================================
+   HIGH RESOLUTION
+========================================================== */
+
+@media (-webkit-min-device-pixel-ratio:2),
+       (min-resolution:192dpi){
+
+    img{
+
+        image-rendering:auto;
+
+    }
+
+}
+
+
+/* ==========================================================
+   END OF FILE
+========================================================== */

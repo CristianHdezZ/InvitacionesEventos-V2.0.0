@@ -1,0 +1,362 @@
+/* ==========================================================
+   INVITATION ENGINE V2
+   FILE        : artwork.css
+   VERSION     : 2.0.0
+   MODULE      : PINTURA DE ILUSTRACIONES EN LÍNEA
+
+   Solo color y trazo de los SVG dibujados a mano (rosas,
+   hojas, enredaderas y el vestido de la quinceañera). Nada de
+   posición ni de tamaño: de eso se encarga cada sección.
+
+   Vive aparte porque estas mismas ilustraciones aparecen en la
+   portada (ya migrada al Engine V2) y en la carta (todavía en
+   style.css). Un solo módulo evita tener las reglas duplicadas
+   en los dos sitios mientras dura la migración.
+
+   Los colores se escriben var(--nombre-v1, var(--nombre-v2)):
+   el primero es el que escribía el panel de admin, así que
+   cuando se reconecte el puente admin→CSS los controles
+   vuelven a funcionar sin tocar este archivo.
+========================================================== */
+
+
+/* ==========================================================
+   ESTADO PENDIENTE
+
+   Nada decorativo se pinta hasta saber qué toca, porque la
+   configuración del panel viaja por red:
+
+     · corona, quinceañera y guirnaldas pueden salir como
+       dibujo SVG o como imagen .png;
+     · mariposas, guirnaldas y animación pueden estar apagadas.
+
+   Sin esto se veía un instante lo que trae el HTML y luego
+   cambiaba o desaparecía de golpe.
+
+   Se usa visibility y no display para que el hueco ya esté
+   reservado y el diseño no dé un salto al aparecer.
+
+   La clase la pone js/include.js al arrancar y la retira
+   ContentManager, pase lo que pase con la petición.
+========================================================== */
+
+.artwork-pendiente .gate__crown,
+.artwork-pendiente .hero__crown,
+.artwork-pendiente .gate__dress,
+.artwork-pendiente .letter__dress,
+.artwork-pendiente .garland,
+.artwork-pendiente .letter__garland,
+.artwork-pendiente .gate__butterfly,
+.artwork-pendiente .gate__lottie{
+
+    visibility:hidden;
+
+}
+
+
+/* ==========================================================
+   DECORACIÓN FLORAL COMO IMAGEN (.png)
+
+   Todos los ajustes del admin (opacidad, difuminado, tinte)
+   se aplican únicamente sobre la imagen; el dibujo SVG
+   conserva siempre el diseño original.
+
+   El filtro se arma desde JS y queda en 'none' cuando no hay
+   ningún efecto configurado. Un filtro neutro no se ve, pero
+   fuerza composición por GPU y en Safari/iOS puede pintar la
+   imagen como un recuadro vacío junto al transform de volteo.
+========================================================== */
+
+.garland-img{
+
+    display:block;
+
+    position:relative;
+
+    object-fit:contain;
+
+    opacity:var(--floral-opacidad, 1);
+
+    filter:var(--floral-filtro, none);
+
+}
+
+
+/* ==========================================================
+   ROSAS
+========================================================== */
+
+.rose__c1{
+
+    fill:var(--rosa, var(--color-primary));
+
+    opacity:.62;
+
+}
+
+.rose__c2{
+
+    fill:var(--rosa-deep, var(--color-primary-dark));
+
+    opacity:.5;
+
+}
+
+.rose__c3{
+
+    fill:#F6C9D4;
+
+    opacity:.7;
+
+}
+
+.rose__spiral{
+
+    fill:none;
+
+    stroke:var(--rosa-deep, var(--color-primary-dark));
+
+    stroke-width:1.2;
+
+    stroke-linecap:round;
+
+    opacity:.4;
+
+}
+
+
+/* ==========================================================
+   ENREDADERA Y HOJAS
+========================================================== */
+
+.garland__vine{
+
+    fill:none;
+
+    stroke:var(--verde, #8FA98A);
+
+    stroke-width:1.2;
+
+    opacity:.42;
+
+}
+
+.leaf{
+
+    fill:var(--verde, #8FA98A);
+
+    opacity:.4;
+
+}
+
+
+/* ==========================================================
+   VESTIDO — cuerpo
+========================================================== */
+
+.dress__body{
+
+    fill:var(--vestido, var(--color-primary));
+
+    opacity:.92;
+
+}
+
+.dress__sleeve{
+
+    fill:var(--vestido, var(--color-primary));
+
+    opacity:.85;
+
+}
+
+.dress__hair{
+
+    fill:var(--vino, var(--color-secondary));
+
+    opacity:.9;
+
+}
+
+.dress__arm{
+
+    fill:var(--tinta-suave, var(--color-text-light));
+
+    opacity:.55;
+
+}
+
+.dress__neck{
+
+    fill:var(--tinta-suave, var(--color-text-light));
+
+    opacity:.22;
+
+}
+
+.dress__shadow{
+
+    fill:var(--tinta-suave, var(--color-text-light));
+
+    opacity:.15;
+
+}
+
+
+/* ==========================================================
+   VESTIDO — corona y joyas
+========================================================== */
+
+.dress__crown{
+
+    fill:none;
+
+    stroke:var(--oro, var(--color-gold));
+
+    stroke-width:1.3;
+
+    stroke-linecap:round;
+
+    stroke-linejoin:round;
+
+}
+
+.dress__gem{
+
+    fill:var(--oro, var(--color-gold));
+
+}
+
+.dress__gem--accent{
+
+    fill:var(--rosa-deep, var(--color-primary-dark));
+
+}
+
+
+/* ==========================================================
+   VESTIDO — detalle de tela
+========================================================== */
+
+.dress__lace{
+
+    fill:none;
+
+    stroke:var(--blush, var(--color-background));
+
+    stroke-width:1;
+
+    stroke-linecap:round;
+
+    opacity:.75;
+
+}
+
+.dress__bow{
+
+    fill:var(--rosa-deep, var(--color-primary-dark));
+
+    stroke:var(--vino, var(--color-secondary));
+
+    stroke-width:.5;
+
+    opacity:.95;
+
+}
+
+.dress__ruffle{
+
+    fill:none;
+
+    stroke:var(--blush, var(--color-background));
+
+    stroke-width:1.4;
+
+    stroke-linecap:round;
+
+    opacity:.5;
+
+}
+
+.dress__pleat{
+
+    fill:none;
+
+    stroke:var(--rosa-deep, var(--color-primary-dark));
+
+    stroke-width:1;
+
+    stroke-linecap:round;
+
+    opacity:.22;
+
+}
+
+.dress__sheen{
+
+    fill:none;
+
+    stroke:#fff;
+
+    stroke-width:1.4;
+
+    stroke-linecap:round;
+
+    opacity:.18;
+
+}
+
+
+/* ==========================================================
+   VESTIDO — destellos
+========================================================== */
+
+.dress__sparkle{
+
+    fill:#fff;
+
+    opacity:.9;
+
+    animation:
+
+        artworkSparkle
+
+        2.4s ease-in-out infinite;
+
+}
+
+@keyframes artworkSparkle{
+
+    0%,100%{
+
+        opacity:.2;
+
+    }
+
+    50%{
+
+        opacity:1;
+
+    }
+
+}
+
+
+/* ==========================================================
+   REDUCED MOTION
+========================================================== */
+
+@media (prefers-reduced-motion:reduce){
+
+    .dress__sparkle{
+
+        animation:none;
+
+    }
+
+}
+
+
+/* ==========================================================
+   END OF FILE
+========================================================== */

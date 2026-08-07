@@ -1,0 +1,201 @@
+/* ==========================================================
+   INVITATION ENGINE V2
+   FILE        : layout/gallery.css
+   VERSION     : 2.0.0
+   MODULE      : GALLERY (carrusel y lightbox)
+
+   ESTE es el módulo en uso. El motor trae otro en
+   components/gallery.css con nomenclatura .gallery__* y su
+   propia estructura de lightbox; cambiar a él supondría
+   reescribir el markup del carrusel. Queda ahí, sin activar.
+
+   El bloque del álbum compartido que va debajo del carrusel
+   está aparte, en layout/album.css.
+========================================================== */
+
+
+/* ==========================================================
+   CARRUSEL
+
+   El padding inferior deja sitio a los puntos de paginación,
+   que Swiper coloca fuera del área de las diapositivas.
+========================================================== */
+
+.galeria__swiper{
+
+    margin-top:36px;
+
+    padding-bottom:44px;
+
+}
+
+
+/* Ancho por diapositiva: Swiper necesita medida explícita
+   cuando el slidesPerView es 'auto'. */
+
+.galeria__swiper .swiper-slide{
+
+    width:min(280px,70vw);
+
+}
+
+
+/* ==========================================================
+   FOTO
+========================================================== */
+
+.galeria__item{
+
+    width:100%;
+
+    padding:0;
+
+    border:0;
+
+    aspect-ratio:4 / 5;
+
+    overflow:hidden;
+
+    border-radius:6px;
+
+    background:var(--blush-2, var(--color-primary-light));
+
+    cursor:pointer;
+
+    box-shadow:0 16px 34px -20px rgba(139,79,98,.45);
+
+}
+
+.galeria__item img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+    transition:transform .6s var(--ease, ease);
+
+}
+
+.galeria__item:hover img{
+
+    transform:scale(1.08);
+
+}
+
+
+/* ==========================================================
+   CONTROLES DE SWIPER
+========================================================== */
+
+.galeria__swiper .swiper-button-prev,
+
+.galeria__swiper .swiper-button-next{
+
+    color:var(--vino, var(--color-secondary));
+
+}
+
+.galeria__swiper .swiper-button-prev::after,
+
+.galeria__swiper .swiper-button-next::after{
+
+    font-size:1.3rem;
+
+}
+
+.galeria__swiper .swiper-pagination-bullet{
+
+    background:var(--rosa-deep, var(--color-primary-dark));
+
+    opacity:.4;
+
+}
+
+.galeria__swiper .swiper-pagination-bullet-active{
+
+    background:var(--vino, var(--color-secondary));
+
+    opacity:1;
+
+}
+
+
+/* ==========================================================
+   LIGHTBOX
+
+   Siempre en el DOM: se muestra con opacidad y pointer-events
+   en vez de display, para poder animar la entrada.
+========================================================== */
+
+.lightbox{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:100;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:5vh 5vw;
+
+    background:rgba(110,75,84,.92);
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transition:opacity var(--transition-normal);
+
+}
+
+.lightbox.is-open{
+
+    opacity:1;
+
+    pointer-events:auto;
+
+}
+
+.lightbox img{
+
+    max-width:90vw;
+
+    max-height:90vh;
+
+    border-radius:2px;
+
+}
+
+.lightbox__close{
+
+    position:absolute;
+
+    top:22px;
+
+    right:28px;
+
+    border:0;
+
+    background:none;
+
+    color:var(--color-white);
+
+    font-size:2.2rem;
+
+    line-height:1;
+
+    cursor:pointer;
+
+}
+
+
+/* ==========================================================
+   END OF FILE
+========================================================== */

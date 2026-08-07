@@ -1,0 +1,2620 @@
+/* ==========================================================
+   INVITATION ENGINE V2
+   FILE        : gate.css
+   VERSION     : 2.0.2
+   MODULE      : Gate Layout
+========================================================== */
+
+
+/* ==========================================================
+   GATE VARIABLES
+========================================================== */
+
+.gate{
+
+    /* Engine */
+
+    --gate-scale:1;
+
+    --gate-opacity:1;
+
+    --gate-z:999;
+
+    /* Envelope */
+
+    --gate-envelope-width:220px;
+
+    --gate-envelope-scale:1;
+
+    --gate-envelope-opacity:1;
+
+    /* Dress */
+
+    --gate-dress-width:260px;
+
+    --gate-dress-scale:1;
+
+    --gate-dress-opacity:1;
+
+    /* Garland */
+
+    --gate-garland-scale:1;
+
+    --gate-garland-opacity:1;
+
+    --gate-garland-blur:0;
+
+    /* Effects */
+
+    --gate-blur:0;
+
+    --gate-brightness:1;
+
+    --gate-contrast:1;
+
+    --gate-saturate:1;
+
+}
+
+
+/* ==========================================================
+   GATE CONTAINER
+========================================================== */
+
+.gate{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:var(--gate-z);
+
+    display:grid;
+
+    grid-template-rows:
+
+        auto
+
+        1fr
+
+        auto
+
+        auto;
+
+    justify-items:center;
+
+    align-items:center;
+
+    width:100%;
+
+    min-height:100vh;
+
+    overflow:hidden;
+
+    padding:var(--space-6);
+
+    background:var(--color-background);
+
+    color:var(--color-text);
+
+    opacity:var(--gate-opacity);
+
+    transition:
+
+        opacity var(--transition-slow),
+
+        visibility var(--transition-slow);
+
+}
+
+
+/* ==========================================================
+   BACKGROUND
+========================================================== */
+
+.gate::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+        radial-gradient(
+
+            circle at top,
+
+            var(--color-primary-light),
+
+            transparent 58%
+
+        ),
+
+        radial-gradient(
+
+            circle at bottom right,
+
+            rgba(233,170,187,.18),
+
+            transparent 45%
+
+        );
+
+    pointer-events:none;
+
+}
+
+
+/* ==========================================================
+   LIGHT EFFECT
+========================================================== */
+
+.gate::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+        linear-gradient(
+
+            120deg,
+
+            transparent 20%,
+
+            rgba(255,255,255,.12) 50%,
+
+            transparent 80%
+
+        );
+
+    background-size:220% 100%;
+
+    animation:gateShine 9s linear infinite;
+
+    pointer-events:none;
+
+}
+
+
+/* ==========================================================
+   CONTENT LAYER
+========================================================== */
+
+.gate>*{
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+
+/* ==========================================================
+   STATES
+========================================================== */
+
+.gate.is-open{
+
+    opacity:1;
+
+    visibility:visible;
+
+}
+
+.gate.is-closed{
+
+    opacity:0;
+
+    visibility:hidden;
+
+    pointer-events:none;
+
+}
+
+
+/* ==========================================================
+   ACCESSIBILITY
+========================================================== */
+
+.gate[aria-hidden="true"]{
+
+    visibility:hidden;
+
+}
+
+/* ==========================================================
+   GRID LAYOUT
+========================================================== */
+
+.gate__top{
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+.gate__content{
+
+    width:100%;
+
+    max-width:680px;
+
+    display:grid;
+
+    justify-items:center;
+
+    align-content:center;
+
+    gap:var(--space-4);
+
+    text-align:center;
+
+}
+
+.gate__illustration{
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:flex-end;
+
+}
+
+.gate__bottom{
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+
+/* ==========================================================
+   TYPOGRAPHY
+========================================================== */
+
+.gate__eyebrow{
+
+    margin:0;
+
+    color:var(--color-text-light);
+
+    font-family:var(--font-body);
+
+    font-size:.78rem;
+
+    letter-spacing:.30em;
+
+    text-transform:uppercase;
+
+}
+
+.gate__name{
+
+    margin:0;
+
+    font-family:var(--font-script);
+
+    font-size:clamp(3.5rem,8vw,5.6rem);
+
+    line-height:1;
+
+    color:var(--color-primary-dark);
+
+}
+
+.gate__xv{
+
+    margin:0;
+
+    color:var(--color-gold);
+
+    font-size:.86rem;
+
+    letter-spacing:.35em;
+
+    text-transform:uppercase;
+
+}
+
+.gate__quote{
+
+    max-width:440px;
+
+    margin:0;
+
+    color:var(--color-text);
+
+    font-family:var(--font-title);
+
+    font-size:1.08rem;
+
+    font-style:italic;
+
+    line-height:1.8;
+
+}
+
+
+/* ==========================================================
+   DIVIDER
+========================================================== */
+
+.gate__divider{
+
+    width:90px;
+
+    height:2px;
+
+    background:var(--color-gold);
+
+    opacity:.35;
+
+}
+
+
+/* ==========================================================
+   LOTTIE
+========================================================== */
+
+.gate__lottie{
+
+    position:absolute;
+
+    top:70px;
+
+    right:70px;
+
+    width:80px;
+
+    height:80px;
+
+    opacity:.85;
+
+    pointer-events:none;
+
+}
+
+
+/* ==========================================================
+   PARTICLES CONTAINER
+========================================================== */
+
+.gate__particles{
+
+    position:absolute;
+
+    inset:0;
+
+    overflow:hidden;
+
+    pointer-events:none;
+
+    z-index:1;
+
+}
+
+
+/* ==========================================================
+   ORNAMENT
+========================================================== */
+
+.gate__ornament{
+
+    display:block;
+
+    width:90px;
+
+    height:auto;
+
+    opacity:.65;
+
+}
+
+/* ==========================================================
+   ENVELOPE
+========================================================== */
+
+.gate__envelope{
+
+    position:relative;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    width:calc(
+
+        var(--gate-envelope-width)
+
+        * var(--gate-envelope-scale)
+
+    );
+
+    aspect-ratio:220 / 140;
+
+    cursor:pointer;
+
+    opacity:var(--gate-envelope-opacity);
+
+    transition:
+
+        transform var(--transition-normal),
+
+        filter var(--transition-normal),
+
+        opacity var(--transition-normal);
+
+}
+
+.gate__envelope:hover{
+
+    transform:
+
+        translateY(-5px)
+
+        scale(1.03);
+
+    filter:
+
+        drop-shadow(
+
+            0 18px 32px rgba(0,0,0,.18)
+
+        );
+
+}
+
+.gate__envelope svg,
+
+.gate__envelope img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:contain;
+
+    display:block;
+
+}
+
+
+/* ==========================================================
+   ENVELOPE LABEL
+========================================================== */
+
+.gate__envelope-label{
+
+    position:absolute;
+
+    left:50%;
+
+    bottom:18px;
+
+    transform:translateX(-50%);
+
+    font-family:var(--font-title);
+
+    font-size:.92rem;
+
+    letter-spacing:.18em;
+
+    text-transform:uppercase;
+
+    color:var(--color-secondary);
+
+    white-space:nowrap;
+
+    pointer-events:none;
+
+}
+
+
+/* ==========================================================
+   SEAL
+========================================================== */
+
+.gate__seal{
+
+    position:absolute;
+
+    left:50%;
+
+    top:58%;
+
+    transform:
+
+        translate(-50%,-50%)
+
+        scale(1);
+
+    width:42px;
+
+    height:42px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:4;
+
+    transition:
+
+        transform var(--transition-normal);
+
+}
+
+.gate__seal svg,
+
+.gate__seal img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:contain;
+
+}
+
+.gate__envelope:hover .gate__seal{
+
+    transform:
+
+        translate(-50%,-50%)
+
+        scale(1.08);
+
+}
+
+
+/* ==========================================================
+   TAP RING
+========================================================== */
+
+.gate__tap-ring{
+
+    position:absolute;
+
+    inset:-6px;
+
+    border-radius:50%;
+
+    border:
+
+        2px solid
+
+        rgba(201,125,149,.45);
+
+    animation:
+
+        gateTapRing
+
+        2s infinite;
+
+}
+
+.gate__tap-ring--2{
+
+    animation-delay:1s;
+
+}
+
+@keyframes gateTapRing{
+
+    0%{
+
+        transform:scale(.45);
+
+        opacity:.85;
+
+    }
+
+    100%{
+
+        transform:scale(1.8);
+
+        opacity:0;
+
+    }
+
+}
+
+
+/* ==========================================================
+   ENVELOPE SHINE
+========================================================== */
+
+.gate__envelope::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    border-radius:inherit;
+
+    background:
+
+        linear-gradient(
+
+            120deg,
+
+            transparent 30%,
+
+            rgba(255,255,255,.28) 50%,
+
+            transparent 70%
+
+        );
+
+    background-size:220% 100%;
+
+    opacity:0;
+
+    transition:opacity .35s ease;
+
+    pointer-events:none;
+
+}
+
+.gate__envelope:hover::before{
+
+    opacity:1;
+
+    animation:
+
+        gateEnvelopeShine
+
+        1.4s linear;
+
+}
+
+@keyframes gateEnvelopeShine{
+
+    from{
+
+        background-position:200% 0;
+
+    }
+
+    to{
+
+        background-position:-200% 0;
+
+    }
+
+}
+
+/* ==========================================================
+   GARLAND
+========================================================== */
+
+.garland{
+
+    display:block;
+
+    width:min(100%,520px);
+
+    height:auto;
+
+    object-fit:contain;
+
+    user-select:none;
+
+    pointer-events:none;
+
+    transform-origin:center;
+
+    opacity:var(--gate-garland-opacity);
+
+    filter:
+
+        blur(var(--gate-garland-blur))
+
+        brightness(var(--gate-brightness))
+
+        contrast(var(--gate-contrast))
+
+        saturate(var(--gate-saturate));
+
+    transition:
+
+        transform var(--transition-normal),
+
+        opacity var(--transition-normal),
+
+        filter var(--transition-normal);
+
+}
+
+.garland img,
+
+.garland svg{
+
+    width:100%;
+
+    height:auto;
+
+    display:block;
+
+    object-fit:contain;
+
+}
+
+
+/* ==========================================================
+   TOP GARLAND
+========================================================== */
+
+.garland--top{
+
+    margin-bottom:var(--space-4);
+
+}
+
+
+/* ==========================================================
+   BOTTOM GARLAND
+========================================================== */
+
+.garland--bottom{
+
+    margin-top:var(--space-4);
+
+    transform:
+
+        scaleY(-1)
+
+        scale(var(--gate-garland-scale));
+
+}
+
+
+/* ==========================================================
+   GARLAND PNG
+========================================================== */
+
+.garland-img{
+
+    width:100%;
+
+    height:auto;
+
+    object-fit:contain;
+
+}
+
+
+/* ==========================================================
+   ILLUSTRATION AREA
+========================================================== */
+
+.gate__illustration{
+
+    position:relative;
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:flex-end;
+
+    min-height:250px;
+
+}
+
+
+/* ==========================================================
+   DRESS
+========================================================== */
+
+.gate__dress{
+
+    position:relative;
+
+    display:block;
+
+    width:
+
+        calc(
+
+            var(--gate-dress-width)
+
+            *
+
+            var(--gate-dress-scale)
+
+        );
+
+    max-width:42vw;
+
+    height:auto;
+
+    opacity:var(--gate-dress-opacity);
+
+    object-fit:contain;
+
+    transform-origin:center bottom;
+
+    animation:
+
+        gateDressFloat
+
+        5s ease-in-out infinite;
+
+    transition:
+
+        transform var(--transition-normal),
+
+        opacity var(--transition-normal),
+
+        filter var(--transition-normal);
+
+}
+
+
+/* ==========================================================
+   DRESS IMAGE
+========================================================== */
+
+.gate__dress img,
+
+.gate__dress svg{
+
+    display:block;
+
+    width:100%;
+
+    height:auto;
+
+    object-fit:contain;
+
+}
+
+
+/* ==========================================================
+   DRESS EFFECT
+========================================================== */
+
+.gate__dress{
+
+    filter:
+
+        blur(var(--gate-blur))
+
+        brightness(var(--gate-brightness))
+
+        contrast(var(--gate-contrast))
+
+        saturate(var(--gate-saturate));
+
+}
+
+
+/* ==========================================================
+   FLOAT ANIMATION
+========================================================== */
+
+@keyframes gateDressFloat{
+
+    0%{
+
+        transform:
+
+            translateY(0)
+
+            rotate(0deg);
+
+    }
+
+    25%{
+
+        transform:
+
+            translateY(-5px)
+
+            rotate(-1deg);
+
+    }
+
+    50%{
+
+        transform:
+
+            translateY(-10px)
+
+            rotate(0deg);
+
+    }
+
+    75%{
+
+        transform:
+
+            translateY(-5px)
+
+            rotate(1deg);
+
+    }
+
+    100%{
+
+        transform:
+
+            translateY(0)
+
+            rotate(0deg);
+
+    }
+
+}
+
+
+/* ==========================================================
+   DRESS SHADOW
+========================================================== */
+
+.gate__dress::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+
+    bottom:-12px;
+
+    transform:translateX(-50%);
+
+    width:60%;
+
+    height:10px;
+
+    border-radius:50%;
+
+    background:rgba(0,0,0,.10);
+
+    filter:blur(8px);
+
+    z-index:-1;
+
+}
+
+
+/* ==========================================================
+   DYNAMIC PNG SUPPORT
+========================================================== */
+
+.gate__dress.is-png img{
+
+    object-fit:contain;
+
+}
+
+.gate__dress.is-svg svg{
+
+    object-fit:contain;
+
+}
+
+/* ==========================================================
+   BUTTERFLIES
+========================================================== */
+
+.gate__butterfly{
+
+    position:absolute;
+
+    width:48px;
+
+    height:auto;
+
+    pointer-events:none;
+
+    transform-origin:center;
+
+    opacity:.90;
+
+    animation:
+
+        gateButterflyFloat
+
+        7s ease-in-out infinite;
+
+    z-index:2;
+
+}
+
+.gate__butterfly img,
+
+.gate__butterfly svg{
+
+    width:100%;
+
+    height:auto;
+
+    display:block;
+
+    object-fit:contain;
+
+}
+
+.gate__butterfly--left{
+
+    top:16%;
+
+    left:8%;
+
+}
+
+.gate__butterfly--right{
+
+    top:22%;
+
+    right:10%;
+
+    animation-delay:2.5s;
+
+}
+
+.gate__butterfly--center{
+
+    top:10%;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    animation-delay:4s;
+
+}
+
+@keyframes gateButterflyFloat{
+
+    0%{
+
+        transform:
+
+            translate(0,0)
+
+            rotate(0deg);
+
+    }
+
+    20%{
+
+        transform:
+
+            translate(8px,-10px)
+
+            rotate(4deg);
+
+    }
+
+    40%{
+
+        transform:
+
+            translate(-6px,-18px)
+
+            rotate(-4deg);
+
+    }
+
+    60%{
+
+        transform:
+
+            translate(10px,-12px)
+
+            rotate(2deg);
+
+    }
+
+    80%{
+
+        transform:
+
+            translate(-8px,-6px)
+
+            rotate(-2deg);
+
+    }
+
+    100%{
+
+        transform:
+
+            translate(0,0)
+
+            rotate(0deg);
+
+    }
+
+}
+
+
+/* ==========================================================
+   PARTICLES
+========================================================== */
+
+.gate__particles{
+
+    position:absolute;
+
+    inset:0;
+
+    overflow:hidden;
+
+    pointer-events:none;
+
+    opacity:.85;
+
+    z-index:1;
+
+}
+
+.gate__particle{
+
+    position:absolute;
+
+    width:8px;
+
+    height:8px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.65);
+
+    filter:blur(.4px);
+
+    animation:
+
+        gateParticleFloat
+
+        linear infinite;
+
+}
+
+.gate__particle--gold{
+
+    background:rgba(184,147,92,.55);
+
+}
+
+.gate__particle--pink{
+
+    background:rgba(233,170,187,.55);
+
+}
+
+@keyframes gateParticleFloat{
+
+    from{
+
+        transform:
+
+            translateY(120vh)
+
+            scale(.5);
+
+        opacity:0;
+
+    }
+
+    10%{
+
+        opacity:1;
+
+    }
+
+    90%{
+
+        opacity:1;
+
+    }
+
+    to{
+
+        transform:
+
+            translateY(-30vh)
+
+            scale(1.2);
+
+        opacity:0;
+
+    }
+
+}
+
+
+/* ==========================================================
+   GOLD SHINE
+========================================================== */
+
+.gate__shine{
+
+    position:absolute;
+
+    inset:0;
+
+    pointer-events:none;
+
+    z-index:2;
+
+    overflow:hidden;
+
+}
+
+.gate__shine::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+        linear-gradient(
+
+            120deg,
+
+            transparent 15%,
+
+            rgba(255,255,255,.15) 45%,
+
+            rgba(255,255,255,.30) 50%,
+
+            rgba(255,255,255,.15) 55%,
+
+            transparent 85%
+
+        );
+
+    background-size:240% 100%;
+
+    animation:
+
+        gateShine
+
+        9s linear infinite;
+
+}
+
+@keyframes gateShine{
+
+    from{
+
+        background-position:220% 0;
+
+    }
+
+    to{
+
+        background-position:-220% 0;
+
+    }
+
+}
+
+
+/* ==========================================================
+   DECORATIVE ORNAMENT
+========================================================== */
+
+.gate__ornament{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    width:90px;
+
+    opacity:.70;
+
+}
+
+.gate__ornament img,
+
+.gate__ornament svg{
+
+    width:100%;
+
+    height:auto;
+
+    display:block;
+
+}
+
+
+/* ==========================================================
+   LOTTIE SUPPORT
+========================================================== */
+
+.gate__lottie{
+
+    position:absolute;
+
+    top:80px;
+
+    right:60px;
+
+    width:80px;
+
+    height:80px;
+
+    opacity:.85;
+
+    pointer-events:none;
+
+    transition:
+
+        transform var(--transition-normal),
+
+        opacity var(--transition-normal);
+
+}
+
+.gate__lottie:hover{
+
+    transform:scale(1.08);
+
+}
+
+
+/* ==========================================================
+   DECORATIVE LAYER
+========================================================== */
+
+.gate__decorations{
+
+    position:absolute;
+
+    inset:0;
+
+    pointer-events:none;
+
+    z-index:1;
+
+}
+
+.gate__decorations>*{
+
+    position:absolute;
+
+}
+
+
+/* ==========================================================
+   GATE CONTENT ANIMATION
+========================================================== */
+
+.gate__content{
+
+    animation:
+
+        gateFadeUp
+
+        .9s ease both;
+
+}
+
+@keyframes gateFadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:
+
+            translateY(25px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+
+            translateY(0);
+
+    }
+
+}
+
+/* ==========================================================
+   ADMIN ENGINE
+========================================================== */
+
+.gate{
+
+    --theme-primary:var(--color-primary);
+
+    --theme-secondary:var(--color-secondary);
+
+    --theme-gold:var(--color-gold);
+
+    --theme-background:var(--color-background);
+
+    --theme-text:var(--color-text);
+
+}
+
+
+/* ==========================================================
+   ADMIN SCALE
+========================================================== */
+
+.gate{
+
+    --admin-garland-scale:1;
+
+    --admin-dress-scale:1;
+
+    --admin-envelope-scale:1;
+
+    --admin-seal-scale:1;
+
+    --admin-lottie-scale:1;
+
+}
+
+
+/* ==========================================================
+   ADMIN OPACITY
+========================================================== */
+
+.gate{
+
+    --admin-garland-opacity:1;
+
+    --admin-dress-opacity:1;
+
+    --admin-envelope-opacity:1;
+
+    --admin-particles-opacity:.85;
+
+    --admin-butterflies-opacity:.90;
+
+}
+
+
+/* ==========================================================
+   ADMIN FILTERS
+========================================================== */
+
+.gate{
+
+    --admin-brightness:1;
+
+    --admin-contrast:1;
+
+    --admin-saturate:1;
+
+    --admin-blur:0;
+
+}
+
+
+/* ==========================================================
+   APPLY ENGINE
+========================================================== */
+
+.garland{
+
+    opacity:var(--admin-garland-opacity);
+
+    transform:
+
+        scale(var(--admin-garland-scale));
+
+}
+
+.gate__dress{
+
+    opacity:var(--admin-dress-opacity);
+
+    transform-origin:center bottom;
+
+}
+
+.gate__envelope{
+
+    opacity:var(--admin-envelope-opacity);
+
+}
+
+.gate__particles{
+
+    opacity:var(--admin-particles-opacity);
+
+}
+
+.gate__butterfly{
+
+    opacity:var(--admin-butterflies-opacity);
+
+}
+
+
+/* ==========================================================
+   THEME
+========================================================== */
+
+.theme-pink-gold{
+
+    --theme-primary:#F6D8DF;
+
+    --theme-secondary:#8B4F62;
+
+    --theme-gold:#B8935C;
+
+    --theme-background:#FBEAEE;
+
+}
+
+.theme-royal{
+
+    --theme-primary:#DDD6F8;
+
+    --theme-secondary:#5B4E91;
+
+    --theme-gold:#D0B164;
+
+    --theme-background:#F7F4FD;
+
+}
+
+.theme-classic{
+
+    --theme-primary:#FBEAEE;
+
+    --theme-secondary:#8B4F62;
+
+    --theme-gold:#B8935C;
+
+    --theme-background:#FFF9FA;
+
+}
+
+.theme-luxury{
+
+    --theme-primary:#F4E8D8;
+
+    --theme-secondary:#49372E;
+
+    --theme-gold:#C8A356;
+
+    --theme-background:#FDFBF8;
+
+}
+
+.theme-silver{
+
+    --theme-primary:#F7F7F7;
+
+    --theme-secondary:#676767;
+
+    --theme-gold:#BFC4CC;
+
+    --theme-background:#FFFFFF;
+
+}
+
+.theme-minimal{
+
+    --theme-primary:#FFFFFF;
+
+    --theme-secondary:#444444;
+
+    --theme-gold:#D2D2D2;
+
+    --theme-background:#FFFFFF;
+
+}
+
+
+/* ==========================================================
+   APPLY COLORS
+========================================================== */
+
+[class*="theme-"] .gate{
+
+    background:var(--theme-background);
+
+    color:var(--theme-text);
+
+}
+
+[class*="theme-"] .gate__name{
+
+    color:var(--theme-secondary);
+
+}
+
+[class*="theme-"] .gate__xv{
+
+    color:var(--theme-gold);
+
+}
+
+[class*="theme-"] .gate__divider{
+
+    background:var(--theme-gold);
+
+}
+
+[class*="theme-"] .gate__quote{
+
+    color:var(--theme-text);
+
+}
+
+
+/* ==========================================================
+   DYNAMIC PNG SUPPORT
+========================================================== */
+
+.gate__dress img{
+
+    width:100%;
+
+    object-fit:contain;
+
+}
+
+.garland img{
+
+    width:100%;
+
+    object-fit:contain;
+
+}
+
+.gate__seal img{
+
+    width:100%;
+
+    object-fit:contain;
+
+}
+
+.gate__envelope img{
+
+    width:100%;
+
+    object-fit:contain;
+
+}
+
+
+/* ==========================================================
+   JSON ENGINE READY
+========================================================== */
+
+/*
+
+{
+    "theme":"royal",
+    "dress":"dress01.png",
+    "garland":"flowers04.png",
+    "seal":"seal02.png",
+    "envelope":"gold-envelope.png"
+}
+
+*/
+
+
+/* ==========================================================
+   ENGINE READY
+========================================================== */
+
+.gate[data-theme]{
+
+    transition:
+
+        background .35s ease,
+
+        color .35s ease;
+
+}
+
+.gate img{
+
+    user-select:none;
+
+    -webkit-user-drag:none;
+
+}
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media (max-width:1200px){
+
+    .gate{
+
+        padding:var(--space-6);
+
+    }
+
+    .gate__content{
+
+        max-width:620px;
+
+    }
+
+}
+
+@media (max-width:992px){
+
+    .gate{
+
+        grid-template-rows:
+
+            auto
+
+            auto
+
+            auto
+
+            auto;
+
+    }
+
+    .garland{
+
+        width:440px;
+
+    }
+
+    .gate__envelope{
+
+        width:190px;
+
+    }
+
+    .gate__dress{
+
+        width:220px;
+
+        max-width:42vw;
+
+    }
+
+    .gate__lottie{
+
+        width:68px;
+
+        height:68px;
+
+        right:40px;
+
+        top:50px;
+
+    }
+
+}
+
+@media (max-width:768px){
+
+    .gate{
+
+        padding:24px;
+
+    }
+
+    .gate__content{
+
+        gap:20px;
+
+    }
+
+    .gate__name{
+
+        font-size:3.6rem;
+
+    }
+
+    .gate__quote{
+
+        max-width:360px;
+
+        font-size:1rem;
+
+    }
+
+    .gate__envelope{
+
+        width:170px;
+
+    }
+
+    .gate__dress{
+
+        width:180px;
+
+        max-width:48vw;
+
+    }
+
+    .garland{
+
+        width:340px;
+
+    }
+
+    .gate__seal{
+
+        width:34px;
+
+        height:34px;
+
+    }
+
+    .gate__lottie{
+
+        width:58px;
+
+        height:58px;
+
+        top:30px;
+
+        right:20px;
+
+    }
+
+    .gate__butterfly{
+
+        width:36px;
+
+    }
+
+}
+
+@media (max-width:576px){
+
+    .gate{
+
+        padding:18px;
+
+    }
+
+    .gate__content{
+
+        gap:16px;
+
+    }
+
+    .gate__eyebrow{
+
+        font-size:.70rem;
+
+    }
+
+    .gate__name{
+
+        font-size:3rem;
+
+    }
+
+    .gate__xv{
+
+        font-size:.78rem;
+
+    }
+
+    .gate__quote{
+
+        font-size:.95rem;
+
+        line-height:1.7;
+
+    }
+
+    .gate__envelope{
+
+        width:155px;
+
+    }
+
+    .gate__dress{
+
+        width:155px;
+
+        max-width:55vw;
+
+    }
+
+    .garland{
+
+        width:280px;
+
+    }
+
+    .gate__lottie{
+
+        display:none;
+
+    }
+
+}
+
+@media (max-height:820px){
+
+    .gate{
+
+        padding-top:16px;
+
+        padding-bottom:16px;
+
+    }
+
+    .gate__content{
+
+        gap:14px;
+
+    }
+
+    .gate__dress{
+
+        width:150px;
+
+    }
+
+    .garland{
+
+        width:280px;
+
+    }
+
+}
+
+@media (min-height:900px){
+
+    .gate{
+
+        grid-template-rows:
+
+            auto
+
+            1fr
+
+            auto
+
+            auto;
+
+    }
+
+    .gate__illustration{
+
+        margin-top:auto;
+
+    }
+
+}
+
+
+/* ==========================================================
+   REDUCED MOTION
+========================================================== */
+
+@media (prefers-reduced-motion:reduce){
+
+    .gate *{
+
+        animation:none !important;
+
+        transition:none !important;
+
+    }
+
+}
+
+
+/* ==========================================================
+   PRINT
+========================================================== */
+
+@media print{
+
+    .gate{
+
+        position:relative;
+
+        min-height:auto;
+
+    }
+
+}
+
+
+/* ==========================================================
+   PINTURA DE LOS SVG (portado desde style.css)
+
+   Estas reglas solo dan color a las ilustraciones en línea del
+   gate: el sobre, el sello, el vestido y las mariposas. Se
+   escriben con var(--nombre-v1, var(--nombre-v2)) a propósito:
+   el primer nombre es el que escribía el panel de admin, así
+   que cuando se reconecte el puente admin→CSS los controles
+   vuelven a funcionar sin tocar estas reglas.
+
+   Las rosas, hojas, enredaderas y el vestido NO están aquí:
+   esas mismas ilustraciones las reusa la carta, que todavía es
+   V1, así que su pintura vive en components/artwork.css.
+========================================================== */
+
+
+/* ==========================================================
+   ENCAJE VERTICAL
+
+   El grid de arriba reparte con "auto 1fr auto auto", que le da
+   el espacio sobrante al texto y deja la ilustración con un
+   min-height fijo de 250px. Sumado a las dos guirnaldas eso pasa
+   de 100vh en pantallas de alto medio, y como .gate llevaba
+   overflow:hidden la guirnalda de abajo se recortaba.
+
+   Aquí se invierte: el texto ocupa lo que necesita y la
+   ILUSTRACIÓN es la que cede, escalándose al hueco que queda.
+   Así la portada se acomoda sola a cualquier alto sin listas de
+   excepciones por dispositivo, y el overflow-y queda solo como
+   válvula de seguridad para casos extremos.
+========================================================== */
+
+.gate{
+
+    grid-template-rows:
+
+        auto
+
+        auto
+
+        auto
+
+        auto;
+
+    min-height:100dvh;
+
+    padding:clamp(12px,2vh,24px) var(--space-6);
+
+    /* Sin separación entre filas el sobre y la ilustración quedan
+       pegados y cualquier redondeo de subpíxel los solapa. */
+
+    row-gap:clamp(6px,1.4vh,18px);
+
+    overflow-x:hidden;
+
+    overflow-y:auto;
+
+}
+
+.gate__content{
+
+    gap:clamp(8px,1.6vh,20px);
+
+}
+
+
+/* Guirnaldas: el ancho manda en pantallas anchas, el alto en
+   pantallas bajas. object-fit:contain reescala sin deformar. */
+
+/* El tamaño que fija el panel entra en el ancho y en el tope de
+   alto, no en un transform: escalando con transform la de abajo
+   crecía y la de arriba no, porque solo una llevaba la regla, y
+   quedaban de tamaños distintos. El tope en vw evita que un
+   porcentaje alto la saque de la pantalla. */
+
+.garland{
+
+    width:
+
+        min(
+
+            calc(
+
+                clamp(200px,30vw,440px)
+
+                * var(--gate-garland-scale)
+
+            ),
+
+            92vw
+
+        );
+
+    max-height:
+
+        calc(
+
+            clamp(56px,9vh,110px)
+
+            * var(--gate-garland-scale)
+
+        );
+
+    object-fit:contain;
+
+}
+
+
+/* El dibujo SVG de abajo ya está trazado en su orientación
+   final; solo se voltea la alternativa .png, que es la misma
+   imagen que la de arriba. La hoja del motor volteaba las dos. */
+
+.garland--bottom{
+
+    transform:none;
+
+}
+
+.garland--bottom.garland-img{
+
+    transform:scaleY(-1);
+
+}
+
+
+/* El sobre y el nombre también miden en vh: son los dos bloques
+   que más alto consumen. */
+
+.gate__envelope{
+
+    width:
+
+        calc(
+
+            clamp(140px,20vh,220px)
+
+            * var(--gate-envelope-scale)
+
+        );
+
+}
+
+.gate__name{
+
+    font-size:clamp(2.4rem,6vh,4.4rem);
+
+}
+
+.gate__crown{
+
+    width:
+
+        calc(
+
+            clamp(60px,10vh,110px)
+
+            * var(--gate-crown-scale)
+
+        );
+
+}
+
+
+/* La ilustración ya no impone un piso de 250px: se ajusta al
+   hueco que dejan las demás filas. */
+
+/* Contenedor en grid, no en flex: así la celda tiene alto
+   definido y el height:100% de la figura sí resuelve contra
+   ella. Con flex el porcentaje quedaba sin resolver, la figura
+   crecía hasta su tope en vh y se salía de su fila hacia
+   arriba, rozando el sobre. */
+
+.gate__illustration{
+
+    display:grid;
+
+    place-items:end center;
+
+    min-height:0;
+
+    /* .gate lleva align-items:center, así que sus celdas se
+       encogen al contenido en vez de ocupar la fila. Sin este
+       stretch la celda mide 0 y el height:100% de la figura
+       resuelve contra cero.
+
+       El margin:0 desactiva el margin-top:auto que le pone el
+       @media (min-height:900px) de más arriba: un margen auto
+       también cancela el stretch, y la celda volvía a 0. */
+
+    align-self:stretch;
+
+    margin:0;
+
+}
+
+.gate__dress{
+
+    /* Sin aspect-ratio explícito el <svg> no sabe deducir su
+       ancho a partir del alto y colapsa a 0. Es la proporción
+       del viewBox; la alternativa .png entra en la misma caja
+       gracias a object-fit:contain, igual que hace el sobre. */
+
+    aspect-ratio:220 / 270;
+
+    width:auto;
+
+    height:auto;
+
+    object-fit:contain;
+
+    /* El alto se limita aquí, no con un height:100% contra la
+       celda: una fila 1fr es flexible y el navegador la trata
+       como indefinida, así que el porcentaje no resolvía y la
+       figura crecía hasta su tamaño natural. Con un tope en vh
+       la fila se ajusta a ella y el resultado es predecible. */
+
+    max-height:
+
+        calc(
+
+            clamp(110px,18vh,220px)
+
+            * var(--gate-dress-scale)
+
+        );
+
+    /* Sin tope propio en alto: manda la fila. Un max-height en
+       vh acababa siendo mayor que la celda en pantallas de alto
+       medio, y cuando un elemento no cabe en su área el
+       navegador descarta el alineado al final y lo deja
+       desbordar hacia abajo — la figura se montaba sobre la
+       guirnalda inferior.
+
+       El ancho sí lleva tope, y con aspect-ratio ese tope
+       también limita el alto: en pantallas muy altas la figura
+       se detiene sola en 260px de ancho por su proporción. */
+
+    max-width:
+
+        min(
+
+            calc(260px * var(--gate-dress-scale)),
+
+            46vw
+
+        );
+
+}
+
+
+/* ==========================================================
+   BLOQUEO DEL SCROLL DE FONDO
+
+   Antes vivía en style.css como
+   body.gate-active{overflow:hidden; height:100vh}. El alto fijo
+   se retiró: bastaba con overflow:hidden para que la página de
+   atrás no se mueva, y era ese 100vh el que hacía que AOS
+   midiera mal las secciones de abajo (ver
+   Gate.refreshScrollAnimations en js/components/gate.js).
+========================================================== */
+
+body.gate-active{
+
+    overflow:hidden;
+
+}
+
+
+/* ==========================================================
+   ILUSTRACIÓN COMO IMAGEN (.png)
+========================================================== */
+
+.gate__dress-img{
+
+    display:block;
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:contain;
+
+    object-position:center center;
+
+}
+
+
+/* ==========================================================
+   GANCHOS DEL ADMIN
+========================================================== */
+
+.gate{
+
+    --gate-garland-scale:var(--floral-escala,1);
+
+    --gate-garland-opacity:var(--floral-opacidad,1);
+
+    --gate-dress-scale:var(--ilustracion-escala,1);
+
+    --gate-crown-scale:var(--corona-escala,1);
+
+}
+
+
+/* ==========================================================
+   CORONA
+========================================================== */
+
+/* El ancho lo fija el bloque ENCAJE VERTICAL (en vh). */
+
+.gate__crown{
+
+    display:block;
+
+    height:auto;
+
+    margin:0 auto;
+
+}
+
+
+/* ==========================================================
+   NOMBRE — control del admin
+
+   Mismo caso que en hero.css: doble selector porque las reglas
+   de tema de más arriba usan [class*="theme-"] y ganarían a un
+   .gate__name suelto.
+========================================================== */
+
+.gate__name,
+
+[class*="theme-"] .gate__name{
+
+    color:
+
+        var(--color-nombre,
+
+            var(--theme-secondary,
+
+                var(--color-primary-dark)));
+
+    font-family:
+
+        var(--f-nombre,
+
+            var(--f-script,
+
+                var(--font-script)));
+
+}
+
+.gate__crown--img{
+
+    object-fit:contain;
+
+}
+
+
+/* ==========================================================
+   SOBRE — reset del <button>
+========================================================== */
+
+.gate__envelope{
+
+    padding:0;
+
+    border:0;
+
+    background:transparent;
+
+    color:inherit;
+
+    font:inherit;
+
+}
+
+
+/* ==========================================================
+   SOBRE — pintura
+========================================================== */
+
+.gate__envelope-paper{
+
+    fill:var(--blush, var(--color-background));
+
+    stroke:var(--oro, var(--color-gold));
+
+    stroke-width:1.5;
+
+    transition:fill var(--transition-normal);
+
+}
+
+.gate__envelope-inner{
+
+    fill:none;
+
+    stroke:var(--oro, var(--color-gold));
+
+    stroke-width:.6;
+
+    opacity:.55;
+
+}
+
+.gate__envelope-flap{
+
+    fill:none;
+
+    stroke:var(--oro, var(--color-gold));
+
+    stroke-width:1.5;
+
+    stroke-linejoin:round;
+
+}
+
+.gate__envelope-flap--inner{
+
+    stroke-width:.6;
+
+    opacity:.55;
+
+}
+
+.gate__envelope-dot{
+
+    fill:var(--oro, var(--color-gold));
+
+    opacity:.6;
+
+}
+
+@media (hover:hover){
+
+    .gate__envelope:hover .gate__envelope-paper{
+
+        fill:var(--blush-2, var(--color-primary-light));
+
+    }
+
+}
+
+
+/* ==========================================================
+   SELLO
+========================================================== */
+
+.gate__seal .gate__seal-icon{
+
+    position:relative;
+
+    z-index:1;
+
+    width:100%;
+
+    height:100%;
+
+    filter:
+
+        drop-shadow(
+
+            0 2px 4px rgba(139,79,98,.35)
+
+        );
+
+}
+
+.seal__ring{
+
+    fill:none;
+
+    stroke:var(--oro, var(--color-gold));
+
+    stroke-width:1.2;
+
+}
+
+.seal__fill{
+
+    fill:var(--rosa-deep, var(--color-primary-dark));
+
+}
+
+.seal__letter{
+
+    font-family:var(--font-script);
+
+    font-size:15px;
+
+    fill:var(--blush, var(--color-background));
+
+}
+
+
+/* ==========================================================
+   MARIPOSAS — pintura y aleteo
+========================================================== */
+
+.wing{
+
+    fill:var(--rosa-deep, var(--color-primary-dark));
+
+    opacity:.75;
+
+    transform-origin:30px 20px;
+
+}
+
+.butterfly__body{
+
+    stroke:var(--tinta-suave, var(--color-text-light));
+
+    stroke-width:1.5;
+
+}
+
+.butterfly__wings .wing--l,
+
+.butterfly__wings .wing--r{
+
+    animation:
+
+        gateWingFlap
+
+        1.1s ease-in-out infinite;
+
+    transform-origin:30px 20px;
+
+}
+
+.butterfly__wings .wing--r{
+
+    animation-delay:.1s;
+
+}
+
+@keyframes gateWingFlap{
+
+    0%,100%{
+
+        transform:scaleX(1);
+
+    }
+
+    50%{
+
+        transform:scaleX(.55);
+
+    }
+
+}
+
+
+/* ==========================================================
+   END OF FILE
+========================================================== */

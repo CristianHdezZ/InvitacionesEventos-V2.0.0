@@ -1,0 +1,406 @@
+/* ==========================================================
+   INVITATION ENGINE V2
+   FILE        : chrome.css
+   VERSION     : 2.0.0
+   MODULE      : CHROME (elementos fijos sobre la página)
+
+   Los tres controles que flotan por encima de todo y no
+   pertenecen a ninguna sección: la enredadera lateral, la
+   navegación de puntos y el botón de música.
+========================================================== */
+
+
+/* ==========================================================
+   ENREDADERA
+
+   Se dibuja sola con el scroll: el JS baja stroke-dashoffset.
+   z-index:1 la deja por debajo de las secciones, que llevan
+   z-index:2 en layout/sections.css.
+========================================================== */
+
+.vine-track{
+
+    position:fixed;
+
+    top:0;
+
+    left:calc(50% - 400px);
+
+    z-index:1;
+
+    width:22px;
+
+    height:100vh;
+
+    opacity:.5;
+
+    pointer-events:none;
+
+}
+
+@media (max-width:900px){
+
+    .vine-track{
+
+        left:6px;
+
+        width:16px;
+
+        opacity:.35;
+
+    }
+
+}
+
+#vinePath{
+
+    fill:none;
+
+    stroke:var(--oro, var(--color-gold));
+
+    stroke-width:1.4;
+
+    stroke-linecap:round;
+
+    stroke-dasharray:3200;
+
+    stroke-dashoffset:3200;
+
+    transition:stroke-dashoffset .1s linear;
+
+}
+
+
+/* ==========================================================
+   NAVEGACIÓN DE PUNTOS
+========================================================== */
+
+.dot-nav{
+
+    position:fixed;
+
+    right:14px;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    z-index:40;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:8px;
+
+}
+
+.dot-nav a{
+
+    position:relative;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    width:30px;
+
+    height:30px;
+
+    border-radius:50%;
+
+    border:1px solid rgba(184,147,92,.35);
+
+    color:var(--vino, var(--color-secondary));
+
+    opacity:.65;
+
+    background:
+
+        radial-gradient(
+
+            circle at 35% 28%,
+
+            var(--color-white),
+
+            var(--blush, var(--color-background)) 68%,
+
+            var(--blush-2, var(--color-primary-light))
+
+        );
+
+    box-shadow:
+
+        0 6px 14px -6px rgba(139,79,98,.45),
+
+        inset 0 1px 3px rgba(255,255,255,.9);
+
+    transition:
+
+        opacity var(--transition-normal),
+
+        transform var(--transition-normal),
+
+        box-shadow var(--transition-normal),
+
+        background var(--transition-normal);
+
+}
+
+.dot-nav a svg{
+
+    width:15px;
+
+    height:15px;
+
+}
+
+.dot-nav a.active{
+
+    opacity:1;
+
+    transform:scale(1.14);
+
+    background:
+
+        radial-gradient(
+
+            circle at 35% 28%,
+
+            var(--color-white),
+
+            var(--rosa, var(--color-primary)) 68%,
+
+            var(--vino, var(--color-secondary))
+
+        );
+
+    box-shadow:
+
+        0 8px 18px -6px rgba(139,79,98,.6),
+
+        inset 0 0 0 2px var(--oro, var(--color-gold));
+
+}
+
+
+/* Etiqueta al pasar por encima */
+
+.dot-nav a::after{
+
+    content:attr(data-label);
+
+    position:absolute;
+
+    right:40px;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    padding:2px 8px;
+
+    border-radius:2px;
+
+    background:var(--blush, var(--color-background));
+
+    color:var(--vino, var(--color-secondary));
+
+    font-family:var(--f-body, var(--font-body));
+
+    font-size:.7rem;
+
+    letter-spacing:.05em;
+
+    white-space:nowrap;
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transition:opacity .2s;
+
+}
+
+@media (hover:hover){
+
+    .dot-nav a:hover::after{
+
+        opacity:1;
+
+    }
+
+}
+
+@media (min-width:761px){
+
+    .dot-nav{
+
+        right:22px;
+
+        gap:12px;
+
+    }
+
+    .dot-nav a{
+
+        width:36px;
+
+        height:36px;
+
+    }
+
+    .dot-nav a svg{
+
+        width:18px;
+
+        height:18px;
+
+    }
+
+}
+
+@media (max-width:480px){
+
+    .dot-nav{
+
+        right:8px;
+
+        gap:6px;
+
+    }
+
+    .dot-nav a{
+
+        width:26px;
+
+        height:26px;
+
+    }
+
+    .dot-nav a svg{
+
+        width:13px;
+
+        height:13px;
+
+    }
+
+    /* No hay sitio para la etiqueta junto al punto. */
+
+    .dot-nav a::after{
+
+        display:none;
+
+    }
+
+}
+
+
+/* ==========================================================
+   BOTÓN DE MÚSICA
+========================================================== */
+
+.music-toggle{
+
+    position:fixed;
+
+    left:22px;
+
+    bottom:22px;
+
+    z-index:40;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    width:52px;
+
+    height:52px;
+
+    border-radius:50%;
+
+    border:1px solid var(--oro, var(--color-gold));
+
+    background:var(--color-white);
+
+    cursor:pointer;
+
+    box-shadow:0 6px 20px rgba(139,79,98,.15);
+
+    transition:transform var(--transition-normal);
+
+}
+
+.music-toggle:hover{
+
+    transform:scale(1.06);
+
+}
+
+
+/* Ecualizador: las barras solo se animan mientras suena. */
+
+.music-icon{
+
+    display:flex;
+
+    align-items:flex-end;
+
+    gap:3px;
+
+    height:16px;
+
+}
+
+.music-icon .bar{
+
+    width:3px;
+
+    height:6px;
+
+    border-radius:2px;
+
+    background:var(--vino, var(--color-secondary));
+
+}
+
+.music-toggle[aria-pressed="true"] .bar{
+
+    animation:
+
+        musicBarBounce
+
+        1s ease-in-out infinite;
+
+}
+
+.music-icon .bar:nth-child(1){ animation-delay:0s; }
+.music-icon .bar:nth-child(2){ animation-delay:.2s; }
+.music-icon .bar:nth-child(3){ animation-delay:.4s; }
+
+@keyframes musicBarBounce{
+
+    0%,100%{
+
+        height:6px;
+
+    }
+
+    50%{
+
+        height:16px;
+
+    }
+
+}
+
+
+/* ==========================================================
+   END OF FILE
+========================================================== */

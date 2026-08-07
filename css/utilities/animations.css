@@ -1,0 +1,1337 @@
+/* ==========================================================
+   INVITATION ENGINE V2
+   FILE        : animations.css
+   VERSION     : 2.0.2
+   MODULE      : GLOBAL ANIMATIONS
+========================================================== */
+
+
+/* ==========================================================
+   FADE IN
+========================================================== */
+
+@keyframes fadeIn{
+
+    from{
+
+        opacity:0;
+
+    }
+
+    to{
+
+        opacity:1;
+
+    }
+
+}
+
+
+/* ==========================================================
+   FADE UP
+========================================================== */
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:
+
+            translateY(40px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+
+            translateY(0);
+
+    }
+
+}
+
+
+/* ==========================================================
+   FADE DOWN
+========================================================== */
+
+@keyframes fadeDown{
+
+    from{
+
+        opacity:0;
+
+        transform:
+
+            translateY(-40px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+
+            translateY(0);
+
+    }
+
+}
+
+
+/* ==========================================================
+   FADE LEFT
+========================================================== */
+
+@keyframes fadeLeft{
+
+    from{
+
+        opacity:0;
+
+        transform:
+
+            translateX(-40px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+
+            translateX(0);
+
+    }
+
+}
+
+
+/* ==========================================================
+   FADE RIGHT
+========================================================== */
+
+@keyframes fadeRight{
+
+    from{
+
+        opacity:0;
+
+        transform:
+
+            translateX(40px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+
+            translateX(0);
+
+    }
+
+}
+
+
+/* ==========================================================
+   SCALE IN
+========================================================== */
+
+@keyframes scaleIn{
+
+    from{
+
+        opacity:0;
+
+        transform:scale(.80);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:scale(1);
+
+    }
+
+}
+
+
+/* ==========================================================
+   POP
+========================================================== */
+
+@keyframes pop{
+
+    0%{
+
+        transform:scale(.70);
+
+    }
+
+    70%{
+
+        transform:scale(1.08);
+
+    }
+
+    100%{
+
+        transform:scale(1);
+
+    }
+
+}
+
+
+/* ==========================================================
+   FLOAT
+========================================================== */
+
+@keyframes float{
+
+    0%,100%{
+
+        transform:translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateY(-10px);
+
+    }
+
+}
+
+
+/* ==========================================================
+   FLOAT SMALL
+========================================================== */
+
+@keyframes floatSmall{
+
+    0%,100%{
+
+        transform:translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateY(-5px);
+
+    }
+
+}
+
+/* ==========================================================
+   PULSE
+========================================================== */
+
+@keyframes pulse{
+
+    0%,100%{
+
+        transform:scale(1);
+
+    }
+
+    50%{
+
+        transform:scale(1.05);
+
+    }
+
+}
+
+
+/* ==========================================================
+   HEARTBEAT
+========================================================== */
+
+@keyframes heartbeat{
+
+    0%,100%{
+
+        transform:scale(1);
+
+    }
+
+    15%{
+
+        transform:scale(1.08);
+
+    }
+
+    30%{
+
+        transform:scale(.98);
+
+    }
+
+    45%{
+
+        transform:scale(1.05);
+
+    }
+
+}
+
+
+/* ==========================================================
+   ROTATE
+========================================================== */
+
+@keyframes rotate{
+
+    from{
+
+        transform:rotate(0deg);
+
+    }
+
+    to{
+
+        transform:rotate(360deg);
+
+    }
+
+}
+
+
+/* ==========================================================
+   SHINE
+========================================================== */
+
+@keyframes shine{
+
+    from{
+
+        background-position:220% 0;
+
+    }
+
+    to{
+
+        background-position:-220% 0;
+
+    }
+
+}
+
+
+/* ==========================================================
+   SPIN
+========================================================== */
+
+@keyframes spin{
+
+    from{
+
+        transform:rotate(0deg);
+
+    }
+
+    to{
+
+        transform:rotate(360deg);
+
+    }
+
+}
+
+
+/* ==========================================================
+   BOUNCE
+========================================================== */
+
+@keyframes bounce{
+
+    0%,100%{
+
+        transform:translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateY(-12px);
+
+    }
+
+}
+
+
+/* ==========================================================
+   WIGGLE
+========================================================== */
+
+@keyframes wiggle{
+
+    0%,100%{
+
+        transform:rotate(0deg);
+
+    }
+
+    25%{
+
+        transform:rotate(-3deg);
+
+    }
+
+    75%{
+
+        transform:rotate(3deg);
+
+    }
+
+}
+
+
+/* ==========================================================
+   BLINK
+========================================================== */
+
+@keyframes blink{
+
+    0%,100%{
+
+        opacity:1;
+
+    }
+
+    50%{
+
+        opacity:.35;
+
+    }
+
+}
+
+
+/* ==========================================================
+   TWINKLE
+========================================================== */
+
+@keyframes twinkle{
+
+    0%,100%{
+
+        opacity:.30;
+
+        transform:scale(.9);
+
+    }
+
+    50%{
+
+        opacity:1;
+
+        transform:scale(1.2);
+
+    }
+
+}
+
+/* ==========================================================
+   SLIDE UP
+========================================================== */
+
+@keyframes slideUp{
+
+    from{
+
+        opacity:0;
+
+        transform:
+
+            translateY(80px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+
+            translateY(0);
+
+    }
+
+}
+
+
+/* ==========================================================
+   SLIDE DOWN
+========================================================== */
+
+@keyframes slideDown{
+
+    from{
+
+        opacity:0;
+
+        transform:
+
+            translateY(-80px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+
+            translateY(0);
+
+    }
+
+}
+
+
+/* ==========================================================
+   SLIDE LEFT
+========================================================== */
+
+@keyframes slideLeft{
+
+    from{
+
+        opacity:0;
+
+        transform:
+
+            translateX(-80px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+
+            translateX(0);
+
+    }
+
+}
+
+
+/* ==========================================================
+   SLIDE RIGHT
+========================================================== */
+
+@keyframes slideRight{
+
+    from{
+
+        opacity:0;
+
+        transform:
+
+            translateX(80px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+
+            translateX(0);
+
+    }
+
+}
+
+
+/* ==========================================================
+   ZOOM IN
+========================================================== */
+
+@keyframes zoomIn{
+
+    from{
+
+        opacity:0;
+
+        transform:scale(.50);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:scale(1);
+
+    }
+
+}
+
+
+/* ==========================================================
+   ZOOM OUT
+========================================================== */
+
+@keyframes zoomOut{
+
+    from{
+
+        opacity:0;
+
+        transform:scale(1.35);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:scale(1);
+
+    }
+
+}
+
+
+/* ==========================================================
+   SWING
+========================================================== */
+
+@keyframes swing{
+
+    20%{
+
+        transform:rotate(8deg);
+
+    }
+
+    40%{
+
+        transform:rotate(-6deg);
+
+    }
+
+    60%{
+
+        transform:rotate(4deg);
+
+    }
+
+    80%{
+
+        transform:rotate(-2deg);
+
+    }
+
+    100%{
+
+        transform:rotate(0);
+
+    }
+
+}
+
+
+/* ==========================================================
+   SHAKE
+========================================================== */
+
+@keyframes shake{
+
+    0%,100%{
+
+        transform:translateX(0);
+
+    }
+
+    20%{
+
+        transform:translateX(-6px);
+
+    }
+
+    40%{
+
+        transform:translateX(6px);
+
+    }
+
+    60%{
+
+        transform:translateX(-4px);
+
+    }
+
+    80%{
+
+        transform:translateX(4px);
+
+    }
+
+}
+
+
+/* ==========================================================
+   BREATH
+========================================================== */
+
+@keyframes breath{
+
+    0%,100%{
+
+        transform:scale(1);
+
+    }
+
+    50%{
+
+        transform:scale(1.02);
+
+    }
+
+}
+/* ==========================================================
+   FALL
+========================================================== */
+
+@keyframes fall{
+
+    from{
+
+        transform:
+
+            translateY(-120px)
+
+            rotate(0deg);
+
+        opacity:0;
+
+    }
+
+    to{
+
+        transform:
+
+            translateY(110vh)
+
+            rotate(360deg);
+
+        opacity:1;
+
+    }
+
+}
+
+
+/* ==========================================================
+   PARTICLE FLOAT
+========================================================== */
+
+@keyframes particleFloat{
+
+    0%{
+
+        transform:
+
+            translateY(0)
+
+            translateX(0)
+
+            scale(.6);
+
+        opacity:0;
+
+    }
+
+    20%{
+
+        opacity:1;
+
+    }
+
+    80%{
+
+        opacity:1;
+
+    }
+
+    100%{
+
+        transform:
+
+            translateY(-220px)
+
+            translateX(35px)
+
+            scale(1.15);
+
+        opacity:0;
+
+    }
+
+}
+
+
+/* ==========================================================
+   BUTTERFLY
+========================================================== */
+
+@keyframes butterfly{
+
+    0%,100%{
+
+        transform:
+
+            translate(0,0)
+
+            rotate(0deg);
+
+    }
+
+    25%{
+
+        transform:
+
+            translate(12px,-10px)
+
+            rotate(4deg);
+
+    }
+
+    50%{
+
+        transform:
+
+            translate(0,-22px)
+
+            rotate(0deg);
+
+    }
+
+    75%{
+
+        transform:
+
+            translate(-12px,-10px)
+
+            rotate(-4deg);
+
+    }
+
+}
+
+
+/* ==========================================================
+   GLOW
+========================================================== */
+
+@keyframes glow{
+
+    0%,100%{
+
+        box-shadow:
+
+            0 0 0 rgba(255,215,140,0);
+
+    }
+
+    50%{
+
+        box-shadow:
+
+            0 0 28px rgba(255,215,140,.45);
+
+    }
+
+}
+
+
+/* ==========================================================
+   RIBBON WAVE
+========================================================== */
+
+@keyframes ribbonWave{
+
+    0%,100%{
+
+        transform:
+
+            rotate(0deg);
+
+    }
+
+    50%{
+
+        transform:
+
+            rotate(2deg);
+
+    }
+
+}
+
+
+/* ==========================================================
+   SCROLL INDICATOR
+========================================================== */
+
+@keyframes scrollIndicator{
+
+    0%{
+
+        transform:
+
+            translateY(0);
+
+        opacity:0;
+
+    }
+
+    30%{
+
+        opacity:1;
+
+    }
+
+    100%{
+
+        transform:
+
+            translateY(16px);
+
+        opacity:0;
+
+    }
+
+}
+
+
+/* ==========================================================
+   REVEAL MASK
+========================================================== */
+
+@keyframes revealMask{
+
+    from{
+
+        clip-path:
+
+            inset(0 100% 0 0);
+
+    }
+
+    to{
+
+        clip-path:
+
+            inset(0 0 0 0);
+
+    }
+
+}
+
+
+/* ==========================================================
+   TEXT GRADIENT
+========================================================== */
+
+@keyframes textGradient{
+
+    from{
+
+        background-position:0% 50%;
+
+    }
+
+    to{
+
+        background-position:100% 50%;
+
+    }
+
+}
+
+
+/* ==========================================================
+   RIPPLE
+========================================================== */
+
+@keyframes ripple{
+
+    from{
+
+        transform:scale(.2);
+
+        opacity:.8;
+
+    }
+
+    to{
+
+        transform:scale(2);
+
+        opacity:0;
+
+    }
+
+}
+/* ==========================================================
+   ANIMATION CLASSES
+========================================================== */
+
+.animate-fade{
+
+    animation:
+
+        fadeIn
+
+        .8s ease both;
+
+}
+
+.animate-fade-up{
+
+    animation:
+
+        fadeUp
+
+        .8s ease both;
+
+}
+
+.animate-fade-down{
+
+    animation:
+
+        fadeDown
+
+        .8s ease both;
+
+}
+
+.animate-fade-left{
+
+    animation:
+
+        fadeLeft
+
+        .8s ease both;
+
+}
+
+.animate-fade-right{
+
+    animation:
+
+        fadeRight
+
+        .8s ease both;
+
+}
+
+.animate-scale{
+
+    animation:
+
+        scaleIn
+
+        .7s ease both;
+
+}
+
+.animate-pop{
+
+    animation:
+
+        pop
+
+        .6s ease both;
+
+}
+
+.animate-float{
+
+    animation:
+
+        float
+
+        5s ease-in-out infinite;
+
+}
+
+.animate-float-small{
+
+    animation:
+
+        floatSmall
+
+        3s ease-in-out infinite;
+
+}
+
+.animate-pulse{
+
+    animation:
+
+        pulse
+
+        2s infinite;
+
+}
+
+.animate-heartbeat{
+
+    animation:
+
+        heartbeat
+
+        1.8s infinite;
+
+}
+
+.animate-breath{
+
+    animation:
+
+        breath
+
+        4s ease-in-out infinite;
+
+}
+
+.animate-glow{
+
+    animation:
+
+        glow
+
+        2.5s ease-in-out infinite;
+
+}
+
+.animate-bounce{
+
+    animation:
+
+        bounce
+
+        2.2s infinite;
+
+}
+
+.animate-wiggle{
+
+    animation:
+
+        wiggle
+
+        2s infinite;
+
+}
+
+.animate-rotate{
+
+    animation:
+
+        rotate
+
+        8s linear infinite;
+
+}
+
+.animate-spin{
+
+    animation:
+
+        spin
+
+        1s linear infinite;
+
+}
+
+.animate-shine{
+
+    animation:
+
+        shine
+
+        1.2s linear;
+
+}
+
+.animate-blink{
+
+    animation:
+
+        blink
+
+        1.5s infinite;
+
+}
+
+.animate-twinkle{
+
+    animation:
+
+        twinkle
+
+        2.5s ease-in-out infinite;
+
+}
+/* ==========================================================
+   DELAYS
+========================================================== */
+
+.delay-100{
+
+    animation-delay:.1s;
+
+}
+
+.delay-200{
+
+    animation-delay:.2s;
+
+}
+
+.delay-300{
+
+    animation-delay:.3s;
+
+}
+
+.delay-400{
+
+    animation-delay:.4s;
+
+}
+
+.delay-500{
+
+    animation-delay:.5s;
+
+}
+
+.delay-700{
+
+    animation-delay:.7s;
+
+}
+
+.delay-1000{
+
+    animation-delay:1s;
+
+}
+
+
+/* ==========================================================
+   DURATIONS
+========================================================== */
+
+.duration-fast{
+
+    animation-duration:.4s;
+
+}
+
+.duration-normal{
+
+    animation-duration:.8s;
+
+}
+
+.duration-slow{
+
+    animation-duration:1.5s;
+
+}
+
+.duration-extra{
+
+    animation-duration:3s;
+
+}
+
+
+/* ==========================================================
+   ITERATIONS
+========================================================== */
+
+.infinite{
+
+    animation-iteration-count:infinite;
+
+}
+
+.once{
+
+    animation-iteration-count:1;
+
+}
+
+.twice{
+
+    animation-iteration-count:2;
+
+}
+
+
+/* ==========================================================
+   PLAY STATE
+========================================================== */
+
+.pause-animation{
+
+    animation-play-state:paused;
+
+}
+
+.run-animation{
+
+    animation-play-state:running;
+
+}
+
+
+/* ==========================================================
+   REDUCED MOTION
+========================================================== */
+
+@media(prefers-reduced-motion:reduce){
+
+    *{
+
+        animation:none !important;
+
+        transition:none !important;
+
+        scroll-behavior:auto !important;
+
+    }
+
+}
+
+
+/* ==========================================================
+   END OF FILE
+========================================================== */

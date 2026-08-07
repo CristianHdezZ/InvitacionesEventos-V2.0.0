@@ -1,0 +1,278 @@
+/* ==========================================================
+   INVITATION ENGINE V2
+   FILE        : forms.css
+   VERSION     : 2.0.0
+   MODULE      : FORMS (RSVP y sugerencia musical)
+
+   Módulo nuevo. Lo comparten el formulario de confirmación y
+   el de sugerencia de canción, que usan los mismos campos y el
+   mismo botón.
+========================================================== */
+
+
+/* ==========================================================
+   TARJETA DEL FORMULARIO
+========================================================== */
+
+.rsvp__sub{
+
+    margin-top:6px;
+
+    color:var(--tinta-suave, var(--color-text-light));
+
+}
+
+.rsvp-form{
+
+    margin-top:34px;
+
+    padding:clamp(24px,5vw,44px);
+
+    text-align:left;
+
+    background:var(--color-white);
+
+    border:1px solid var(--blush-2, var(--color-primary-light));
+
+    border-radius:var(--radius,4px);
+
+    box-shadow:0 20px 40px -28px rgba(139,79,98,.35);
+
+}
+
+.musica-form{
+
+    margin-top:0;
+
+}
+
+
+/* ==========================================================
+   CAMPOS
+========================================================== */
+
+.field{
+
+    margin-bottom:20px;
+
+}
+
+.field label,
+
+.field legend{
+
+    display:block;
+
+    margin-bottom:8px;
+
+    padding:0;
+
+    color:var(--tinta-suave, var(--color-text-light));
+
+    font-size:.75rem;
+
+    letter-spacing:.12em;
+
+    text-transform:uppercase;
+
+}
+
+
+/* Subrayado en vez de caja: más ligero y encaja con el resto
+   de la invitación. */
+
+.field input[type="text"],
+
+.field input[type="number"],
+
+.field input[type="tel"],
+
+.field textarea{
+
+    width:100%;
+
+    padding:8px 2px;
+
+    border:0;
+
+    border-bottom:1px solid var(--blush-2, var(--color-primary-light));
+
+    background:transparent;
+
+    color:var(--tinta, var(--color-text));
+
+    font-family:var(--f-body, var(--font-body));
+
+    font-size:1rem;
+
+    transition:border-color var(--transition-normal);
+
+}
+
+.field input:focus,
+
+.field textarea:focus{
+
+    outline:none;
+
+    border-bottom-color:var(--rosa-deep, var(--color-primary-dark));
+
+}
+
+
+/* ==========================================================
+   OPCIONES
+========================================================== */
+
+.field--radios{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:24px;
+
+    padding:0;
+
+    border:0;
+
+}
+
+.radio{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    color:var(--tinta, var(--color-text));
+
+    font-size:.9rem;
+
+    letter-spacing:0;
+
+    text-transform:none;
+
+}
+
+.radio input{
+
+    accent-color:var(--rosa-deep, var(--color-primary-dark));
+
+}
+
+
+/* ==========================================================
+   TRAMPA ANTI-BOTS
+
+   Fuera de pantalla en vez de display:none: así los bots que
+   rellenan campos ocultos siguen cayendo, pero ningún lector
+   de pantalla la anuncia.
+========================================================== */
+
+.hp-field{
+
+    position:absolute;
+
+    left:-9999px;
+
+    width:1px;
+
+    height:1px;
+
+    opacity:0;
+
+    pointer-events:none;
+
+}
+
+
+/* ==========================================================
+   BOTÓN PRINCIPAL
+========================================================== */
+
+.btn-primary{
+
+    display:block;
+
+    width:100%;
+
+    padding:16px;
+
+    border:0;
+
+    border-radius:2px;
+
+    cursor:pointer;
+
+    background:var(--vino, var(--color-secondary));
+
+    color:var(--blush, var(--color-background));
+
+    font-family:var(--f-body, var(--font-body));
+
+    font-size:.82rem;
+
+    letter-spacing:.14em;
+
+    text-transform:uppercase;
+
+    transition:background var(--transition-normal);
+
+}
+
+.btn-primary:hover{
+
+    background:var(--rosa-deep, var(--color-primary-dark));
+
+}
+
+.btn-primary:disabled{
+
+    opacity:.6;
+
+    cursor:not-allowed;
+
+}
+
+
+/* ==========================================================
+   MENSAJE DE ESTADO
+
+   min-height reserva su renglón para que el formulario no dé
+   un salto al aparecer el mensaje.
+========================================================== */
+
+.rsvp-form__status{
+
+    margin-top:14px;
+
+    margin-bottom:0;
+
+    min-height:1.2em;
+
+    color:var(--rosa-deep, var(--color-primary-dark));
+
+    font-size:.88rem;
+
+    text-align:center;
+
+}
+
+.rsvp-form__status[data-state="error"]{
+
+    color:#B3413E;
+
+}
+
+.rsvp-form__status[data-state="ok"]{
+
+    color:var(--vino, var(--color-secondary));
+
+}
+
+
+/* ==========================================================
+   END OF FILE
+========================================================== */

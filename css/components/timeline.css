@@ -1,0 +1,819 @@
+/* ==========================================================
+   INVITATION ENGINE V2
+   FILE        : timeline.css
+   VERSION     : 2.0.2
+   MODULE      : TIMELINE
+========================================================== */
+
+
+/* ==========================================================
+   VARIABLES
+========================================================== */
+
+:root{
+
+    --timeline-width:720px;
+
+    --timeline-line:4px;
+
+    --timeline-dot:22px;
+
+    --timeline-card:320px;
+
+    --timeline-gap:70px;
+
+}
+
+
+/* ==========================================================
+   TIMELINE
+========================================================== */
+
+.timeline{
+
+    position:relative;
+
+    width:100%;
+
+    max-width:var(--timeline-width);
+
+    margin:0 auto;
+
+    display:grid;
+
+    gap:var(--timeline-gap);
+
+    padding:40px 0;
+
+}
+
+
+/* ==========================================================
+   CENTER LINE
+========================================================== */
+
+.timeline::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    bottom:0;
+
+    left:50%;
+
+    width:var(--timeline-line);
+
+    transform:translateX(-50%);
+
+    background:
+
+        linear-gradient(
+
+            to bottom,
+
+            transparent,
+
+            var(--color-gold),
+
+            transparent
+
+        );
+
+}
+
+
+/* ==========================================================
+   ITEM
+========================================================== */
+
+.timeline__item{
+
+    position:relative;
+
+    display:flex;
+
+    width:100%;
+
+    min-height:120px;
+
+}
+
+
+/* ==========================================================
+   LEFT
+========================================================== */
+
+.timeline__item:nth-child(odd){
+
+    justify-content:flex-start;
+
+}
+
+
+/* ==========================================================
+   RIGHT
+========================================================== */
+
+.timeline__item:nth-child(even){
+
+    justify-content:flex-end;
+
+}
+
+
+/* ==========================================================
+   CARD
+========================================================== */
+
+.timeline__card{
+
+    position:relative;
+
+    width:var(--timeline-card);
+
+    padding:30px;
+
+    background:var(--color-white);
+
+    border-radius:24px;
+
+    box-shadow:var(--shadow-lg);
+
+    border:1px solid rgba(184,147,92,.12);
+
+    transition:
+
+        transform var(--transition-normal),
+
+        box-shadow var(--transition-normal);
+
+}
+
+.timeline__card:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:var(--shadow-xl);
+
+}
+
+
+/* ==========================================================
+   DOT
+========================================================== */
+
+.timeline__dot{
+
+    position:absolute;
+
+    top:42px;
+
+    left:50%;
+
+    width:var(--timeline-dot);
+
+    height:var(--timeline-dot);
+
+    border-radius:50%;
+
+    transform:translateX(-50%);
+
+    background:var(--color-secondary);
+
+    border:4px solid var(--color-white);
+
+    box-shadow:0 0 0 5px rgba(184,147,92,.20);
+
+    z-index:2;
+
+}
+
+
+/* ==========================================================
+   ICON
+========================================================== */
+
+.timeline__icon{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    width:58px;
+
+    height:58px;
+
+    margin-bottom:18px;
+
+    border-radius:50%;
+
+    background:var(--color-primary-light);
+
+}
+
+.timeline__icon img,
+
+.timeline__icon svg{
+
+    width:28px;
+
+    height:28px;
+
+}
+
+/* ==========================================================
+   HEADER
+========================================================== */
+
+.timeline__header{
+
+    display:grid;
+
+    gap:12px;
+
+}
+
+
+/* ==========================================================
+   TIME
+========================================================== */
+
+.timeline__time{
+
+    font-size:.82rem;
+
+    font-weight:600;
+
+    letter-spacing:.18em;
+
+    text-transform:uppercase;
+
+    color:var(--color-gold);
+
+}
+
+
+/* ==========================================================
+   TITLE
+========================================================== */
+
+.timeline__title{
+
+    margin:0;
+
+    font-family:var(--font-title);
+
+    font-size:1.55rem;
+
+    color:var(--color-primary-dark);
+
+}
+
+
+/* ==========================================================
+   SUBTITLE
+========================================================== */
+
+.timeline__subtitle{
+
+    color:var(--color-secondary);
+
+    font-size:.95rem;
+
+}
+
+
+/* ==========================================================
+   DESCRIPTION
+========================================================== */
+
+.timeline__description{
+
+    margin:0;
+
+    line-height:1.8;
+
+    color:var(--color-text-light);
+
+}
+
+
+/* ==========================================================
+   LOCATION
+========================================================== */
+
+.timeline__location{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    color:var(--color-text);
+
+    font-size:.95rem;
+
+}
+
+.timeline__location svg,
+
+.timeline__location img{
+
+    width:18px;
+
+    height:18px;
+
+}
+
+
+/* ==========================================================
+   ACTIONS
+========================================================== */
+
+.timeline__actions{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:14px;
+
+    margin-top:10px;
+
+}
+
+
+/* ==========================================================
+   CONNECTOR
+========================================================== */
+
+.timeline__item:nth-child(odd) .timeline__card::after{
+
+    content:"";
+
+    position:absolute;
+
+    top:46px;
+
+    right:-42px;
+
+    width:42px;
+
+    height:2px;
+
+    background:var(--color-gold);
+
+}
+
+.timeline__item:nth-child(even) .timeline__card::after{
+
+    content:"";
+
+    position:absolute;
+
+    top:46px;
+
+    left:-42px;
+
+    width:42px;
+
+    height:2px;
+
+    background:var(--color-gold);
+
+}
+
+
+/* ==========================================================
+   BADGE
+========================================================== */
+
+.timeline__badge{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:6px 14px;
+
+    border-radius:999px;
+
+    background:var(--color-primary-light);
+
+    color:var(--color-secondary);
+
+    font-size:.72rem;
+
+    text-transform:uppercase;
+
+    letter-spacing:.12em;
+
+}
+
+
+/* ==========================================================
+   IMAGE
+========================================================== */
+
+.timeline__image{
+
+    overflow:hidden;
+
+    border-radius:18px;
+
+}
+
+.timeline__image img{
+
+    width:100%;
+
+    display:block;
+
+    object-fit:cover;
+
+}
+
+
+/* ==========================================================
+   HOVER
+========================================================== */
+
+.timeline__card:hover .timeline__icon{
+
+    transform:
+
+        translateY(-4px)
+
+        scale(1.05);
+
+}
+
+.timeline__icon{
+
+    transition:
+
+        transform var(--transition-normal);
+
+}
+
+/* ==========================================================
+   TIMELINE SHINE
+========================================================== */
+
+.timeline__card::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+        linear-gradient(
+
+            120deg,
+
+            transparent 20%,
+
+            rgba(255,255,255,.10) 45%,
+
+            rgba(255,255,255,.25) 50%,
+
+            rgba(255,255,255,.10) 55%,
+
+            transparent 80%
+
+        );
+
+    background-size:240% 100%;
+
+    opacity:0;
+
+    pointer-events:none;
+
+}
+
+.timeline__card:hover::before{
+
+    opacity:1;
+
+    animation:
+
+        timelineShine
+
+        1.2s linear;
+
+}
+
+@keyframes timelineShine{
+
+    from{
+
+        background-position:220% 0;
+
+    }
+
+    to{
+
+        background-position:-220% 0;
+
+    }
+
+}
+
+
+/* ==========================================================
+   REVEAL ANIMATION
+========================================================== */
+
+.timeline__item{
+
+    opacity:0;
+
+    transform:translateY(40px);
+
+    transition:
+
+        opacity .7s ease,
+
+        transform .7s ease;
+
+}
+
+.timeline__item.is-visible{
+
+    opacity:1;
+
+    transform:translateY(0);
+
+}
+
+
+/* ==========================================================
+   ADMIN ENGINE
+========================================================== */
+
+.timeline{
+
+    --timeline-scale:1;
+
+    --timeline-opacity:1;
+
+    --timeline-radius:24px;
+
+}
+
+.timeline__card{
+
+    transform:scale(var(--timeline-scale));
+
+    opacity:var(--timeline-opacity);
+
+    border-radius:var(--timeline-radius);
+
+}
+
+
+/* ==========================================================
+   THEMES
+========================================================== */
+
+.theme-pink-gold{
+
+    --timeline-title:#8B4F62;
+
+    --timeline-text:#6E4B54;
+
+    --timeline-line-color:#B8935C;
+
+}
+
+.theme-royal{
+
+    --timeline-title:#5A4B91;
+
+    --timeline-text:#5C5C5C;
+
+    --timeline-line-color:#D4B15A;
+
+}
+
+.theme-classic{
+
+    --timeline-title:#8B4F62;
+
+    --timeline-text:#6E4B54;
+
+    --timeline-line-color:#B8935C;
+
+}
+
+.theme-luxury{
+
+    --timeline-title:#433228;
+
+    --timeline-text:#625246;
+
+    --timeline-line-color:#D2A84E;
+
+}
+
+.theme-silver{
+
+    --timeline-title:#666666;
+
+    --timeline-text:#7A7A7A;
+
+    --timeline-line-color:#C4C4C4;
+
+}
+
+.theme-minimal{
+
+    --timeline-title:#444444;
+
+    --timeline-text:#777777;
+
+    --timeline-line-color:#DDDDDD;
+
+}
+
+
+/* ==========================================================
+   APPLY THEME
+========================================================== */
+
+[class*="theme-"] .timeline__title{
+
+    color:var(--timeline-title);
+
+}
+
+[class*="theme-"] .timeline__description,
+
+[class*="theme-"] .timeline__location{
+
+    color:var(--timeline-text);
+
+}
+
+[class*="theme-"] .timeline::before,
+
+[class*="theme-"] .timeline__card::after{
+
+    background:var(--timeline-line-color);
+
+}
+
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media(max-width:992px){
+
+    .timeline{
+
+        gap:50px;
+
+    }
+
+    .timeline__card{
+
+        width:280px;
+
+    }
+
+}
+
+@media(max-width:768px){
+
+    .timeline::before{
+
+        left:26px;
+
+    }
+
+    .timeline__item{
+
+        justify-content:flex-start !important;
+
+        padding-left:64px;
+
+    }
+
+    .timeline__dot{
+
+        left:26px;
+
+    }
+
+    .timeline__card{
+
+        width:100%;
+
+    }
+
+    .timeline__card::after{
+
+        display:none;
+
+    }
+
+}
+
+@media(max-width:576px){
+
+    .timeline{
+
+        gap:34px;
+
+    }
+
+    .timeline__card{
+
+        padding:22px;
+
+    }
+
+    .timeline__title{
+
+        font-size:1.30rem;
+
+    }
+
+    .timeline__icon{
+
+        width:50px;
+
+        height:50px;
+
+    }
+
+    .timeline__icon svg,
+
+    .timeline__icon img{
+
+        width:24px;
+
+        height:24px;
+
+    }
+
+}
+
+
+/* ==========================================================
+   REDUCED MOTION
+========================================================== */
+
+@media(prefers-reduced-motion:reduce){
+
+    .timeline *{
+
+        animation:none !important;
+
+        transition:none !important;
+
+    }
+
+}
+
+
+/* ==========================================================
+   PRINT
+========================================================== */
+
+@media print{
+
+    .timeline{
+
+        gap:20px;
+
+    }
+
+    .timeline__card{
+
+        box-shadow:none;
+
+        border:1px solid #CCC;
+
+        page-break-inside:avoid;
+
+    }
+
+}
+
+
+/* ==========================================================
+   END OF FILE
+========================================================== */

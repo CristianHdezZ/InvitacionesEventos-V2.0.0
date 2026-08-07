@@ -1,0 +1,148 @@
+<!-- ===================== PORTADA / SOBRE ===================== -->
+<div class="gate" id="gate">
+  <div id="gateParticles" class="gate__particles" aria-hidden="true"></div>
+
+  <!-- Fila 1 del grid de .gate (auto 1fr auto auto). Las capas
+       decorativas de arriba —partículas, mariposas, lottie— van
+       en position:absolute, así que no ocupan celda. -->
+  <div class="gate__top">
+  <img class="garland garland--top garland-img" id="gateFloralTopImg" src="" alt="" hidden>
+  <!-- El dibujo SVG es el estado por defecto. La alternativa .png de
+       arriba solo se muestra cuando el admin sube una imagen propia, y
+       entonces esta se oculta. En V1 pasaba al revés: el SVG nacía con
+       display:none y scriptOld.js lo destapaba, así que al retirar ese
+       archivo la portada se quedó sin decoración. -->
+  <svg class="garland garland--top" id="gateFloralTopSvg" viewBox="0 0 500 140" aria-hidden="true">
+    <g class="rose" transform="translate(60,20)"><path d="M0,-28 C14,-28 24,-16 22,-2 C20,10 8,18 -4,16 C-18,14 -26,2 -22,-12 C-19,-22 -10,-28 0,-28 Z" class="rose__c1"/><path d="M-2,-18 C10,-20 18,-10 15,2 C12,12 0,16 -9,11 C-17,6 -18,-6 -12,-13 C-9,-16 -6,-18 -2,-18 Z" class="rose__c2"/><path d="M2,-10 C9,-9 12,-2 9,4 C6,9 -1,10 -5,5 C-8,1 -6,-5 -1,-7" class="rose__spiral"/><ellipse cx="-8" cy="-10" rx="5" ry="3" class="rose__c3" transform="rotate(-30 -8 -10)"/></g>
+    <g class="rose" transform="translate(150,-10) scale(0.8)"><path d="M0,-28 C14,-28 24,-16 22,-2 C20,10 8,18 -4,16 C-18,14 -26,2 -22,-12 C-19,-22 -10,-28 0,-28 Z" class="rose__c1"/><path d="M-2,-18 C10,-20 18,-10 15,2 C12,12 0,16 -9,11 C-17,6 -18,-6 -12,-13 C-9,-16 -6,-18 -2,-18 Z" class="rose__c2"/><path d="M2,-10 C9,-9 12,-2 9,4 C6,9 -1,10 -5,5 C-8,1 -6,-5 -1,-7" class="rose__spiral"/><ellipse cx="-8" cy="-10" rx="5" ry="3" class="rose__c3" transform="rotate(-30 -8 -10)"/></g>
+    <g class="rose" transform="translate(350,15) scale(0.9)"><path d="M0,-28 C14,-28 24,-16 22,-2 C20,10 8,18 -4,16 C-18,14 -26,2 -22,-12 C-19,-22 -10,-28 0,-28 Z" class="rose__c1"/><path d="M-2,-18 C10,-20 18,-10 15,2 C12,12 0,16 -9,11 C-17,6 -18,-6 -12,-13 C-9,-16 -6,-18 -2,-18 Z" class="rose__c2"/><path d="M2,-10 C9,-9 12,-2 9,4 C6,9 -1,10 -5,5 C-8,1 -6,-5 -1,-7" class="rose__spiral"/><ellipse cx="-8" cy="-10" rx="5" ry="3" class="rose__c3" transform="rotate(-30 -8 -10)"/></g>
+    <g class="rose" transform="translate(440,25) scale(0.7)"><path d="M0,-28 C14,-28 24,-16 22,-2 C20,10 8,18 -4,16 C-18,14 -26,2 -22,-12 C-19,-22 -10,-28 0,-28 Z" class="rose__c1"/><path d="M-2,-18 C10,-20 18,-10 15,2 C12,12 0,16 -9,11 C-17,6 -18,-6 -12,-13 C-9,-16 -6,-18 -2,-18 Z" class="rose__c2"/><path d="M2,-10 C9,-9 12,-2 9,4 C6,9 -1,10 -5,5 C-8,1 -6,-5 -1,-7" class="rose__spiral"/><ellipse cx="-8" cy="-10" rx="5" ry="3" class="rose__c3" transform="rotate(-30 -8 -10)"/></g>
+    <path d="M0,30 Q120,70 250,35 T500,30" class="garland__vine"/>
+    <ellipse cx="110" cy="45" rx="14" ry="6" class="leaf" transform="rotate(20 110 45)"/>
+    <ellipse cx="260" cy="50" rx="14" ry="6" class="leaf" transform="rotate(-15 260 50)"/>
+    <ellipse cx="400" cy="42" rx="14" ry="6" class="leaf" transform="rotate(30 400 42)"/>
+  </svg>
+  </div>
+
+  <svg class="gate__butterfly gate__butterfly--left" viewBox="0 0 60 40" aria-hidden="true"><g class="butterfly__wings"><path d="M28,20 C10,0 0,5 4,20 C0,35 10,40 28,20Z" class="wing wing--l"/><path d="M32,20 C50,0 60,5 56,20 C60,35 50,40 32,20Z" class="wing wing--r"/></g><line x1="30" y1="8" x2="30" y2="32" class="butterfly__body"/></svg>
+  <svg class="gate__butterfly gate__butterfly--right" viewBox="0 0 60 40" aria-hidden="true"><g class="butterfly__wings"><path d="M28,20 C10,0 0,5 4,20 C0,35 10,40 28,20Z" class="wing wing--l"/><path d="M32,20 C50,0 60,5 56,20 C60,35 50,40 32,20Z" class="wing wing--r"/></g><line x1="30" y1="8" x2="30" y2="32" class="butterfly__body"/></svg>
+
+  <!-- Animación Lottie decorativa (brillos/corazones flotando). Si no carga
+       (por ejemplo sin conexión), simplemente no se ve nada — no rompe el
+       diseño. Puedes cambiar el src por cualquier animación gratuita de
+       https://lottiefiles.com (botón "Embed" → copia la URL .json/.lottie). -->
+  <lottie-player
+    id="gateLottie"
+    class="gate__lottie"
+    src="assets/flor.json"
+    background="transparent" speed="0.6" loop autoplay>
+  </lottie-player>
+
+  <div class="gate__content">
+    <p class="gate__eyebrow">Con la bendición de Dios y mi familia</p>
+    <svg class="gate__crown" id="gateCoronaSvg" viewBox="0 0 100 60" aria-hidden="true">
+      <path d="M10,50 L10,30 L25,42 L35,15 L50,35 L65,15 L75,42 L90,30 L90,50 Z" fill="none" stroke="var(--color-gold, var(--oro, #B8935C))" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+      <circle cx="35" cy="15" r="4" fill="var(--color-gold, var(--oro, #B8935C))"/>
+      <circle cx="50" cy="10" r="5" fill="var(--color-primary-dark, var(--rosa-deep, #C97D95))"/>
+      <circle cx="65" cy="15" r="4" fill="var(--color-gold, var(--oro, #B8935C))"/>
+      <line x1="15" y1="50" x2="85" y2="50" stroke="var(--color-gold, var(--oro, #B8935C))" stroke-width="4" stroke-linecap="round"/>
+    </svg>
+    <img class="gate__crown gate__crown--img" id="gateCoronaImg" src="" alt="" hidden>
+    <h1 class="gate__name">Linda</h1>
+    <p class="gate__xv">XV AÑOS</p>
+    <p class="gate__quote">
+      Hay momentos inolvidables que se atesoran en el corazón para siempre.
+      Me siento muy feliz de llegar a este momento de mi vida y quiero
+      compartirlo contigo.
+    </p>
+    <button class="gate__envelope" id="gateBtn" type="button" aria-label="Abrir invitación">
+      <svg class="gate__envelope-body" viewBox="0 0 220 130" aria-hidden="true">
+        <rect x="3" y="3" width="214" height="124" rx="14" class="gate__envelope-paper"/>
+        <rect x="9" y="9" width="202" height="112" rx="9" class="gate__envelope-inner"/>
+        <path d="M3,17 L110,88 L217,17" class="gate__envelope-flap"/>
+        <path d="M9,17 L110,80 L211,17" class="gate__envelope-flap gate__envelope-flap--inner"/>
+        <circle cx="16" cy="16" r="1.4" class="gate__envelope-dot"/>
+        <circle cx="204" cy="16" r="1.4" class="gate__envelope-dot"/>
+        <circle cx="16" cy="114" r="1.4" class="gate__envelope-dot"/>
+        <circle cx="204" cy="114" r="1.4" class="gate__envelope-dot"/>
+      </svg>
+      <span class="gate__seal" aria-hidden="true">
+        <span class="gate__tap-ring"></span>
+        <span class="gate__tap-ring gate__tap-ring--2"></span>
+        <svg class="gate__seal-icon" viewBox="0 0 40 40">
+          <circle cx="20" cy="20" r="17" class="seal__ring"/>
+          <circle cx="20" cy="20" r="13" class="seal__fill"/>
+          <text x="20" y="26" text-anchor="middle" class="seal__letter">L</text>
+        </svg>
+      </span>
+      <span class="gate__envelope-label">Ver invitación</span>
+    </button>
+  </div>
+
+  <!-- Fila 3: la ilustración. El contenedor le reserva su propia celda,
+       así nunca se monta sobre el sobre ni sobre la guirnalda inferior,
+       sin necesidad de márgenes negativos. -->
+  <div class="gate__illustration">
+  <svg class="gate__dress" id="gateDressSvg" viewBox="0 -10 220 270" aria-hidden="true">
+    <ellipse cx="110" cy="250" rx="95" ry="10" class="dress__shadow"/>
+    <path d="M100,6 C88,10 78,24 80,42 C82,58 76,80 82,100 C87,84 92,66 89,50 C91,42 93,32 96,24 C98,17 99,11 100,6Z" class="dress__hair"/>
+    <path d="M120,6 C132,10 142,24 140,42 C138,58 144,80 138,100 C133,84 128,66 131,50 C129,42 127,32 124,24 C122,17 121,11 120,6Z" class="dress__hair"/>
+    <path d="M85,34 C80,40 78,48 80,56 C81,60 84,62 86,60 C85,54 84,46 86,38 C87,35 87,33 85,34Z" class="dress__arm"/>
+    <path d="M135,34 C140,40 142,48 140,56 C139,60 136,62 134,60 C135,54 136,46 134,38 C133,35 133,33 135,34Z" class="dress__arm"/>
+    <path d="M92,20 C86,24 84,30 88,34 C94,30 100,26 104,22 Z" class="dress__sleeve"/>
+    <path d="M128,20 C134,24 136,30 132,34 C126,30 120,26 116,22 Z" class="dress__sleeve"/>
+    <ellipse cx="110" cy="15" rx="4" ry="3" class="dress__neck"/>
+    <circle cx="110" cy="9" r="7.5" class="dress__hair"/>
+    <path d="M98,5 C98,5 102,0 104,5 C106,-2 108,-8 110,-2 C112,-8 114,-2 116,5 C118,0 122,5 122,5" class="dress__crown"/>
+    <circle cx="110" cy="-2" r="1.6" class="dress__gem--accent"/>
+    <circle cx="104" cy="1" r="1" class="dress__gem"/>
+    <circle cx="116" cy="1" r="1" class="dress__gem"/>
+    <circle cx="107" cy="-2" r="0.9" class="dress__gem"/>
+    <circle cx="113" cy="-2" r="0.9" class="dress__gem"/>
+    <path d="M110,12 C118,12 123,20 121,30 L113,66 C112,68 108,68 107,66 L99,30 C97,20 102,12 110,12 Z" class="dress__body"/>
+    <path d="M104,24 L116,32 M116,24 L104,32 M103,34 L117,42 M117,34 L103,42 M102,44 L118,52 M118,44 L102,52" class="dress__lace"/>
+    <path d="M87,63 L109,74 L87,85 Z" class="dress__bow"/>
+    <path d="M133,63 L111,74 L133,85 Z" class="dress__bow"/>
+    <circle cx="110" cy="74" r="4.5" class="dress__bow"/>
+    <path d="M99,66 C90,90 55,150 30,232 C60,248 160,248 190,232 C165,150 130,90 121,66 C118,70 102,70 99,66 Z" class="dress__body"/>
+    <path d="M110,80 C104,130 100,185 96,230" class="dress__pleat"/>
+    <path d="M110,80 C116,130 122,185 128,230" class="dress__pleat"/>
+    <path d="M106,78 C88,120 72,175 60,222" class="dress__pleat"/>
+    <path d="M114,78 C132,120 148,175 160,222" class="dress__pleat"/>
+    <path d="M102,76 C76,115 52,165 38,215" class="dress__pleat"/>
+    <path d="M118,76 C144,115 168,165 182,215" class="dress__pleat"/>
+    <path d="M58,145 Q71,152 84,146 Q97,152 110,146 Q123,152 136,146 Q149,152 162,145" class="dress__ruffle" style="opacity:.45"/>
+    <path d="M50,170 Q65,178 80,171 Q95,178 110,171 Q125,178 140,171 Q155,178 170,170" class="dress__ruffle" style="opacity:.55"/>
+    <path d="M44,195 Q60,203 77,196 Q94,203 110,196 Q127,203 143,196 Q160,203 176,195" class="dress__ruffle" style="opacity:.65"/>
+    <path d="M42,205 Q59,213 76,206 Q93,213 110,206 Q127,213 144,206 Q161,213 178,205" class="dress__ruffle"/>
+    <path d="M35,220 Q54,229 73,221 Q91,229 110,221 Q129,229 148,221 Q166,229 185,220" class="dress__ruffle"/>
+    <circle cx="107" cy="30" r="0.7" class="dress__gem"/>
+    <circle cx="113" cy="30" r="0.7" class="dress__gem"/>
+    <circle cx="105" cy="40" r="0.7" class="dress__gem"/>
+    <circle cx="115" cy="40" r="0.7" class="dress__gem"/>
+    <circle cx="110" cy="50" r="0.7" class="dress__gem"/>
+    <path d="M108,80 C102,140 96,195 90,232" class="dress__sheen"/>
+    <path d="M112,80 C118,140 124,195 130,232" class="dress__sheen"/>
+    <circle cx="60" cy="150" r="3" class="dress__sparkle" style="animation-delay:.2s"/>
+    <circle cx="150" cy="170" r="2.5" class="dress__sparkle" style="animation-delay:.6s"/>
+    <circle cx="90" cy="210" r="2" class="dress__sparkle" style="animation-delay:1s"/>
+    <circle cx="140" cy="120" r="2" class="dress__sparkle" style="animation-delay:1.4s"/>
+    <circle cx="70" cy="110" r="1.8" class="dress__sparkle" style="animation-delay:.4s"/>
+    <circle cx="160" cy="200" r="2.2" class="dress__sparkle" style="animation-delay:.9s"/>
+    <circle cx="45" cy="190" r="2" class="dress__sparkle" style="animation-delay:1.6s"/>
+    <g class="rose" transform="translate(35,225) scale(0.55)"><path d="M0,-28 C14,-28 24,-16 22,-2 C20,10 8,18 -4,16 C-18,14 -26,2 -22,-12 C-19,-22 -10,-28 0,-28 Z" class="rose__c1"/><path d="M-2,-18 C10,-20 18,-10 15,2 C12,12 0,16 -9,11 C-17,6 -18,-6 -12,-13 C-9,-16 -6,-18 -2,-18 Z" class="rose__c2"/><path d="M2,-10 C9,-9 12,-2 9,4 C6,9 -1,10 -5,5 C-8,1 -6,-5 -1,-7" class="rose__spiral"/><ellipse cx="-8" cy="-10" rx="5" ry="3" class="rose__c3" transform="rotate(-30 -8 -10)"/></g>
+    <g class="rose" transform="translate(185,222) scale(0.6)"><path d="M0,-28 C14,-28 24,-16 22,-2 C20,10 8,18 -4,16 C-18,14 -26,2 -22,-12 C-19,-22 -10,-28 0,-28 Z" class="rose__c1"/><path d="M-2,-18 C10,-20 18,-10 15,2 C12,12 0,16 -9,11 C-17,6 -18,-6 -12,-13 C-9,-16 -6,-18 -2,-18 Z" class="rose__c2"/><path d="M2,-10 C9,-9 12,-2 9,4 C6,9 -1,10 -5,5 C-8,1 -6,-5 -1,-7" class="rose__spiral"/><ellipse cx="-8" cy="-10" rx="5" ry="3" class="rose__c3" transform="rotate(-30 -8 -10)"/></g>
+  </svg>
+  <img class="gate__dress gate__dress-img" id="gateDressImg" src="" alt="" hidden>
+  </div>
+
+  <!-- Fila 4 -->
+  <div class="gate__bottom">
+  <img class="garland garland--bottom garland-img" id="gateFloralBottomImg" src="" alt="" hidden>
+  <svg class="garland garland--bottom" id="gateFloralBottomSvg" viewBox="0 0 500 140" aria-hidden="true">
+    <g class="rose" transform="translate(70,110) scale(0.8)"><path d="M0,-28 C14,-28 24,-16 22,-2 C20,10 8,18 -4,16 C-18,14 -26,2 -22,-12 C-19,-22 -10,-28 0,-28 Z" class="rose__c1"/><path d="M-2,-18 C10,-20 18,-10 15,2 C12,12 0,16 -9,11 C-17,6 -18,-6 -12,-13 C-9,-16 -6,-18 -2,-18 Z" class="rose__c2"/><path d="M2,-10 C9,-9 12,-2 9,4 C6,9 -1,10 -5,5 C-8,1 -6,-5 -1,-7" class="rose__spiral"/><ellipse cx="-8" cy="-10" rx="5" ry="3" class="rose__c3" transform="rotate(-30 -8 -10)"/></g>
+    <g class="rose" transform="translate(420,105) scale(0.9)"><path d="M0,-28 C14,-28 24,-16 22,-2 C20,10 8,18 -4,16 C-18,14 -26,2 -22,-12 C-19,-22 -10,-28 0,-28 Z" class="rose__c1"/><path d="M-2,-18 C10,-20 18,-10 15,2 C12,12 0,16 -9,11 C-17,6 -18,-6 -12,-13 C-9,-16 -6,-18 -2,-18 Z" class="rose__c2"/><path d="M2,-10 C9,-9 12,-2 9,4 C6,9 -1,10 -5,5 C-8,1 -6,-5 -1,-7" class="rose__spiral"/><ellipse cx="-8" cy="-10" rx="5" ry="3" class="rose__c3" transform="rotate(-30 -8 -10)"/></g>
+    <path d="M0,100 Q150,60 250,95 T500,100" class="garland__vine"/>
+  </svg>
+  </div>
+</div>

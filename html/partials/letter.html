@@ -1,0 +1,98 @@
+  <!-- ===================== CARTA / MENSAJE PERSONALIZADO ===================== -->
+  <!-- El id sigue siendo #carta: es el ancla del menú lateral
+       (chrome.html) y de los enlaces ya compartidos. Las clases sí
+       pasan a la convención en inglés del motor, como .gate__ y
+       .hero__. Estilos en css/layout/letter.css. -->
+  <section id="carta" class="section section--center letter">
+    <img class="letter__garland letter__garland--top garland-img" id="cartaFloralTopImg" src="" alt="" hidden>
+    <!-- El dibujo SVG es el estado por defecto; la alternativa .png
+         solo aparece si el admin sube una imagen propia. En V1 nacía
+         con display:none y lo destapaba scriptOld.js, que ya no se
+         carga: por eso la decoración quedaba invisible. -->
+    <svg class="letter__garland letter__garland--top" id="cartaFloralTopSvg" viewBox="0 0 500 100" aria-hidden="true">
+      <g class="rose" transform="translate(70,25) scale(0.75)"><path d="M0,-28 C14,-28 24,-16 22,-2 C20,10 8,18 -4,16 C-18,14 -26,2 -22,-12 C-19,-22 -10,-28 0,-28 Z" class="rose__c1"/><path d="M-2,-18 C10,-20 18,-10 15,2 C12,12 0,16 -9,11 C-17,6 -18,-6 -12,-13 C-9,-16 -6,-18 -2,-18 Z" class="rose__c2"/><path d="M2,-10 C9,-9 12,-2 9,4 C6,9 -1,10 -5,5 C-8,1 -6,-5 -1,-7" class="rose__spiral"/><ellipse cx="-8" cy="-10" rx="5" ry="3" class="rose__c3" transform="rotate(-30 -8 -10)"/></g>
+      <g class="rose" transform="translate(200,10) scale(0.55)"><path d="M0,-28 C14,-28 24,-16 22,-2 C20,10 8,18 -4,16 C-18,14 -26,2 -22,-12 C-19,-22 -10,-28 0,-28 Z" class="rose__c1"/><path d="M-2,-18 C10,-20 18,-10 15,2 C12,12 0,16 -9,11 C-17,6 -18,-6 -12,-13 C-9,-16 -6,-18 -2,-18 Z" class="rose__c2"/><path d="M2,-10 C9,-9 12,-2 9,4 C6,9 -1,10 -5,5 C-8,1 -6,-5 -1,-7" class="rose__spiral"/><ellipse cx="-8" cy="-10" rx="5" ry="3" class="rose__c3" transform="rotate(-30 -8 -10)"/></g>
+      <g class="rose" transform="translate(300,10) scale(0.55)"><path d="M0,-28 C14,-28 24,-16 22,-2 C20,10 8,18 -4,16 C-18,14 -26,2 -22,-12 C-19,-22 -10,-28 0,-28 Z" class="rose__c1"/><path d="M-2,-18 C10,-20 18,-10 15,2 C12,12 0,16 -9,11 C-17,6 -18,-6 -12,-13 C-9,-16 -6,-18 -2,-18 Z" class="rose__c2"/><path d="M2,-10 C9,-9 12,-2 9,4 C6,9 -1,10 -5,5 C-8,1 -6,-5 -1,-7" class="rose__spiral"/><ellipse cx="-8" cy="-10" rx="5" ry="3" class="rose__c3" transform="rotate(-30 -8 -10)"/></g>
+      <g class="rose" transform="translate(430,25) scale(0.75)"><path d="M0,-28 C14,-28 24,-16 22,-2 C20,10 8,18 -4,16 C-18,14 -26,2 -22,-12 C-19,-22 -10,-28 0,-28 Z" class="rose__c1"/><path d="M-2,-18 C10,-20 18,-10 15,2 C12,12 0,16 -9,11 C-17,6 -18,-6 -12,-13 C-9,-16 -6,-18 -2,-18 Z" class="rose__c2"/><path d="M2,-10 C9,-9 12,-2 9,4 C6,9 -1,10 -5,5 C-8,1 -6,-5 -1,-7" class="rose__spiral"/><ellipse cx="-8" cy="-10" rx="5" ry="3" class="rose__c3" transform="rotate(-30 -8 -10)"/></g>
+      <path d="M0,20 Q120,55 250,25 T500,20" class="garland__vine"/>
+      <ellipse cx="150" cy="35" rx="12" ry="5" class="leaf" transform="rotate(20 150 35)"/>
+      <ellipse cx="380" cy="32" rx="12" ry="5" class="leaf" transform="rotate(-15 380 32)"/>
+    </svg>
+
+    <div class="section__inner" data-aos="fade-up">
+      <div class="section__header">
+        <span class="section__badge" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 8.6c0 4.4-8.8 10.4-8.8 10.4S3.2 13 3.2 8.6a4.6 4.6 0 0 1 8.8-1.8 4.6 4.6 0 0 1 8.8 1.8Z"/></svg></span>
+        <span class="section__eyebrow">Mensaje para ti</span>
+      </div>
+      <p class="letter__text">
+        Hoy quiero compartir contigo uno de los días más felices de mi vida.
+        Quince años de historias, de risas y de aprender a florecer, y quiero
+        que estés ahí para verlo con tus propios ojos. Esta invitación es un
+        pedacito de mi corazón, hecha con la misma ilusión con la que espero
+        abrazarte ese día.
+      </p>
+      <p class="letter__signature">Con cariño, Linda</p>
+    </div>
+
+    <svg class="letter__dress" id="cartaDressSvg" viewBox="0 -10 220 270" aria-hidden="true">
+      <ellipse cx="110" cy="250" rx="90" ry="9" class="dress__shadow"/>
+      <path d="M100,6 C88,10 78,24 80,42 C82,58 76,80 82,100 C87,84 92,66 89,50 C91,42 93,32 96,24 C98,17 99,11 100,6Z" class="dress__hair"/>
+      <path d="M120,6 C132,10 142,24 140,42 C138,58 144,80 138,100 C133,84 128,66 131,50 C129,42 127,32 124,24 C122,17 121,11 120,6Z" class="dress__hair"/>
+      <path d="M85,34 C80,40 78,48 80,56 C81,60 84,62 86,60 C85,54 84,46 86,38 C87,35 87,33 85,34Z" class="dress__arm"/>
+      <path d="M135,34 C140,40 142,48 140,56 C139,60 136,62 134,60 C135,54 136,46 134,38 C133,35 133,33 135,34Z" class="dress__arm"/>
+      <path d="M92,20 C86,24 84,30 88,34 C94,30 100,26 104,22 Z" class="dress__sleeve"/>
+      <path d="M128,20 C134,24 136,30 132,34 C126,30 120,26 116,22 Z" class="dress__sleeve"/>
+      <ellipse cx="110" cy="15" rx="4" ry="3" class="dress__neck"/>
+      <circle cx="110" cy="9" r="7.5" class="dress__hair"/>
+      <path d="M98,5 C98,5 102,0 104,5 C106,-2 108,-8 110,-2 C112,-8 114,-2 116,5 C118,0 122,5 122,5" class="dress__crown"/>
+      <circle cx="110" cy="-2" r="1.6" class="dress__gem--accent"/>
+      <circle cx="104" cy="1" r="1" class="dress__gem"/>
+      <circle cx="116" cy="1" r="1" class="dress__gem"/>
+      <circle cx="107" cy="-2" r="0.9" class="dress__gem"/>
+      <circle cx="113" cy="-2" r="0.9" class="dress__gem"/>
+      <path d="M110,12 C118,12 123,20 121,30 L113,66 C112,68 108,68 107,66 L99,30 C97,20 102,12 110,12 Z" class="dress__body"/>
+      <path d="M104,24 L116,32 M116,24 L104,32 M103,34 L117,42 M117,34 L103,42 M102,44 L118,52 M118,44 L102,52" class="dress__lace"/>
+      <path d="M87,63 L109,74 L87,85 Z" class="dress__bow"/>
+      <path d="M133,63 L111,74 L133,85 Z" class="dress__bow"/>
+      <circle cx="110" cy="74" r="4.5" class="dress__bow"/>
+      <path d="M99,66 C90,90 55,150 30,232 C60,248 160,248 190,232 C165,150 130,90 121,66 C118,70 102,70 99,66 Z" class="dress__body"/>
+      <path d="M110,80 C104,130 100,185 96,230" class="dress__pleat"/>
+      <path d="M110,80 C116,130 122,185 128,230" class="dress__pleat"/>
+      <path d="M106,78 C88,120 72,175 60,222" class="dress__pleat"/>
+      <path d="M114,78 C132,120 148,175 160,222" class="dress__pleat"/>
+      <path d="M102,76 C76,115 52,165 38,215" class="dress__pleat"/>
+      <path d="M118,76 C144,115 168,165 182,215" class="dress__pleat"/>
+      <path d="M58,145 Q80,155 110,147 Q140,155 162,145" class="dress__ruffle" style="opacity:.45"/>
+      <path d="M50,170 Q80,182 110,172 Q140,182 170,170" class="dress__ruffle" style="opacity:.55"/>
+      <path d="M44,195 Q80,207 110,197 Q140,207 176,195" class="dress__ruffle" style="opacity:.65"/>
+      <path d="M42,205 C80,218 140,218 178,205" class="dress__ruffle"/>
+      <path d="M35,220 C80,234 140,234 185,220" class="dress__ruffle"/>
+      <circle cx="107" cy="30" r="0.7" class="dress__gem"/>
+      <circle cx="113" cy="30" r="0.7" class="dress__gem"/>
+      <circle cx="105" cy="40" r="0.7" class="dress__gem"/>
+      <circle cx="115" cy="40" r="0.7" class="dress__gem"/>
+      <circle cx="110" cy="50" r="0.7" class="dress__gem"/>
+      <path d="M108,80 C102,140 96,195 90,232" class="dress__sheen"/>
+      <path d="M112,80 C118,140 124,195 130,232" class="dress__sheen"/>
+      <circle cx="60" cy="150" r="3" class="dress__sparkle" style="animation-delay:.2s"/>
+      <circle cx="150" cy="170" r="2.5" class="dress__sparkle" style="animation-delay:.6s"/>
+      <circle cx="90" cy="210" r="2" class="dress__sparkle" style="animation-delay:1s"/>
+      <circle cx="140" cy="120" r="2" class="dress__sparkle" style="animation-delay:1.4s"/>
+      <circle cx="70" cy="110" r="1.8" class="dress__sparkle" style="animation-delay:.4s"/>
+      <circle cx="160" cy="200" r="2.2" class="dress__sparkle" style="animation-delay:.9s"/>
+      <circle cx="45" cy="190" r="2" class="dress__sparkle" style="animation-delay:1.6s"/>
+
+      <g class="rose" transform="translate(30,225) scale(0.45)"><path d="M0,-28 C14,-28 24,-16 22,-2 C20,10 8,18 -4,16 C-18,14 -26,2 -22,-12 C-19,-22 -10,-28 0,-28 Z" class="rose__c1"/><path d="M-2,-18 C10,-20 18,-10 15,2 C12,12 0,16 -9,11 C-17,6 -18,-6 -12,-13 C-9,-16 -6,-18 -2,-18 Z" class="rose__c2"/><path d="M2,-10 C9,-9 12,-2 9,4 C6,9 -1,10 -5,5 C-8,1 -6,-5 -1,-7" class="rose__spiral"/><ellipse cx="-8" cy="-10" rx="5" ry="3" class="rose__c3" transform="rotate(-30 -8 -10)"/></g>
+      <g class="rose" transform="translate(192,222) scale(0.5)"><path d="M0,-28 C14,-28 24,-16 22,-2 C20,10 8,18 -4,16 C-18,14 -26,2 -22,-12 C-19,-22 -10,-28 0,-28 Z" class="rose__c1"/><path d="M-2,-18 C10,-20 18,-10 15,2 C12,12 0,16 -9,11 C-17,6 -18,-6 -12,-13 C-9,-16 -6,-18 -2,-18 Z" class="rose__c2"/><path d="M2,-10 C9,-9 12,-2 9,4 C6,9 -1,10 -5,5 C-8,1 -6,-5 -1,-7" class="rose__spiral"/><ellipse cx="-8" cy="-10" rx="5" ry="3" class="rose__c3" transform="rotate(-30 -8 -10)"/></g>
+      <ellipse cx="14" cy="235" rx="10" ry="4" class="leaf" transform="rotate(25 14 235)"/>
+      <ellipse cx="208" cy="233" rx="10" ry="4" class="leaf" transform="rotate(-20 208 233)"/>
+    </svg>
+    <img class="letter__dress letter__dress--img" id="cartaDressImg" src="" alt="" hidden>
+
+    <img class="letter__garland letter__garland--bottom garland-img" id="cartaFloralBottomImg" src="" alt="" hidden>
+    <svg class="letter__garland letter__garland--bottom" id="cartaFloralBottomSvg" viewBox="0 0 500 100" aria-hidden="true">
+      <g class="rose" transform="translate(90,70) scale(0.6)"><path d="M0,-28 C14,-28 24,-16 22,-2 C20,10 8,18 -4,16 C-18,14 -26,2 -22,-12 C-19,-22 -10,-28 0,-28 Z" class="rose__c1"/><path d="M-2,-18 C10,-20 18,-10 15,2 C12,12 0,16 -9,11 C-17,6 -18,-6 -12,-13 C-9,-16 -6,-18 -2,-18 Z" class="rose__c2"/><path d="M2,-10 C9,-9 12,-2 9,4 C6,9 -1,10 -5,5 C-8,1 -6,-5 -1,-7" class="rose__spiral"/><ellipse cx="-8" cy="-10" rx="5" ry="3" class="rose__c3" transform="rotate(-30 -8 -10)"/></g>
+      <g class="rose" transform="translate(410,68) scale(0.7)"><path d="M0,-28 C14,-28 24,-16 22,-2 C20,10 8,18 -4,16 C-18,14 -26,2 -22,-12 C-19,-22 -10,-28 0,-28 Z" class="rose__c1"/><path d="M-2,-18 C10,-20 18,-10 15,2 C12,12 0,16 -9,11 C-17,6 -18,-6 -12,-13 C-9,-16 -6,-18 -2,-18 Z" class="rose__c2"/><path d="M2,-10 C9,-9 12,-2 9,4 C6,9 -1,10 -5,5 C-8,1 -6,-5 -1,-7" class="rose__spiral"/><ellipse cx="-8" cy="-10" rx="5" ry="3" class="rose__c3" transform="rotate(-30 -8 -10)"/></g>
+      <path d="M0,60 Q150,90 250,65 T500,60" class="garland__vine"/>
+    </svg>
+  </section>

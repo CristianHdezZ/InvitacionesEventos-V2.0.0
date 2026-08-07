@@ -1,0 +1,62 @@
+<!-- ===================== BIENVENIDA / FOTO =====================
+
+     Sin atributos data-aos a propósito. La entrada del hero la
+     coreografía js/components/hero.js con GSAP: al llevar los dos,
+     AOS dejaba los elementos en opacity:0 y GSAP, que lee el valor
+     actual como destino, terminaba animando de 0 a 0 — el hero se
+     quedaba invisible.
+
+     AOS se sigue usando en las secciones de más abajo, donde la
+     animación sí depende del scroll.
+================================================================= -->
+<header id="hero" class="hero">
+  <div class="hero__container">
+    <div class="hero__content">
+
+      <p class="hero__eyebrow">Tenemos el honor de invitarlos a la celebración de los XV años de nuestra hija</p>
+
+      <div class="hero__frame">
+        <img id="fotoPrincipal" src="assets/gallery/Linda04.png" alt="Retrato de Linda Hernández">
+      </div>
+
+      <!-- La corona y los nombres van juntos en .hero__name-wrapper para
+           que el espacio entre ambos lo controle el gap del grid y no un
+           margin sobre la corona. -->
+      <div class="hero__name-wrapper">
+
+        <svg class="hero__crown" id="heroCoronaSvg" viewBox="0 0 100 60" aria-hidden="true">
+          <!-- Cadena de respaldo: --color-gold/--color-primary-dark son los
+               nombres del Engine V2, --oro/--rosa-deep los de style.css. -->
+          <path d="M10,50 L10,30 L25,42 L35,15 L50,35 L65,15 L75,42 L90,30 L90,50 Z" fill="none" stroke="var(--color-gold, var(--oro, #B8935C))" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+          <circle cx="35" cy="15" r="4" fill="var(--color-gold, var(--oro, #B8935C))"/>
+          <circle cx="50" cy="10" r="5" fill="var(--color-primary-dark, var(--rosa-deep, #C97D95))"/>
+          <circle cx="65" cy="15" r="4" fill="var(--color-gold, var(--oro, #B8935C))"/>
+          <line x1="15" y1="50" x2="85" y2="50" stroke="var(--color-gold, var(--oro, #B8935C))" stroke-width="4" stroke-linecap="round"/>
+        </svg>
+        <img class="hero__crown hero__crown--img" id="heroCoronaImg" src="" alt="" hidden>
+
+        <div class="hero__names">
+          <h1 class="hero__name">Linda</h1>
+          <p class="hero__lastname">Hernández</p>
+        </div>
+
+      </div>
+
+      <p class="hero__subtitle">Que se llevará a cabo el día</p>
+
+      <div class="hero__badge">
+        <strong>19</strong>
+        <span class="hero__badge-label">
+          <span>Sábado</span>
+          <span>Septiembre</span>
+        </span>
+        <span class="hero__badge-burst" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span><span></span>
+        </span>
+      </div>
+
+      <p class="hero__year">2026</p>
+
+    </div>
+  </div>
+</header>

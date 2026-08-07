@@ -1,0 +1,37 @@
+  <!-- ===================== SUGERENCIA MUSICAL ===================== -->
+  <section id="musica" class="section section--center musica">
+    <div class="section__inner" data-aos="fade-up">
+      <div class="section__header">
+        <span class="section__badge" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></span>
+        <span class="section__eyebrow">Sugerencia Musical</span>
+        <h2 class="section__title">Sugiérenos una canción que no puede faltar en la fiesta</h2>
+      </div>
+
+    <div class="musica__inner" data-aos="fade-up">
+      <div class="musica__player">
+        <!--<iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/7gYZDWwNadfs2iKo8O1nBi?utm_source=generator&si=9433293f27444f29" width="100%" height="352" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>-->
+        <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/7gYZDWwNadfs2iKo8O1nBi?utm_source=generator&si=284302e0fddb4a5d" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      
+      </div>
+
+      
+
+      <form id="musicaForm" class="rsvp-form musica-form" data-endpoint="/api/musica">
+        <div class="field">
+          <label for="cancionTitulo">Canción</label>
+          <input type="text" id="cancionTitulo" name="cancion" required autocomplete="off" placeholder="Ej. Perfect">
+        </div>
+        <div class="field">
+          <label for="cancionArtista">Artista (opcional)</label>
+          <input type="text" id="cancionArtista" name="artista" autocomplete="off" placeholder="Ej. Ed Sheeran">
+        </div>
+
+        <!-- Honeypot anti-spam: campo oculto que un humano nunca llena -->
+        <input type="text" name="_gotcha" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+        <button type="submit" class="btn-primary" id="musicaSubmit">Enviar sugerencia</button>
+        <p class="rsvp-form__status" id="musicaStatus" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+    </div>
+  </section>

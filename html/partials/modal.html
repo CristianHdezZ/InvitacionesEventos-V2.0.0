@@ -1,0 +1,25 @@
+  <!-- ===================== POPUP DE CONFIRMACIÓN RSVP ===================== -->
+  <div class="modal" id="rsvpModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="rsvpModalTitulo">
+    <div class="modal__backdrop" data-modal-close></div>
+    <div class="modal__card" role="document">
+      <div class="modal__icon" aria-hidden="true">
+        <svg viewBox="0 0 48 48" fill="none"><path d="M24 40 C8 28 10 14 18 14 C22 14 24 18 24 18 C24 18 26 14 30 14 C38 14 40 28 24 40 Z" fill="currentColor"/></svg>
+      </div>
+      <h3 class="modal__titulo" id="rsvpModalTitulo">¡Gracias!</h3>
+      <p class="modal__mensaje" id="rsvpModalMensaje"></p>
+      <div class="modal__tarjeta-acciones" id="rsvpTarjetaAcciones" hidden>
+        <p class="modal__tarjeta-status" id="rsvpTarjetaStatus">Preparando tu tarjeta de invitación…</p>
+        <button type="button" class="modal__btn modal__btn--ghost" id="rsvpDescargarBtn" hidden>Descargar tarjeta</button>
+        <button type="button" class="modal__btn modal__btn--whatsapp" id="rsvpWhatsappBtn" hidden>Compartir por WhatsApp</button>
+        <p class="modal__tarjeta-hint" id="rsvpWhatsappHint" hidden>Se descargó la tarjeta y se abrió tu chat de WhatsApp — solo falta que la adjuntes ahí (WhatsApp no permite adjuntarla de forma automática).</p>
+      </div>
+      <button type="button" class="modal__btn" id="rsvpModalBtn">Aceptar</button>
+    </div>
+  </div>
+
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="lightbox__close" id="lightboxClose" aria-label="Cerrar">&times;</button>
+    <!-- Sin src: se rellena al abrir una foto. Un src="" hace que
+         el navegador vuelva a pedir la propia página. -->
+    <img alt="" id="lightboxImg">
+  </div>

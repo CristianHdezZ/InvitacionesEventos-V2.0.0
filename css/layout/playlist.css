@@ -1,0 +1,76 @@
+/* ==========================================================
+   INVITATION ENGINE V2
+   FILE        : playlist.css
+   VERSION     : 2.0.0
+   MODULE      : PLAYLIST (sugerencia musical)
+
+   Módulo nuevo. El formulario en sí lo estiliza
+   components/forms.css, que comparte con el RSVP.
+========================================================== */
+
+
+/* ==========================================================
+   REJILLA
+
+   Una columna en móvil; en pantallas anchas el reproductor y
+   el formulario van lado a lado.
+========================================================== */
+
+.musica__inner{
+
+    display:grid;
+
+    grid-template-columns:1fr;
+
+    gap:32px;
+
+    max-width:var(--container,720px);
+
+    margin:40px auto 0;
+
+    text-align:left;
+
+}
+
+@media (min-width:900px){
+
+    .musica__inner{
+
+        grid-template-columns:1fr 1fr;
+
+        align-items:center;
+
+        gap:48px;
+
+    }
+
+}
+
+
+/* ==========================================================
+   REPRODUCTOR
+
+   El overflow:hidden recorta las esquinas del iframe de
+   Spotify, que trae las suyas cuadradas.
+========================================================== */
+
+.musica__player{
+
+    overflow:hidden;
+
+    border-radius:12px;
+
+    box-shadow:0 20px 40px -28px rgba(139,79,98,.35);
+
+}
+
+.musica__player iframe{
+
+    display:block;
+
+}
+
+
+/* ==========================================================
+   END OF FILE
+========================================================== */

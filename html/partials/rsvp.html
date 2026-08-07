@@ -1,0 +1,42 @@
+  <!-- ===================== RSVP ===================== -->
+  <section id="rsvp" class="section section--center rsvp">
+    <div class="section__inner" data-aos="fade-up">
+      <div class="section__header">
+        <span class="section__badge" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span>
+        <span class="section__eyebrow">Confirma tu lugar</span>
+        <h2 class="section__title">¿Nos acompañas?</h2>
+      </div>
+      <p class="rsvp__sub">Por favor confirma tu asistencia antes del 1 de septiembre.</p>
+
+      <form id="rsvpForm" class="rsvp-form" data-endpoint="/api/rsvp">
+
+        <div class="field">
+          <label for="nombre">Nombre completo</label>
+          <input type="text" id="nombre" name="nombre" required autocomplete="name">
+        </div>
+        <div class="field">
+          <label for="telefono">Teléfono</label>
+          <input type="tel" id="telefono" name="telefono" required autocomplete="tel" placeholder="Ej. 3001234567" inputmode="tel" minlength="10" pattern="[0-9+\-\s()]{10,}" title="Ingresa un teléfono válido (mínimo 10 dígitos).">
+        </div>
+
+        <!-- Cupo limitado: por ahora cada confirmación es individual (sin acompañantes). -->
+        <input type="hidden" id="acompanantes" name="acompanantes" value="0">
+
+        <fieldset class="field field--radios">
+          <legend>¿Asistirás?</legend>
+          <label class="radio"><input type="radio" name="asistencia" value="si" required> Sí, ahí estaré 💕</label>
+          <label class="radio"><input type="radio" name="asistencia" value="no" required> No podré asistir</label>
+        </fieldset>
+        <div class="field">
+          <label for="mensaje">Déjame un mensaje (opcional)</label>
+          <textarea id="mensaje" name="mensaje" rows="3"></textarea>
+        </div>
+
+        <!-- Honeypot anti-spam: campo oculto que un humano nunca llena -->
+        <input type="text" name="_gotcha" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+        <button type="submit" class="btn-primary" id="rsvpSubmit">Enviar confirmación</button>
+        <p class="rsvp-form__status" id="rsvpStatus" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>

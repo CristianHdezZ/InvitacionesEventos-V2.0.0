@@ -1,0 +1,33 @@
+<!-- ===================== ENREDADERA GUÍA (firma visual) ===================== -->
+<svg class="vine-track" viewBox="0 0 60 3000" preserveAspectRatio="none" aria-hidden="true">
+  <path id="vinePath" d="M30,0 C10,150 50,300 30,450 C10,600 50,750 30,900
+    C10,1050 50,1200 30,1350 C10,1500 50,1650 30,1800
+    C10,1950 50,2100 30,2250 C10,2400 50,2550 30,2700
+    C10,2850 50,2950 30,3000" />
+</svg>
+
+<!-- ===================== BOTÓN DE MÚSICA =====================
+     data-audio y data-music son los enganches que busca
+     js/components/music.js. Sin ellos el componente no
+     encontraba el botón y el clic no hacía nada.
+============================================================ -->
+<audio id="bgMusic" data-audio loop preload="none">
+  <source src="assets/music/LaPrincesadePapa.mp3" type="audio/mpeg">
+</audio>
+<button id="musicToggle" data-music class="music-toggle" aria-label="Reproducir música" aria-pressed="false">
+  <span class="music-icon"><span class="bar"></span><span class="bar"></span><span class="bar"></span></span>
+</button>
+
+<!-- ===================== NAV DE PROGRESO ===================== -->
+<nav class="dot-nav" aria-label="Navegación de secciones">
+  <a href="#hero" data-label="Inicio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg></a>
+  <a href="#cuenta" data-label="Cuenta regresiva"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></a>
+  <a href="#carta" data-label="Carta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></a>
+  <a href="#itinerario" data-label="Itinerario"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13"/><path d="M3.5 6h.01M3.5 12h.01M3.5 18h.01"/></svg></a>
+  <a href="#vestimenta" data-label="Vestimenta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4a2 2 0 1 1 2 2c-.6.3-1 .8-1 1.4V8"/><path d="M12 8 3 15h18z"/></svg></a>
+  <a href="#regalos" data-label="Regalos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="8" width="18" height="13" rx="1"/><path d="M3 12h18M12 8v13"/><path d="M12 8c-1.5 0-3-1-3-2.5S10.5 3 12 4c1.5-1 3 0 3 1.5S13.5 8 12 8Z"/></svg></a>
+  <a href="#detalles" data-label="Ubicación"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12Z"/><circle cx="12" cy="9" r="2.5"/></svg></a>
+  <a href="#galeria" data-label="Galería"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16l-5-5-4 4-3-3-6 6"/></svg></a>
+  <a href="#musica" data-label="Música"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></a>
+  <a href="#rsvp" data-label="Confirmar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></a>
+</nav>

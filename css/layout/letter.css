@@ -1,0 +1,336 @@
+/* ==========================================================
+   INVITATION ENGINE V2
+   FILE        : letter.css
+   VERSION     : 2.0.0
+   MODULE      : LETTER (carta / mensaje personalizado)
+
+   Módulo nuevo: el motor no traía una hoja para esta sección.
+   Sigue la convención en inglés del resto del engine
+   (.gate__, .hero__), aunque el id de la sección se queda como
+   #carta porque es el ancla del menú lateral y de cualquier
+   enlace que ya se haya compartido.
+
+   La pintura de rosas, hojas y vestido NO está aquí: la
+   comparte con la portada y vive en components/artwork.css.
+
+   El envoltorio .section / .section__inner sigue siendo el de
+   style.css, común a las nueve secciones que faltan por migrar.
+   Se cambiará entero cuando se active layout/sections.css.
+========================================================== */
+
+
+/* ==========================================================
+   VARIABLES Y GANCHOS DEL ADMIN
+
+   Nombre V1 primero, para que reconectar el puente admin→CSS
+   no obligue a volver aquí.
+========================================================== */
+
+.letter{
+
+    --letter-garland-width:640px;
+
+    --letter-garland-scale:var(--floral-escala,1);
+
+    --letter-garland-opacity:var(--floral-opacidad,1);
+
+    --letter-dress-width:260px;
+
+    --letter-dress-scale:var(--ilustracion-escala,1);
+
+}
+
+
+/* ==========================================================
+   CONTENEDOR
+
+   Grid en columna. Cada pieza ocupa su propia fila y el
+   row-gap marca la separación: no hay márgenes negativos
+   apoyando la figura sobre las flores, como pasaba en V1.
+
+   Tampoco hay medidas en vh. Esta sección va en el flujo de la
+   página, no ocupa pantalla completa, así que no necesita
+   competir por el alto disponible como sí hace la portada.
+========================================================== */
+
+.letter{
+
+    position:relative;
+
+    display:grid;
+
+    justify-items:center;
+
+    row-gap:clamp(12px,2vw,28px);
+
+    overflow:hidden;
+
+}
+
+
+/* ==========================================================
+   TARJETA DEL MENSAJE
+========================================================== */
+
+.letter>.section__inner{
+
+    width:100%;
+
+}
+
+
+/* ==========================================================
+   TEXTO
+========================================================== */
+
+.letter__text{
+
+    max-width:560px;
+
+    margin:0 auto;
+
+    color:var(--tinta, var(--color-text));
+
+    font-family:var(--f-display, var(--font-title));
+
+    font-style:italic;
+
+    font-size:
+
+        calc(
+
+            clamp(1.15rem,2.4vw,1.5rem)
+
+            * var(--scale-mensajes,1)
+
+        );
+
+    line-height:1.8;
+
+}
+
+
+/* ==========================================================
+   FIRMA
+========================================================== */
+
+.letter__signature{
+
+    margin:0;
+
+    color:var(--rosa-deep, var(--color-primary-dark));
+
+    font-family:var(--f-script, var(--font-script));
+
+    font-size:2rem;
+
+    line-height:1.2;
+
+}
+
+
+/* ==========================================================
+   GUIRNALDAS
+========================================================== */
+
+.letter__garland{
+
+    display:block;
+
+    width:100%;
+
+    max-width:
+
+        calc(
+
+            var(--letter-garland-width)
+
+            * var(--letter-garland-scale)
+
+        );
+
+    height:auto;
+
+    opacity:var(--letter-garland-opacity);
+
+    pointer-events:none;
+
+    user-select:none;
+
+}
+
+
+/* El dibujo SVG de abajo ya está trazado en su orientación
+   final, así que no se voltea. La alternativa .png sí, porque
+   es la misma imagen que la de arriba. */
+
+.letter__garland--bottom{
+
+    opacity:calc(var(--letter-garland-opacity) * .9);
+
+}
+
+.letter__garland--bottom.garland-img{
+
+    transform:scaleY(-1);
+
+    z-index:var(--floral-z-abajo,0);
+
+}
+
+.letter__garland--top.garland-img{
+
+    z-index:var(--floral-z-arriba,0);
+
+}
+
+.letter__garland.garland-img{
+
+    aspect-ratio:500 / 100;
+
+    object-fit:contain;
+
+}
+
+
+/* ==========================================================
+   ILUSTRACIÓN
+
+   Se dimensiona por ancho y deja que el aspect-ratio calcule
+   el alto. El viewBox del SVG es 220x270; la alternativa .png
+   entra en la misma caja con object-fit:contain.
+========================================================== */
+
+.letter__dress{
+
+    display:block;
+
+    width:
+
+        calc(
+
+            min(var(--letter-dress-width),50vw)
+
+            * var(--letter-dress-scale)
+
+        );
+
+    height:auto;
+
+    aspect-ratio:220 / 270;
+
+    object-fit:contain;
+
+    opacity:.95;
+
+    transform-origin:50% 100%;
+
+    animation:
+
+        letterDressFloat
+
+        4.5s ease-in-out infinite;
+
+}
+
+.letter__dress--img{
+
+    object-position:center center;
+
+}
+
+@keyframes letterDressFloat{
+
+    0%,100%{
+
+        transform:
+
+            translateY(0)
+
+            rotate(0deg);
+
+    }
+
+    25%{
+
+        transform:
+
+            translateY(-5px)
+
+            rotate(-1.3deg);
+
+    }
+
+    50%{
+
+        transform:
+
+            translateY(-9px)
+
+            rotate(0deg);
+
+    }
+
+    75%{
+
+        transform:
+
+            translateY(-5px)
+
+            rotate(1.3deg);
+
+    }
+
+}
+
+
+/* ==========================================================
+   RESPONSIVE
+
+   Una sola excepción: en pantallas estrechas la figura cede
+   ancho. Todo lo demás ya escala solo con clamp() y min().
+========================================================== */
+
+@media (max-width:600px){
+
+    .letter{
+
+        --letter-dress-width:230px;
+
+    }
+
+    .letter__dress{
+
+        width:
+
+            calc(
+
+                min(var(--letter-dress-width),55vw)
+
+                * var(--letter-dress-scale)
+
+            );
+
+    }
+
+}
+
+
+/* ==========================================================
+   REDUCED MOTION
+========================================================== */
+
+@media (prefers-reduced-motion:reduce){
+
+    .letter__dress{
+
+        animation:none;
+
+    }
+
+}
+
+
+/* ==========================================================
+   END OF FILE
+========================================================== */

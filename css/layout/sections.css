@@ -1,0 +1,1484 @@
+/* ==========================================================
+   INVITATION ENGINE V2
+   FILE        : sections.css
+   VERSION     : 2.0.2
+   MODULE      : SECTIONS LAYOUT
+========================================================== */
+
+
+/* ==========================================================
+   SECTION VARIABLES
+========================================================== */
+
+:root{
+
+    --section-max-width:760px;
+
+    --section-gap:120px;
+
+    --section-padding-x:32px;
+
+    --section-padding-y:110px;
+
+}
+
+
+/* ==========================================================
+   SECTION
+========================================================== */
+
+.section{
+
+    position:relative;
+
+    width:100%;
+
+    padding:
+
+        var(--section-padding-y)
+
+        var(--section-padding-x);
+
+}
+
+
+/* ==========================================================
+   SECTION INNER
+========================================================== */
+
+.section__inner{
+
+    width:100%;
+
+    max-width:var(--section-max-width);
+
+    margin:0 auto;
+
+}
+
+
+/* ==========================================================
+   SECTION CONTAINER
+========================================================== */
+
+.section__container{
+
+    display:grid;
+
+    gap:var(--space-6);
+
+}
+
+
+/* ==========================================================
+   SECTION CENTER
+========================================================== */
+
+.section--center{
+
+    text-align:center;
+
+}
+
+
+/* ==========================================================
+   SECTION HEADER
+========================================================== */
+
+.section__header{
+
+    display:grid;
+
+    justify-items:center;
+
+    gap:18px;
+
+    margin-bottom:52px;
+
+}
+
+
+/* ==========================================================
+   EYEBROW
+========================================================== */
+
+.section__eyebrow{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    font-size:.75rem;
+
+    text-transform:uppercase;
+
+    letter-spacing:.28em;
+
+    color:var(--color-secondary);
+
+}
+
+
+/* ==========================================================
+   EYEBROW LINES
+========================================================== */
+
+.section__eyebrow::before,
+
+.section__eyebrow::after{
+
+    content:"";
+
+    width:24px;
+
+    height:1px;
+
+    background:var(--color-gold);
+
+}
+
+
+/* ==========================================================
+   TITLE
+========================================================== */
+
+.section__title{
+
+    margin:0;
+
+    font-family:var(--font-title);
+
+    font-size:
+
+        clamp(
+
+            2rem,
+
+            4vw,
+
+            3rem
+
+        );
+
+    font-weight:500;
+
+    color:var(--color-primary-dark);
+
+}
+
+
+/* ==========================================================
+   SUBTITLE
+========================================================== */
+
+.section__subtitle{
+
+    margin:0;
+
+    max-width:620px;
+
+    font-size:1rem;
+
+    line-height:1.9;
+
+    color:var(--color-text-light);
+
+}
+
+
+/* ==========================================================
+   DIVIDER
+========================================================== */
+
+.section__divider{
+
+    width:90px;
+
+    height:2px;
+
+    background:var(--color-gold);
+
+    opacity:.35;
+
+}
+
+
+/* ==========================================================
+   CONTENT
+========================================================== */
+
+.section__content{
+
+    display:grid;
+
+    gap:40px;
+
+}
+
+
+/* ==========================================================
+   FOOTER
+========================================================== */
+
+.section__footer{
+
+    margin-top:40px;
+
+}
+
+/* ==========================================================
+   SECTION VARIANTS
+========================================================== */
+
+.section--light{
+
+    background:transparent;
+
+}
+
+.section--white{
+
+    background:var(--color-white);
+
+}
+
+.section--primary{
+
+    background:var(--color-primary-light);
+
+}
+
+.section--gradient{
+
+    background:
+
+        linear-gradient(
+
+            180deg,
+
+            transparent 0%,
+
+            rgba(255,255,255,.55) 100%
+
+        );
+
+}
+
+
+/* ==========================================================
+   SECTION CARD
+========================================================== */
+
+.section__card{
+
+    position:relative;
+
+    display:grid;
+
+    gap:32px;
+
+    padding:48px;
+
+    background:var(--color-white);
+
+    border-radius:var(--radius-lg);
+
+    border:1px solid rgba(184,147,92,.10);
+
+    box-shadow:var(--shadow-lg);
+
+    overflow:hidden;
+
+    transition:
+
+        transform var(--transition-normal),
+
+        box-shadow var(--transition-normal);
+
+}
+
+.section__card:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:var(--shadow-xl);
+
+}
+
+
+/* ==========================================================
+   CARD TOP BORDER
+========================================================== */
+
+.section__card::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:0;
+
+    width:100%;
+
+    height:4px;
+
+    background:
+
+        linear-gradient(
+
+            90deg,
+
+            transparent,
+
+            var(--color-gold),
+
+            var(--color-secondary),
+
+            transparent
+
+        );
+
+}
+
+
+/* ==========================================================
+   SECTION BADGE
+========================================================== */
+
+.section__badge{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    width:70px;
+
+    height:70px;
+
+    margin:0 auto;
+
+    border-radius:50%;
+
+    background:var(--color-white);
+
+    box-shadow:var(--shadow-md);
+
+    border:1px solid rgba(184,147,92,.18);
+
+}
+
+.section__badge svg,
+
+.section__badge img{
+
+    width:34px;
+
+    height:34px;
+
+    object-fit:contain;
+
+}
+
+
+/* ==========================================================
+   SECTION ICON
+========================================================== */
+
+.section__icon{
+
+    color:var(--color-secondary);
+
+}
+
+
+/* ==========================================================
+   SECTION DESCRIPTION
+========================================================== */
+
+.section__description{
+
+    max-width:620px;
+
+    margin:0 auto;
+
+    color:var(--color-text);
+
+    line-height:1.9;
+
+}
+
+
+/* ==========================================================
+   SECTION ACTIONS
+========================================================== */
+
+.section__actions{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:18px;
+
+    flex-wrap:wrap;
+
+}
+
+
+/* ==========================================================
+   TWO COLUMNS
+========================================================== */
+
+.section__grid{
+
+    display:grid;
+
+    gap:48px;
+
+    align-items:center;
+
+    grid-template-columns:
+
+        repeat(2,minmax(0,1fr));
+
+}
+
+
+/* ==========================================================
+   GRID ITEM
+========================================================== */
+
+.section__grid-item{
+
+    display:grid;
+
+    gap:24px;
+
+}
+
+
+/* ==========================================================
+   IMAGE
+========================================================== */
+
+.section__image{
+
+    width:100%;
+
+    border-radius:var(--radius-lg);
+
+    overflow:hidden;
+
+    box-shadow:var(--shadow-lg);
+
+}
+
+.section__image img{
+
+    width:100%;
+
+    display:block;
+
+    object-fit:cover;
+
+}
+
+/* ==========================================================
+   SECTION DECORATIONS
+========================================================== */
+
+.section__decorations{
+
+    position:absolute;
+
+    inset:0;
+
+    overflow:hidden;
+
+    pointer-events:none;
+
+    z-index:0;
+
+}
+
+.section__decorations>*{
+
+    position:absolute;
+
+}
+
+
+/* ==========================================================
+   FLOWERS
+========================================================== */
+
+.section__flower{
+
+    width:180px;
+
+    opacity:.18;
+
+}
+
+.section__flower--top-left{
+
+    top:-30px;
+
+    left:-40px;
+
+}
+
+.section__flower--top-right{
+
+    top:-30px;
+
+    right:-40px;
+
+    transform:scaleX(-1);
+
+}
+
+.section__flower--bottom-left{
+
+    bottom:-40px;
+
+    left:-30px;
+
+    transform:rotate(180deg);
+
+}
+
+.section__flower--bottom-right{
+
+    bottom:-40px;
+
+    right:-30px;
+
+    transform:
+
+        rotate(180deg)
+
+        scaleX(-1);
+
+}
+
+
+/* ==========================================================
+   ORNAMENT
+========================================================== */
+
+.section__ornament{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    width:90px;
+
+    margin:0 auto;
+
+    opacity:.70;
+
+}
+
+.section__ornament img,
+
+.section__ornament svg{
+
+    width:100%;
+
+    height:auto;
+
+    display:block;
+
+}
+
+
+/* ==========================================================
+   GOLD SHINE
+========================================================== */
+
+.section__shine{
+
+    position:absolute;
+
+    inset:0;
+
+    overflow:hidden;
+
+    pointer-events:none;
+
+}
+
+.section__shine::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+        linear-gradient(
+
+            120deg,
+
+            transparent 20%,
+
+            rgba(255,255,255,.10) 45%,
+
+            rgba(255,255,255,.22) 50%,
+
+            rgba(255,255,255,.10) 55%,
+
+            transparent 80%
+
+        );
+
+    background-size:240% 100%;
+
+    animation:
+
+        sectionShine
+
+        10s linear infinite;
+
+}
+
+@keyframes sectionShine{
+
+    from{
+
+        background-position:220% 0;
+
+    }
+
+    to{
+
+        background-position:-220% 0;
+
+    }
+
+}
+
+
+/* ==========================================================
+   PARTICLES
+========================================================== */
+
+.section__particles{
+
+    position:absolute;
+
+    inset:0;
+
+    overflow:hidden;
+
+    pointer-events:none;
+
+    opacity:.75;
+
+}
+
+.section__particle{
+
+    position:absolute;
+
+    width:7px;
+
+    height:7px;
+
+    border-radius:50%;
+
+    background:rgba(184,147,92,.35);
+
+    animation:
+
+        sectionParticle
+
+        linear infinite;
+
+}
+
+.section__particle--pink{
+
+    background:rgba(233,170,187,.35);
+
+}
+
+@keyframes sectionParticle{
+
+    from{
+
+        transform:
+
+            translateY(120%)
+
+            scale(.4);
+
+        opacity:0;
+
+    }
+
+    15%{
+
+        opacity:1;
+
+    }
+
+    85%{
+
+        opacity:1;
+
+    }
+
+    to{
+
+        transform:
+
+            translateY(-120%)
+
+            scale(1.15);
+
+        opacity:0;
+
+    }
+
+}
+
+
+/* ==========================================================
+   REVEAL
+========================================================== */
+
+.section__reveal{
+
+    opacity:0;
+
+    transform:translateY(40px);
+
+    transition:
+
+        opacity .8s ease,
+
+        transform .8s ease;
+
+}
+
+.section__reveal.is-visible{
+
+    opacity:1;
+
+    transform:translateY(0);
+
+}
+
+
+/* ==========================================================
+   HOVER EFFECT
+========================================================== */
+
+.section__card:hover .section__badge{
+
+    transform:
+
+        translateY(-4px)
+
+        scale(1.05);
+
+}
+
+.section__badge{
+
+    transition:
+
+        transform var(--transition-normal),
+
+        box-shadow var(--transition-normal);
+
+}
+
+
+/* ==========================================================
+   CONTENT ANIMATION
+========================================================== */
+
+.section__header,
+
+.section__content,
+
+.section__footer{
+
+    position:relative;
+
+    z-index:2;
+
+}
+/* ==========================================================
+   ADMIN ENGINE
+========================================================== */
+
+.section{
+
+    --section-scale:1;
+
+    --section-opacity:1;
+
+    --section-radius:var(--radius-lg);
+
+    --section-shadow:var(--shadow-lg);
+
+    --section-gap-custom:var(--space-6);
+
+}
+
+
+/* ==========================================================
+   APPLY ENGINE
+========================================================== */
+
+.section__card{
+
+    border-radius:var(--section-radius);
+
+    box-shadow:var(--section-shadow);
+
+    opacity:var(--section-opacity);
+
+    transform:scale(var(--section-scale));
+
+}
+
+.section__container{
+
+    gap:var(--section-gap-custom);
+
+}
+
+
+/* ==========================================================
+   THEMES
+========================================================== */
+
+.theme-pink-gold{
+
+    --section-bg:#FFFFFF;
+
+    --section-title:#8B4F62;
+
+    --section-text:#6E4B54;
+
+    --section-gold:#B8935C;
+
+}
+
+.theme-royal{
+
+    --section-bg:#FFFFFF;
+
+    --section-title:#5A4B91;
+
+    --section-text:#565656;
+
+    --section-gold:#D4B15A;
+
+}
+
+.theme-classic{
+
+    --section-bg:#FFFFFF;
+
+    --section-title:#8B4F62;
+
+    --section-text:#6E4B54;
+
+    --section-gold:#B8935C;
+
+}
+
+.theme-luxury{
+
+    --section-bg:#FFFDFB;
+
+    --section-title:#433228;
+
+    --section-text:#645448;
+
+    --section-gold:#D2A84E;
+
+}
+
+.theme-silver{
+
+    --section-bg:#FFFFFF;
+
+    --section-title:#666666;
+
+    --section-text:#7B7B7B;
+
+    --section-gold:#C6C6C6;
+
+}
+
+.theme-minimal{
+
+    --section-bg:#FFFFFF;
+
+    --section-title:#444444;
+
+    --section-text:#777777;
+
+    --section-gold:#DDDDDD;
+
+}
+
+
+/* ==========================================================
+   APPLY THEME
+========================================================== */
+
+[class*="theme-"] .section__card{
+
+    background:var(--section-bg);
+
+}
+
+[class*="theme-"] .section__title{
+
+    color:var(--section-title);
+
+}
+
+[class*="theme-"] .section__subtitle,
+
+[class*="theme-"] .section__description{
+
+    color:var(--section-text);
+
+}
+
+[class*="theme-"] .section__divider,
+
+[class*="theme-"] .section__eyebrow::before,
+
+[class*="theme-"] .section__eyebrow::after{
+
+    background:var(--section-gold);
+
+}
+
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media (max-width:992px){
+
+    .section{
+
+        padding:
+
+            90px
+
+            28px;
+
+    }
+
+    .section__grid{
+
+        grid-template-columns:1fr;
+
+        gap:36px;
+
+    }
+
+}
+
+@media (max-width:768px){
+
+    .section{
+
+        padding:
+
+            72px
+
+            24px;
+
+    }
+
+    .section__header{
+
+        margin-bottom:36px;
+
+    }
+
+    .section__content{
+
+        gap:28px;
+
+    }
+
+    .section__card{
+
+        padding:32px 24px;
+
+    }
+
+    .section__badge{
+
+        width:60px;
+
+        height:60px;
+
+    }
+
+}
+
+@media (max-width:576px){
+
+    .section{
+
+        padding:
+
+            60px
+
+            18px;
+
+    }
+
+    .section__title{
+
+        font-size:2rem;
+
+    }
+
+    .section__subtitle{
+
+        font-size:.95rem;
+
+    }
+
+    .section__card{
+
+        padding:24px 20px;
+
+    }
+
+    .section__actions{
+
+        flex-direction:column;
+
+    }
+
+}
+
+
+/* ==========================================================
+   REDUCED MOTION
+========================================================== */
+
+@media (prefers-reduced-motion:reduce){
+
+    .section *{
+
+        animation:none !important;
+
+        transition:none !important;
+
+    }
+
+}
+
+
+/* ==========================================================
+   PRINT
+========================================================== */
+
+@media print{
+
+    .section{
+
+        padding:0;
+
+        page-break-inside:avoid;
+
+    }
+
+}
+
+
+/* ==========================================================
+   AJUSTES DEL PROYECTO
+
+   Lo que la hoja del motor no cubría y sí traía style.css.
+========================================================== */
+
+
+/* La enredadera lateral (.vine-track, en style.css) es fixed con
+   z-index:1. Sin esto las secciones quedarían por debajo. */
+
+.section{
+
+    z-index:2;
+
+}
+
+
+/* Gancho de tamaño del admin sobre los títulos. */
+
+.section__title{
+
+    font-size:
+
+        calc(
+
+            clamp(2rem,4vw,3rem)
+
+            * var(--scale-titulos,1)
+
+        );
+
+}
+
+
+/* Nombre V1 primero, igual que en el resto de módulos migrados:
+   conserva el tono actual del eyebrow y deja el gancho puesto
+   para cuando se reconecte el puente admin→CSS. */
+
+.section__eyebrow{
+
+    color:var(--rosa-deep, var(--color-secondary));
+
+}
+
+.section__eyebrow::before,
+
+.section__eyebrow::after{
+
+    background:var(--oro, var(--color-gold));
+
+}
+
+
+/* ==========================================================
+   MODO TARJETAS
+
+   Interruptor independiente del admin: por defecto las
+   secciones se ven planas y el badge está oculto; con
+   body.tarjetas-activas cada .section__inner se convierte en
+   tarjeta y aparece el icono.
+
+   Hoy nadie enciende la clase —la ponía scriptOld.js, que ya no
+   se carga—, así que el modo está inactivo hasta que se
+   reconstruya el puente admin→sitio. Se conserva tal cual
+   estaba para no cambiar el diseño por la puerta de atrás.
+
+   En style.css esto eran 36 selectores repitiendo los nueve id
+   de sección. Ahora que las nueve comparten el mismo envoltorio
+   basta con .section__inner.
+========================================================== */
+
+.section__badge{
+
+    display:none;
+
+}
+
+body.tarjetas-activas .section__inner{
+
+    position:relative;
+
+    padding:54px 30px 38px;
+
+    border-radius:26px;
+
+    background:
+
+        linear-gradient(
+
+            165deg,
+
+            var(--color-white) 0%,
+
+            var(--color-white) 55%,
+
+            var(--blush, var(--color-background)) 130%
+
+        );
+
+    box-shadow:
+
+        0 26px 54px -26px rgba(139,79,98,.42),
+
+        inset 0 0 0 1px rgba(184,147,92,.14);
+
+}
+
+
+/* Filete superior */
+
+body.tarjetas-activas .section__inner::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:0;
+
+    right:0;
+
+    height:4px;
+
+    border-radius:26px 26px 0 0;
+
+    opacity:.65;
+
+    background:
+
+        linear-gradient(
+
+            90deg,
+
+            transparent,
+
+            var(--oro, var(--color-gold)) 30%,
+
+            var(--rosa-deep, var(--color-primary-dark)) 70%,
+
+            transparent
+
+        );
+
+}
+
+
+/* Estrella de la esquina */
+
+body.tarjetas-activas .section__inner::after{
+
+    content:"✦";
+
+    position:absolute;
+
+    top:20px;
+
+    right:24px;
+
+    z-index:1;
+
+    font-size:1rem;
+
+    color:var(--oro, var(--color-gold));
+
+    opacity:.5;
+
+    pointer-events:none;
+
+}
+
+
+/* El badge va absoluto contra la tarjeta, para quedar montado
+   sobre su borde superior. Más arriba .section__header lleva
+   position:relative (bloque CONTENT ANIMATION), y eso lo
+   convertía en el bloque contenedor: el icono aparecía dentro
+   de la tarjeta en vez de a caballo del borde. */
+
+body.tarjetas-activas .section__header{
+
+    position:static;
+
+}
+
+
+/* Icono circular */
+
+body.tarjetas-activas .section__badge{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    position:absolute;
+
+    top:0;
+
+    left:32px;
+
+    z-index:2;
+
+    width:60px;
+
+    height:60px;
+
+    margin:0;
+
+    border:0;
+
+    border-radius:50%;
+
+    transform:translateY(-50%);
+
+    color:var(--icono, var(--color-secondary));
+
+    background:
+
+        radial-gradient(
+
+            circle at 35% 28%,
+
+            var(--color-white),
+
+            var(--blush, var(--color-background)) 68%,
+
+            var(--blush-2, var(--color-primary-light))
+
+        );
+
+    box-shadow:
+
+        0 16px 32px -14px rgba(139,79,98,.55),
+
+        inset 0 2px 6px rgba(255,255,255,.9),
+
+        inset 0 -3px 8px rgba(184,147,92,.22);
+
+}
+
+body.tarjetas-activas .section__badge::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:-4px;
+
+    border-radius:50%;
+
+    border:1.5px solid var(--oro, var(--color-gold));
+
+    opacity:.45;
+
+}
+
+body.tarjetas-activas .section__badge svg{
+
+    position:relative;
+
+    z-index:1;
+
+    width:26px;
+
+    height:26px;
+
+}
+
+@media (hover:hover){
+
+    body.tarjetas-activas .section__badge:hover{
+
+        transform:
+
+            translateY(-50%)
+
+            scale(1.1);
+
+        color:var(--rosa-oscuro, var(--color-secondary-dark));
+
+        box-shadow:
+
+            0 20px 38px -14px rgba(139,79,98,.65),
+
+            inset 0 2px 6px rgba(255,255,255,.9),
+
+            inset 0 -3px 8px rgba(184,147,92,.3);
+
+    }
+
+}
+
+
+/* Ubicación y música meten su bloque de contenido DENTRO de
+   .section__inner, así que comparten tarjeta con el título en
+   vez de formar una segunda. Solo se ajusta la separación. */
+
+body.tarjetas-activas .ubicacion,
+
+body.tarjetas-activas .musica__inner{
+
+    margin-top:24px;
+
+}
+
+@media (max-width:600px){
+
+    body.tarjetas-activas .section__inner{
+
+        padding:48px 20px 30px;
+
+        border-radius:20px;
+
+    }
+
+    body.tarjetas-activas .section__inner::before{
+
+        border-radius:20px 20px 0 0;
+
+    }
+
+    body.tarjetas-activas .section__inner::after{
+
+        top:16px;
+
+        right:18px;
+
+        font-size:.85rem;
+
+    }
+
+    body.tarjetas-activas .section__badge{
+
+        left:22px;
+
+        width:50px;
+
+        height:50px;
+
+    }
+
+    body.tarjetas-activas .section__badge svg{
+
+        width:22px;
+
+        height:22px;
+
+    }
+
+    body.tarjetas-activas .ubicacion,
+
+    body.tarjetas-activas .musica__inner{
+
+        margin-top:18px;
+
+    }
+
+}
+
+
+/* ==========================================================
+   END OF FILE
+========================================================== */

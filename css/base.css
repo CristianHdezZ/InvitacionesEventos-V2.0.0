@@ -1,0 +1,639 @@
+/* ==========================================================
+   INVITATION ENGINE V2
+   FILE        : base.css
+   VERSION     : 2.0.1
+   DESCRIPTION : Global Base Styles
+   AUTHOR      : Invitation Engine
+==========================================================*/
+
+
+/* ==========================================================
+   HTML
+==========================================================*/
+
+html{
+
+    width:100%;
+
+    min-height:100%;
+
+}
+
+
+/* ==========================================================
+   BODY
+==========================================================*/
+
+body{
+
+    min-width:320px;
+
+    min-height:100vh;
+
+    overflow-x:hidden;
+
+    background:var(--color-background);
+
+    color:var(--color-text);
+
+    font-family:var(--font-body);
+
+    font-weight:var(--font-weight-light);
+
+    line-height:var(--lh-relaxed);
+
+}
+
+
+/* ==========================================================
+   TYPOGRAPHY
+==========================================================*/
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6{
+
+    font-family:var(--font-title);
+
+    font-weight:var(--font-weight-medium);
+
+    color:var(--color-secondary);
+
+    line-height:var(--lh-tight);
+
+}
+
+h1{
+
+    font-size:clamp(2.8rem,6vw,4.8rem);
+
+}
+
+h2{
+
+    font-size:clamp(2rem,5vw,3.2rem);
+
+}
+
+h3{
+
+    font-size:clamp(1.6rem,4vw,2.2rem);
+
+}
+
+p{
+
+    font-size:var(--fs-md);
+
+    color:var(--color-text);
+
+}
+
+
+/* ==========================================================
+   LINKS
+==========================================================*/
+
+a{
+
+    transition:color var(--transition-normal);
+
+}
+
+a:hover{
+
+    color:var(--color-secondary);
+
+}
+
+
+/* ==========================================================
+   IMAGES
+==========================================================*/
+
+img{
+
+    user-select:none;
+
+    -webkit-user-drag:none;
+
+}
+
+
+/* ==========================================================
+   CONTAINER
+==========================================================*/
+
+.container{
+
+    width:min(100% - 2rem,var(--container-xl));
+
+    margin-inline:auto;
+
+}
+
+
+/* ==========================================================
+   SECTION
+==========================================================*/
+
+.section{
+
+    position:relative;
+
+    padding-block:var(--section-padding);
+
+}
+
+.section__inner{
+
+    width:min(100%,var(--container-lg));
+
+    margin-inline:auto;
+
+}
+
+
+/* ==========================================================
+   GRID
+==========================================================*/
+
+.grid{
+
+    display:grid;
+
+}
+
+.grid-center{
+
+    display:grid;
+
+    place-items:center;
+
+}
+
+.grid-2{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:var(--grid-gap-lg);
+
+}
+
+.grid-3{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:var(--grid-gap-lg);
+
+}
+
+
+/* ==========================================================
+   FLEX
+==========================================================*/
+
+.flex{
+
+    display:flex;
+
+}
+
+.flex-center{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+}
+
+.flex-column{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.flex-between{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+.flex-wrap{
+
+    flex-wrap:wrap;
+
+}
+
+
+/* ==========================================================
+   GAP
+==========================================================*/
+
+.gap-xs{
+
+    gap:var(--space-2);
+
+}
+
+.gap-sm{
+
+    gap:var(--space-4);
+
+}
+
+.gap-md{
+
+    gap:var(--space-6);
+
+}
+
+.gap-lg{
+
+    gap:var(--space-8);
+
+}
+
+.gap-xl{
+
+    gap:var(--space-10);
+
+}
+
+
+/* ==========================================================
+   TEXT ALIGN
+==========================================================*/
+
+.text-center{
+
+    text-align:center;
+
+}
+
+.text-left{
+
+    text-align:left;
+
+}
+
+.text-right{
+
+    text-align:right;
+
+}
+
+
+/* ==========================================================
+   WIDTH
+==========================================================*/
+
+.w-100{
+
+    width:100%;
+
+}
+
+.h-100{
+
+    height:100%;
+
+}
+
+
+/* ==========================================================
+   DISPLAY
+==========================================================*/
+
+.hidden{
+
+    display:none !important;
+
+}
+
+.block{
+
+    display:block;
+
+}
+
+.inline{
+
+    display:inline-block;
+
+}
+
+
+/* ==========================================================
+   POSITION
+==========================================================*/
+
+.relative{
+
+    position:relative;
+
+}
+
+.absolute{
+
+    position:absolute;
+
+}
+
+.fixed{
+
+    position:fixed;
+
+}
+
+
+/* ==========================================================
+   OVERFLOW
+==========================================================*/
+
+.overflow-hidden{
+
+    overflow:hidden;
+
+}
+
+
+/* ==========================================================
+   BORDER RADIUS
+==========================================================*/
+
+.rounded-sm{
+
+    border-radius:var(--radius-sm);
+
+}
+
+.rounded-md{
+
+    border-radius:var(--radius-md);
+
+}
+
+.rounded-lg{
+
+    border-radius:var(--radius-lg);
+
+}
+
+.rounded-xl{
+
+    border-radius:var(--radius-xl);
+
+}
+
+.rounded-circle{
+
+    border-radius:50%;
+
+}
+
+
+/* ==========================================================
+   SHADOWS
+==========================================================*/
+
+.shadow-sm{
+
+    box-shadow:var(--shadow-sm);
+
+}
+
+.shadow-md{
+
+    box-shadow:var(--shadow-md);
+
+}
+
+.shadow-lg{
+
+    box-shadow:var(--shadow-lg);
+
+}
+
+.shadow-xl{
+
+    box-shadow:var(--shadow-xl);
+
+}
+
+
+/* ==========================================================
+   DIVIDER
+==========================================================*/
+
+.divider{
+
+    width:80px;
+
+    height:1px;
+
+    background:var(--color-gold);
+
+    margin-inline:auto;
+
+}
+
+
+/* ==========================================================
+   SCROLLBAR
+==========================================================*/
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:var(--color-background);
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:var(--color-primary);
+
+    border-radius:999px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:var(--color-secondary);
+
+}
+
+
+/* ==========================================================
+   SELECTION
+==========================================================*/
+
+::selection{
+
+    background:var(--color-primary);
+
+    color:white;
+
+}
+
+
+/* ==========================================================
+   FOCUS
+==========================================================*/
+
+:focus-visible{
+
+    outline:2px solid var(--color-gold);
+
+    outline-offset:4px;
+
+}
+
+
+/* ==========================================================
+   UTILITIES
+==========================================================*/
+
+.fade{
+
+    opacity:0;
+
+    transition:opacity var(--transition-normal);
+
+}
+
+.fade.show{
+
+    opacity:1;
+
+}
+
+.no-select{
+
+    user-select:none;
+
+}
+
+.pointer{
+
+    cursor:pointer;
+
+}
+
+.transition{
+
+    transition:all var(--transition-normal);
+
+}
+
+
+/* ==========================================================
+   RESPONSIVE
+==========================================================*/
+
+@media(max-width:1024px){
+
+    .grid-3{
+
+        grid-template-columns:repeat(2,1fr);
+
+    }
+
+}
+
+@media(max-width:768px){
+
+    .grid-2,
+
+    .grid-3{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+
+/* ==========================================================
+   AJUSTES DEL PROYECTO
+
+   El body de la hoja del motor usa un fondo plano. La
+   invitación lleva desde V1 un lavado de acuarela con dos
+   degradados radiales, que es buena parte de su carácter, así
+   que se repone aquí en vez de perderlo.
+========================================================== */
+
+body{
+
+    background:
+
+        radial-gradient(
+
+            1200px 600px at 15% -5%,
+
+            var(--color-primary-light),
+
+            transparent 60%
+
+        ),
+
+        radial-gradient(
+
+            900px 500px at 100% 20%,
+
+            #F8E3E8,
+
+            transparent 55%
+
+        ),
+
+        var(--color-background);
+
+}
+
+
+/* ==========================================================
+   PÁRRAFOS
+
+   reset.css quita el margen por defecto. Los módulos ya fijan
+   el suyo donde importa; este es el que usan los párrafos
+   sueltos dentro de las secciones.
+========================================================== */
+
+.section__inner p:not([class]){
+
+    margin-bottom:1em;
+
+}
+
+.section__inner p:not([class]):last-child{
+
+    margin-bottom:0;
+
+}
+
+
+/* ==========================================================
+   END OF FILE
+========================================================== */

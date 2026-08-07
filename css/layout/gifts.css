@@ -1,0 +1,273 @@
+/* ==========================================================
+   INVITATION ENGINE V2
+   FILE        : gifts.css
+   VERSION     : 2.0.0
+   MODULE      : GIFTS (mesa de regalos)
+
+   Módulo nuevo: el motor no traía hoja para esta sección.
+========================================================== */
+
+
+/* ==========================================================
+   CONTENEDOR
+
+   La lluvia de sobres es una capa absoluta detrás del
+   contenido; el overflow:hidden la recorta al llegar al borde.
+========================================================== */
+
+.regalos{
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.regalos__lluvia{
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:0;
+
+    pointer-events:none;
+
+}
+
+.regalos .section__inner{
+
+    position:relative;
+
+    z-index:1;
+
+}
+
+
+/* ==========================================================
+   SOBRE
+========================================================== */
+
+.regalos__sobre{
+
+    position:relative;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    width:88px;
+
+    height:88px;
+
+    margin:26px auto 18px;
+
+    border-radius:50%;
+
+    background:
+
+        radial-gradient(
+
+            circle at 35% 28%,
+
+            var(--color-white),
+
+            var(--blush, var(--color-background)) 68%,
+
+            var(--blush-2, var(--color-primary-light))
+
+        );
+
+    box-shadow:
+
+        0 18px 40px -16px rgba(139,79,98,.55),
+
+        inset 0 2px 8px rgba(255,255,255,.9),
+
+        inset 0 -4px 10px rgba(184,147,92,.2);
+
+    /* El zoom al entrar y salir de pantalla lo aplica
+       js/components/scroll.js escribiendo opacity y transform;
+       aquí solo va la transición que lo suaviza. */
+
+    transition:
+
+        opacity .5s var(--ease, ease),
+
+        transform .5s var(--ease, ease);
+
+}
+
+.regalos__sobre::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:-5px;
+
+    border-radius:50%;
+
+    border:1.5px solid var(--oro, var(--color-gold));
+
+    opacity:.42;
+
+}
+
+.regalos__sobre svg{
+
+    width:48px;
+
+    height:48px;
+
+    color:var(--icono, var(--color-secondary));
+
+}
+
+
+/* ==========================================================
+   TEXTOS
+========================================================== */
+
+.regalos__mensaje{
+
+    max-width:540px;
+
+    margin:0 auto 14px;
+
+    color:var(--tinta, var(--color-text));
+
+    font-family:var(--f-display, var(--font-title));
+
+    font-style:italic;
+
+    font-size:
+
+        calc(
+
+            clamp(1.1rem,2.3vw,1.4rem)
+
+            * var(--scale-mensajes,1)
+
+        );
+
+}
+
+.regalos__detalle{
+
+    max-width:480px;
+
+    margin:0 auto;
+
+    color:var(--tinta-suave, var(--color-text-light));
+
+    font-size:calc(.95rem * var(--scale-mensajes,1));
+
+    white-space:pre-line;
+
+}
+
+
+/* Sin texto no debe dejar hueco. */
+
+.regalos__detalle:empty{
+
+    display:none;
+
+}
+
+
+/* ==========================================================
+   LLUVIA DE SOBRES
+
+   Cada sobre lo coloca el JS con su propio left, duración y
+   retraso; aquí solo va el recorrido.
+========================================================== */
+
+.regalos__sobre-anim{
+
+    position:absolute;
+
+    top:0;
+
+    display:block;
+
+    opacity:0;
+
+    color:var(--rosa-deep, var(--color-primary-dark));
+
+    animation:
+
+        regalosSobreCae
+
+        linear infinite;
+
+}
+
+.regalos__sobre-anim svg{
+
+    display:block;
+
+    width:100%;
+
+    height:auto;
+
+}
+
+@keyframes regalosSobreCae{
+
+    0%{
+
+        transform:
+
+            translateY(-40px)
+
+            rotate(-8deg);
+
+        opacity:0;
+
+    }
+
+    12%{
+
+        opacity:.85;
+
+    }
+
+    100%{
+
+        transform:
+
+            translateY(320px)
+
+            rotate(8deg);
+
+        opacity:0;
+
+    }
+
+}
+
+
+/* ==========================================================
+   REDUCED MOTION
+========================================================== */
+
+@media (prefers-reduced-motion:reduce){
+
+    .regalos__sobre-anim{
+
+        animation:none;
+
+        opacity:0;
+
+    }
+
+}
+
+
+/* ==========================================================
+   END OF FILE
+========================================================== */

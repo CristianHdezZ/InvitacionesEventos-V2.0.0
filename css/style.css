@@ -1,0 +1,40 @@
+/* =========================================================
+   style.css — YA NO SE CARGA
+
+   Fue la hoja única de la versión 1. Su contenido está
+   repartido en los módulos del Engine V2 y main.css ya no la
+   importa. Se conserva solo como referencia; puede borrarse
+   sin efecto alguno.
+
+   Dónde quedó cada cosa:
+
+     tokens y reset ........ css/reset.css
+                             css/variables.css
+                             css/base.css
+     portada ............... css/layout/gate.css
+     hero .................. css/layout/hero.css
+     carta ................. css/layout/letter.css
+     envoltorio .section ... css/layout/sections.css
+     itinerario ............ css/layout/timeline.css
+     vestimenta ............ css/layout/dresscode.css
+     regalos ............... css/layout/gifts.css
+     ubicación y mapa ...... css/layout/location.css
+     galería y lightbox .... css/layout/gallery.css
+     álbum compartido ...... css/layout/album.css
+     sugerencia musical .... css/layout/playlist.css
+     modal del RSVP ........ css/layout/modal.css
+     footer y hashtag ...... css/layout/footer.css
+     cuenta regresiva ...... css/components/countdown.css
+     formularios ........... css/components/forms.css
+     nav, enredadera y
+     botón de música ....... css/components/chrome.css
+     ilustraciones SVG ..... css/components/artwork.css
+
+   Los tokens de V1 (--oro, --vino, --rosa-deep, --scale-*…)
+   ya no se declaran: cada módulo los pide como
+   var(--nombre-v1, var(--nombre-v2)), así que si el admin
+   vuelve a escribirlos seguirán mandando, y si no, resuelven
+   al token equivalente de variables.css.
+
+   Se retiró .video-wrap: no lo usaba ningún partial.
+   ========================================================= */

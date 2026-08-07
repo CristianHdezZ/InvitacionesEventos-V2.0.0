@@ -1,0 +1,102 @@
+/* ==========================================================
+   MAIN — punto de entrada de estilos
+   ==========================================================
+   head.html enlaza SOLO este archivo; desde aquí se decide
+   qué hojas se cargan.
+
+   MIGRACIÓN AL ENGINE V2 — COMPLETA
+
+   style.css ya no se carga: todo su contenido vive en los
+   módulos de abajo. El archivo se conserva en el repo solo
+   como referencia de lo que había, y puede borrarse.
+
+   El orden importa y va de lo general a lo particular:
+   primero el reset, luego los tokens, la base, y encima los
+   módulos, que son los que deben ganar.
+
+   Los módulos escriben los colores como
+   var(--nombre-v1, var(--nombre-v2)). El primer nombre es el
+   que escribía el panel de admin: los ganchos siguen puestos
+   para cuando se reconstruya el puente admin→sitio, aunque
+   hoy nadie los escriba.
+   ========================================================== */
+
+
+/* ----------------------------------------------------------
+   1. Cimientos
+   ---------------------------------------------------------- */
+
+@import url("reset.css");
+@import url("variables.css");
+@import url("base.css");
+
+
+/* ----------------------------------------------------------
+   2. Ilustraciones compartidas
+
+   Pintura de rosas, hojas, enredaderas y vestido. Aparte
+   porque las mismas ilustraciones salen en la portada y en la
+   carta.
+   ---------------------------------------------------------- */
+
+@import url("components/artwork.css");
+
+
+/* ----------------------------------------------------------
+   3. Envoltorio de sección
+
+   Antes que los módulos de sección, que lo ajustan.
+   ---------------------------------------------------------- */
+
+@import url("layout/sections.css");
+
+
+/* ----------------------------------------------------------
+   4. Secciones
+   ---------------------------------------------------------- */
+
+@import url("layout/gate.css");
+@import url("layout/hero.css");
+@import url("layout/letter.css");
+@import url("layout/timeline.css");
+@import url("layout/dresscode.css");
+@import url("layout/gifts.css");
+@import url("layout/location.css");
+@import url("layout/gallery.css");
+@import url("layout/album.css");
+@import url("layout/playlist.css");
+@import url("layout/modal.css");
+@import url("layout/footer.css");
+
+
+/* ----------------------------------------------------------
+   5. Componentes transversales
+   ---------------------------------------------------------- */
+
+@import url("components/countdown.css");
+@import url("components/forms.css");
+@import url("components/chrome.css");
+
+
+/* ----------------------------------------------------------
+   6. Hojas del motor todavía sin usar
+
+   Existen en el repo pero ningún markup las reclama. Son
+   diseños alternativos para secciones que ya tienen el suyo
+   (components/timeline.css propone tarjetas alternadas,
+   components/gallery.css y components/modal.css otra
+   estructura), más el sistema de botones .btn y las utilidades
+   tipo helper. Activarlas exige reescribir el markup de esas
+   secciones.
+   ---------------------------------------------------------- */
+
+/*
+@import url("components/buttons.css");
+@import url("components/cards.css");
+@import url("components/gallery.css");
+@import url("components/modal.css");
+@import url("components/timeline.css");
+@import url("utilities/animations.css");
+@import url("utilities/helpers.css");
+@import url("utilities/responsive.css");
+*/
