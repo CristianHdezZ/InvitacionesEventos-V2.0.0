@@ -19,7 +19,7 @@ const Loader = (() => {
 
         typingSpeed:42,
 
-        finishDelay:2500,
+        finishDelay:2250,
 
         fadeDuration:900,
 
@@ -138,7 +138,7 @@ const Loader = (() => {
 
             await typeLine(message);
 
-            await wait(700);
+            await wait(600);
 
             typing.innerHTML+="<br>";
 
@@ -175,30 +175,7 @@ const Loader = (() => {
     /* ==========================================================
        PRELOAD
     ========================================================== */
-
-    /*async function preloadResources() {
-
-        const total = CONFIG.resources.length;
-
-        let loaded = 0;
-
-        for (const src of CONFIG.resources) {
-
-            await loadImage(src);
-
-            loaded++;
-
-            progress = Math.round((loaded / total) * 100);
-
-            updateProgress(progress);
-
-        }
-
-        resourcesReady = true;
-
-        finishIfReady();
-
-    }*/
+    
    /* async function preloadResources() {
 
         const total = CONFIG.resources.length;
