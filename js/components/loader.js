@@ -19,7 +19,7 @@ const Loader = (() => {
 
         typingSpeed:42,
 
-        finishDelay:2250,
+        finishDelay:2400,
 
         fadeDuration:900,
 
@@ -138,7 +138,7 @@ const Loader = (() => {
 
             await typeLine(message);
 
-            await wait(600);
+            await wait(680);
 
             typing.innerHTML+="<br>";
 
