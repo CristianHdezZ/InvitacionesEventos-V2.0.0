@@ -1,7 +1,7 @@
 /* ==========================================================
    INVITATION ENGINE V2
    FILE        : include.js
-   VERSION     : 2.2.0
+   VERSION     : 2.1.0
    MODULE      : HTML INCLUDE LOADER
 ========================================================== */
 
@@ -9,6 +9,15 @@
 
 /* ==========================================================
    ESTADO INICIAL
+
+   Corona, quinceañera y guirnaldas existen dos veces en el
+   marcado: el dibujo SVG y la imagen .png. Cuál se muestra lo
+   decide la configuración del panel, que llega por red.
+
+   Sin esta marca se veía el dibujo SVG un instante y luego
+   saltaba al .png. La clase oculta las dos variantes hasta que
+   ContentManager resuelve cuál toca; se retira siempre, tanto
+   si la config llega como si falla.
 ========================================================== */
 
 document.documentElement.classList.add("artwork-pendiente");
@@ -20,9 +29,11 @@ document.documentElement.classList.add("artwork-pendiente");
 class HtmlInclude {
 
     constructor() {
+
         this.elements = [
             ...document.querySelectorAll("[data-include]")
         ];
+
     }
 
     async load() {
@@ -38,7 +49,9 @@ class HtmlInclude {
                 });
 
                 if (!response.ok) {
+
                     throw new Error(`HTTP ${response.status}`);
+
                 }
 
                 return {
@@ -48,7 +61,11 @@ class HtmlInclude {
 
             } catch (error) {
 
-                console.error("[Include]", file, error);
+                console.error(
+                    "[Include]",
+                    file,
+                    error
+                );
 
                 return {
                     element,
@@ -64,7 +81,9 @@ class HtmlInclude {
         partials.forEach(({ element, html }) => {
 
             if (html !== null) {
+
                 element.outerHTML = html;
+
             }
 
         });
@@ -86,10 +105,14 @@ const STYLES = [
 ];
 
 /* ==========================================================
-   LIBRERÍAS EXTERNAS
+   JAVASCRIPT
 ========================================================== */
 
-const LIBRARIES = [
+const SCRIPTS = [
+
+    /* ======================================================
+       LIBRERÍAS
+    ====================================================== */
 
     "https://unpkg.com/aos@2.3.4/dist/aos.js",
 
@@ -107,23 +130,32 @@ const LIBRARIES = [
 
     "https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js",
 
-    "https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"
+    "https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js",
 
-];
-
-/* ==========================================================
-   CORE + APP (ORDEN OBLIGATORIO)
-========================================================== */
-
-const CORE_SCRIPTS = [
+    /* ======================================================
+       CORE
+    ====================================================== */
 
     "js/core/config.js",
+
+   
+    /* ======================================================
+       MANAGERS
+    ====================================================== */
 
     "js/managers/component.manager.js",
 
     "js/managers/theme.manager.js",
 
     "js/managers/content.manager.js",
+
+    /* state.manager.js sigue siendo un archivo de 0 bytes y nada
+       referencia StateManager; se queda fuera hasta que tenga
+       contenido. Lo mismo con services/storage.service.js. */
+
+     /* ======================================================
+       UTILS
+    ====================================================== */
 
     "js/utils/dom.js",
 
@@ -135,6 +167,12 @@ const CORE_SCRIPTS = [
 
     "js/utils/animations.js",
 
+
+
+     /* ======================================================
+       SERVICES
+    ====================================================== */
+
     "js/services/data.service.js",
 
     "js/services/config.service.js",
@@ -145,7 +183,21 @@ const CORE_SCRIPTS = [
 
     "js/services/card.service.js",
 
+    /* ======================================================
+        CORE
+    ====================================================== */
+
     "js/core/app.js",
+
+
+    /* ======================================================
+       COMPONENTS
+
+       Van ANTES de bootstrap.js: InvitationApp.registerComponents()
+       lee window.Gate, window.Hero, etc. Si bootstrap arranca antes
+       de que existan, se registran cero componentes y la app queda
+       marcada como inicializada sin haber inicializado nada.
+    ====================================================== */
 
     "js/components/gate.js",
 
@@ -169,8 +221,12 @@ const CORE_SCRIPTS = [
 
     "js/components/scroll.js",
 
-    "js/core/bootstrap.js"
 
+    /* ======================================================
+       BOOTSTRAP (siempre al final)
+    ====================================================== */
+
+    "js/core/bootstrap.js"
 ];
 
 /* ==========================================================
@@ -181,17 +237,26 @@ function loadStyle(href) {
 
     return new Promise((resolve) => {
 
-        if (document.querySelector(`link[href="${href}"]`)) {
+        if (
+            document.querySelector(
+                `link[href="${href}"]`
+            )
+        ) {
+
             resolve();
+
             return;
+
         }
 
         const link = document.createElement("link");
 
         link.rel = "stylesheet";
+
         link.href = href;
 
         link.onload = resolve;
+
         link.onerror = resolve;
 
         document.head.appendChild(link);
@@ -208,20 +273,41 @@ function loadScript(src) {
 
     return new Promise((resolve) => {
 
-        if (document.querySelector(`script[src="${src}"]`)) {
+        if (
+
+            document.querySelector(
+
+                `script[src="${src}"]`
+
+            )
+
+        ) {
+
             resolve();
+
             return;
+
         }
 
         const script = document.createElement("script");
 
         script.src = src;
 
+        script.async = false;
+
+        script.defer = false;
+
         script.onload = resolve;
 
         script.onerror = () => {
 
-            console.error("[Script]", src);
+            console.error(
+
+                "[Script]",
+
+                src
+
+            );
 
             resolve();
 
@@ -243,27 +329,24 @@ async function bootstrap() {
 
     await include.load();
 
-    /* CSS EN PARALELO */
+    for (const css of STYLES) {
 
-    await Promise.all(
-        STYLES.map(loadStyle)
-    );
+        await loadStyle(css);
 
-    /* LIBRERÍAS EN PARALELO */
+    }
 
-    await Promise.all(
-        LIBRARIES.map(loadScript)
-    );
+    for (const script of SCRIPTS) {
 
-    /* CORE EN ORDEN */
-
-    for (const script of CORE_SCRIPTS) {
         await loadScript(script);
+
     }
 
     if (
+
         window.Bootstrap &&
+
         typeof Bootstrap.init === "function"
+
     ) {
 
         await Bootstrap.init();
@@ -271,7 +354,9 @@ async function bootstrap() {
     } else {
 
         console.error(
+
             "[Bootstrap] Bootstrap no fue encontrado."
+
         );
 
     }
@@ -285,8 +370,11 @@ async function bootstrap() {
 if (document.readyState === "loading") {
 
     document.addEventListener(
+
         "DOMContentLoaded",
+
         bootstrap
+
     );
 
 } else {
