@@ -148,6 +148,7 @@ const DEFAULT_CONFIG = {
   regalos: {
     activo: true,
     icono: 'fi:regalo',
+    antetitulo: 'Con cariño',
     titulo: 'Mesa de regalos',
     mensaje: 'Tu presencia es mi mejor regalo. Si además deseas obsequiarme algo, un sobre con tu cariño será recibido con todo el corazón.',
     detalle: ''
@@ -331,6 +332,7 @@ function sanitizeConfig(body) {
   const regalos = {
     activo: typeof b?.regalos?.activo === 'boolean' ? b?.regalos?.activo : d.regalos.activo,
     icono: ICONOS_VALIDOS.includes(b?.regalos?.icono) ? b?.regalos?.icono : d.regalos.icono,
+    antetitulo: sanitizeText(b?.regalos?.antetitulo, 40, d.regalos.antetitulo),
     titulo: sanitizeText(b?.regalos?.titulo, 80, d.regalos.titulo),
     mensaje: sanitizeText(b?.regalos?.mensaje, 400, d.regalos.mensaje),
     detalle: sanitizeText(b?.regalos?.detalle, 300, d.regalos.detalle || '')

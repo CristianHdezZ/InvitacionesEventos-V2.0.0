@@ -54,6 +54,8 @@ ContentManager.TEXTS = [
 
     { path: "footerMensaje", target: ".footer__mensaje" },
 
+    { path: "regalos.antetitulo", target: "#regalosAntetitulo" },
+
     { path: "regalos.titulo", target: "#regalosTitulo" },
 
     { path: "regalos.mensaje", target: "#regalosMensaje" },

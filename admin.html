@@ -543,6 +543,10 @@
       <div class="icon-picker" id="regIconoPicker"></div>
     </div>
     <div class="field">
+      <label for="regAntetitulo">Antetítulo</label>
+      <input type="text" id="regAntetitulo" placeholder="Con cariño" maxlength="40">
+    </div>
+    <div class="field">
       <label for="regTitulo">Título</label>
       <input type="text" id="regTitulo" placeholder="Mesa de regalos">
       <div data-estilo-slot="regalosTitulo"></div>
@@ -1588,6 +1592,7 @@ function iconoSvg(id, extraClass) {
     document.getElementById('regActivo').checked = reg.activo !== false;
     document.getElementById('regIcono').value = reg.icono || 'fi:regalo';
     regIconoPicker.setSelected(reg.icono || 'fi:regalo');
+    document.getElementById('regAntetitulo').value = reg.antetitulo || '';
     document.getElementById('regTitulo').value = reg.titulo || '';
     document.getElementById('regMensaje').value = reg.mensaje || '';
     document.getElementById('regDetalle').value = reg.detalle || '';
@@ -1704,6 +1709,7 @@ function iconoSvg(id, extraClass) {
       regalos: {
         activo: document.getElementById('regActivo').checked,
         icono: document.getElementById('regIcono').value,
+        antetitulo: document.getElementById('regAntetitulo').value.trim(),
         titulo: document.getElementById('regTitulo').value.trim(),
         mensaje: document.getElementById('regMensaje').value.trim(),
         detalle: document.getElementById('regDetalle').value.trim()
