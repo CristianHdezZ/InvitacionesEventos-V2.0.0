@@ -131,7 +131,7 @@ Rsvp.bindEvents = function () {
 
             "click",
 
-            () => this.closeModal()
+            () => this.closeModal(true)
 
         );
 
@@ -231,7 +231,15 @@ Rsvp.onSuccess = function (datos) {
 
     if (asiste) {
 
-        this.celebrate();
+        /* El confeti ya no sale aquí. Se queda pendiente y estalla al
+           pulsar "Aceptar", cuando la página ya está situada en la
+           cuenta regresiva: lanzarlo con el modal abierto lo dejaba
+           por detrás del propio modal y del fondo oscuro.
+
+           Solo para quien confirma que sí asiste; a quien no viene no
+           se le celebra nada. */
+
+        this.pendingCelebration = true;
 
         this.prepareCard(datos);
 
@@ -574,7 +582,14 @@ Rsvp.openModal = function (mensaje) {
 
 };
 
-Rsvp.closeModal = function () {
+/* irACuenta llega en true solo desde el botón "Aceptar". Cerrar por
+   el fondo o con Escape deja a la persona donde estaba, que es lo que
+   se espera de un cierre accidental.
+
+   En V1 este mismo gesto llevaba al hero; ahora lleva a la cuenta
+   regresiva, que es lo que interesa mirar justo después de confirmar. */
+
+Rsvp.closeModal = function (irACuenta) {
 
     const modal = this.elements.modal;
 
@@ -593,7 +608,189 @@ Rsvp.closeModal = function () {
 
     modal.setAttribute("aria-hidden", "true");
 
+    /* El desplazamiento va después de soltar el bloqueo: con
+       overflow-hidden todavía puesto, el body no puede desplazarse y
+       el scrollIntoView se pierde. */
+
     document.body.classList.remove("overflow-hidden");
+
+    if (irACuenta) {
+
+        this.scrollToCountdown();
+
+    }
+
+};
+
+/* ==========================================================
+   IR A LA CUENTA REGRESIVA
+========================================================== */
+
+Rsvp.scrollToCountdown = function () {
+
+    const destino = document.getElementById("cuenta");
+
+    if (!destino) {
+
+        /* Sin sección a la que ir el confeti no debe perderse: se
+           lanza igualmente donde esté la persona. */
+
+        this.celebrateIfPending();
+
+        return;
+
+    }
+
+    /* Un fotograma de margen: el modal se cierra con transición y el
+       navegador necesita rehacer el layout sin overflow-hidden antes
+       de calcular a dónde desplazarse. */
+
+    requestAnimationFrame(() => {
+
+        if (typeof DOM !== "undefined" && DOM.scrollTo) {
+
+            DOM.scrollTo(destino, "smooth");
+
+        } else {
+
+            destino.scrollIntoView({
+
+                behavior: "smooth",
+
+                block: "start"
+
+            });
+
+        }
+
+        this.whenScrollSettles(
+
+            () => this.celebrateIfPending()
+
+        );
+
+    });
+
+};
+
+/* ==========================================================
+   ESPERAR A QUE PARE EL DESPLAZAMIENTO
+
+   No se usa el evento "scrollend" porque Safari no lo tuvo hasta
+   hace poco. Mirar los fotogramas funciona en todas partes.
+
+   El detalle está en no dar por parado un desplazamiento que aún no
+   ha arrancado: el suave tarda unos fotogramas en moverse, y contar
+   sin más daría "quieto" al instante. Por eso hasta que no se
+   detecta movimiento solo corre el plazo de cortesía, pensado para
+   cuando la sección ya estaba a la vista y no hay nada que recorrer.
+========================================================== */
+
+Rsvp.whenScrollSettles = function (callback) {
+
+    const ARRANQUE = 400;
+
+    const TOPE = 3000;
+
+    const inicio = Date.now();
+
+    let ultimo = window.scrollY;
+
+    let seMovio = false;
+
+    let quietos = 0;
+
+    let hecho = false;
+
+    const rematar = () => {
+
+        if (hecho) {
+
+            return;
+
+        }
+
+        hecho = true;
+
+        clearTimeout(seguro);
+
+        callback();
+
+    };
+
+    /* El seguro va en un temporizador y no dentro del bucle de
+       fotogramas. Con la pestaña en segundo plano requestAnimationFrame
+       se detiene por completo —cero fotogramas por segundo—, así que un
+       tope que solo se comprobara ahí dentro tampoco llegaría a saltar y
+       el confeti se perdería. setTimeout sigue corriendo, como mucho
+       ralentizado. Le puede pasar a quien pulsa "Aceptar" y se va a otra
+       aplicación. */
+
+    const seguro = setTimeout(rematar, TOPE);
+
+    const mirar = () => {
+
+        if (hecho) {
+
+            return;
+
+        }
+
+        const actual = window.scrollY;
+
+        if (Math.abs(actual - ultimo) >= 1) {
+
+            seMovio = true;
+
+            quietos = 0;
+
+            ultimo = actual;
+
+        } else {
+
+            quietos++;
+
+            if (seMovio && quietos >= 3) {
+
+                rematar();
+
+                return;
+
+            }
+
+            if (!seMovio && Date.now() - inicio > ARRANQUE) {
+
+                rematar();
+
+                return;
+
+            }
+
+        }
+
+        requestAnimationFrame(mirar);
+
+    };
+
+    requestAnimationFrame(mirar);
+
+};
+
+/* ==========================================================
+   CONFETI PENDIENTE
+========================================================== */
+
+Rsvp.celebrateIfPending = function () {
+
+    if (!this.pendingCelebration) {
+
+        return;
+
+    }
+
+    this.pendingCelebration = false;
+
+    this.celebrate();
 
 };
 
