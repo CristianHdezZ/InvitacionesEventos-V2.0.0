@@ -450,13 +450,15 @@
     <h2>Tipografía</h2>
     <p class="hint" style="margin-bottom:14px;">Cada bloque controla una parte concreta de la invitación.</p>
 
+    <!-- La fuente y el tamaño del nombre y del apellido se
+         controlan en "Datos principales", junto a su color.
+         Estaban también aquí y eran dos sitios para lo mismo:
+         el de allí ganaba siempre y este no se notaba. Lo que
+         hubiera guardado se traslada solo (ver migrarEstiloGlobal
+         en api/config.js). -->
+
     <h3 class="sub">Nombre de la quinceañera</h3>
     <div class="row-3">
-      <div class="field"><label for="fontNombre">Fuente del nombre</label><select id="fontNombre"></select><p class="hint">Déjalo en "(usar la general)" para que siga la fuente cursiva de abajo.</p></div>
-      <div class="field"><label for="scaleNombre">Tamaño del nombre</label><select id="scaleNombre"><option value="xs">Muy pequeño</option><option value="compacta">Pequeño</option><option value="normal">Normal</option><option value="grande">Grande</option><option value="xl">Muy grande</option><option value="xxl">Extra grande</option></select></div>
-    </div>
-    <div class="row-3">
-      <div class="field"><label for="fontApellido">Fuente del apellido</label><select id="fontApellido"></select></div>
       <div class="field">
         <label for="espacioCorona">Espacio entre la corona y el nombre</label>
         <div class="rango-field">
@@ -473,7 +475,6 @@
         </div>
         <p class="hint">Valores negativos los acercan aún más.</p>
       </div>
-      <div class="field"><label for="scaleApellido">Tamaño del apellido</label><select id="scaleApellido"><option value="xs">Muy pequeño</option><option value="compacta">Pequeño</option><option value="normal">Normal</option><option value="grande">Grande</option><option value="xl">Muy grande</option><option value="xxl">Extra grande</option></select></div>
     </div>
 
     <h3 class="sub">Fuentes generales</h3>
@@ -1030,8 +1031,6 @@ function iconoSvg(id, extraClass) {
     el.innerHTML = '<option value="">(usar la general)</option>' +
       options.map(o => `<option value="${o}">${o}</option>`).join('');
   }
-  fillSelectConHerencia(document.getElementById('fontNombre'), FUENTES_NOMBRE);
-  fillSelectConHerencia(document.getElementById('fontApellido'), FUENTES_NOMBRE);
   montarEstiloBoxes();
 
   // Muestra el valor del deslizador de espacio de la corona
@@ -1554,19 +1553,15 @@ function iconoSvg(id, extraClass) {
     document.getElementById('fontDisplay').value = t.display || 'Cormorant Garamond';
     document.getElementById('fontScript').value = t.script || 'Alex Brush';
     document.getElementById('fontBody').value = t.body || 'Jost';
-    document.getElementById('scaleNombre').value = t.escalaNombre || 'normal';
     document.getElementById('scaleTitulos').value = t.escalaTitulos || 'normal';
     document.getElementById('scaleMensajes').value = t.escalaMensajes || 'normal';
     document.getElementById('scaleIconos').value = t.escalaIconos || 'normal';
-    document.getElementById('scaleApellido').value = t.escalaApellido || 'normal';
     const ec = (typeof t.espacioCorona === 'number') ? t.espacioCorona : 14;
     document.getElementById('espacioCorona').value = ec;
     document.getElementById('espacioCoronaVal').textContent = ec + ' px';
     const ea = (typeof t.espacioApellido === 'number') ? t.espacioApellido : 4;
     document.getElementById('espacioApellido').value = ea;
     document.getElementById('espacioApellidoVal').textContent = ea + ' px';
-    document.getElementById('fontNombre').value = t.fuenteNombre || '';
-    document.getElementById('fontApellido').value = t.fuenteApellido || '';
 
     fillEstilos(config.estilos);
 
@@ -1678,15 +1673,15 @@ function iconoSvg(id, extraClass) {
         display: document.getElementById('fontDisplay').value,
         script: document.getElementById('fontScript').value,
         body: document.getElementById('fontBody').value,
-        escalaNombre: document.getElementById('scaleNombre').value,
         escalaTitulos: document.getElementById('scaleTitulos').value,
         escalaMensajes: document.getElementById('scaleMensajes').value,
         escalaIconos: document.getElementById('scaleIconos').value,
-        escalaApellido: document.getElementById('scaleApellido').value,
         espacioCorona: parseInt(document.getElementById('espacioCorona').value, 10),
         espacioApellido: parseInt(document.getElementById('espacioApellido').value, 10),
-        fuenteNombre: document.getElementById('fontNombre').value,
-        fuenteApellido: document.getElementById('fontApellido').value
+        // fuenteNombre y fuenteApellido salen del bloque de "Datos
+        // principales"; el servidor los traslada a estilos.*
+        fuenteNombre: '',
+        fuenteApellido: ''
       },
       estilos: collectEstilos(),
       itinerarioAnimado: document.getElementById('itinerarioAnimado').checked,
