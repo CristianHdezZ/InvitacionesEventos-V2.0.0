@@ -453,6 +453,14 @@
 
     aspect-ratio:220 / 140;
 
+    /* El sobre cambia de ancho en cuatro sitios distintos: aquí, en
+       tres media queries y en la regla que lo mide en vh. Declararlo
+       como contenedor deja que la etiqueta y el sello se midan contra
+       ese ancho —en cqw— y sigan cualquiera de esos valores sin tener
+       que repetir un tamaño de letra en cada breakpoint. */
+
+    container-type:inline-size;
+
     cursor:pointer;
 
     opacity:var(--gate-envelope-opacity);
@@ -510,13 +518,28 @@
 
     left:50%;
 
-    bottom:18px;
+    /* 8.18cqw son los 18px de siempre cuando el sobre mide 220px, su
+       ancho máximo. Al ir en cqw la separación se encoge con él y la
+       etiqueta no se descuelga hacia el borde inferior en móvil. */
+
+    bottom:8.18cqw;
 
     transform:translateX(-50%);
 
     font-family:var(--font-title);
 
-    font-size:.92rem;
+    /* Antes era .92rem fijo. El sobre baja hasta 140px pero el texto
+       se quedaba en 14,7px, así que "VER INVITACIÓN" —con nowrap y
+       .18em de espaciado— llegaba a ocupar el 94,7% del sobre y se
+       salía del filete dorado interior, que está al 91,8%.
+
+       6.69cqw da esos mismos 14,7px con el sobre a 220px, así que en
+       escritorio no cambia nada, y en móvil encoge con él quedándose
+       en torno al 70% del ancho, que es la proporción que ya tenía en
+       pantallas grandes. El clamp es solo un suelo de legibilidad: no
+       llega a actuar mientras el sobre no baje de 120px. */
+
+    font-size:clamp(8px,6.69cqw,.92rem);
 
     letter-spacing:.18em;
 
