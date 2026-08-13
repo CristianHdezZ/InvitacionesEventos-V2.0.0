@@ -89,6 +89,14 @@ const STYLES = [
    LIBRERÍAS EXTERNAS
 ========================================================== */
 
+/* Aquí va solo lo que hace falta para pintar la portada. Se cargan
+   todas antes de arrancar el motor, así que cada KB de esta lista
+   retrasa el primer pintado.
+
+   Antes estaban las nueve —411,6 KB comprimidos— y de esas, dos
+   paquetes no se usaban en ninguna parte y tres solo hacían falta si
+   el invitado llegaba a confirmar. */
+
 const LIBRARIES = [
 
     "https://unpkg.com/aos@2.3.4/dist/aos.js",
@@ -97,19 +105,40 @@ const LIBRARIES = [
 
     "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js",
 
-    "https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js",
-
-    "https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.5.0/tsparticles.confetti.bundle.min.js",
-
-    "https://cdn.jsdelivr.net/npm/@tsparticles/all@3.5.0/tsparticles.all.bundle.min.js",
-
-    "https://unpkg.com/@lottiefiles/lottie-player@2.0.8/dist/lottie-player.js",
-
-    "https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js",
-
-    "https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"
+    "https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"
 
 ];
+
+/* ==========================================================
+   LIBRERÍAS BAJO DEMANDA
+
+   No se piden al arrancar. Cada una tiene un único sitio que la
+   necesita y lo pide con cargarLibreria():
+
+     lottie -> ContentManager.applyLottie(), y solo si el interruptor
+               "mostrarLottie" del panel está encendido. Apagado, el
+               reproductor ni se descarga.
+
+     jspdf  -> CardService.generate(), al confirmar asistencia. Se
+     qrcode    pide ahí y no al pulsar "Descargar tarjeta", porque
+               para entonces el PDF ya tiene que estar hecho.
+
+   tsParticles se retiró del todo: sus dos paquetes sumaban 119,7 KB
+   y solo aparecían en js/scriptOld.js, que ya no se carga.
+========================================================== */
+
+const LIBRERIAS_BAJO_DEMANDA = {
+
+    lottie:
+        "https://unpkg.com/@lottiefiles/lottie-player@2.0.8/dist/lottie-player.js",
+
+    qrcode:
+        "https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js",
+
+    jspdf:
+        "https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"
+
+};
 
 /* ==========================================================
    CORE + APP (ORDEN OBLIGATORIO)
@@ -233,6 +262,45 @@ function loadScript(src) {
     });
 
 }
+
+/* ==========================================================
+   CARGA BAJO DEMANDA
+========================================================== */
+
+/* Cachea la promesa, no el resultado. loadScript() resuelve al
+   momento si ya existe un <script> con esa URL, pero no comprueba si
+   todavía se está descargando; si dos sitios piden la misma librería
+   a la vez, el segundo seguiría adelante con la librería a medias.
+   Guardando la promesa, los dos esperan a la misma descarga. */
+
+const libreriasEnCurso = {};
+
+function cargarLibreria(nombre) {
+
+    const url = LIBRERIAS_BAJO_DEMANDA[nombre];
+
+    if (!url) {
+
+        console.warn("[Libs] no existe:", nombre);
+
+        return Promise.resolve();
+
+    }
+
+    if (!libreriasEnCurso[nombre]) {
+
+        libreriasEnCurso[nombre] = loadScript(url);
+
+    }
+
+    return libreriasEnCurso[nombre];
+
+}
+
+/* Lo consumen CardService y ContentManager, que se cargan como
+   scripts sueltos y no comparten ámbito con este archivo. */
+
+window.cargarLibreria = cargarLibreria;
 
 /* ==========================================================
    LOADLOADER

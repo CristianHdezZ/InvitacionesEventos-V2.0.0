@@ -245,6 +245,20 @@ ContentManager.applyLottie = function () {
 
     }
 
+    /* El reproductor (94,2 KB) se pide aquí y no al arrancar: con el
+       interruptor de arriba apagado no se descarga siquiera, que era
+       la contradicción de tener la opción en el panel y bajarlo igual.
+
+       Se lanza sin esperar: <lottie-player> es un custom element, y
+       al definirse lee los atributos que ya tenga puestos. Por eso el
+       src se asigna antes. */
+
+    if (typeof window.cargarLibreria === "function") {
+
+        window.cargarLibreria("lottie");
+
+    }
+
 };
 
 /* ==========================================================

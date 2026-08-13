@@ -593,7 +593,56 @@ CardService.qrDataUrl = function (texto, tamano) {
    Devuelve un Blob del PDF, o null si no se pudo.
 ========================================================== */
 
+/* ==========================================================
+   DEPENDENCIAS
+
+   jsPDF (112,5 KB) y qrcodejs (6,8 KB) ya no se descargan al abrir
+   la invitación: solo hacen falta si el invitado llega a confirmar,
+   y la mayoría no lo hace en la primera visita.
+
+   El momento es este y no el clic en "Descargar tarjeta": para
+   cuando ese botón aparece, el PDF ya tiene que estar generado
+   —ver Rsvp.wireCardButtons()—. Aquí el invitado está esperando de
+   todas formas la respuesta de la API de confirmación, así que la
+   descarga se solapa con una espera que ya existía.
+========================================================== */
+
+CardService.ensureDeps = async function () {
+
+    if (typeof window.cargarLibreria !== "function") {
+
+        return;
+
+    }
+
+    const pendientes = [];
+
+    if (typeof window.jspdf === "undefined") {
+
+        pendientes.push(window.cargarLibreria("jspdf"));
+
+    }
+
+    if (typeof window.QRCode === "undefined") {
+
+        pendientes.push(window.cargarLibreria("qrcode"));
+
+    }
+
+    if (pendientes.length) {
+
+        await Promise.all(pendientes);
+
+    }
+
+};
+
 CardService.generate = async function (nombreInvitado, config) {
+
+    await this.ensureDeps();
+
+    /* Si el CDN falla se devuelve null y Rsvp muestra su aviso: la
+       confirmación queda registrada aunque no haya tarjeta. */
 
     if (
 

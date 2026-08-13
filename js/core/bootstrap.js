@@ -169,6 +169,12 @@ Bootstrap.detectLibraries = function () {
     this.dependencies.confetti =
         typeof window.confetti !== "undefined";
 
+    /* Estas dos son ahora de carga bajo demanda, así que al arrancar
+       valen false y es lo correcto: se piden en CardService.generate()
+       cuando alguien confirma. La foto que toma este método es del
+       momento del arranque, no una promesa de lo que habrá luego;
+       quien las necesite debe mirar window.jspdf / window.QRCode. */
+
     this.dependencies.qrCode =
         typeof window.QRCode !== "undefined";
 
