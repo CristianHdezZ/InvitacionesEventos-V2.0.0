@@ -25,9 +25,13 @@ const Loader = (() => {
 
         /* Pausa para leer el último mensaje, ya con la máquina de
            escribir terminada. Ahora es el único sitio donde se define
-           esa espera. */
+           esa espera.
 
-        finishDelay:5800,
+           Valía 5800 de cuando corría en paralelo con el tecleo y se
+           le comía casi todo: al encadenarla detrás se sumaba entera
+           y el loader llegaba a ~14,6 s. Con 1500 ronda los 10 s. */
+
+        finishDelay:1500,
 
         fadeDuration:900,
 
