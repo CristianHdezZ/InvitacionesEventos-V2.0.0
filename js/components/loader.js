@@ -19,7 +19,7 @@ const Loader = (() => {
 
         typingSpeed:42,
 
-        finishDelay:2400,
+        finishDelay:5800,
 
         fadeDuration:900,
 
@@ -115,21 +115,7 @@ const Loader = (() => {
        TYPEWRITER
     ========================================================== */
 
-    /*async function runAnimation() {
-
-        typing.innerHTML = "";
-
-        for (const message of CONFIG.messages) {
-
-            await typeLine(message);
-
-            await wait(500);
-
-            typing.innerHTML += "<br>";
-
-        }
-
-    }*/
+    /*
    async function runAnimation(){
 
         typing.innerHTML="";
@@ -144,9 +130,33 @@ const Loader = (() => {
 
         }
 
+    }*/
+
+    async function runAnimation() {
+
+        typing.innerHTML = "";
+
+        for (let i = 0; i < CONFIG.messages.length; i++) {
+
+            await typeLine(CONFIG.messages[i]);
+
+            // Espacio entre mensajes
+            if (i < CONFIG.messages.length - 1) {
+
+                typing.innerHTML += "<br><br>";
+
+                await wait(1000);
+
+            }
+
+        }
+
+        // Espera final para que el usuario lea el mensaje completo
+        await wait(5800);
+
     }
 
-    function typeLine(text) {
+    /*function typeLine(text) {
 
         return new Promise(resolve => {
 
@@ -167,6 +177,32 @@ const Loader = (() => {
                 }
 
             }, CONFIG.typingSpeed);
+
+        });
+
+    }*/
+
+    function typeLine(text) {
+
+        return new Promise(resolve => {
+
+            let index = 0;
+
+            const timer = setInterval(() => {
+
+                typing.innerHTML += text.charAt(index);
+
+                index++;
+
+                if (index >= text.length) {
+
+                    clearInterval(timer);
+
+                    resolve();
+
+                }
+
+            }, 45);
 
         });
 
