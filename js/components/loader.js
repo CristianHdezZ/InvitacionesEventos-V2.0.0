@@ -17,7 +17,15 @@ const Loader = (() => {
 
     const CONFIG = {
 
-        typingSpeed:42,
+        /* 45 ms es lo que estaba escrito a mano dentro de typeLine e
+           ignoraba este valor. Se sube de 42 a 45 para que la
+           velocidad real no cambie ahora que sí se lee de aquí. */
+
+        typingSpeed:45,
+
+        /* Pausa para leer el último mensaje, ya con la máquina de
+           escribir terminada. Ahora es el único sitio donde se define
+           esa espera. */
 
         finishDelay:5800,
 
@@ -62,6 +70,18 @@ const Loader = (() => {
 
     let resourcesReady = false;
 
+    /* Promesa de la máquina de escribir. finishIfReady() la espera
+       antes de ocultar: si no, el loader se iba en cuanto estaban
+       los recursos y el bootstrap, y cortaba los mensajes a medias. */
+
+    let animationPromise = null;
+
+    /* finishIfReady() lo llaman los recursos y el bootstrap, y ahora
+       además espera. Sin este candado las dos llamadas podrían
+       encadenar dos ocultamientos. */
+
+    let finishing = false;
+
     /* ==========================================================
        INIT
     ========================================================== */
@@ -105,7 +125,7 @@ const Loader = (() => {
 
         listenBootstrap();
 
-        runAnimation();
+        animationPromise = runAnimation();
 
         preloadResources();
 
@@ -151,8 +171,9 @@ const Loader = (() => {
 
         }
 
-        // Espera final para que el usuario lea el mensaje completo
-        await wait(5800);
+        /* La pausa para leer el último mensaje no va aquí: la aplica
+           finishIfReady() con CONFIG.finishDelay, ya con la animación
+           terminada. Tenerla en los dos sitios sumaba el doble. */
 
     }
 
@@ -202,7 +223,7 @@ const Loader = (() => {
 
                 }
 
-            }, 45);
+            }, CONFIG.typingSpeed);
 
         });
 
@@ -460,25 +481,38 @@ const Loader = (() => {
        FINISH
     ========================================================== */
 
-   function finishIfReady() {
+   async function finishIfReady() {
+
+        if (finishing) return;
 
         if (!resourcesReady) return;
 
         if (!bootstrapReady) return;
 
+        finishing = true;
+
         /*
         * Espera a que termine la máquina
         * de escribir y deja el mensaje
         * visible unos segundos.
+        *
+        * El await es lo que hace que se cumpla lo que dice ese
+        * comentario: antes se ocultaba en cuanto había recursos y
+        * bootstrap —normalmente antes de que terminara de escribir—
+        * y el texto se cortaba a media frase.
         */
 
-        setTimeout(() => {
+        if (animationPromise) {
 
-            updateProgress(100);
+            await animationPromise;
 
-            hide();
+        }
 
-        }, CONFIG.finishDelay);
+        await wait(CONFIG.finishDelay);
+
+        updateProgress(100);
+
+        hide();
 
     }
 
