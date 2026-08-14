@@ -334,6 +334,14 @@ Timeline.render = function () {
 
     this.observe();
 
+    this.bindLineProgress();
+
+    /* Una primera pasada ya: si se recarga con la sección a la vista,
+       la línea debe salir con el trazo que le corresponde y no vacía
+       esperando a que alguien toque el scroll. */
+
+    this.updateLineProgress();
+
     this.refreshAnimations();
 
 };
@@ -542,6 +550,110 @@ Timeline.refreshAnimations = function () {
         AOS.refresh();
 
     }
+
+};
+
+/* ==========================================================
+   LÍNEA QUE SE TRAZA CON EL SCROLL
+
+   La línea dorada vertical existía ya, entera desde el principio.
+   Ahora se dibuja a medida que se baja por la sección, de modo que
+   acompaña al recorrido en vez de adelantarlo.
+
+   Se calcula por posición y no con IntersectionObserver: aquí no
+   interesa "entró o salió" sino cuánto se ha avanzado, y además así
+   no se pierde nada en un deslizamiento rápido.
+========================================================== */
+
+/* Altura de pantalla que sirve de referencia: la punta de la línea
+   marca el punto del programa que cruza esa raya.
+
+   Al 50%, en el centro, que es donde va la mirada. Probé con .85,
+   pegado al borde inferior, y el trazo se completaba nada más
+   asomar la sección: con una lista corta como esta, para cuando su
+   final cruzaba esa raya aún no se había leído nada. */
+
+Timeline.LINEA_ARRANQUE = .5;
+
+Timeline.updateLineProgress = function () {
+
+    const lista = this.elements.timeline;
+
+    if (
+
+        !lista ||
+
+        document.body.classList.contains("itinerario-estatico")
+
+    ) {
+
+        return;
+
+    }
+
+    const caja = lista.getBoundingClientRect();
+
+    if (!caja.height) {
+
+        return;
+
+    }
+
+    /* 0 cuando la lista asoma por abajo; 1 cuando su final ha
+       cruzado esa misma referencia. */
+
+    const arranque = window.innerHeight * this.LINEA_ARRANQUE;
+
+    const avance = (arranque - caja.top) / caja.height;
+
+    lista.style.setProperty(
+
+        "--timeline-progreso",
+
+        Math.max(0, Math.min(1, avance)).toFixed(3)
+
+    );
+
+};
+
+Timeline.bindLineProgress = function () {
+
+    if (this.lineaEnganchada) {
+
+        return;
+
+    }
+
+    /* Se agrupa en un fotograma: el scroll dispara muchísimo y medir
+       la caja en cada evento sería trabajo tirado. */
+
+    let pendiente = false;
+
+    const alDesplazar = () => {
+
+        if (pendiente) {
+
+            return;
+
+        }
+
+        pendiente = true;
+
+        requestAnimationFrame(() => {
+
+            pendiente = false;
+
+            this.updateLineProgress();
+
+        });
+
+    };
+
+    window.addEventListener("scroll", alDesplazar, { passive: true });
+
+    window.addEventListener("resize", alDesplazar, { passive: true });
+
+    this.lineaEnganchada = true;
 
 };
 

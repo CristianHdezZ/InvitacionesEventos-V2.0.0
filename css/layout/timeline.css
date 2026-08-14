@@ -58,6 +58,32 @@
 
     opacity:.5;
 
+    /* La línea se va trazando según se baja por la sección. El JS
+       escribe --timeline-progreso entre 0 y 1 sobre la lista.
+
+       Se escala en vez de cambiarle el alto: scaleY lo resuelve el
+       compositor y no obliga a recalcular el diseño en cada scroll,
+       que aquí ocurre decenas de veces por segundo.
+
+       El valor de reserva es 1: si el JS no llega a ejecutarse, la
+       línea sale entera, que es como estaba antes. */
+
+    transform-origin:top center;
+
+    transform:scaleY(var(--timeline-progreso, 1));
+
+}
+
+/* Quien pide menos movimiento la recibe ya trazada. */
+
+@media (prefers-reduced-motion: reduce){
+
+    .timeline::before{
+
+        transform:none;
+
+    }
+
 }
 
 
