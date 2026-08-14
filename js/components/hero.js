@@ -180,6 +180,8 @@ Hero.animate = function () {
 
     }
 
+    this.setupParallax();
+
     this.steps.forEach(step => {
 
         const element = this.elements[step.key];
@@ -223,6 +225,141 @@ Hero.animate = function () {
     });
 
     this.burstBadge();
+
+};
+
+/* ==========================================================
+   PARALLAX DEL RETRATO
+
+   El marco de la foto se queda algo rezagado al bajar, lo justo
+   para que se despegue del texto y la portada tenga profundidad.
+
+   Tres decisiones que conviene no deshacer:
+
+   1. Se mueve el MARCO, no la foto de dentro. La foto es apaisada
+      —1402x1122— dentro de un marco de 4/5, así que con
+      object-fit:cover no sobra nada por arriba ni por abajo: para
+      desplazarla habría que ampliarla todavía más y se perdería
+      parte del retrato, que ya va muy recortado.
+
+   2. Se escribe con gsap.set() y no con style.transform. GSAP es
+      el único dueño de las animaciones del hero —por eso el
+      partial no lleva data-aos—, y usa el mismo canal 'y' que la
+      entrada. Escribiendo por fuera se pisarían: es lo que dejaba
+      el hero invisible cuando convivían los dos sistemas.
+
+   3. No arranca hasta que la coreografía de entrada termina. Antes
+      de eso GSAP está animando ese mismo eje, y meter valores en
+      medio cortaría la entrada a la mitad.
+========================================================== */
+
+/* Recorrido máximo. Corto a propósito: un parallax que se nota es
+   un parallax mal puesto. */
+
+Hero.PARALLAX_MAX = 12;
+
+Hero.setupParallax = function () {
+
+    if (
+
+        typeof gsap === "undefined" ||
+
+        !this.elements.frame ||
+
+        this.parallaxMontado
+
+    ) {
+
+        return;
+
+    }
+
+    if (
+
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches
+
+    ) {
+
+        return;
+
+    }
+
+    this.parallaxMontado = true;
+
+    /* El último paso arranca en 1.10 y dura 1s; se deja un margen. */
+
+    const espera =
+
+        Math.max(...this.steps.map(s => s.delay)) + 1.3;
+
+    gsap.delayedCall(espera, () => {
+
+        this.parallaxListo = true;
+
+        this.updateParallax();
+
+    });
+
+    let pendiente = false;
+
+    const alDesplazar = () => {
+
+        if (pendiente) {
+
+            return;
+
+        }
+
+        pendiente = true;
+
+        requestAnimationFrame(() => {
+
+            pendiente = false;
+
+            this.updateParallax();
+
+        });
+
+    };
+
+    window.addEventListener("scroll", alDesplazar, { passive: true });
+
+    window.addEventListener("resize", alDesplazar, { passive: true });
+
+};
+
+Hero.updateParallax = function () {
+
+    if (!this.parallaxListo || !this.elements.frame) {
+
+        return;
+
+    }
+
+    const caja = this.elements.hero.getBoundingClientRect();
+
+    if (!caja.height) {
+
+        return;
+
+    }
+
+    /* 0 con la portada en su sitio, 1 cuando ya se ha ido del todo
+       por arriba. Fuera de ese tramo no hay nada que calcular. */
+
+    const avance = Math.min(
+
+        1,
+
+        Math.max(0, -caja.top / caja.height)
+
+    );
+
+    gsap.set(this.elements.frame, {
+
+        y: avance * this.PARALLAX_MAX
+
+    });
 
 };
 
