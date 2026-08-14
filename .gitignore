@@ -2,5 +2,8 @@ node_modules/
 .npm-cache/
 .vercel
 .env
+.env.local
+# Datos de las pruebas locales (ver LOCAL_STORE_DIR en .env.local).
+.data/
 *.log
 Old/

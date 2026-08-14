@@ -10,6 +10,18 @@
  * mismo que tendrás en producción.
  */
 
+// .env.local va PRIMERO a proposito: dotenv no pisa lo que ya esta
+// definido, asi que lo que se ponga ahi manda sobre el .env normal.
+//
+// Sirve para que este servidor no toque la base de datos de
+// produccion. El .env del proyecto trae las credenciales de Upstash
+// —son las mismas que usa el sitio publicado—, y sin separacion cada
+// prueba del formulario dejaba una confirmacion real en la lista de
+// invitados.
+//
+// .env.local esta en .gitignore y no se despliega, asi que en Vercel
+// no existe y todo sigue igual que siempre.
+require('dotenv').config({ path: '.env.local' });
 require('dotenv').config();
 const path = require('path');
 const express = require('express');
@@ -49,7 +61,15 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`✅ Sitio local en          http://localhost:${PORT}`);
   console.log(`   Panel de confirmaciones http://localhost:${PORT}/admin.html`);
-  if (!process.env.UPSTASH_REDIS_REST_URL) {
-    console.log('   (Upstash no configurado: las confirmaciones se guardan en /tmp, solo para pruebas)');
+  // Conviene que esto se vea siempre y sin ambiguedad: es la
+  // diferencia entre ensayar y escribir en la lista de invitados de
+  // verdad.
+  if (process.env.LOCAL_STORE === '1') {
+    console.log('   💾 Datos en disco local (LOCAL_STORE=1). NO se toca produccion.');
+  } else if (process.env.UPSTASH_REDIS_REST_URL) {
+    console.log('   ⚠️  ATENCION: escribiendo en la base de datos de PRODUCCION (Upstash).');
+    console.log('      Para probar sin ensuciar la lista, pon LOCAL_STORE=1 en .env.local');
+  } else {
+    console.log('   💾 Upstash no configurado: los datos se guardan en disco local.');
   }
 });

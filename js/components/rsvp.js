@@ -377,6 +377,16 @@ Rsvp.onDuplicate = function (body, datos) {
 
         this.prepareCard(datos);
 
+        /* El confeti también aquí. Al principio lo dejé solo para las
+           confirmaciones nuevas, pensando que repetir no era motivo de
+           celebración, pero quien vuelve a por su tarjeta recibe lo
+           mismo que la primera vez y la explosión forma parte de eso.
+
+           Solo en esta rama: quien declinó no celebra nada, y con los
+           datos sin coincidir ni siquiera se llega hasta aquí. */
+
+        this.pendingCelebration = true;
+
         /* También se recuerda al volver: si este dispositivo no lo
            tenía guardado —caché borrada, otro navegador—, ahora ya
            sabe que este número está registrado. */
