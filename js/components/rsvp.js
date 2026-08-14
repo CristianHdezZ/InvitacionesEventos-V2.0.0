@@ -57,6 +57,8 @@ Rsvp.init = function () {
 
     this.bindEvents();
 
+    this.applyRemembered();
+
     this.initialized = true;
 
 };
@@ -102,6 +104,26 @@ Rsvp.cache = function () {
     this.elements.whatsappHint =
 
         document.getElementById("rsvpWhatsappHint");
+
+    this.elements.done =
+
+        document.getElementById("rsvpHecho");
+
+    this.elements.doneTitle =
+
+        document.getElementById("rsvpHechoTitulo");
+
+    this.elements.doneText =
+
+        document.getElementById("rsvpHechoTexto");
+
+    this.elements.doneCard =
+
+        document.getElementById("rsvpHechoTarjeta");
+
+    this.elements.doneChange =
+
+        document.getElementById("rsvpHechoCambiar");
 
 };
 
@@ -166,6 +188,36 @@ Rsvp.bindEvents = function () {
         }
 
     });
+
+    if (this.elements.doneChange) {
+
+        this.elements.doneChange.addEventListener(
+
+            "click",
+
+            () => {
+
+                this.forget();
+
+                this.showForm();
+
+            }
+
+        );
+
+    }
+
+    if (this.elements.doneCard) {
+
+        this.elements.doneCard.addEventListener(
+
+            "click",
+
+            () => this.downloadRememberedCard()
+
+        );
+
+    }
 
 };
 
@@ -247,6 +299,14 @@ Rsvp.onSuccess = function (datos) {
 
     }
 
+    /* Se recuerda tanto el sí como el no: el servidor bloquea los
+       dos por igual, así que en ambos casos ofrecer otra vez el
+       formulario sería mandar a la persona a un 409. */
+
+    this.remember(datos.nombre, datos.asistencia);
+
+    this.applyRemembered();
+
 };
 
 /* ==========================================================
@@ -288,6 +348,14 @@ Rsvp.onDuplicate = function (body, datos) {
 
         this.prepareCard(datos);
 
+        /* También se recuerda al volver: si este dispositivo no lo
+           tenía guardado —caché borrada, otro navegador—, ahora ya
+           sabe que este número está registrado. */
+
+        this.remember(datos.nombre, "si");
+
+        this.applyRemembered();
+
         return;
 
     }
@@ -305,6 +373,10 @@ Rsvp.onDuplicate = function (body, datos) {
             "Ya teníamos tu respuesta"
 
         );
+
+        this.remember(datos.nombre, "no");
+
+        this.applyRemembered();
 
         return;
 
@@ -569,6 +641,285 @@ Rsvp.toggle = function (elemento, visible) {
     if (elemento) {
 
         elemento.hidden = !visible;
+
+    }
+
+};
+
+/* ==========================================================
+   RECUERDO EN ESTE DISPOSITIVO
+
+   Deja constancia en localStorage de que desde aquí ya se confirmó,
+   para no seguir ofreciendo un formulario que solo puede acabar en
+   409.
+
+   Esto NO es una medida de seguridad y no debe tratarse como tal:
+   vive en el navegador, se borra con la caché y no existe en
+   incógnito. Lo único que de verdad impide el duplicado es el
+   servidor. Aquí solo se evita el paseo en balde.
+========================================================== */
+
+Rsvp.STORAGE_KEY = "rsvp-confirmado";
+
+Rsvp.remember = function (nombre, asistencia) {
+
+    if (typeof AppStorage === "undefined") {
+
+        return;
+
+    }
+
+    /* El teléfono no se guarda: para rehacer la tarjeta basta el
+       nombre, y cuanto menos dato personal quede en el navegador,
+       mejor. */
+
+    try {
+
+        AppStorage.set(this.STORAGE_KEY, {
+
+            nombre: (nombre || "").trim(),
+
+            asistencia: asistencia === "si" ? "si" : "no",
+
+            fecha: new Date().toISOString()
+
+        });
+
+    }
+
+    catch (error) {
+
+        /* Safari en privado y los modos sin cuota lanzan al escribir.
+           Quedarse sin recuerdo no rompe nada. */
+
+        console.warn("[Rsvp] no se pudo recordar", error);
+
+    }
+
+};
+
+Rsvp.forget = function () {
+
+    if (typeof AppStorage === "undefined") {
+
+        return;
+
+    }
+
+    try {
+
+        AppStorage.remove(this.STORAGE_KEY);
+
+    }
+
+    catch (error) {
+
+        console.warn("[Rsvp] no se pudo olvidar", error);
+
+    }
+
+};
+
+Rsvp.recall = function () {
+
+    if (typeof AppStorage === "undefined") {
+
+        return null;
+
+    }
+
+    const dato = AppStorage.get(this.STORAGE_KEY, null);
+
+    return dato && typeof dato === "object" ? dato : null;
+
+};
+
+/* ==========================================================
+   PANEL DE "YA CONFIRMASTE"
+========================================================== */
+
+Rsvp.applyRemembered = function () {
+
+    const dato = this.recall();
+
+    if (!dato) {
+
+        return;
+
+    }
+
+    this.showDonePanel(dato);
+
+};
+
+Rsvp.showDonePanel = function (dato) {
+
+    const nombre = (dato.nombre || "").trim().split(" ")[0];
+
+    const asiste = dato.asistencia === "si";
+
+    if (this.elements.doneTitle) {
+
+        this.elements.doneTitle.textContent = asiste
+
+            ? "Ya confirmaste tu asistencia"
+
+            : "Ya enviaste tu respuesta";
+
+    }
+
+    if (this.elements.doneText) {
+
+        this.elements.doneText.textContent = asiste
+
+            ? "Desde este dispositivo ya confirmaste" +
+
+              (nombre ? ", " + nombre : "") +
+
+              ". Nos vemos en la fiesta 💕"
+
+            : "Desde este dispositivo ya respondiste que no podrás " +
+
+              "acompañarnos. Gracias por avisar.";
+
+    }
+
+    /* La tarjeta solo tiene sentido para quien viene. */
+
+    this.toggle(this.elements.doneCard, asiste);
+
+    this.toggle(this.elements.form, false);
+
+    this.toggle(this.elements.done, true);
+
+};
+
+/* La salida de emergencia. Sin esto, un móvil que se pasan entre
+   varios de la familia dejaría fuera al segundo, y quien tecleó mal
+   su número no podría reintentarlo. */
+
+Rsvp.showForm = function () {
+
+    this.toggle(this.elements.done, false);
+
+    this.toggle(this.elements.form, true);
+
+    if (this.elements.form) {
+
+        const primero =
+
+            this.elements.form.querySelector("input, textarea");
+
+        if (primero) {
+
+            primero.focus();
+
+        }
+
+    }
+
+};
+
+/* ==========================================================
+   REHACER LA TARJETA DESDE EL RECUERDO
+
+   Se genera de nuevo en vez de guardarla: un PDF de 600 KB no cabe
+   en localStorage, y armarlo cuesta menos que almacenarlo.
+========================================================== */
+
+Rsvp.downloadRememberedCard = async function () {
+
+    const dato = this.recall();
+
+    const boton = this.elements.doneCard;
+
+    if (!dato || typeof CardService === "undefined") {
+
+        return;
+
+    }
+
+    const etiqueta = boton ? boton.textContent : "";
+
+    if (boton) {
+
+        boton.disabled = true;
+
+        boton.textContent = "Preparando…";
+
+    }
+
+    try {
+
+        const config =
+
+            typeof ConfigService !== "undefined"
+
+                ? (ConfigService.data || {})
+
+                : {};
+
+        const blob = await CardService.generate(dato.nombre, config);
+
+        if (!blob) {
+
+            throw new Error("no se pudo generar");
+
+        }
+
+        const url = URL.createObjectURL(blob);
+
+        const a = document.createElement("a");
+
+        a.href = url;
+
+        a.download =
+
+            "Invitacion-XV-" +
+
+            String(dato.nombre || "invitado")
+
+                .trim()
+
+                .replace(/\s+/g, "-") +
+
+            ".pdf";
+
+        document.body.appendChild(a);
+
+        a.click();
+
+        a.remove();
+
+        URL.revokeObjectURL(url);
+
+    }
+
+    catch (error) {
+
+        console.error("[Rsvp] tarjeta", error);
+
+        if (this.elements.doneText) {
+
+            this.elements.doneText.textContent =
+
+                "No pudimos preparar la tarjeta ahora mismo. " +
+
+                "Inténtalo de nuevo en un momento.";
+
+        }
+
+    }
+
+    finally {
+
+        if (boton) {
+
+            boton.disabled = false;
+
+            boton.textContent = etiqueta;
+
+        }
 
     }
 

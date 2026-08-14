@@ -176,6 +176,17 @@
    monitores altos. */
 --quinceanera-alto:clamp(150px,26vh,300px);
 
+/* Hueco que ocupa la navegación de puntos contando desde el borde
+   derecho: su separación más el ancho del botón. Va en position:fixed
+   sobre el contenido y no le reserva sitio, así que en pantallas
+   estrechas las líneas largas terminaban debajo de los círculos.
+
+   Los tres valores salen de components/chrome.css y se mueven con
+   sus media queries; si allí cambian los tamaños, hay que cambiarlos
+   aquí también. */
+
+--rail-gutter:44px;   /* 14 de separación + 30 del botón */
+
 
 /* ==========================================================
    Z INDEX

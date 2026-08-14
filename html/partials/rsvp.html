@@ -38,5 +38,20 @@
         <button type="submit" class="btn-primary" id="rsvpSubmit">Enviar confirmación</button>
         <p class="rsvp-form__status" id="rsvpStatus" role="status" aria-live="polite"></p>
       </form>
+
+      <!-- Sustituye al formulario cuando este dispositivo ya confirmó.
+           Es solo comodidad: la defensa real contra duplicados es el
+           409 del servidor, que no depende del navegador.
+
+           Por eso lleva siempre la salida de abajo: en un móvil que se
+           pasan entre varios de la familia, el segundo tiene que poder
+           confirmar, y quien se equivocó de número tiene que poder
+           reintentarlo. -->
+      <div class="rsvp-hecho" id="rsvpHecho" hidden>
+        <p class="rsvp-hecho__titulo" id="rsvpHechoTitulo">Ya confirmaste tu asistencia</p>
+        <p class="rsvp-hecho__texto" id="rsvpHechoTexto"></p>
+        <button type="button" class="btn-primary" id="rsvpHechoTarjeta" hidden>Descargar mi tarjeta</button>
+        <button type="button" class="rsvp-hecho__cambiar" id="rsvpHechoCambiar">¿No fuiste tú? Llenar el formulario de nuevo</button>
+      </div>
     </div>
   </section>

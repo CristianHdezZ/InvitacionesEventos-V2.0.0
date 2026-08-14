@@ -236,6 +236,15 @@
 
 @media (min-width:761px){
 
+    /* Se mueve con el tamaño de la barra: ver --rail-gutter en
+       variables.css y su uso en layout/hero.css. */
+
+    :root{
+
+        --rail-gutter:58px;
+
+    }
+
     .dot-nav{
 
         right:22px;
@@ -263,6 +272,12 @@
 }
 
 @media (max-width:480px){
+
+    :root{
+
+        --rail-gutter:34px;
+
+    }
 
     .dot-nav{
 

@@ -274,5 +274,96 @@
 
 
 /* ==========================================================
+   YA CONFIRMADO EN ESTE DISPOSITIVO
+
+   Ocupa el sitio del formulario cuando ya se confirmó desde este
+   navegador. Se apoya en las mismas variables que el resto de la
+   tarjeta para que no desentone con la sección.
+========================================================== */
+
+.rsvp-hecho{
+
+    max-width:var(--container-xs);
+
+    margin:0 auto;
+
+    padding:var(--space-7) var(--space-6);
+
+    border:var(--border-gold);
+
+    border-radius:var(--radius-lg);
+
+    background:var(--color-surface-alt, var(--color-white));
+
+    box-shadow:var(--shadow-sm);
+
+    text-align:center;
+
+}
+
+.rsvp-hecho__titulo{
+
+    margin:0 0 var(--space-3);
+
+    font-family:var(--font-title);
+
+    font-size:var(--fs-lg);
+
+    color:var(--vino, var(--color-secondary));
+
+}
+
+.rsvp-hecho__texto{
+
+    margin:0 0 var(--space-6);
+
+    font-size:.95rem;
+
+    line-height:var(--lh-normal);
+
+    color:var(--color-text);
+
+}
+
+/* Deliberadamente discreto: es la salida de emergencia, no la
+   acción principal. Pero tiene que verse y poder pulsarse sin
+   esfuerzo, así que va con área de toque holgada y subrayado. */
+
+.rsvp-hecho__cambiar{
+
+    display:inline-block;
+
+    margin-top:var(--space-5);
+
+    padding:var(--space-2) var(--space-3);
+
+    border:0;
+
+    background:none;
+
+    cursor:pointer;
+
+    font-family:inherit;
+
+    font-size:.85rem;
+
+    color:var(--color-text-light, var(--color-text));
+
+    text-decoration:underline;
+
+    text-underline-offset:3px;
+
+}
+
+.rsvp-hecho__cambiar:hover,
+
+.rsvp-hecho__cambiar:focus-visible{
+
+    color:var(--vino, var(--color-secondary));
+
+}
+
+
+/* ==========================================================
    END OF FILE
 ========================================================== */

@@ -1765,5 +1765,37 @@
 
 
 /* ==========================================================
+   HUECO PARA LA NAVEGACIÓN DE PUNTOS
+
+   .dot-nav va en position:fixed sobre el contenido y no le reserva
+   sitio. En pantallas estrechas la última palabra de las líneas
+   largas quedaba debajo de los círculos: medido en un viewport de
+   349 px, la entradilla llegaba a 312,8 px y la barra empezaba en
+   305,3 px, así que la "a" de "hija" se leía tapada.
+
+   Va al final del archivo a propósito: .hero tiene su padding
+   repartido entre varias reglas y media queries, y padding-inline
+   aquí gana a todas sin tocar el vertical de ninguna.
+
+   El max() respeta el margen que ya hubiera cuando es mayor que el
+   de la barra, así que en pantallas anchas no cambia nada. Y se
+   aplica a los dos lados porque el texto está centrado: solo a la
+   derecha quedaría descentrado.
+========================================================== */
+
+.hero{
+
+    padding-inline:max(
+
+        var(--space-6),
+
+        calc(var(--rail-gutter) + var(--space-2))
+
+    );
+
+}
+
+
+/* ==========================================================
    END OF FILE
 ========================================================== */
