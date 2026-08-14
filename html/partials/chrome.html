@@ -15,6 +15,12 @@
   <source src="assets/music/LaPrincesadePapa.mp3" type="audio/mpeg">
 </audio>
 <button id="musicToggle" data-music class="music-toggle" aria-label="Reproducir música" aria-pressed="false">
+  <!-- Telón líquido detrás del ecualizador. Dos manchas girando a
+       distinto ritmo: en un círculo de 52px una onda literal solo
+       dejaría ver un trozo, mientras que estas llenan el disco y dan
+       la misma sensación de fluido. Aparece al sonar y se va al
+       pausar. Decorativo, de ahí el aria-hidden. -->
+  <span class="music-wave" aria-hidden="true"><span class="music-wave__blob"></span><span class="music-wave__blob"></span></span>
   <!-- Cinco barras y no tres: con tres se lee como un icono; con
        cinco, cada una a su altura y a su ritmo, se lee como una onda
        de sonido. El CSS las mueve solo mientras suena la música. -->
