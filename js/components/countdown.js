@@ -272,37 +272,81 @@ Countdown.render=function(
 
 ){
 
-    if(this.elements.days){
+    /* El último parámetro distingue la animación: los segundos
+       cambian sesenta veces por minuto y necesitan un gesto corto;
+       el resto cambia de tanto en tanto y admite algo más. */
 
-        this.elements.days.textContent=
+    this.setNumber(this.elements.days, days, true);
 
-            this.format(days);
+    this.setNumber(this.elements.hours, hours, true);
+
+    this.setNumber(this.elements.minutes, minutes, true);
+
+    this.setNumber(this.elements.seconds, seconds, false);
+
+};
+
+/* ==========================================================
+   ESCRIBIR UNA CIFRA
+
+   Solo toca el DOM si el valor cambió de verdad. Antes se
+   reescribían las cuatro cifras cada segundo aunque tres fueran
+   idénticas; ahora, además de ahorrar ese trabajo, es lo que
+   permite animar únicamente la que se movió.
+========================================================== */
+
+Countdown.setNumber = function (elemento, valor, marcado) {
+
+    if (!elemento) {
+
+        return;
 
     }
 
-    if(this.elements.hours){
+    const texto = this.format(valor);
 
-        this.elements.hours.textContent=
+    if (elemento.textContent === texto) {
 
-            this.format(hours);
-
-    }
-
-    if(this.elements.minutes){
-
-        this.elements.minutes.textContent=
-
-            this.format(minutes);
+        return;
 
     }
 
-    if(this.elements.seconds){
+    elemento.textContent = texto;
 
-        this.elements.seconds.textContent=
+    this.animateChange(elemento, marcado);
 
-            this.format(seconds);
+};
+
+Countdown.animateChange = function (elemento, marcado) {
+
+    const clases = ["is-cambiando", "is-cambiando--marcado"];
+
+    elemento.classList.remove(...clases);
+
+    /* Leer una medida obliga al navegador a recalcular ahora mismo.
+       Sin esto agrupa el quitar y el poner en el mismo fotograma, no
+       ve ningún cambio y la animación no se reinicia: a partir del
+       segundo tick dejaría de verse. */
+
+    void elemento.offsetWidth;
+
+    elemento.classList.add("is-cambiando");
+
+    if (marcado) {
+
+        elemento.classList.add("is-cambiando--marcado");
 
     }
+
+    /* No hace falta escuchar "animationend" para limpiar: la línea de
+       arriba ya quita las clases en el cambio siguiente, y sin
+       animation-fill-mode el elemento vuelve solo a su estilo normal
+       al acabar.
+
+       Además evita una fuga: con la pestaña en segundo plano las
+       animaciones no avanzan y ese evento no llega nunca, así que a
+       un cambio por segundo se irían acumulando oyentes muertos sobre
+       el mismo elemento. */
 
 };
 

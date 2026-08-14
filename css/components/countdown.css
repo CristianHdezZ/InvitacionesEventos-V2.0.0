@@ -744,5 +744,74 @@
 
 
 /* ==========================================================
+   CAMBIO DE CIFRA
+
+   La cuenta atrás era lo único de la página que se movía cada
+   segundo sin que se notara: el número se sustituía de golpe.
+   Ahora entra desde abajo, como si girara un contador.
+
+   Solo se anima la cifra que cambia. Los segundos van cada
+   segundo, así que su animación es corta y discreta; días, horas
+   y minutos cambian de tanto en tanto y se permiten algo más.
+
+   Va con translate y opacidad, sin recortar el contenedor: si se
+   pusiera overflow:hidden en .countdown__item se llevaría por
+   delante la sombra y el hover que ya tenía.
+========================================================== */
+
+@keyframes countdownEntraCifra{
+
+    0%{
+
+        transform:translateY(45%);
+
+        opacity:0;
+
+    }
+
+    55%{
+
+        opacity:1;
+
+    }
+
+    100%{
+
+        transform:translateY(0);
+
+        opacity:1;
+
+    }
+
+}
+
+.countdown__number.is-cambiando{
+
+    animation:countdownEntraCifra .38s var(--ease, ease);
+
+}
+
+/* Días, horas y minutos: mismo gesto, algo más de recorrido. */
+
+.countdown__number.is-cambiando--marcado{
+
+    animation-duration:.6s;
+
+}
+
+@media (prefers-reduced-motion: reduce){
+
+    .countdown__number.is-cambiando,
+
+    .countdown__number.is-cambiando--marcado{
+
+        animation:none;
+
+    }
+
+}
+
+
+/* ==========================================================
    END OF FILE
 ========================================================== */
