@@ -385,23 +385,79 @@
 
 }
 
-/* Un latido corto y contado —tres veces y para— solo mientras está
-   cerrada. En bucle sería un parpadeo permanente al lado de cada
-   punto del programa, que cansa. */
+/* Respiración: el "+" crece y vuelve, y con él sale un aro que se
+   abre y se desvanece. El crecimiento invita a tocar y el aro sugiere
+   que ahí se despliega algo.
+
+   El aro se hace con box-shadow y no con otro pseudo-elemento porque
+   ::before ya es esta marca y ::after lo tiene cogido el círculo del
+   ícono. En cada fotograma se repite el aro blanco de 2px para no
+   perderlo mientras dura la animación.
+
+   Ciclo largo y recorrido corto —un 12%— a propósito: lo que se busca
+   es que el ojo lo encuentre, no que reclame atención. */
 
 @keyframes timelineNotaLatido{
 
-    0%,100%{ transform:scale(1); }
+    0%{
 
-    50%{ transform:scale(1.16); }
+        transform:scale(1);
+
+        box-shadow:
+
+            0 0 0 2px var(--color-surface, #fff),
+
+            0 0 0 0 rgba(184,147,92,.5);
+
+    }
+
+    55%{
+
+        transform:scale(1.12);
+
+        box-shadow:
+
+            0 0 0 2px var(--color-surface, #fff),
+
+            0 0 0 8px rgba(184,147,92,0);
+
+    }
+
+    100%{
+
+        transform:scale(1);
+
+        box-shadow:
+
+            0 0 0 2px var(--color-surface, #fff),
+
+            0 0 0 0 rgba(184,147,92,0);
+
+    }
 
 }
+
+/* Solo mientras está cerrada: una vez desplegada ya no hay nada que
+   anunciar, y además el giro a "×" necesita el transform libre. */
 
 .timeline__icon--nota:not([aria-expanded="true"])::before{
 
-    animation:timelineNotaLatido 2.2s var(--ease, ease) 3;
+    animation:timelineNotaLatido 3s var(--ease, ease) infinite;
 
 }
+
+/* Desacompasados. Latiendo los seis a la vez parece un semáforo; con
+   unas décimas de diferencia se lee como algo vivo. */
+
+.timeline__item:nth-child(2) .timeline__icon--nota::before{ animation-delay:.4s; }
+
+.timeline__item:nth-child(3) .timeline__icon--nota::before{ animation-delay:.8s; }
+
+.timeline__item:nth-child(4) .timeline__icon--nota::before{ animation-delay:1.2s; }
+
+.timeline__item:nth-child(5) .timeline__icon--nota::before{ animation-delay:1.6s; }
+
+.timeline__item:nth-child(6) .timeline__icon--nota::before{ animation-delay:2s; }
 
 @media (prefers-reduced-motion: reduce){
 
