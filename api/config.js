@@ -131,10 +131,10 @@ const DEFAULT_CONFIG = {
   itinerarioAnimado: true,
   disenoTarjetas: false,
   itinerario: [
-    { titulo: 'Recepción', hora: '7:00 p.m.', icono: 'fi:copa' },
-    { titulo: 'Ceremonia', hora: '7:30 p.m.', icono: 'fi:arco' },
-    { titulo: 'Vals', hora: '8:00 p.m.', icono: 'fi:baile' },
-    { titulo: 'Cena', hora: '9:00 p.m.', icono: 'fi:cena' }
+    { titulo: 'Recepción', hora: '7:00 p.m.', nota: '', icono: 'fi:copa' },
+    { titulo: 'Ceremonia', hora: '7:30 p.m.', nota: '', icono: 'fi:arco' },
+    { titulo: 'Vals', hora: '8:00 p.m.', nota: '', icono: 'fi:baile' },
+    { titulo: 'Cena', hora: '9:00 p.m.', nota: '', icono: 'fi:cena' }
   ],
   vestimenta: {
     nota: 'Color a evitar: rosa palo — ¡es el mío! 🌹',
@@ -312,6 +312,10 @@ function sanitizeConfig(body) {
         return {
           titulo: sanitizeText(item?.titulo, 60, 'Actividad'),
           hora: sanitizeText(item?.hora, 30, ''),
+          // Comentario que se despliega al tocar el icono. Vacio por
+          // defecto: sin nota el icono no es interactivo, para no
+          // ofrecer algo que al pulsarlo no haga nada.
+          nota: sanitizeText(item?.nota, 200, ''),
           icono: ICONOS_VALIDOS.includes(iconoMigrado) ? iconoMigrado : 'mdi:glass-cocktail'
         };
       })

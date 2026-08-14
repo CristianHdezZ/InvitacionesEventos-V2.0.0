@@ -282,5 +282,165 @@
 
 
 /* ==========================================================
+   COMENTARIO DEL ITINERARIO
+
+   Solo aparece en los puntos que tienen nota escrita desde el panel.
+   Se abre al tocar el ícono, nunca al pasar por encima: en el móvil
+   —que es donde más se mira esto— el hover no existe.
+========================================================== */
+
+/* El ícono pasa de <span> a <button> cuando hay nota, así que hay
+   que quitarle lo que el navegador le pone de serie. Todo lo demás
+   —tamaño, fondo, círculo— lo sigue heredando de .timeline__icon. */
+
+.timeline__icon--nota{
+
+    padding:0;
+
+    border:0;
+
+    font:inherit;
+
+    color:inherit;
+
+    -webkit-appearance:none;
+
+    appearance:none;
+
+    cursor:pointer;
+
+}
+
+/* Marca discreta de que ahí hay algo que ver. Va en ::before porque
+   ::after ya lo usa el aro del ícono. */
+
+.timeline__icon--nota::before{
+
+    content:"";
+
+    position:absolute;
+
+    right:1px;
+
+    bottom:1px;
+
+    z-index:2;
+
+    width:11px;
+
+    height:11px;
+
+    border-radius:50%;
+
+    background:var(--oro, var(--color-gold));
+
+    box-shadow:0 0 0 2px var(--color-surface, #fff);
+
+    transition:transform var(--transition-fast);
+
+}
+
+.timeline__icon--nota[aria-expanded="true"]::before{
+
+    transform:scale(1.25);
+
+}
+
+.timeline__icon--nota:focus-visible{
+
+    outline:2px solid var(--oro, var(--color-gold));
+
+    outline-offset:3px;
+
+}
+
+/* El comentario ocupa su propia línea debajo. El item es flex, así
+   que se le permite envolver y la nota pide el ancho completo.
+
+   .timeline__text lleva min-width:0 para que sea ella la que se
+   encoja si falta sitio: sin eso podría empujar y provocar un salto
+   de línea que no queremos. */
+
+.timeline__item{
+
+    flex-wrap:wrap;
+
+}
+
+.timeline__text{
+
+    min-width:0;
+
+}
+
+.timeline__nota{
+
+    flex:0 0 100%;
+
+    order:3;
+
+    margin:0;
+
+    padding:0 2px;
+
+    /* Cerrado. visibility además de opacity para que los lectores de
+       pantalla tampoco lo anuncien mientras está plegado. */
+
+    max-height:0;
+
+    opacity:0;
+
+    visibility:hidden;
+
+    overflow:hidden;
+
+    font-size:.86rem;
+
+    line-height:var(--lh-normal);
+
+    color:var(--color-text-light, var(--color-text));
+
+    text-align:left;
+
+    transition:
+
+        max-height .3s var(--ease, ease),
+
+        opacity .2s var(--ease, ease),
+
+        margin-top .3s var(--ease, ease),
+
+        visibility 0s linear .3s;
+
+}
+
+.timeline__nota.is-open{
+
+    max-height:16em;
+
+    opacity:1;
+
+    visibility:visible;
+
+    margin-top:12px;
+
+    padding-left:10px;
+
+    border-left:2px solid var(--oro, var(--color-gold));
+
+    transition:
+
+        max-height .35s var(--ease, ease),
+
+        opacity .3s var(--ease, ease) .05s,
+
+        margin-top .35s var(--ease, ease),
+
+        visibility 0s;
+
+}
+
+
+/* ==========================================================
    END OF FILE
 ========================================================== */

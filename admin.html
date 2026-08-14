@@ -1303,7 +1303,7 @@ function iconoSvg(id, extraClass) {
   const vestColorEvitarPicker = setupIconPicker('vestIconoColorEvitarPicker', 'vestIconoColorEvitar', 'mdi:flower');
 
   function addItinerarioRow(item){
-    item = item || { titulo:'', hora:'', icono:'mdi:glass-cocktail' };
+    item = item || { titulo:'', hora:'', nota:'', icono:'mdi:glass-cocktail' };
     const row = document.createElement('div');
     row.className = 'it-row';
     row.innerHTML = `
@@ -1312,6 +1312,8 @@ function iconoSvg(id, extraClass) {
         <input type="text" class="it-hora" placeholder="7:00 p.m." value="${escapeHtml(item.hora)}">
         <button type="button" class="remove-btn">Quitar</button>
       </div>
+      <textarea class="it-nota" rows="2" maxlength="200"
+        placeholder="Comentario opcional: se muestra al tocar el ícono en la invitación. Déjalo vacío y el ícono no será pulsable.">${escapeHtml(item.nota || '')}</textarea>
       <input type="hidden" class="it-icono" value="${item.icono}">
       <div class="icon-picker">${iconPickerHtml(item.icono)}</div>
     `;
@@ -1695,6 +1697,7 @@ function iconoSvg(id, extraClass) {
       itinerario: [...itinerarioRows.querySelectorAll('.it-row')].map(row => ({
         titulo: row.querySelector('.it-titulo').value.trim(),
         hora: row.querySelector('.it-hora').value.trim(),
+        nota: row.querySelector('.it-nota').value.trim(),
         icono: row.querySelector('.it-icono').value
       })),
       vestimenta: {
