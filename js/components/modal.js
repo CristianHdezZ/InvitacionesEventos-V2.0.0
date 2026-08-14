@@ -511,11 +511,25 @@ Modal.onScroll=function(){
    PAUSE
 ========================================================== */
 
+/* Las dos comprueban que el elemento exista antes de tocarlo.
+
+   InvitationApp las llama desde onVisibilityChange, que se dispara en
+   cuanto la pestaña pasa a segundo plano. Eso puede ocurrir mientras
+   la página todavía se está montando —los parciales se piden por
+   fetch y Modal aún no ha cacheado nada—, y entonces this.elements.modal
+   está sin definir.
+
+   Es lo que llenaba la consola de "Cannot read properties of undefined
+   (reading 'classList')" en cada carga: le pasa a quien abre la
+   invitación y se va a otra aplicación antes de que termine de cargar. */
+
 Modal.pause=function(){
 
     if(
 
-        this.opened
+        this.opened &&
+
+        this.elements.modal
 
     ){
 
@@ -535,6 +549,12 @@ Modal.pause=function(){
 ========================================================== */
 
 Modal.resume=function(){
+
+    if(!this.elements.modal){
+
+        return;
+
+    }
 
     this.elements.modal.classList.remove(
 
