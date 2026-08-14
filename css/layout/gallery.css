@@ -197,5 +197,69 @@
 
 
 /* ==========================================================
+   KEN BURNS
+
+   La foto que se está viendo hace un acercamiento lento con una
+   deriva mínima. Es el recurso de siempre en los pases de fotos:
+   una imagen quieta parece congelada, y con este movimiento la
+   galería respira sin pedir nada al invitado.
+
+   Solo sobre .swiper-slide-active, que es la clase que pone
+   Swiper: las demás diapositivas se quedan quietas y no gastan
+   trabajo de compositor por estar fuera de pantalla.
+
+   Dura 4,6s, algo más de lo que se ve cada foto —3,5s de espera
+   más 0,7s de transición—, para que el movimiento no llegue a
+   detenerse antes de pasar a la siguiente.
+
+   El recorte ya lo hacía .galeria__item con overflow:hidden, así
+   que la ampliación no se sale del marco.
+========================================================== */
+
+@keyframes galeriaKenBurns{
+
+    0%{
+
+        transform:scale(1) translate3d(0, 0, 0);
+
+    }
+
+    100%{
+
+        transform:scale(1.12) translate3d(-1.6%, -1.1%, 0);
+
+    }
+
+}
+
+.galeria__swiper .swiper-slide-active .galeria__item img{
+
+    /* forwards: al terminar mantiene el acercamiento en vez de
+       volver de golpe al principio mientras la foto sigue a la
+       vista. Al dejar de ser la activa pierde la animación y la
+       transición que ya tenía la devuelve suavemente. */
+
+    /* linear a propósito. Con la curva --ease del proyecto, que
+       arranca rápido y frena, a mitad de tiempo ya había recorrido
+       el 88% y el resto de la foto se veía parada. Un Ken Burns
+       necesita deriva constante: lo que se busca es que nunca deje
+       de moverse mientras se mira. */
+
+    animation:galeriaKenBurns 4.6s linear forwards;
+
+}
+
+@media (prefers-reduced-motion: reduce){
+
+    .galeria__swiper .swiper-slide-active .galeria__item img{
+
+        animation:none;
+
+    }
+
+}
+
+
+/* ==========================================================
    END OF FILE
 ========================================================== */

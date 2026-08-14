@@ -1480,5 +1480,83 @@ body.tarjetas-activas .musica__inner{
 
 
 /* ==========================================================
+   SUBRAYADO DEL TÍTULO
+
+   Un filete dorado que se abre desde el centro cuando el título
+   entra en pantalla. Lo pone y lo quita js/components/scroll.js,
+   así que se repite cada vez que se pasa por la sección, igual
+   que el resto de efectos de la invitación.
+
+   Se anima con scaleX y no con el ancho: así el navegador no
+   tiene que recalcular el diseño, y de paso el degradado no se
+   deforma al crecer.
+
+   Cabe de sobra: el encabezado deja 52px hasta lo siguiente.
+========================================================== */
+
+.section__title{
+
+    position:relative;
+
+}
+
+.section__title::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+
+    bottom:-16px;
+
+    width:64px;
+
+    height:1px;
+
+    margin-left:-32px;
+
+    /* Se desvanece por los dos extremos en vez de cortarse en seco. */
+
+    background:linear-gradient(
+
+        90deg,
+
+        transparent,
+
+        var(--oro, var(--color-gold)),
+
+        transparent
+
+    );
+
+    transform:scaleX(0);
+
+    transition:transform .85s var(--ease, ease);
+
+}
+
+.section__title.is-subrayado::after{
+
+    transform:scaleX(1);
+
+}
+
+/* Sin animación se deja puesto: es parte del adorno, no un efecto. */
+
+@media (prefers-reduced-motion: reduce){
+
+    .section__title::after{
+
+        transform:scaleX(1);
+
+        transition:none;
+
+    }
+
+}
+
+
+/* ==========================================================
    END OF FILE
 ========================================================== */

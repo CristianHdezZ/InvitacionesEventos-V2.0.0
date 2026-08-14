@@ -50,6 +50,8 @@ Scroll.init = function () {
 
     this.revealIcons();
 
+    this.revealTitles();
+
     this.setupVine();
 
     this.setupNav();
@@ -160,6 +162,88 @@ Scroll.revealIcons = function () {
     );
 
     objetivos.forEach(el => observer.observe(el));
+
+    this.observers.push(observer);
+
+};
+
+/* ==========================================================
+   SUBRAYADO DE LOS TÍTULOS
+
+   Pone y quita .is-subrayado en los ocho títulos de sección; el
+   filete dorado lo dibuja el CSS de layout/sections.css.
+
+   La clase se quita al salir a propósito, para que el trazo se
+   repita en cada pasada, que es como se comportan los demás
+   efectos de la invitación.
+
+   Con movimiento reducido no se hace nada: el CSS ya deja el
+   filete puesto en ese caso.
+========================================================== */
+
+Scroll.revealTitles = function () {
+
+    if (typeof IntersectionObserver === "undefined") {
+
+        return;
+
+    }
+
+    const titulos = [
+
+        ...document.querySelectorAll(".section__title")
+
+    ];
+
+    if (!titulos.length) {
+
+        return;
+
+    }
+
+    const reducido = window.matchMedia(
+
+        "(prefers-reduced-motion: reduce)"
+
+    ).matches;
+
+    if (reducido) {
+
+        return;
+
+    }
+
+    const observer = new IntersectionObserver(
+
+        entries => {
+
+            entries.forEach(entry => {
+
+                entry.target.classList.toggle(
+
+                    "is-subrayado",
+
+                    entry.isIntersecting
+
+                );
+
+            });
+
+        },
+
+        {
+
+            /* Que el título esté bien dentro antes de trazar: con un
+               umbral bajo se dispararía asomando por el borde y el
+               filete se vería crecer fuera de pantalla. */
+
+            threshold: .6
+
+        }
+
+    );
+
+    titulos.forEach(t => observer.observe(t));
 
     this.observers.push(observer);
 
