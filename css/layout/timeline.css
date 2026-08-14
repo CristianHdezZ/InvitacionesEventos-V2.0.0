@@ -314,35 +314,102 @@
 /* Marca discreta de que ahí hay algo que ver. Va en ::before porque
    ::after ya lo usa el aro del ícono. */
 
+/* Marca de "aquí hay algo". Era un punto liso de 11px y pasaba
+   desapercibido: ahora que las burbujas no se abren solas, esto es lo
+   único que avisa, así que tiene que verse.
+
+   Lleva un "+" porque un punto solo dice "mira aquí" mientras que un
+   signo dice "esto se abre". Al desplegarse gira 45° y se convierte en
+   una "×", que además comunica que el mismo gesto lo cierra. Se gira
+   en vez de cambiar el content para que la transición sea continua. */
+
 .timeline__icon--nota::before{
 
-    content:"";
+    content:"+";
 
     position:absolute;
 
-    right:1px;
+    right:-2px;
 
-    bottom:1px;
+    bottom:-2px;
 
     z-index:2;
 
-    width:11px;
+    display:flex;
 
-    height:11px;
+    align-items:center;
+
+    justify-content:center;
+
+    width:19px;
+
+    height:19px;
 
     border-radius:50%;
 
     background:var(--oro, var(--color-gold));
 
-    box-shadow:0 0 0 2px var(--color-surface, #fff);
+    /* El aro del color del fondo lo despega del ícono. */
 
-    transition:transform var(--transition-fast);
+    box-shadow:
+
+        0 0 0 2px var(--color-surface, #fff),
+
+        var(--shadow-xs);
+
+    color:#fff;
+
+    /* La tipografía de títulos dibuja un "+" muy fino a este tamaño. */
+
+    font-family:var(--font-body);
+
+    font-size:14px;
+
+    font-weight:400;
+
+    line-height:1;
+
+    transition:
+
+        transform var(--transition-normal),
+
+        background var(--transition-fast);
 
 }
 
 .timeline__icon--nota[aria-expanded="true"]::before{
 
-    transform:scale(1.25);
+    transform:rotate(45deg);
+
+    background:var(--vino, var(--color-secondary));
+
+}
+
+/* Un latido corto y contado —tres veces y para— solo mientras está
+   cerrada. En bucle sería un parpadeo permanente al lado de cada
+   punto del programa, que cansa. */
+
+@keyframes timelineNotaLatido{
+
+    0%,100%{ transform:scale(1); }
+
+    50%{ transform:scale(1.16); }
+
+}
+
+.timeline__icon--nota:not([aria-expanded="true"])::before{
+
+    animation:timelineNotaLatido 2.2s var(--ease, ease) 3;
+
+}
+
+@media (prefers-reduced-motion: reduce){
+
+    .timeline__icon--nota::before{
+
+        animation:none;
+
+    }
 
 }
 
