@@ -373,7 +373,18 @@
 
 }
 
+/* El contenedor solo se ocupa de plegarse. No se le pone padding en
+   reposo: con max-height:0 seguiría ocupando alto y el itinerario
+   quedaría con huecos entre puntos. */
+
 .timeline__nota{
+
+    /* Los dos tonos se declaran aquí para que la burbuja y su cola
+       tiren del mismo valor y no se descuadren nunca. */
+
+    --burbuja-fondo:var(--color-surface-alt, #FFF8FA);
+
+    --burbuja-borde:rgba(184,147,92,.38);
 
     flex:0 0 100%;
 
@@ -381,7 +392,7 @@
 
     margin:0;
 
-    padding:0 2px;
+    padding:0;
 
     /* Cerrado. visibility además de opacity para que los lectores de
        pantalla tampoco lo anuncien mientras está plegado. */
@@ -394,14 +405,6 @@
 
     overflow:hidden;
 
-    font-size:.86rem;
-
-    line-height:var(--lh-normal);
-
-    color:var(--color-text-light, var(--color-text));
-
-    text-align:left;
-
     transition:
 
         max-height .3s var(--ease, ease),
@@ -410,23 +413,28 @@
 
         margin-top .3s var(--ease, ease),
 
+        padding-top .3s var(--ease, ease),
+
         visibility 0s linear .3s;
 
 }
 
 .timeline__nota.is-open{
 
-    max-height:16em;
+    max-height:18em;
 
     opacity:1;
 
     visibility:visible;
 
-    margin-top:12px;
+    margin-top:6px;
 
-    padding-left:10px;
+    /* Hueco para la cola, que sobresale por encima de la burbuja.
+       Va en el padding y no en un margen del hijo porque el recorte
+       de overflow llega hasta el borde del padding: dentro de esa
+       franja la cola se ve, fuera se cortaría. */
 
-    border-left:2px solid var(--oro, var(--color-gold));
+    padding-top:9px;
 
     transition:
 
@@ -436,7 +444,90 @@
 
         margin-top .35s var(--ease, ease),
 
+        padding-top .35s var(--ease, ease),
+
         visibility 0s;
+
+}
+
+/* ==========================================================
+   LA BURBUJA
+========================================================== */
+
+.timeline__burbuja{
+
+    position:relative;
+
+    display:block;
+
+    /* Deja la cola caída bajo el ícono, no en el centro: así se lee
+       de quién es el comentario. */
+
+    margin-left:14px;
+
+    padding:13px 17px;
+
+    border:1px solid var(--burbuja-borde);
+
+    border-radius:var(--radius-lg, 18px);
+
+    background:var(--burbuja-fondo);
+
+    box-shadow:var(--shadow-sm);
+
+    font-size:.86rem;
+
+    line-height:var(--lh-normal);
+
+    color:var(--color-text);
+
+    text-align:left;
+
+}
+
+/* La cola es un cuadrado girado 45°: se le pintan solo los dos lados
+   que quedan hacia arriba y el resto lo tapa la propia burbuja, así
+   parece una punta y no un rombo pegado. */
+
+/* Quien pide menos movimiento recibe la burbuja ya puesta, sin el
+   despliegue. Aparecer sigue apareciendo: lo que se quita es la
+   animación, no el contenido. */
+
+@media (prefers-reduced-motion: reduce){
+
+    .timeline__nota,
+
+    .timeline__nota.is-open{
+
+        transition:none;
+
+    }
+
+}
+
+.timeline__burbuja::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:-6px;
+
+    left:20px;
+
+    width:11px;
+
+    height:11px;
+
+    transform:rotate(45deg);
+
+    background:var(--burbuja-fondo);
+
+    border-top:1px solid var(--burbuja-borde);
+
+    border-left:1px solid var(--burbuja-borde);
+
+    border-top-left-radius:3px;
 
 }
 
