@@ -591,6 +591,9 @@
       <div data-estilo-slot="ubicacionLugar"></div></div>
     <div class="field"><label for="cfgDireccion">Dirección</label><input type="text" id="cfgDireccion">
       <div data-estilo-slot="ubicacionDireccion"></div></div>
+    <div class="field"><label for="cfgFechaLugar">Fecha (línea sobre la hora)</label>
+      <input type="text" id="cfgFechaLugar" maxlength="120" placeholder="Sábado 19 de Septiembre del presente año">
+      <p class="hint">Texto libre. Aparece justo encima de la hora en la tarjeta de ubicación.</p></div>
     <div class="field"><label for="cfgHoraLugar">Hora</label><input type="text" id="cfgHoraLugar" placeholder="7:00 p.m.">
       <div data-estilo-slot="ubicacionHora"></div></div>
     <div class="field">
@@ -1602,6 +1605,7 @@ function iconoSvg(id, extraClass) {
     const u = config.ubicacion || {};
     document.getElementById('cfgLugar').value = u.nombreLugar || '';
     document.getElementById('cfgDireccion').value = u.direccion || '';
+    document.getElementById('cfgFechaLugar').value = u.fecha || '';
     document.getElementById('cfgHoraLugar').value = u.hora || '';
     document.getElementById('cfgMapaEmbed').value = u.mapaEmbedUrl || '';
     document.getElementById('cfgMapaLink').value = u.mapaLink || '';
@@ -1720,6 +1724,7 @@ function iconoSvg(id, extraClass) {
       ubicacion: {
         nombreLugar: document.getElementById('cfgLugar').value.trim(),
         direccion: document.getElementById('cfgDireccion').value.trim(),
+        fecha: document.getElementById('cfgFechaLugar').value.trim(),
         hora: document.getElementById('cfgHoraLugar').value.trim(),
         mapaEmbedUrl: document.getElementById('cfgMapaEmbed').value.trim(),
         streetViewUrl: document.getElementById('cfgStreetView').value.trim(),

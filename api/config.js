@@ -156,6 +156,8 @@ const DEFAULT_CONFIG = {
   ubicacion: {
     nombreLugar: 'Salón de Eventos Imperial Eventos Deluxe',
     direccion: 'Cr 40ªª Nº 48ª -12 Sector UCO Rionegro- Antioquia',
+    // Linea de texto libre que va justo encima de la hora.
+    fecha: 'Sábado 19 de Septiembre del presente año',
     hora: '7:00 p.m.',
     mapaEmbedUrl: 'https://www.google.com/maps?q=6.1887244,-75.3635988&z=17&output=embed',
     streetViewUrl: 'https://www.google.com/maps/embed?pb=!4v1784564524946!6m8!1m7!1sCOvTRbTPuU5mPLvsMMZbUw!2m2!1d6.188724376340286!2d-75.36359884954642!3f325.46288285307287!4f8.27229985678568!5f0.7820865974627469',
@@ -363,6 +365,7 @@ function sanitizeConfig(body) {
   const ubicacion = {
     nombreLugar: sanitizeText(b?.ubicacion?.nombreLugar, 150, d.ubicacion.nombreLugar),
     direccion: sanitizeText(b?.ubicacion?.direccion, 250, d.ubicacion.direccion),
+    fecha: sanitizeText(b?.ubicacion?.fecha, 120, d.ubicacion.fecha),
     hora: sanitizeText(b?.ubicacion?.hora, 30, d.ubicacion.hora),
     mapaEmbedUrl: sanitizeUrl(mapaEmbedEntrante, d.ubicacion.mapaEmbedUrl),
     streetViewUrl: sanitizeUrl(streetViewEntrante, d.ubicacion.streetViewUrl),

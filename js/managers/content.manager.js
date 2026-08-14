@@ -68,6 +68,8 @@ ContentManager.TEXTS = [
 
     { path: "ubicacion.direccion", target: ".ubicacion__direccion" },
 
+    { path: "ubicacion.fecha", target: "#ubicacionFecha" },
+
     /* El "Hora: " lo pone el ::before de la regla CSS. */
 
     { path: "ubicacion.hora", target: ".detalle-card__hora" }

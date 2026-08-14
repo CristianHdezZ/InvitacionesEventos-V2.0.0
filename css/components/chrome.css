@@ -361,23 +361,28 @@
 
 /* Ecualizador: las barras solo se animan mientras suena. */
 
+/* El ecualizador ocupaba 15x16 dentro de un botón de 52: apenas un
+   30% de su superficie, y en reposo las tres barras de 3x6 parecían
+   tres puntitos. Funcionaba, pero no se veía que la música estaba
+   sonando, que es justo lo que tiene que comunicar. */
+
 .music-icon{
 
     display:flex;
 
     align-items:flex-end;
 
-    gap:3px;
+    gap:3.5px;
 
-    height:16px;
+    height:20px;
 
 }
 
 .music-icon .bar{
 
-    width:3px;
+    width:3.5px;
 
-    height:6px;
+    height:7px;
 
     border-radius:2px;
 
@@ -403,15 +408,101 @@
 
     0%,100%{
 
-        height:6px;
+        height:7px;
 
     }
 
     50%{
 
-        height:16px;
+        height:20px;
 
     }
+
+}
+
+/* ==========================================================
+   AVISO DE QUE ESTÁ SONANDO
+
+   Tres barras de 3px en una esquina inferior no se ven: el ojo no
+   está mirando ahí. Se le añade un aro dorado que sale del botón y
+   se desvanece, que sí se percibe con el rabillo del ojo.
+
+   Va por box-shadow y no por un pseudo-elemento ni por transform:
+   el botón ya usa transform para el hover y ya tiene su sombra,
+   que se repite en cada fotograma para no perderla mientras dura
+   la animación.
+========================================================== */
+
+@keyframes musicHalo{
+
+    0%{
+
+        box-shadow:
+
+            0 6px 20px rgba(139,79,98,.15),
+
+            0 0 0 0 rgba(184,147,92,.5);
+
+    }
+
+    70%{
+
+        box-shadow:
+
+            0 6px 20px rgba(139,79,98,.15),
+
+            0 0 0 13px rgba(184,147,92,0);
+
+    }
+
+    100%{
+
+        box-shadow:
+
+            0 6px 20px rgba(139,79,98,.15),
+
+            0 0 0 0 rgba(184,147,92,0);
+
+    }
+
+}
+
+.music-toggle[aria-pressed="true"]{
+
+    animation:musicHalo 2.4s var(--ease, ease) infinite;
+
+}
+
+@media (prefers-reduced-motion: reduce){
+
+    .music-toggle[aria-pressed="true"],
+
+    .music-toggle[aria-pressed="true"] .bar{
+
+        animation:none;
+
+    }
+
+    /* Quitar la animación no puede dejar el botón mudo: quien pide
+       menos movimiento sigue necesitando saber si suena. Las barras
+       se quedan quietas pero a distinta altura —un ecualizador
+       congelado— y el aro se pinta fijo. */
+
+    .music-toggle[aria-pressed="true"]{
+
+        box-shadow:
+
+            0 6px 20px rgba(139,79,98,.15),
+
+            0 0 0 3px rgba(184,147,92,.35);
+
+    }
+
+    .music-toggle[aria-pressed="true"] .bar:nth-child(1){ height:12px; }
+
+    .music-toggle[aria-pressed="true"] .bar:nth-child(2){ height:20px; }
+
+    .music-toggle[aria-pressed="true"] .bar:nth-child(3){ height:9px; }
 
 }
 

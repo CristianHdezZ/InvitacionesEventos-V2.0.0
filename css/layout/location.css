@@ -287,6 +287,40 @@
 
 }
 
+/* Misma familia que la hora, para que se lean como un bloque, pero
+   sin su ::before: aquí la línea es la frase completa.
+
+   Se le da algo más de peso y el tono vino en vez del oro porque es
+   el dato principal de los dos; la hora queda como su complemento.
+
+   Toma los 16px de separación que la hora tenía por arriba, y la
+   hora se pega justo debajo: ver la regla de contigüidad más abajo,
+   necesaria porque si no los márgenes se colapsarían a 16px y las
+   dos líneas quedarían sueltas en vez de leerse juntas. */
+
+.detalle-card__fecha{
+
+    margin:16px 0 4px;
+
+    color:var(--vino, var(--color-secondary));
+
+    font-size:.82rem;
+
+    letter-spacing:.12em;
+
+    text-transform:uppercase;
+
+}
+
+/* Solo cuando van seguidas: si algún día no hay fecha, la hora
+   conserva su separación de siempre. */
+
+.detalle-card__fecha + .detalle-card__hora{
+
+    margin-top:0;
+
+}
+
 .detalle-card__hora{
 
     margin:16px 0 22px;
