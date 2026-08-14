@@ -111,13 +111,7 @@ Timeline.observe = function () {
 
     ) {
 
-        items.forEach(item => {
-
-            reveal(item);
-
-            this.syncNoteWithView(item, true);
-
-        });
+        items.forEach(reveal);
 
         return;
 
@@ -340,10 +334,6 @@ Timeline.render = function () {
 
     this.observe();
 
-    this.bindNoteScroll();
-
-    this.updateNotesByScroll();
-
     this.refreshAnimations();
 
 };
@@ -396,18 +386,10 @@ Timeline.bindNotes = function () {
 
             }
 
-            /* Uno abierto a la vez solo donde se abren a mano: varios
-               desplegados dejan la sección hecha un lío.
+            /* Uno abierto a la vez: varios desplegados dejan la
+               sección hecha un lío. */
 
-               En móvil no, porque ahí las abre el scroll y cerrarlas
-               aquí desharía lo que el propio desplazamiento acaba de
-               hacer. */
-
-            if (!this.autoNotes()) {
-
-                this.closeNotes();
-
-            }
+            this.closeNotes();
 
             this.openNote(boton);
 
@@ -421,23 +403,11 @@ Timeline.bindNotes = function () {
 
     if (!this.notesBound) {
 
-        /* Tocar fuera cierra, pero no donde las abre el scroll: allí
-           el primer toque en cualquier sitio las apagaría todas y solo
-           volverían al salir y entrar de la sección. */
-
         document.addEventListener(
 
             "click",
 
-            () => {
-
-                if (!this.autoNotes()) {
-
-                    this.closeNotes();
-
-                }
-
-            }
+            () => this.closeNotes()
 
         );
 
@@ -510,159 +480,6 @@ Timeline.closeNotes = function () {
         )
 
         .forEach(boton => this.closeNote(boton));
-
-};
-
-/* ==========================================================
-   APERTURA AUTOMÁTICA AL PASAR
-
-   En el móvil las burbujas se abren solas según entran en pantalla:
-   con el dedo, ir tocando ícono por ícono para leer el programa es
-   incómodo, y la información se pierde.
-
-   En escritorio se mantiene el clic. Ahí hay sitio de sobra, el
-   puntero es preciso y abrir seis burbujas a la vez solo alarga la
-   sección sin que nadie lo haya pedido.
-
-   Se mira el puntero además del ancho: una tablet táctil ancha se
-   maneja igual que un teléfono, y una ventana de escritorio estrecha
-   no deja de tener ratón.
-========================================================== */
-
-Timeline.autoNotes = function () {
-
-    return window.matchMedia(
-
-        "(max-width: 760px), (pointer: coarse)"
-
-    ).matches;
-
-};
-
-/* Camino de respaldo: sin IntersectionObserver o con movimiento
-   reducido los puntos se muestran todos de golpe, y sus burbujas con
-   ellos. Quien pide menos movimiento prefiere el contenido puesto a
-   que aparezca poco a poco.
-
-   La apertura normal, la que sigue al scroll, está más abajo en
-   updateNotesByScroll(). */
-
-Timeline.syncNoteWithView = function (item, visible) {
-
-    if (!visible || !this.autoNotes()) {
-
-        return;
-
-    }
-
-    this.openNote(item.querySelector(".timeline__icon--nota"));
-
-};
-
-/* ==========================================================
-   APERTURA PROGRESIVA POR POSICIÓN
-
-   Se decide con la posición de cada punto, no con
-   IntersectionObserver. El observador informa solo del estado final
-   cuando algo entra y sale entre dos fotogramas, así que con un
-   deslizamiento rápido había puntos que se saltaban y no llegaban a
-   abrirse nunca.
-
-   La regla es simple: abierta toda burbuja cuyo punto ya pasó la
-   línea, cerrada el resto. Al depender de dónde está cada cosa y no
-   de un evento que pudo perderse, da igual llegar despacio o de un
-   tirón, y al subir se cierran en orden inverso.
-
-   Y no oscila: abrir una burbuja empuja hacia abajo a las
-   siguientes, nunca al punto que la abrió, así que nada puede
-   abrirse y cerrarse a sí mismo en bucle.
-========================================================== */
-
-Timeline.LINEA_APERTURA = .72;
-
-Timeline.updateNotesByScroll = function () {
-
-    if (!this.autoNotes() || !this.elements.timeline) {
-
-        return;
-
-    }
-
-    const linea = window.innerHeight * this.LINEA_APERTURA;
-
-    /* Primero se leen todas las posiciones y después se escribe:
-       alternar lectura y escritura obliga al navegador a recalcular
-       el diseño en cada vuelta del bucle. */
-
-    const estados = [
-
-        ...this.elements.timeline.querySelectorAll(".timeline__item")
-
-    ].map(item => ({
-
-        boton: item.querySelector(".timeline__icon--nota"),
-
-        abrir: item.getBoundingClientRect().top < linea
-
-    }));
-
-    estados.forEach(({ boton, abrir }) => {
-
-        if (!boton) {
-
-            return;
-
-        }
-
-        if (abrir) {
-
-            this.openNote(boton);
-
-        } else {
-
-            this.closeNote(boton);
-
-        }
-
-    });
-
-};
-
-Timeline.bindNoteScroll = function () {
-
-    if (this.noteScrollBound) {
-
-        return;
-
-    }
-
-    /* passive: aquí no se llama a preventDefault, y avisando de ello
-       el navegador no tiene que esperar a este código para desplazar
-       la página. */
-
-    window.addEventListener(
-
-        "scroll",
-
-        () => this.updateNotesByScroll(),
-
-        { passive: true }
-
-    );
-
-    /* Al girar el teléfono cambia el alto y con él la línea. */
-
-    window.addEventListener(
-
-        "resize",
-
-        () => this.updateNotesByScroll(),
-
-        { passive: true }
-
-    );
-
-    this.noteScrollBound = true;
 
 };
 
