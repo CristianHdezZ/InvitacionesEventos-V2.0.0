@@ -15,7 +15,10 @@
   <source src="assets/music/LaPrincesadePapa.mp3" type="audio/mpeg">
 </audio>
 <button id="musicToggle" data-music class="music-toggle" aria-label="Reproducir música" aria-pressed="false">
-  <span class="music-icon"><span class="bar"></span><span class="bar"></span><span class="bar"></span></span>
+  <!-- Cinco barras y no tres: con tres se lee como un icono; con
+       cinco, cada una a su altura y a su ritmo, se lee como una onda
+       de sonido. El CSS las mueve solo mientras suena la música. -->
+  <span class="music-icon"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span></span>
 </button>
 
 <!-- ===================== NAV DE PROGRESO ===================== -->

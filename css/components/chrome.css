@@ -366,13 +366,18 @@
    tres puntitos. Funcionaba, pero no se veía que la música estaba
    sonando, que es justo lo que tiene que comunicar. */
 
+/* El ecualizador ocupaba 15x16 dentro de un botón de 52: apenas un
+   30% de su superficie, y en reposo las tres barras de 3x6 parecían
+   tres puntitos. Funcionaba, pero no se veía que la música estaba
+   sonando, que es justo lo que tiene que comunicar. */
+
 .music-icon{
 
     display:flex;
 
-    align-items:flex-end;
+    align-items:center;
 
-    gap:3.5px;
+    gap:2.5px;
 
     height:20px;
 
@@ -380,9 +385,9 @@
 
 .music-icon .bar{
 
-    width:3.5px;
+    width:2.5px;
 
-    height:7px;
+    height:var(--bar-min, 5px);
 
     border-radius:2px;
 
@@ -396,25 +401,39 @@
 
         musicBarBounce
 
-        1s ease-in-out infinite;
+        var(--bar-ritmo, 1s) ease-in-out infinite;
 
 }
 
-.music-icon .bar:nth-child(1){ animation-delay:0s; }
-.music-icon .bar:nth-child(2){ animation-delay:.2s; }
-.music-icon .bar:nth-child(3){ animation-delay:.4s; }
+/* Cada barra con su altura máxima y su propio ritmo. Si todas
+   compartieran los mismos subirían y bajarían en bloque, como un
+   acordeón; con valores distintos —y a propósito no proporcionales
+   entre sí— el conjunto se lee como una onda de sonido.
+
+   Las más altas van al centro, que es como se ve una forma de onda
+   de verdad: fuerte en medio y decayendo hacia los extremos. */
+
+.music-icon .bar:nth-child(1){ --bar-max:11px; --bar-ritmo:1.15s; animation-delay:0s;   }
+.music-icon .bar:nth-child(2){ --bar-max:18px; --bar-ritmo:.85s;  animation-delay:.18s; }
+.music-icon .bar:nth-child(3){ --bar-max:20px; --bar-ritmo:1.05s; animation-delay:.05s; }
+.music-icon .bar:nth-child(4){ --bar-max:15px; --bar-ritmo:.95s;  animation-delay:.3s;  }
+.music-icon .bar:nth-child(5){ --bar-max:9px;  --bar-ritmo:1.25s; animation-delay:.12s; }
+
+/* Crecen desde el centro hacia arriba y hacia abajo —el contenedor
+   va con align-items:center—, no desde una base. Es lo que
+   distingue una onda de un gráfico de barras. */
 
 @keyframes musicBarBounce{
 
     0%,100%{
 
-        height:7px;
+        height:var(--bar-min, 5px);
 
     }
 
     50%{
 
-        height:20px;
+        height:var(--bar-max, 16px);
 
     }
 
@@ -498,11 +517,17 @@
 
     }
 
-    .music-toggle[aria-pressed="true"] .bar:nth-child(1){ height:12px; }
+    /* La misma silueta, pero detenida: se sigue viendo que suena. */
 
-    .music-toggle[aria-pressed="true"] .bar:nth-child(2){ height:20px; }
+    .music-toggle[aria-pressed="true"] .bar:nth-child(1){ height:9px; }
 
-    .music-toggle[aria-pressed="true"] .bar:nth-child(3){ height:9px; }
+    .music-toggle[aria-pressed="true"] .bar:nth-child(2){ height:16px; }
+
+    .music-toggle[aria-pressed="true"] .bar:nth-child(3){ height:20px; }
+
+    .music-toggle[aria-pressed="true"] .bar:nth-child(4){ height:13px; }
+
+    .music-toggle[aria-pressed="true"] .bar:nth-child(5){ height:7px; }
 
 }
 
