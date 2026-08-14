@@ -332,6 +332,35 @@ Rsvp.onDuplicate = function (body, datos) {
 
     const registrada = body ? body.asistencia : null;
 
+    const coincideNombre = body ? body.nombreCoincide === true : false;
+
+    /* El teléfono identifica el registro, pero no basta para
+       entregar la tarjeta: va con el nombre impreso. Si no coincide
+       con el que se confirmó, o es un error al teclear o es el
+       teléfono de otra persona, y en ninguno de los dos casos
+       corresponde dar una tarjeta a ese nombre.
+
+       Tampoco se recuerda en el dispositivo: así puede corregirlo y
+       volver a intentarlo sin tener que usar la salida de emergencia. */
+
+    if (registrada && !coincideNombre) {
+
+        this.openModal(
+
+            "Con este número ya hay una confirmación registrada a " +
+
+            "otro nombre. Revisa que lo hayas escrito igual que la " +
+
+            "primera vez, o escríbenos y lo revisamos.",
+
+            "Los datos no coinciden"
+
+        );
+
+        return;
+
+    }
+
     if (registrada === "si") {
 
         this.openModal(

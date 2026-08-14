@@ -10,6 +10,36 @@ function sanitize(value, maxLen) {
 // la necesita para comparar contra lo que ya hay guardado.
 const normalizePhone = canonicalPhone;
 
+// Para reconocer a alguien no basta el telefono: la tarjeta lleva el
+// nombre impreso, asi que se exige que coincidan los dos. Sin esto,
+// con un telefono ajeno se podia obtener una tarjeta a cualquier
+// nombre.
+//
+// La comparacion es tolerante a proposito. Quien vuelve semanas
+// despues no teclea igual que la primera vez, y bloquearlo por una
+// tilde o una mayuscula seria un fastidio sin ninguna ganancia: quien
+// quisiera saltarselo solo tendria que escribirlo bien.
+//
+//   "ANA MARIA RUIZ" == "Ana María  Ruiz"
+//
+// El apellido si cuenta: "Ana" y "Ana Ruiz" son distintos.
+function normalizeName(value) {
+  if (typeof value !== 'string') return '';
+  return value
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')   // quita las tildes
+    .toLowerCase()
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function mismoNombre(guardado, entrante) {
+  const a = normalizeName(guardado);
+  const b = normalizeName(entrante);
+  // Sin nombre guardado no se puede afirmar que coincida.
+  return a.length > 0 && a === b;
+}
+
 function setCors(res) {
   if (process.env.ALLOWED_ORIGIN) res.setHeader('Access-Control-Allow-Origin', process.env.ALLOWED_ORIGIN);
   res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
@@ -69,6 +99,7 @@ module.exports = async (req, res) => {
         // numeros ya sabia por el propio 409 que estaba registrado, y
         // esta rama pasa por el limite de intentos por IP.
         let asistenciaPrevia = null;
+        let nombreCoincide = false;
         try {
           const previas = await listRsvps();
           // Se canoniza tambien lo guardado: los registros anteriores
@@ -76,7 +107,13 @@ module.exports = async (req, res) => {
           const previa = previas.find(
             (item) => canonicalPhone(item.telefono) === telefono
           );
-          if (previa) asistenciaPrevia = previa.asistencia;
+          if (previa) {
+            asistenciaPrevia = previa.asistencia;
+            // La comparacion del nombre se hace aqui y solo viaja el
+            // si/no. Devolver el nombre guardado permitiria averiguar
+            // a quien pertenece un telefono con solo probarlo.
+            nombreCoincide = mismoNombre(previa.nombre, nombre);
+          }
         } catch (err) {
           console.error('Error leyendo la confirmacion previa:', err);
         }
@@ -84,7 +121,8 @@ module.exports = async (req, res) => {
           ok: false,
           error: 'Ya existe una confirmacion registrada con este numero de telefono.',
           yaConfirmado: true,
-          asistencia: asistenciaPrevia
+          asistencia: asistenciaPrevia,
+          nombreCoincide
         });
       }
       return res.status(200).json({ ok: true, id: entry.id });
