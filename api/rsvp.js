@@ -1,16 +1,14 @@
 const { createUniqueRsvp, listRsvps, allowRsvpAttempt, hasRedis } = require('../lib/store');
 const { requireAdmin } = require('../lib/admin-auth');
+const { canonicalPhone } = require('../lib/phone');
 
 function sanitize(value, maxLen) {
   return typeof value === 'string' ? value.trim().slice(0, maxLen) : '';
 }
 
-function normalizePhone(value) {
-  if (typeof value !== 'string') return '';
-  const trimmed = value.trim();
-  const plus = trimmed.startsWith('+') ? '+' : '';
-  return plus + trimmed.replace(/\D/g, '');
-}
+// La normalizacion vive en lib/phone.js porque lib/store.js tambien
+// la necesita para comparar contra lo que ya hay guardado.
+const normalizePhone = canonicalPhone;
 
 function setCors(res) {
   if (process.env.ALLOWED_ORIGIN) res.setHeader('Access-Control-Allow-Origin', process.env.ALLOWED_ORIGIN);
@@ -41,7 +39,10 @@ module.exports = async (req, res) => {
     const mensaje = sanitize(body.mensaje, 500);
     const errors = [];
     if (!nombre) errors.push('El nombre es obligatorio.');
-    if (telefono.replace('+', '').length < 10) errors.push('Ingresa un telefono valido.');
+    // Ya no hay que quitar ningun '+': canonicalPhone deja solo
+    // digitos. Diez digitos se convierten en doce al anadir el 57, y
+    // lo mas corto que existe sigue quedando por debajo del limite.
+    if (telefono.length < 10) errors.push('Ingresa un telefono valido.');
     if (!asistencia) errors.push('Debes indicar si asistiras.');
     if (errors.length) return res.status(400).json({ ok: false, errors });
 
@@ -58,7 +59,33 @@ module.exports = async (req, res) => {
     try {
       const created = await createUniqueRsvp(telefono, entry);
       if (!created) {
-        return res.status(409).json({ ok: false, error: 'Ya existe una confirmacion registrada con este numero de telefono.' });
+        // Se devuelve la respuesta que quedo registrada para que el
+        // front sepa si puede volver a ofrecer la tarjeta. Sin este
+        // dato tendria que fiarse de lo que la persona acaba de
+        // marcar, y quien declino y ahora marca "si" se llevaria una
+        // tarjeta sin estar en la lista.
+        //
+        // Solo se expone 'asistencia', no el nombre: quien pruebe
+        // numeros ya sabia por el propio 409 que estaba registrado, y
+        // esta rama pasa por el limite de intentos por IP.
+        let asistenciaPrevia = null;
+        try {
+          const previas = await listRsvps();
+          // Se canoniza tambien lo guardado: los registros anteriores
+          // al cambio conservan el formato viejo y no coincidirian.
+          const previa = previas.find(
+            (item) => canonicalPhone(item.telefono) === telefono
+          );
+          if (previa) asistenciaPrevia = previa.asistencia;
+        } catch (err) {
+          console.error('Error leyendo la confirmacion previa:', err);
+        }
+        return res.status(409).json({
+          ok: false,
+          error: 'Ya existe una confirmacion registrada con este numero de telefono.',
+          yaConfirmado: true,
+          asistencia: asistenciaPrevia
+        });
       }
       return res.status(200).json({ ok: true, id: entry.id });
     } catch (err) {

@@ -36,6 +36,14 @@ const FormService = {};
      etiqueta  texto normal del botón
      enviando  texto del botón mientras se envía
      onSuccess recibe (cuerpoDeLaRespuesta, datosDelFormulario)
+
+     onDuplicate  opcional, solo para el 409. Recibe lo mismo que
+                  onSuccess. Si se pasa, el duplicado deja de
+                  pintarse como error: no lo es. Que un número ya
+                  esté registrado es un hecho, y quien vuelve suele
+                  venir a recuperar su tarjeta, no a equivocarse.
+                  Sin este callback el 409 sigue saliendo en rojo,
+                  que es lo que le conviene al formulario de música.
 ========================================================== */
 
 FormService.submit = async function (opciones) {
@@ -52,7 +60,9 @@ FormService.submit = async function (opciones) {
 
         enviando = "Enviando…",
 
-        onSuccess
+        onSuccess,
+
+        onDuplicate
 
     } = opciones;
 
@@ -120,6 +130,20 @@ FormService.submit = async function (opciones) {
                 onSuccess(body, datos);
 
             }
+
+            return;
+
+        }
+
+        if (
+
+            response.status === 409 &&
+
+            typeof onDuplicate === "function"
+
+        ) {
+
+            onDuplicate(body || {}, datos);
 
             return;
 

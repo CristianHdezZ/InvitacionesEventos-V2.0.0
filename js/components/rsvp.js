@@ -197,7 +197,9 @@ Rsvp.send = function () {
 
         enviando: "Enviando…",
 
-        onSuccess: (body, datos) => this.onSuccess(datos)
+        onSuccess: (body, datos) => this.onSuccess(datos),
+
+        onDuplicate: (body, datos) => this.onDuplicate(body, datos)
 
     });
 
@@ -244,6 +246,82 @@ Rsvp.onSuccess = function (datos) {
         this.prepareCard(datos);
 
     }
+
+};
+
+/* ==========================================================
+   YA ESTABA CONFIRMADO (409)
+
+   El servidor rechaza el duplicado y eso está bien: es la única
+   defensa real y es atómica. Pero para quien vuelve no es un error.
+   El caso habitual es que perdió su tarjeta y regresa a por ella,
+   y hasta ahora se encontraba un mensaje en rojo sin salida.
+
+   Manda lo que hay registrado, no lo que acaba de marcar en el
+   formulario: si en su día dijo que no, entregarle una tarjeta le
+   haría creer que está en la lista cuando no lo está.
+========================================================== */
+
+Rsvp.onDuplicate = function (body, datos) {
+
+    FormService.setStatus(this.elements.status, "", "");
+
+    this.elements.form.reset();
+
+    const nombre = (datos.nombre || "").trim().split(" ")[0];
+
+    const registrada = body ? body.asistencia : null;
+
+    if (registrada === "si") {
+
+        this.openModal(
+
+            "Ya tenemos tu confirmación" +
+
+            (nombre ? ", " + nombre : "") +
+
+            ". Te dejamos tu tarjeta otra vez por si la perdiste.",
+
+            "Ya estabas confirmado"
+
+        );
+
+        this.prepareCard(datos);
+
+        return;
+
+    }
+
+    if (registrada === "no") {
+
+        this.openModal(
+
+            "Con este número ya habías respondido que no podrías " +
+
+            "acompañarnos. Si cambiaron tus planes, escríbenos y lo " +
+
+            "ajustamos.",
+
+            "Ya teníamos tu respuesta"
+
+        );
+
+        return;
+
+    }
+
+    /* Sin dato de lo registrado —por ejemplo si falló la lectura en
+       el servidor— se avisa sin prometer nada. */
+
+    this.openModal(
+
+        "Ya hay una confirmación registrada con este número de " +
+
+        "teléfono. Si crees que es un error, escríbenos.",
+
+        "Ya estabas registrado"
+
+    );
 
 };
 
@@ -552,7 +630,7 @@ Rsvp.celebrate = function () {
    MODAL
 ========================================================== */
 
-Rsvp.openModal = function (mensaje) {
+Rsvp.openModal = function (mensaje, titulo) {
 
     const modal = this.elements.modal;
 
@@ -565,6 +643,21 @@ Rsvp.openModal = function (mensaje) {
     if (this.elements.modalMessage) {
 
         this.elements.modalMessage.textContent = mensaje;
+
+    }
+
+    /* El título se escribe siempre, también en el caso normal: el
+       modal se reutiliza, y si un duplicado lo dejó en "Ya estabas
+       confirmado", la siguiente confirmación buena heredaría ese
+       texto. */
+
+    const encabezado =
+
+        document.getElementById("rsvpModalTitulo");
+
+    if (encabezado) {
+
+        encabezado.textContent = titulo || "¡Gracias!";
 
     }
 
