@@ -286,9 +286,17 @@ ContentManager.applyHashtag = function () {
 
     const conAlmohadilla = "#" + limpio;
 
+    /* Se escribe en los <span> de dentro, NUNCA en el <a>.
+
+       Antes el selector apuntaba a .footer__hashtag, que es el propio
+       enlace, y al asignarle textContent se llevaba por delante todo
+       su contenido: el icono de Instagram y el span quedaban
+       borrados. El del álbum se salvaba solo porque su selector sí
+       apuntaba al span. */
+
     document
 
-        .querySelectorAll(".footer__hashtag, #albumHashtagText")
+        .querySelectorAll("#footerHashtagText, #albumHashtagText")
 
         .forEach(el => {
 
@@ -296,19 +304,33 @@ ContentManager.applyHashtag = function () {
 
         });
 
-    const enlace = document.getElementById("albumHashtagLink");
+    if (!limpio) {
 
-    if (enlace && limpio) {
-
-        enlace.href =
-
-            "https://www.instagram.com/explore/tags/" +
-
-            encodeURIComponent(limpio.toLowerCase()) +
-
-            "/";
+        return;
 
     }
+
+    /* Los dos enlaces, no solo el del álbum: el del pie se quedaba
+       con el href="#" del partial y al pulsarlo saltaba al principio
+       de la página en vez de abrir Instagram. */
+
+    const destino =
+
+        "https://www.instagram.com/explore/tags/" +
+
+        encodeURIComponent(limpio.toLowerCase()) +
+
+        "/";
+
+    document
+
+        .querySelectorAll("#footerHashtagLink, #albumHashtagLink")
+
+        .forEach(enlace => {
+
+            enlace.href = destino;
+
+        });
 
 };
 
