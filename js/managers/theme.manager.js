@@ -667,11 +667,37 @@ ThemeManager.applyIllustrations = function (config) {
 
     );
 
+    /* La de la carta tiene su propia variable: --ilustracion-escala
+       se quedó para la portada. letter.css usa esta y cae en la otra
+       si falta, así que una configuración anterior a la separación
+       se sigue viendo igual. */
+
+    this.setPercent(
+
+        "--ilustracion-carta-escala",
+
+        config.ilustracionCarta && config.ilustracionCarta.escala
+
+    );
+
     this.setPercent(
 
         "--corona-escala",
 
         config.corona && config.corona.escala
+
+    );
+
+    /* La del inicio tiene su propia variable: --corona-escala se quedó
+       para la portada. hero.css usa esta y cae en la otra si falta,
+       de modo que una configuración anterior a la separación sigue
+       viéndose igual. */
+
+    this.setPercent(
+
+        "--corona-hero-escala",
+
+        config.coronaHero && config.coronaHero.escala
 
     );
 

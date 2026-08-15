@@ -67,7 +67,12 @@
       compartirlo contigo.
     </p>
     <button class="gate__envelope" id="gateBtn" type="button" aria-label="Abrir invitación">
-      <svg class="gate__envelope-body" viewBox="0 0 220 130" aria-hidden="true">
+      <!-- Igual que la corona y la ilustración: el dibujo es el estado
+           por defecto y la imagen solo aparece si se sube una desde el
+           panel. Los dos identificadores los empareja ARTWORK en
+           js/managers/content.manager.js. -->
+      <img class="gate__envelope-img" id="gateEnvelopeImg" src="" alt="" hidden>
+      <svg class="gate__envelope-body" id="gateEnvelopeSvg" viewBox="0 0 220 130" aria-hidden="true">
         <rect x="3" y="3" width="214" height="124" rx="14" class="gate__envelope-paper"/>
         <rect x="9" y="9" width="202" height="112" rx="9" class="gate__envelope-inner"/>
         <path d="M3,17 L110,88 L217,17" class="gate__envelope-flap"/>
@@ -94,7 +99,11 @@
        así nunca se monta sobre el sobre ni sobre la guirnalda inferior,
        sin necesidad de márgenes negativos. -->
   <div class="gate__illustration">
-  <!--<svg class="gate__dress" id="gateDressSvg" viewBox="0 -10 220 270" aria-hidden="true">
+  <!-- Arranca oculto a propósito: aquí la variante por defecto es la
+       foto, que se precarga desde el <head> para que la portada pinte
+       sin esperar a la config. Si el panel pide el dibujo, swapArtwork
+       le limpia el display y aparece. -->
+  <svg class="gate__dress gate__dress-svg" id="gateDressSvg" viewBox="0 -10 220 270" aria-hidden="true" style="display:none">
     <ellipse cx="110" cy="250" rx="95" ry="10" class="dress__shadow"/>
     <path d="M100,6 C88,10 78,24 80,42 C82,58 76,80 82,100 C87,84 92,66 89,50 C91,42 93,32 96,24 C98,17 99,11 100,6Z" class="dress__hair"/>
     <path d="M120,6 C132,10 142,24 140,42 C138,58 144,80 138,100 C133,84 128,66 131,50 C129,42 127,32 124,24 C122,17 121,11 120,6Z" class="dress__hair"/>
@@ -143,7 +152,7 @@
     <circle cx="45" cy="190" r="2" class="dress__sparkle" style="animation-delay:1.6s"/>
     <g class="rose" transform="translate(35,225) scale(0.55)"><path d="M0,-28 C14,-28 24,-16 22,-2 C20,10 8,18 -4,16 C-18,14 -26,2 -22,-12 C-19,-22 -10,-28 0,-28 Z" class="rose__c1"/><path d="M-2,-18 C10,-20 18,-10 15,2 C12,12 0,16 -9,11 C-17,6 -18,-6 -12,-13 C-9,-16 -6,-18 -2,-18 Z" class="rose__c2"/><path d="M2,-10 C9,-9 12,-2 9,4 C6,9 -1,10 -5,5 C-8,1 -6,-5 -1,-7" class="rose__spiral"/><ellipse cx="-8" cy="-10" rx="5" ry="3" class="rose__c3" transform="rotate(-30 -8 -10)"/></g>
     <g class="rose" transform="translate(185,222) scale(0.6)"><path d="M0,-28 C14,-28 24,-16 22,-2 C20,10 8,18 -4,16 C-18,14 -26,2 -22,-12 C-19,-22 -10,-28 0,-28 Z" class="rose__c1"/><path d="M-2,-18 C10,-20 18,-10 15,2 C12,12 0,16 -9,11 C-17,6 -18,-6 -12,-13 C-9,-16 -6,-18 -2,-18 Z" class="rose__c2"/><path d="M2,-10 C9,-9 12,-2 9,4 C6,9 -1,10 -5,5 C-8,1 -6,-5 -1,-7" class="rose__spiral"/><ellipse cx="-8" cy="-10" rx="5" ry="3" class="rose__c3" transform="rotate(-30 -8 -10)"/></g>
-  </svg>-->
+  </svg>
   <!-- Mismo caso que la corona: src escrito para aprovechar el
        preload del <head> y pintarse sin esperar a la config. -->
   <img class="gate__dress gate__dress-img" id="gateDressImg"

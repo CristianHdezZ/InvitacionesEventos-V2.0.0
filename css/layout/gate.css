@@ -507,6 +507,26 @@
 
 }
 
+/* La imagen alternativa del sobre ocupa el hueco del dibujo, no se
+   apila debajo: los dos son la misma pieza y solo uno se ve a la vez.
+   El sello y la etiqueta van encima, así que se queda al fondo. */
+
+.gate__envelope-img{
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:0;
+
+}
+
+.gate__envelope-img[hidden]{
+
+    display:none;
+
+}
+
 
 /* ==========================================================
    ENVELOPE LABEL
@@ -2367,6 +2387,26 @@ body.gate-active{
     object-fit:contain;
 
     object-position:center center;
+
+}
+
+
+/* ==========================================================
+   ILUSTRACIÓN COMO DIBUJO (.svg en línea)
+
+   Necesita medidas explícitas igual que la imagen: con
+   width/height en auto el <svg> se queda en 0 dentro de la
+   celda del grid, porque la celda se dimensiona por su
+   contenido y el contenido depende de la celda. Aquí no hace
+   falta object-fit: el preserveAspectRatio que trae el SVG por
+   defecto ya encaja el dibujo dentro de la caja sin deformarlo.
+========================================================== */
+
+.gate__dress-svg{
+
+    width:100%;
+
+    height:100%;
 
 }
 

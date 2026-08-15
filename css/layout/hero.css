@@ -1546,7 +1546,11 @@
 
 .hero{
 
-    --hero-crown-scale:var(--corona-escala,1);
+    /* Su propia variable, con la de la portada como reserva: una
+       configuración guardada antes de separarlas no traía
+       --corona-hero-escala y así sigue viéndose igual. */
+
+    --hero-crown-scale:var(--corona-hero-escala,var(--corona-escala,1));
 
     --admin-name-scale:var(--scale-nombre,1);
 

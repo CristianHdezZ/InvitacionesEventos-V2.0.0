@@ -66,6 +66,11 @@ const DEFAULT_CONFIG = {
   fraseInvitacion: 'Tenemos el honor de invitarlos a la celebración de los XV años de nuestra hija',
   fraseGate: 'Hay momentos inolvidables que se atesoran en el corazón para siempre. Me siento muy feliz de llegar a este momento de mi vida y quiero compartirlo contigo.',
   mensajeCarta: 'Hoy quiero compartir contigo uno de los días más felices de mi vida. Quince años de historias, de risas y de aprender a florecer, y quiero que estés ahí para verlo con tus propios ojos. Esta invitación es un pedacito de mi corazón, hecha con la misma ilusión con la que espero abrazarte ese día.',
+  // Textos propios de la portada (el sobre cerrado). No se comparten
+  // con el hero: alli la frase de arriba es fraseInvitacion.
+  fraseBendicion: 'Con la bendición de Dios y mi familia',
+  textoXV: 'XV AÑOS',
+  textoSobre: 'Ver invitación',
   hashtag: '#LindaXV2026',
   footerMensaje: 'Gracias por ser parte de este capítulo',
   fotoPrincipal: 'assets/gallery/Linda04.png',
@@ -76,7 +81,28 @@ const DEFAULT_CONFIG = {
     imagenUrl: '',
     escala: 100
   },
+  // La de la carta es independiente de la de la portada, igual que
+  // pasa con las coronas. Antes habia una sola para las dos.
+  ilustracionCarta: {
+    tipo: 'svg',
+    imagenUrl: '',
+    escala: 100
+  },
   corona: {
+    tipo: 'svg',
+    imagenUrl: '',
+    escala: 100
+  },
+  // La del inicio es independiente de la de la portada. Antes habia
+  // una sola para las dos y no se podian poner distintas.
+  coronaHero: {
+    tipo: 'svg',
+    imagenUrl: '',
+    escala: 100
+  },
+  // El sobre de la portada: dibujo vectorial o imagen propia, igual
+  // que la corona y la ilustracion.
+  sobre: {
     tipo: 'svg',
     imagenUrl: '',
     escala: 100
@@ -414,6 +440,9 @@ function sanitizeConfig(body) {
     fraseInvitacion: sanitizeText(b.fraseInvitacion, 300, d.fraseInvitacion),
     fraseGate: sanitizeText(b.fraseGate, 400, d.fraseGate),
     mensajeCarta: sanitizeText(b.mensajeCarta, 800, d.mensajeCarta),
+    fraseBendicion: sanitizeText(b.fraseBendicion, 120, d.fraseBendicion),
+    textoXV: sanitizeText(b.textoXV, 40, d.textoXV),
+    textoSobre: sanitizeText(b.textoSobre, 40, d.textoSobre),
     hashtag: sanitizeText(b.hashtag, 40, d.hashtag),
     footerMensaje: sanitizeText(b.footerMensaje, 200, d.footerMensaje),
     fotoPrincipal: sanitizeUrl(b.fotoPrincipal, d.fotoPrincipal),
@@ -424,10 +453,50 @@ function sanitizeConfig(body) {
       imagenUrl: sanitizeUrl(b?.ilustracionQuinceanera?.imagenUrl, d.ilustracionQuinceanera.imagenUrl),
       escala: sanitizeEntero(b?.ilustracionQuinceanera?.escala, 30, 250, d.ilustracionQuinceanera.escala)
     },
+    // Si la configuracion guardada es de antes de separarlas, la de
+    // la carta hereda la de la portada: asi la invitacion se sigue
+    // viendo igual y no hay que volver a configurarla.
+    ilustracionCarta: (() => {
+      const c = b?.ilustracionCarta;
+      const base = {
+        tipo: sanitizeChoice(b?.ilustracionQuinceanera?.tipo, ILUSTRACION_TIPOS_VALIDOS, d.ilustracionQuinceanera.tipo),
+        imagenUrl: sanitizeUrl(b?.ilustracionQuinceanera?.imagenUrl, d.ilustracionQuinceanera.imagenUrl),
+        escala: sanitizeEntero(b?.ilustracionQuinceanera?.escala, 30, 250, d.ilustracionQuinceanera.escala)
+      };
+      if (c === undefined || c === null) return base;
+      return {
+        tipo: sanitizeChoice(c.tipo, ILUSTRACION_TIPOS_VALIDOS, d.ilustracionCarta.tipo),
+        imagenUrl: sanitizeUrl(c.imagenUrl, d.ilustracionCarta.imagenUrl),
+        escala: sanitizeEntero(c.escala, 30, 250, d.ilustracionCarta.escala)
+      };
+    })(),
     corona: {
       tipo: sanitizeChoice(b?.corona?.tipo, SVG_O_IMAGEN_VALIDOS, d.corona.tipo),
       imagenUrl: sanitizeUrl(b?.corona?.imagenUrl, d.corona.imagenUrl),
       escala: sanitizeEntero(b?.corona?.escala, 30, 250, d.corona.escala)
+    },
+    // Si la configuracion guardada es de antes de separarlas, la del
+    // inicio hereda la de la portada: asi la invitacion se sigue
+    // viendo igual y no hay que volver a configurarla.
+    coronaHero: (() => {
+      const h = b?.coronaHero;
+      const heredada = h === undefined || h === null;
+      const base = {
+        tipo: sanitizeChoice(b?.corona?.tipo, SVG_O_IMAGEN_VALIDOS, d.corona.tipo),
+        imagenUrl: sanitizeUrl(b?.corona?.imagenUrl, d.corona.imagenUrl),
+        escala: sanitizeEntero(b?.corona?.escala, 30, 250, d.corona.escala)
+      };
+      if (heredada) return base;
+      return {
+        tipo: sanitizeChoice(h.tipo, SVG_O_IMAGEN_VALIDOS, d.coronaHero.tipo),
+        imagenUrl: sanitizeUrl(h.imagenUrl, d.coronaHero.imagenUrl),
+        escala: sanitizeEntero(h.escala, 30, 250, d.coronaHero.escala)
+      };
+    })(),
+    sobre: {
+      tipo: sanitizeChoice(b?.sobre?.tipo, SVG_O_IMAGEN_VALIDOS, d.sobre.tipo),
+      imagenUrl: sanitizeUrl(b?.sobre?.imagenUrl, d.sobre.imagenUrl),
+      escala: sanitizeEntero(b?.sobre?.escala, 30, 250, d.sobre.escala)
     },
     decoracionFloral: {
       mostrar: typeof b?.decoracionFloral?.mostrar === 'boolean' ? b.decoracionFloral.mostrar : d.decoracionFloral.mostrar,

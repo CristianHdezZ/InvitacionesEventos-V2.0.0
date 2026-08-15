@@ -266,13 +266,66 @@
   <details class="card-box">
     <summary><h2>Portada</h2></summary>
     <div class="card-box__cuerpo">
+      <div class="field">
+        <label for="cfgFraseBendicion">Texto superior</label>
+        <input type="text" id="cfgFraseBendicion" maxlength="120" placeholder="Con la bendición de Dios y mi familia">
+      </div>
+      <div class="field">
+        <label for="cfgTextoXV">Texto bajo el nombre</label>
+        <input type="text" id="cfgTextoXV" maxlength="40" placeholder="XV AÑOS">
+      </div>
+      <div class="field">
+        <label for="cfgTextoSobre">Texto del sobre</label>
+        <input type="text" id="cfgTextoSobre" maxlength="40" placeholder="Ver invitación">
+        <p class="hint">La llamada que aparece sobre el sobre cerrado.</p>
+      </div>
+      <div class="field">
+        <label>Sobre de la portada</label>
+        <label class="radio-inline"><input type="radio" name="sobreTipo" id="sobreTipoSvg" value="svg" checked> Dibujo</label>
+        <label class="radio-inline"><input type="radio" name="sobreTipo" id="sobreTipoImagen" value="imagen"> Imagen propia</label>
+      </div>
+      <div class="field" id="sobreImagenField" style="display:none;">
+        <label for="cfgSobreUrl">URL de la imagen</label>
+        <input type="text" id="cfgSobreUrl" placeholder="assets/gallery/sobre.png o https://...">
+        <p class="hint">PNG con fondo transparente. El sello y el texto se siguen dibujando encima.</p>
+        <img id="sobrePreview" alt="" style="width:120px; height:auto; display:block; margin-top:8px;">
+      </div>
+      <div class="field">
+        <label for="sobreEscala">Tamaño del sobre: <span id="sobreEscalaVal">100%</span></label>
+        <input type="range" id="sobreEscala" min="30" max="250" step="5" value="100">
+      </div>
+      <div class="field">
+      <label>Corona de la portada</label>
+      <label class="switch-label" style="font-weight:normal;">
+        <input type="radio" name="coronaTipo" id="coronaTipoSvg" value="svg" checked>
+        Dibujo (SVG) — se puede recolorear desde este panel
+      </label>
+      <label class="switch-label" style="font-weight:normal;">
+        <input type="radio" name="coronaTipo" id="coronaTipoImagen" value="imagen">
+        Imagen personalizada
+      </label>
+    </div>
+      <div class="field" id="coronaImagenField" style="display:none;">
+      <label for="cfgCoronaUrl">URL de la imagen</label>
+      <input type="text" id="cfgCoronaUrl" placeholder="assets/gallery/corona.png o https://...">
+      <p class="hint">Usa una imagen con fondo transparente (PNG). Ruta propia o enlace público, igual que la foto principal.</p>
+      <img id="coronaPreview" alt="" style="width:70px; height:auto; display:block; margin-top:8px;">
+    </div>
+      <div class="field">
+      <label for="coronaEscala">Tamaño de la corona</label>
+      <div class="rango-field">
+        <input type="range" id="coronaEscala" min="30" max="250" step="5" value="100">
+        <output id="coronaEscalaVal">100%</output>
+      </div>
+      <p class="hint">Se aplica tanto al dibujo (SVG) como a la imagen personalizada. Solo a la portada: la del inicio tiene su propio tamaño en esa sección.</p>
+    </div>
 <div class="field">
       <label for="cfgFrase">Frase de la portada</label>
       <textarea id="cfgFrase" rows="3"></textarea>
       <div data-estilo-slot="fraseGate"></div>
     </div>
 <div class="field">
-      <label>Ilustración de la quinceañera (portada y carta)</label>
+      <label>Ilustración de la quinceañera</label>
       <label class="switch-label" style="font-weight:normal;">
         <input type="radio" name="ilustracionTipo" id="ilustracionTipoSvg" value="svg" checked>
         Dibujo animado (SVG) — se puede recolorear desde este panel
@@ -299,7 +352,7 @@
         <input type="range" id="ilustracionEscala" min="30" max="250" step="5" value="100">
         <output id="ilustracionEscalaVal">100%</output>
       </div>
-      <p class="hint">Se aplica a cualquiera de las tres opciones de arriba, en la portada y en la carta.</p>
+      <p class="hint">Se aplica a cualquiera de las tres opciones de arriba. Solo a la portada: la de la carta tiene su propio tamaño en esa sección.</p>
     </div>
 <div class="field">
       <label class="switch-label">
@@ -326,6 +379,22 @@
   <details class="card-box">
     <summary><h2>Inicio</h2></summary>
     <div class="card-box__cuerpo">
+      <div class="field">
+        <label>Corona sobre el nombre</label>
+        <label class="radio-inline"><input type="radio" name="coronaHeroTipo" id="coronaHeroTipoSvg" value="svg" checked> Dibujo</label>
+        <label class="radio-inline"><input type="radio" name="coronaHeroTipo" id="coronaHeroTipoImagen" value="imagen"> Imagen propia</label>
+        <p class="hint">Independiente de la corona de la portada: puedes poner una distinta en cada sitio.</p>
+      </div>
+      <div class="field" id="coronaHeroImagenField" style="display:none;">
+        <label for="cfgCoronaHeroUrl">URL de la imagen</label>
+        <input type="text" id="cfgCoronaHeroUrl" placeholder="assets/gallery/corona.png o https://...">
+        <p class="hint">Usa una imagen con fondo transparente (PNG).</p>
+        <img id="coronaHeroPreview" alt="" style="width:70px; height:auto; display:block; margin-top:8px;">
+      </div>
+      <div class="field">
+        <label for="coronaHeroEscala">Tamaño de la corona: <span id="coronaHeroEscalaVal">100%</span></label>
+        <input type="range" id="coronaHeroEscala" min="30" max="250" step="5" value="100">
+      </div>
 <div class="field">
       <label for="cfgFraseInvitacion">Frase de invitación (arriba de la foto)</label>
       <textarea id="cfgFraseInvitacion" rows="2"></textarea>
@@ -347,31 +416,9 @@
       <label>Vista previa</label>
       <img id="fotoPreview" alt="" style="width:100px; height:130px; object-fit:cover; border-radius:6px; border:1px solid var(--blush-2); display:block;">
     </div>
-<div class="field">
-      <label>Corona sobre el nombre (portada e inicio)</label>
-      <label class="switch-label" style="font-weight:normal;">
-        <input type="radio" name="coronaTipo" id="coronaTipoSvg" value="svg" checked>
-        Dibujo (SVG) — se puede recolorear desde este panel
-      </label>
-      <label class="switch-label" style="font-weight:normal;">
-        <input type="radio" name="coronaTipo" id="coronaTipoImagen" value="imagen">
-        Imagen personalizada
-      </label>
-    </div>
-<div class="field" id="coronaImagenField" style="display:none;">
-      <label for="cfgCoronaUrl">URL de la imagen</label>
-      <input type="text" id="cfgCoronaUrl" placeholder="assets/gallery/corona.png o https://...">
-      <p class="hint">Usa una imagen con fondo transparente (PNG). Ruta propia o enlace público, igual que la foto principal.</p>
-      <img id="coronaPreview" alt="" style="width:70px; height:auto; display:block; margin-top:8px;">
-    </div>
-<div class="field">
-      <label for="coronaEscala">Tamaño de la corona</label>
-      <div class="rango-field">
-        <input type="range" id="coronaEscala" min="30" max="250" step="5" value="100">
-        <output id="coronaEscalaVal">100%</output>
-      </div>
-      <p class="hint">Se aplica tanto al dibujo (SVG) como a la imagen personalizada, en la portada y en el inicio.</p>
-    </div>
+
+
+
     </div>
   </details>
 
@@ -383,6 +430,33 @@
       <textarea id="cfgCarta" rows="4"></textarea>
       <div data-estilo-slot="carta"></div>
     </div>
+      <div class="field">
+        <label>Ilustración de la quinceañera</label>
+        <label class="switch-label" style="font-weight:normal;">
+          <input type="radio" name="ilustracionCartaTipo" id="ilustracionCartaTipoSvg" value="svg" checked>
+          Dibujo animado (SVG) — se puede recolorear desde este panel
+        </label>
+        <label class="switch-label" style="font-weight:normal;">
+          <input type="radio" name="ilustracionCartaTipo" id="ilustracionCartaTipoSvgDetallado" value="svg-detallado">
+          Ilustración detallada (nueva)
+          <img src="assets/gallery/quinceanera-detallada.svg" alt="" style="width:36px; height:36px; object-fit:cover; object-position:top; border-radius:4px; margin-left:6px; vertical-align:middle; border:1px solid var(--blush-2);">
+        </label>
+        <label class="switch-label" style="font-weight:normal;">
+          <input type="radio" name="ilustracionCartaTipo" id="ilustracionCartaTipoImagen" value="imagen">
+          Imagen personalizada
+        </label>
+        <p class="hint">Independiente de la de la portada: puedes poner una distinta en cada sitio.</p>
+      </div>
+      <div class="field" id="ilustracionCartaImagenField" style="display:none;">
+        <label for="cfgIlustracionCartaUrl">URL de la imagen</label>
+        <input type="text" id="cfgIlustracionCartaUrl" placeholder="assets/gallery/quinceañera.png o https://...">
+        <p class="hint">Usa una imagen con fondo transparente (PNG).</p>
+        <img id="ilustracionCartaPreview" alt="" style="width:100px; height:auto; display:block; margin-top:8px;">
+      </div>
+      <div class="field">
+        <label for="ilustracionCartaEscala">Tamaño de la ilustración: <span id="ilustracionCartaEscalaVal">100%</span></label>
+        <input type="range" id="ilustracionCartaEscala" min="30" max="250" step="5" value="100">
+      </div>
     </div>
   </details>
 
@@ -1152,6 +1226,27 @@ function iconoSvg(id, extraClass) {
     rangoIlustracionEscala.addEventListener('input', pintarEscala);
     pintarEscala();
   }
+  const rangoSobreEscala = document.getElementById('sobreEscala');
+  const rangoSobreEscalaVal = document.getElementById('sobreEscalaVal');
+  if (rangoSobreEscala && rangoSobreEscalaVal) {
+    const pintarEscalaSobre = () => { rangoSobreEscalaVal.textContent = rangoSobreEscala.value + '%'; };
+    rangoSobreEscala.addEventListener('input', pintarEscalaSobre);
+    pintarEscalaSobre();
+  }
+  const rangoCoronaHeroEscala = document.getElementById('coronaHeroEscala');
+  const rangoCoronaHeroEscalaVal = document.getElementById('coronaHeroEscalaVal');
+  if (rangoCoronaHeroEscala && rangoCoronaHeroEscalaVal) {
+    const pintarCoronaHero = () => { rangoCoronaHeroEscalaVal.textContent = rangoCoronaHeroEscala.value + '%'; };
+    rangoCoronaHeroEscala.addEventListener('input', pintarCoronaHero);
+    pintarCoronaHero();
+  }
+  const rangoIlustracionCartaEscala = document.getElementById('ilustracionCartaEscala');
+  const rangoIlustracionCartaEscalaVal = document.getElementById('ilustracionCartaEscalaVal');
+  if (rangoIlustracionCartaEscala && rangoIlustracionCartaEscalaVal) {
+    const pintarIlustracionCarta = () => { rangoIlustracionCartaEscalaVal.textContent = rangoIlustracionCartaEscala.value + '%'; };
+    rangoIlustracionCartaEscala.addEventListener('input', pintarIlustracionCarta);
+    pintarIlustracionCarta();
+  }
   const rangoCoronaEscala = document.getElementById('coronaEscala');
   const rangoCoronaEscalaVal = document.getElementById('coronaEscalaVal');
   if (rangoCoronaEscala && rangoCoronaEscalaVal) {
@@ -1472,6 +1567,27 @@ function iconoSvg(id, extraClass) {
     }, 500);
   });
 
+  /* ---------------- Ilustración de la carta: SVG o imagen ---------------- */
+  const ilustracionCartaImagenField = document.getElementById('ilustracionCartaImagenField');
+  const ilustracionCartaPreview = document.getElementById('ilustracionCartaPreview');
+  const cfgIlustracionCartaUrl = document.getElementById('cfgIlustracionCartaUrl');
+
+  function actualizarIlustracionCartaCampos(){
+    const esImagen = document.getElementById('ilustracionCartaTipoImagen').checked;
+    ilustracionCartaImagenField.style.display = esImagen ? '' : 'none';
+  }
+  document.querySelectorAll('input[name="ilustracionCartaTipo"]').forEach((input) => {
+    input.addEventListener('change', actualizarIlustracionCartaCampos);
+  });
+
+  let ilustracionCartaDebounce;
+  cfgIlustracionCartaUrl.addEventListener('input', (e) => {
+    clearTimeout(ilustracionCartaDebounce);
+    ilustracionCartaDebounce = setTimeout(() => {
+      ilustracionCartaPreview.src = e.target.value.trim();
+    }, 500);
+  });
+
   /* ---------------- Corona sobre el nombre: SVG o imagen ---------------- */
   const coronaImagenField = document.getElementById('coronaImagenField');
   const coronaPreview = document.getElementById('coronaPreview');
@@ -1490,6 +1606,48 @@ function iconoSvg(id, extraClass) {
     clearTimeout(coronaDebounce);
     coronaDebounce = setTimeout(() => {
       coronaPreview.src = e.target.value.trim();
+    }, 500);
+  });
+
+  /* ---------------- Corona del inicio: SVG o imagen ---------------- */
+  const coronaHeroImagenField = document.getElementById('coronaHeroImagenField');
+  const coronaHeroPreview = document.getElementById('coronaHeroPreview');
+  const cfgCoronaHeroUrl = document.getElementById('cfgCoronaHeroUrl');
+
+  function actualizarCoronaHeroCampos(){
+    const esImagen = document.getElementById('coronaHeroTipoImagen').checked;
+    coronaHeroImagenField.style.display = esImagen ? '' : 'none';
+  }
+  document.querySelectorAll('input[name="coronaHeroTipo"]').forEach((input) => {
+    input.addEventListener('change', actualizarCoronaHeroCampos);
+  });
+
+  let coronaHeroDebounce;
+  cfgCoronaHeroUrl.addEventListener('input', (e) => {
+    clearTimeout(coronaHeroDebounce);
+    coronaHeroDebounce = setTimeout(() => {
+      coronaHeroPreview.src = e.target.value.trim();
+    }, 500);
+  });
+
+  /* ---------------- Sobre de la portada: SVG o imagen ---------------- */
+  const sobreImagenField = document.getElementById('sobreImagenField');
+  const sobrePreview = document.getElementById('sobrePreview');
+  const cfgSobreUrl = document.getElementById('cfgSobreUrl');
+
+  function actualizarSobreCampos(){
+    const esImagen = document.getElementById('sobreTipoImagen').checked;
+    sobreImagenField.style.display = esImagen ? '' : 'none';
+  }
+  document.querySelectorAll('input[name="sobreTipo"]').forEach((input) => {
+    input.addEventListener('change', actualizarSobreCampos);
+  });
+
+  let sobreDebounce;
+  cfgSobreUrl.addEventListener('input', (e) => {
+    clearTimeout(sobreDebounce);
+    sobreDebounce = setTimeout(() => {
+      sobrePreview.src = e.target.value.trim();
     }, 500);
   });
 
@@ -1617,6 +1775,17 @@ function iconoSvg(id, extraClass) {
     rangoIlustracionEscala.value = escalaIlustracion;
     rangoIlustracionEscalaVal.textContent = escalaIlustracion + '%';
 
+    const ilustracionCarta = config.ilustracionCarta || {};
+    const ilustracionCartaTipo = ['svg', 'svg-detallado', 'imagen'].includes(ilustracionCarta.tipo) ? ilustracionCarta.tipo : 'svg';
+    const ilustracionCartaInput = document.querySelector(`input[name="ilustracionCartaTipo"][value="${ilustracionCartaTipo}"]`);
+    if (ilustracionCartaInput) ilustracionCartaInput.checked = true;
+    cfgIlustracionCartaUrl.value = ilustracionCarta.imagenUrl || '';
+    ilustracionCartaPreview.src = ilustracionCarta.imagenUrl || '';
+    actualizarIlustracionCartaCampos();
+    const escalaIlustracionCarta = (typeof ilustracionCarta.escala === 'number') ? ilustracionCarta.escala : 100;
+    rangoIlustracionCartaEscala.value = escalaIlustracionCarta;
+    rangoIlustracionCartaEscalaVal.textContent = escalaIlustracionCarta + '%';
+
     const corona = config.corona || {};
     const coronaTipo = ['svg', 'imagen'].includes(corona.tipo) ? corona.tipo : 'svg';
     const coronaInput = document.querySelector(`input[name="coronaTipo"][value="${coronaTipo}"]`);
@@ -1624,6 +1793,31 @@ function iconoSvg(id, extraClass) {
     cfgCoronaUrl.value = corona.imagenUrl || '';
     coronaPreview.src = corona.imagenUrl || '';
     actualizarCoronaCampos();
+
+    const coronaHero = config.coronaHero || {};
+    const coronaHeroTipo = ['svg', 'imagen'].includes(coronaHero.tipo) ? coronaHero.tipo : 'svg';
+    const coronaHeroInput = document.querySelector(`input[name="coronaHeroTipo"][value="${coronaHeroTipo}"]`);
+    if (coronaHeroInput) coronaHeroInput.checked = true;
+    cfgCoronaHeroUrl.value = coronaHero.imagenUrl || '';
+    coronaHeroPreview.src = coronaHero.imagenUrl || '';
+    actualizarCoronaHeroCampos();
+    const escalaCoronaHero = (typeof coronaHero.escala === 'number') ? coronaHero.escala : 100;
+    rangoCoronaHeroEscala.value = escalaCoronaHero;
+    rangoCoronaHeroEscalaVal.textContent = escalaCoronaHero + '%';
+
+    document.getElementById('cfgFraseBendicion').value = config.fraseBendicion || '';
+    document.getElementById('cfgTextoXV').value = config.textoXV || '';
+    document.getElementById('cfgTextoSobre').value = config.textoSobre || '';
+    const sobre = config.sobre || {};
+    const sobreTipo = ['svg', 'imagen'].includes(sobre.tipo) ? sobre.tipo : 'svg';
+    const sobreInput = document.querySelector(`input[name="sobreTipo"][value="${sobreTipo}"]`);
+    if (sobreInput) sobreInput.checked = true;
+    cfgSobreUrl.value = sobre.imagenUrl || '';
+    sobrePreview.src = sobre.imagenUrl || '';
+    actualizarSobreCampos();
+    const escalaSobre = (typeof sobre.escala === 'number') ? sobre.escala : 100;
+    rangoSobreEscala.value = escalaSobre;
+    rangoSobreEscalaVal.textContent = escalaSobre + '%';
     const escalaCorona = (typeof corona.escala === 'number') ? corona.escala : 100;
     rangoCoronaEscala.value = escalaCorona;
     rangoCoronaEscalaVal.textContent = escalaCorona + '%';
@@ -1768,6 +1962,24 @@ function iconoSvg(id, extraClass) {
         tipo: document.querySelector('input[name="ilustracionTipo"]:checked')?.value || 'svg',
         imagenUrl: cfgIlustracionUrl.value.trim(),
         escala: parseInt(rangoIlustracionEscala.value, 10)
+      },
+      ilustracionCarta: {
+        tipo: document.querySelector('input[name="ilustracionCartaTipo"]:checked')?.value || 'svg',
+        imagenUrl: cfgIlustracionCartaUrl.value.trim(),
+        escala: parseInt(rangoIlustracionCartaEscala.value, 10)
+      },
+      fraseBendicion: document.getElementById('cfgFraseBendicion').value.trim(),
+      textoXV: document.getElementById('cfgTextoXV').value.trim(),
+      textoSobre: document.getElementById('cfgTextoSobre').value.trim(),
+      sobre: {
+        tipo: document.querySelector('input[name="sobreTipo"]:checked')?.value || 'svg',
+        imagenUrl: cfgSobreUrl.value.trim(),
+        escala: parseInt(rangoSobreEscala.value, 10)
+      },
+      coronaHero: {
+        tipo: document.querySelector('input[name="coronaHeroTipo"]:checked')?.value || 'svg',
+        imagenUrl: cfgCoronaHeroUrl.value.trim(),
+        escala: parseInt(rangoCoronaHeroEscala.value, 10)
       },
       corona: {
         tipo: document.querySelector('input[name="coronaTipo"]:checked')?.value || 'svg',

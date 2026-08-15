@@ -50,6 +50,15 @@ ContentManager.TEXTS = [
 
     { path: "fraseGate", target: ".gate__quote" },
 
+    /* Textos propios de la portada. El de arriba no es fraseInvitacion:
+       aquel es el del hero, este solo sale en el sobre cerrado. */
+
+    { path: "fraseBendicion", target: ".gate__eyebrow" },
+
+    { path: "textoXV", target: ".gate__xv" },
+
+    { path: "textoSobre", target: ".gate__envelope-label" },
+
     { path: "mensajeCarta", target: ".letter__text" },
 
     { path: "footerMensaje", target: ".footer__mensaje" },
@@ -684,20 +693,51 @@ ContentManager.applyDressCode = function () {
    más vale la ilustración de siempre que un hueco.
 ========================================================== */
 
+/* Ruta fija de la ilustración detallada: el panel solo guarda el
+   tipo, no la URL, porque el archivo vive en el proyecto. */
+
+ContentManager.ILUSTRACION_DETALLADA = "assets/gallery/quinceanera-detallada.svg";
+
 ContentManager.ARTWORK = [
+
+    /* Dos coronas independientes: la de la portada y la del inicio.
+       Antes compartían un solo ajuste y no se podían poner distintas. */
 
     {
         path: "corona",
         pares: [
-            ["gateCoronaSvg", "gateCoronaImg"],
+            ["gateCoronaSvg", "gateCoronaImg"]
+        ]
+    },
+
+    {
+        path: "coronaHero",
+        pares: [
             ["heroCoronaSvg", "heroCoronaImg"]
         ]
     },
 
     {
+        path: "sobre",
+        pares: [
+            ["gateEnvelopeSvg", "gateEnvelopeImg"]
+        ]
+    },
+
+    /* La ilustración de la quinceañera también va por separado:
+       la de la portada y la de la carta se ajustan cada una por
+       su lado, como las coronas. */
+
+    {
         path: "ilustracionQuinceanera",
         pares: [
-            ["gateDressSvg", "gateDressImg"],
+            ["gateDressSvg", "gateDressImg"]
+        ]
+    },
+
+    {
+        path: "ilustracionCarta",
+        pares: [
             ["cartaDressSvg", "cartaDressImg"]
         ]
     },
@@ -745,9 +785,20 @@ ContentManager.resolveArtwork = function () {
 
         const tipo = ConfigService.get(path + ".tipo", "svg");
 
-        const url = ConfigService.get(path + ".imagenUrl");
+        /* La "ilustración detallada" es un archivo .svg que se pinta
+           como imagen: no se recolorea desde el panel, pero se trata
+           igual que una imagen propia con una URL fija. Solo la
+           ofrecen la portada y la carta. */
 
-        const usarImagen = tipo === "imagen" && Boolean(url);
+        const detallada = tipo === "svg-detallado";
+
+        const url = detallada
+
+            ? this.ILUSTRACION_DETALLADA
+
+            : ConfigService.get(path + ".imagenUrl");
+
+        const usarImagen = (tipo === "imagen" || detallada) && Boolean(url);
 
         /* Las guirnaldas se pueden apagar por completo desde el
            panel: afecta a las cuatro posiciones a la vez. */

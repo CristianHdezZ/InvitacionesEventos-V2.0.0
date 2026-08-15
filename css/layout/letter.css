@@ -36,7 +36,10 @@
 
     --letter-dress-width:260px;
 
-    --letter-dress-scale:var(--ilustracion-escala,1);
+    /* Propia de la carta; si no está definida cae en la de la portada,
+       que es la que existía cuando el ajuste era uno solo. */
+
+    --letter-dress-scale:var(--ilustracion-carta-escala,var(--ilustracion-escala,1));
 
 }
 
