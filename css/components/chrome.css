@@ -453,11 +453,10 @@
 
     height:100%;
 
-    /* Un desenfoque mínimo: redondea el trazo sin deshacer la
-       silueta. A 1.5px los bordes ya perdían definición y las dos
-       ondas se confundían entre sí. */
-
-    filter:blur(.8px);
+    /* Sin desenfoque. Lo llevaba para redondear los bordes, pero
+       ahora cada onda lleva su propio trazo fino y un blur, por
+       pequeño que sea, se lo come: son líneas de un píxel. La
+       definición la dan los trazos, no el difuminado. */
 
 }
 
@@ -466,52 +465,118 @@
    en un rosa claro y la de delante lleva el oro a plena fuerza.
    Con las dos al mismo tono se leían como una sola mancha. */
 
+/* El color de los degradados se define aquí, no en el SVG, para que
+   siga la paleta si algún día cambia.
+
+   Van a opacidad alta a propósito: el fondo de la página es rosa
+   claro y cualquier transparencia arrastra el dorado hacia el rosa
+   quitándole el tono. Quien gradúa la presencia es el degradado, no
+   una opacidad global. */
+
+.music-wave__stop--rosa{ stop-color:var(--rosa, var(--color-primary)); }
+
+.music-wave__stop--oroclaro{ stop-color:var(--color-gold-light, #D8BE92); }
+
+.music-wave__stop--oro{ stop-color:var(--oro, var(--color-gold)); }
+
+/* ==========================================================
+   TRAZO FINO DE CADA ONDA
+
+   Una línea de un píxel siguiendo el contorno de cada capa. Es lo
+   que separa una silueta de la siguiente donde se solapan: sin
+   ella las tres se funden en una mancha continua.
+
+   Cada trazo va en un tono más profundo que su relleno —el mismo
+   color, no uno ajeno—, así define sin ensuciar.
+
+   vector-effect:non-scaling-stroke es imprescindible aquí: el SVG
+   se estira de 320x80 a 160x100, una deformación desigual que sin
+   esto haría el trazo el doble de grueso en vertical que en
+   horizontal.
+========================================================== */
+
 .music-wave__path{
 
     transform-origin:center;
 
-}
-
-.music-wave__path--rosa{
-
-    fill:var(--rosa, var(--color-primary));
-
-    opacity:.72;
-
-    animation:musicOndaRosa 7s ease-in-out infinite;
+    stroke-linejoin:round;
 
 }
 
-.music-wave__path--oro{
+.music-wave__path--fondo{
 
-    /* El oro oscuro en vez del normal: contra el rosa claro de
-       detrás, el contraste es lo que dibuja las dos siluetas. */
+    stroke:var(--rosa-deep, var(--color-primary-dark));
 
-    fill:var(--color-gold-dark, #8E6C3D);
-
-    opacity:.62;
-
-    animation:musicOndaOro 9.5s ease-in-out infinite;
+    stroke-opacity:.55;
 
 }
 
-/* Se estiran y se encogen en vertical, con una deriva mínima. Sin
-   girar y sin moverse mucho: la gracia está en la forma, y un
-   desplazamiento grande la sacaría de detrás del botón. */
+.music-wave__path--media{
 
-@keyframes musicOndaRosa{
+    stroke:var(--oro, var(--color-gold));
 
-    0%,100%{ transform:translateX(-3%) scaleY(1); }
-
-    50%{ transform:translateX(3%) scaleY(1.22); }
+    stroke-opacity:.5;
 
 }
 
-@keyframes musicOndaOro{
+.music-wave__path--frente{
 
-    0%,100%{ transform:translateX(3%) scaleY(1.12); }
+    stroke:var(--color-gold-dark, #8E6C3D);
 
-    50%{ transform:translateX(-3%) scaleY(.86); }
+    stroke-opacity:.6;
+
+}
+
+/* Cada capa con su ritmo y su recorrido. Los tres tiempos son primos
+   entre sí para que el conjunto no vuelva a repetirse hasta pasado
+   mucho rato. */
+
+.music-wave__path--fondo{
+
+    animation:musicOndaFondo 11s ease-in-out infinite;
+
+}
+
+.music-wave__path--media{
+
+    animation:musicOndaMedia 8s ease-in-out infinite;
+
+}
+
+.music-wave__path--frente{
+
+    animation:musicOndaFrente 6.5s ease-in-out infinite;
+
+}
+
+/* Se estiran y se encogen en vertical con una deriva horizontal
+   mínima. Sin girar y sin moverse mucho: la gracia está en la forma,
+   y un desplazamiento grande la sacaría de detrás del botón.
+
+   Las tres van en sentidos distintos, así los cruces entre capas
+   cambian constantemente y es ahí donde aparece el detalle. */
+
+@keyframes musicOndaFondo{
+
+    0%,100%{ transform:translateX(-2.5%) scaleY(1); }
+
+    50%{ transform:translateX(2.5%) scaleY(1.18); }
+
+}
+
+@keyframes musicOndaMedia{
+
+    0%,100%{ transform:translateX(2%) scaleY(1.1); }
+
+    50%{ transform:translateX(-2%) scaleY(.88); }
+
+}
+
+@keyframes musicOndaFrente{
+
+    0%,100%{ transform:translateX(-1.5%) scaleY(.92); }
+
+    50%{ transform:translateX(1.5%) scaleY(1.14); }
 
 }
 

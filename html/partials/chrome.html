@@ -37,8 +37,33 @@
        La rosa va detrás y es la más ancha, así asoma por encima y
        por debajo de la dorada, como en la referencia. -->
   <svg class="music-wave__svg" viewBox="0 0 320 80" preserveAspectRatio="none" aria-hidden="true">
-    <path class="music-wave__path music-wave__path--rosa" d="M0,40C4,39 17,35 25,33C33,31 41,28 49,28C57,28 66,30 74,31C82,32 90,35 98,34C106,33 115,29 123,25C131,21 140,14 148,12C156,10 164,10 172,12C180,14 189,21 197,25C205,29 214,33 222,34C230,35 238,32 246,31C254,30 263,28 271,28C279,28 287,31 295,33C303,35 316,39 320,40 L320,40 320,40C316,41 303,43 295,45C287,47 279,52 271,54C263,56 254,58 246,57C238,56 230,52 222,50C214,48 205,46 197,47C189,48 180,54 172,57C164,61 156,67 148,68C140,69 131,68 123,65C115,62 106,55 98,52C90,49 82,46 74,45C66,44 57,47 49,47C41,47 33,47 25,46C17,45 4,41 0,40 Z"/>
-    <path class="music-wave__path music-wave__path--oro" d="M0,40C4,39 17,37 25,36C33,36 41,37 49,37C57,37 66,37 74,36C82,35 90,32 98,29C106,26 115,22 123,20C131,18 140,16 148,16C156,16 164,19 172,21C180,23 189,28 197,30C205,32 214,34 222,35C230,36 238,35 246,34C254,34 263,32 271,32C279,32 287,33 295,34C303,35 316,39 320,40 L320,40 320,40C316,41 303,43 295,45C287,47 279,50 271,51C263,52 254,53 246,53C238,53 230,50 222,49C214,48 205,45 197,45C189,45 180,47 172,49C164,51 156,55 148,57C140,59 131,62 123,62C115,62 106,60 98,58C90,56 82,53 74,50C66,48 57,44 49,43C41,42 33,43 25,42C17,42 4,40 0,40 Z"/>
+    <defs>
+      <!-- Cada onda se apaga hacia sus puntas en vez de cortarse con
+           un borde duro. Es lo que hace que se lean como una forma y
+           no como tres recortes pegados. Los colores se ponen desde
+           el CSS para que sigan la paleta. -->
+      <linearGradient id="ondaFondo" x1="0" y1="0" x2="1" y2="0">
+        <stop class="music-wave__stop--rosa" offset="0" stop-opacity="0"/>
+        <stop class="music-wave__stop--rosa" offset=".5" stop-opacity=".9"/>
+        <stop class="music-wave__stop--rosa" offset="1" stop-opacity="0"/>
+      </linearGradient>
+      <linearGradient id="ondaMedia" x1="0" y1="0" x2="1" y2="0">
+        <stop class="music-wave__stop--oroclaro" offset="0" stop-opacity="0"/>
+        <stop class="music-wave__stop--oroclaro" offset=".45" stop-opacity=".85"/>
+        <stop class="music-wave__stop--oroclaro" offset="1" stop-opacity="0"/>
+      </linearGradient>
+      <linearGradient id="ondaFrente" x1="0" y1="0" x2="1" y2="0">
+        <stop class="music-wave__stop--oro" offset="0" stop-opacity="0"/>
+        <stop class="music-wave__stop--oro" offset=".55" stop-opacity=".95"/>
+        <stop class="music-wave__stop--oro" offset="1" stop-opacity="0"/>
+      </linearGradient>
+    </defs>
+    <!-- Tres capas con frecuencias distintas: 3.5, 5.5 y 7.5 crestas.
+         Al no ser múltiplos entre sí se entrelazan en vez de ir en
+         paralelo, que es lo que daba aspecto plano. -->
+    <path class="music-wave__path music-wave__path--fondo" stroke-width="1" vector-effect="non-scaling-stroke" fill="url(#ondaFondo)" d="M0,40C3,39 13,34 19,32C25,30 32,28 38,26C44,25 50,23 56,23C62,23 69,23 75,24C81,25 88,27 94,29C100,31 107,33 113,34C119,35 126,35 132,34C138,33 145,32 151,30C157,28 163,24 169,21C175,18 182,15 188,13C194,11 201,10 207,10C213,10 220,10 226,12C232,14 239,17 245,20C251,23 258,27 264,29C270,32 276,33 282,35C288,37 295,38 301,39C307,40 317,40 320,40L320,40C317,41 307,43 301,43C295,44 288,43 282,43C276,43 270,43 264,44C258,45 251,46 245,48C239,50 232,54 226,57C220,60 213,63 207,66C201,69 194,72 188,73C182,74 175,74 169,73C163,72 157,69 151,66C145,63 138,60 132,57C126,54 119,51 113,49C107,47 100,46 94,45C88,44 81,45 75,45C69,46 62,47 56,48C50,49 44,50 38,50C32,50 25,49 19,47C13,45 3,41 0,40Z"/>
+    <path class="music-wave__path music-wave__path--media" stroke-width="1" vector-effect="non-scaling-stroke" fill="url(#ondaMedia)" d="M0,40C3,39 13,37 19,36C25,36 32,37 38,37C44,37 50,38 56,37C62,36 69,33 75,30C81,27 88,22 94,20C100,18 107,16 113,16C119,17 126,20 132,23C138,26 145,31 151,33C157,35 163,36 169,35C175,34 182,31 188,28C194,25 201,21 207,19C213,17 220,17 226,18C232,19 239,23 245,26C251,29 258,33 264,35C270,37 276,38 282,38C288,39 295,38 301,38C307,38 317,40 320,40L320,40C317,41 307,44 301,45C295,46 288,45 282,45C276,45 270,43 264,43C258,43 251,44 245,46C239,48 232,53 226,56C220,59 213,63 207,64C201,65 194,65 188,63C182,61 175,56 169,53C163,50 157,46 151,45C145,44 138,45 132,47C126,49 119,54 113,56C107,58 100,61 94,61C88,61 81,60 75,58C69,56 62,52 56,49C50,46 44,43 38,42C32,41 25,41 19,41C13,41 3,40 0,40Z"/>
+    <path class="music-wave__path music-wave__path--frente" stroke-width="1" vector-effect="non-scaling-stroke" fill="url(#ondaFrente)" d="M0,40C3,39 13,36 19,36C25,36 32,38 38,38C44,38 50,39 56,37C62,36 69,31 75,29C81,27 88,24 94,24C100,24 107,28 113,30C119,32 126,37 132,37C138,37 145,34 151,31C157,28 163,22 169,21C175,20 182,22 188,24C194,26 201,33 207,35C213,37 220,37 226,36C232,35 239,31 245,30C251,29 258,27 264,28C270,29 276,33 282,35C288,37 295,38 301,39C307,40 317,40 320,40L320,40C317,41 307,44 301,45C295,46 288,46 282,45C276,45 270,42 264,42C258,42 251,44 245,46C239,48 232,53 226,55C220,57 213,57 207,56C201,55 194,49 188,47C182,45 175,43 169,44C163,45 157,51 151,53C145,56 138,59 132,59C126,59 119,55 113,52C107,49 100,44 94,43C88,42 81,44 75,45C69,46 62,50 56,50C50,51 44,49 38,48C32,47 25,43 19,42C13,41 3,40 0,40Z"/>
   </svg>
 </span>
 
