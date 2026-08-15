@@ -9,7 +9,6 @@
    navegación de puntos y el botón de música.
 ========================================================== */
 
-
 /* ==========================================================
    ENREDADERA
 
@@ -69,7 +68,6 @@
     transition:stroke-dashoffset .1s linear;
 
 }
-
 
 /* ==========================================================
    NAVEGACIÓN DE PUNTOS
@@ -184,7 +182,6 @@
         inset 0 0 0 2px var(--oro, var(--color-gold));
 
 }
-
 
 /* Etiqueta al pasar por encima */
 
@@ -313,7 +310,6 @@
 
 }
 
-
 /* ==========================================================
    BOTÓN DE MÚSICA
 ========================================================== */
@@ -334,8 +330,8 @@
 
     align-items:center;
 
-    /* 62 y no 52: con el telón líquido detrás, doce píxeles más de
-       diámetro son la diferencia entre intuir el movimiento y verlo.
+    /* 62 y no 52: con la onda dentro, doce píxeles más de diámetro
+       son la diferencia entre intuir el movimiento y verlo.
 
        No se sube más porque el botón va en position:fixed y flota
        sobre el contenido: comprobado a 375px de ancho, a este tamaño
@@ -365,61 +361,34 @@
 
 }
 
-
-/* Ecualizador: las barras solo se animan mientras suena. */
-
-/* El ecualizador ocupaba 15x16 dentro de un botón de 52: apenas un
-   30% de su superficie, y en reposo las tres barras de 3x6 parecían
-   tres puntitos. Funcionaba, pero no se veía que la música estaba
-   sonando, que es justo lo que tiene que comunicar. */
-
 /* El ecualizador ocupaba 15x16 dentro de un botón de 52: apenas un
    30% de su superficie, y en reposo las tres barras de 3x6 parecían
    tres puntitos. Funcionaba, pero no se veía que la música estaba
    sonando, que es justo lo que tiene que comunicar. */
 
 /* ==========================================================
-   TELÓN LÍQUIDO
+   ONDA DENTRO DEL BOTÓN
 
-   Dos manchas orgánicas girando detrás del ecualizador, en los
-   rosas de la paleta y muy transparentes: tienen que insinuarse,
-   no competir con las barras.
+   Dos capas de onda recortadas por el círculo del botón: se ve
+   la franja central de la figura, como una señal a través de una
+   ventana redonda.
 
-   Son elipses deformadas con border-radius de ocho valores, no
-   imágenes ni SVG: se animan con transform, que resuelve el
-   compositor, y no añaden ni un archivo que descargar.
-
-   Giran a ritmos distintos y en sentidos opuestos, así el
-   solapamiento nunca se repite igual y no se percibe un bucle.
+   Aparece al sonar la música y se va al pausar. Va por detrás del
+   ecualizador, que lleva z-index para quedar encima.
 ========================================================== */
 
 .music-wave{
 
-    /* Fija y centrada sobre el botón, que está en left:22 bottom:22
-       con 62px de lado: su centro cae en 53,53 desde esa esquina.
+    /* Ocupa el botón entero y se recorta a su círculo: es la ventana
+       por la que se ve pasar la onda. */
 
-       Mucho más ancha que alta, como la onda de la referencia. Sin
-       overflow:hidden ni border-radius: recortarla era justo lo que
-       impedía ver la figura completa. */
+    position:absolute;
 
-    position:fixed;
+    inset:0;
 
-    /* El botón va en left:22 bottom:22 con 62px de lado, así que su
-       centro cae a 53px de las dos esquinas. La onda mide 160x100:
-       para que su centro coincida, left = 53-80 y bottom = 53-50. */
+    border-radius:50%;
 
-    left:-27px;
-
-    bottom:3px;
-
-    width:160px;
-
-    height:100px;
-
-    /* Por debajo del botón, que va en 40. El orden del marcado no
-       decide aquí: manda el z-index. */
-
-    z-index:39;
+    overflow:hidden;
 
     opacity:0;
 
@@ -429,34 +398,35 @@
 
 }
 
-.music-toggle[aria-pressed="true"] + .music-wave{
+.music-toggle[aria-pressed="true"] .music-wave{
 
     opacity:1;
 
 }
 
-/* Más PEQUEÑAS que el botón, no más grandes.
-
-   El primer intento las puso al 150% y centradas: cubrían el disco
-   entero, así que dentro solo se veía un relleno plano y girar una
-   figura que ya lo tapa todo no cambiaba nada. Lo que se lee como
-   onda es el borde curvo, y hay que dejarlo dentro del recorte.
-
-   Ahora orbitan: se desplazan, giran y cambian de tamaño a la vez,
-   de modo que sus contornos cruzan la zona visible. */
-
 .music-wave__svg{
+
+    /* Más ancho que el botón y centrado: por el círculo pasa la
+       franja central de la figura, donde las crestas son altas, en
+       vez de las puntas finas de los extremos. */
+
+    position:absolute;
+
+    top:0;
+
+    left:-45%;
 
     display:block;
 
-    width:100%;
+    width:190%;
+
+    /* El reset aplica max-width:100% a todo svg —ver css/reset.css—
+       y eso capaba este ancho: el left sí se movía pero la figura se
+       quedaba del tamaño del botón. Hay que soltarlo aquí. */
+
+    max-width:none;
 
     height:100%;
-
-    /* Sin desenfoque. Lo llevaba para redondear los bordes, pero
-       ahora cada onda lleva su propio trazo fino y un blur, por
-       pequeño que sea, se lo come: son líneas de un píxel. La
-       definición la dan los trazos, no el difuminado. */
 
 }
 
@@ -474,8 +444,6 @@
    una opacidad global. */
 
 .music-wave__stop--rosa{ stop-color:var(--rosa, var(--color-primary)); }
-
-.music-wave__stop--oroclaro{ stop-color:var(--color-gold-light, #D8BE92); }
 
 .music-wave__stop--oro{ stop-color:var(--oro, var(--color-gold)); }
 
@@ -511,14 +479,6 @@
 
 }
 
-.music-wave__path--media{
-
-    stroke:var(--oro, var(--color-gold));
-
-    stroke-opacity:.5;
-
-}
-
 .music-wave__path--frente{
 
     stroke:var(--color-gold-dark, #8E6C3D);
@@ -537,12 +497,6 @@
 
 }
 
-.music-wave__path--media{
-
-    animation:musicOndaMedia 8s ease-in-out infinite;
-
-}
-
 .music-wave__path--frente{
 
     animation:musicOndaFrente 6.5s ease-in-out infinite;
@@ -556,27 +510,29 @@
    Las tres van en sentidos distintos, así los cruces entre capas
    cambian constantemente y es ahí donde aparece el detalle. */
 
+/* El mismo recorrido para las dos —de .94 a 1.12— pero invertido: una
+   se estira mientras la otra se encoge.
+
+   Antes la de fondo iba de 1 a 1.18 y la de frente de .92 a 1.14, así
+   que de media la rosa era mayor y por eso se veía más grande aunque
+   las figuras midieran lo mismo.
+
+   Y la deriva horizontal va en sentidos opuestos, que es lo que evita
+   que las crestas lleguen a coincidir. */
+
 @keyframes musicOndaFondo{
 
-    0%,100%{ transform:translateX(-2.5%) scaleY(1); }
+    0%,100%{ transform:translateX(-2.5%) scaleY(.94); }
 
-    50%{ transform:translateX(2.5%) scaleY(1.18); }
-
-}
-
-@keyframes musicOndaMedia{
-
-    0%,100%{ transform:translateX(2%) scaleY(1.1); }
-
-    50%{ transform:translateX(-2%) scaleY(.88); }
+    50%{ transform:translateX(2.5%) scaleY(1.12); }
 
 }
 
 @keyframes musicOndaFrente{
 
-    0%,100%{ transform:translateX(-1.5%) scaleY(.92); }
+    0%,100%{ transform:translateX(2.5%) scaleY(1.12); }
 
-    50%{ transform:translateX(1.5%) scaleY(1.14); }
+    50%{ transform:translateX(-2.5%) scaleY(.94); }
 
 }
 
@@ -755,7 +711,6 @@
     .music-toggle[aria-pressed="true"] .bar:nth-child(5){ height:9px; }
 
 }
-
 
 /* ==========================================================
    END OF FILE

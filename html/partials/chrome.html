@@ -15,19 +15,10 @@
   <source src="assets/music/LaPrincesadePapa.mp3" type="audio/mpeg">
 </audio>
 <button id="musicToggle" data-music class="music-toggle" aria-label="Reproducir música" aria-pressed="false">
-  <!-- Cinco barras y no tres: con tres se lee como un icono; con
-       cinco, cada una a su altura y a su ritmo, se lee como una onda
-       de sonido. El CSS las mueve solo mientras suena la música. -->
-  <span class="music-icon"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span></span>
-</button>
-
-<!-- Onda de fondo. Va FUERA del botón y detrás de él, no dentro:
-     dentro quedaba recortada por el círculo y solo se veía un trozo.
-     Aquí se ve la figura entera, desbordando el botón por los lados.
-
-     Tiene que ir después en el marcado para que el CSS pueda
-     reaccionar a aria-pressed del botón con el selector +, y queda
-     por debajo gracias al z-index, no al orden. -->
+  <!-- Onda dentro del botón, recortada por el círculo: se ve la
+       franja central de la figura, como una señal a través de una
+       ventana redonda. El SVG es más ancho que el botón para que lo
+       que cruce sea la parte alta de las crestas y no las puntas. -->
 <span class="music-wave" aria-hidden="true">
   <!-- La silueta no se puede hacer con dos elipses: son dos bordes
        ondulados que se juntan en punta a los lados. Los trazados
@@ -47,25 +38,26 @@
         <stop class="music-wave__stop--rosa" offset=".5" stop-opacity=".9"/>
         <stop class="music-wave__stop--rosa" offset="1" stop-opacity="0"/>
       </linearGradient>
-      <linearGradient id="ondaMedia" x1="0" y1="0" x2="1" y2="0">
-        <stop class="music-wave__stop--oroclaro" offset="0" stop-opacity="0"/>
-        <stop class="music-wave__stop--oroclaro" offset=".45" stop-opacity=".85"/>
-        <stop class="music-wave__stop--oroclaro" offset="1" stop-opacity="0"/>
-      </linearGradient>
       <linearGradient id="ondaFrente" x1="0" y1="0" x2="1" y2="0">
         <stop class="music-wave__stop--oro" offset="0" stop-opacity="0"/>
         <stop class="music-wave__stop--oro" offset=".55" stop-opacity=".95"/>
         <stop class="music-wave__stop--oro" offset="1" stop-opacity="0"/>
       </linearGradient>
     </defs>
-    <!-- Tres capas con frecuencias distintas: 3.5, 5.5 y 7.5 crestas.
-         Al no ser múltiplos entre sí se entrelazan en vez de ir en
-         paralelo, que es lo que daba aspecto plano. -->
-    <path class="music-wave__path music-wave__path--fondo" stroke-width="1" vector-effect="non-scaling-stroke" fill="url(#ondaFondo)" d="M0,40C3,39 13,34 19,32C25,30 32,28 38,26C44,25 50,23 56,23C62,23 69,23 75,24C81,25 88,27 94,29C100,31 107,33 113,34C119,35 126,35 132,34C138,33 145,32 151,30C157,28 163,24 169,21C175,18 182,15 188,13C194,11 201,10 207,10C213,10 220,10 226,12C232,14 239,17 245,20C251,23 258,27 264,29C270,32 276,33 282,35C288,37 295,38 301,39C307,40 317,40 320,40L320,40C317,41 307,43 301,43C295,44 288,43 282,43C276,43 270,43 264,44C258,45 251,46 245,48C239,50 232,54 226,57C220,60 213,63 207,66C201,69 194,72 188,73C182,74 175,74 169,73C163,72 157,69 151,66C145,63 138,60 132,57C126,54 119,51 113,49C107,47 100,46 94,45C88,44 81,45 75,45C69,46 62,47 56,48C50,49 44,50 38,50C32,50 25,49 19,47C13,45 3,41 0,40Z"/>
-    <path class="music-wave__path music-wave__path--media" stroke-width="1" vector-effect="non-scaling-stroke" fill="url(#ondaMedia)" d="M0,40C3,39 13,37 19,36C25,36 32,37 38,37C44,37 50,38 56,37C62,36 69,33 75,30C81,27 88,22 94,20C100,18 107,16 113,16C119,17 126,20 132,23C138,26 145,31 151,33C157,35 163,36 169,35C175,34 182,31 188,28C194,25 201,21 207,19C213,17 220,17 226,18C232,19 239,23 245,26C251,29 258,33 264,35C270,37 276,38 282,38C288,39 295,38 301,38C307,38 317,40 320,40L320,40C317,41 307,44 301,45C295,46 288,45 282,45C276,45 270,43 264,43C258,43 251,44 245,46C239,48 232,53 226,56C220,59 213,63 207,64C201,65 194,65 188,63C182,61 175,56 169,53C163,50 157,46 151,45C145,44 138,45 132,47C126,49 119,54 113,56C107,58 100,61 94,61C88,61 81,60 75,58C69,56 62,52 56,49C50,46 44,43 38,42C32,41 25,41 19,41C13,41 3,40 0,40Z"/>
-    <path class="music-wave__path music-wave__path--frente" stroke-width="1" vector-effect="non-scaling-stroke" fill="url(#ondaFrente)" d="M0,40C3,39 13,36 19,36C25,36 32,38 38,38C44,38 50,39 56,37C62,36 69,31 75,29C81,27 88,24 94,24C100,24 107,28 113,30C119,32 126,37 132,37C138,37 145,34 151,31C157,28 163,22 169,21C175,20 182,22 188,24C194,26 201,33 207,35C213,37 220,37 226,36C232,35 239,31 245,30C251,29 258,27 264,28C270,29 276,33 282,35C288,37 295,38 301,39C307,40 317,40 320,40L320,40C317,41 307,44 301,45C295,46 288,46 282,45C276,45 270,42 264,42C258,42 251,44 245,46C239,48 232,53 226,55C220,57 213,57 207,56C201,55 194,49 188,47C182,45 175,43 169,44C163,45 157,51 151,53C145,56 138,59 132,59C126,59 119,55 113,52C107,49 100,44 94,43C88,42 81,44 75,45C69,46 62,50 56,50C50,51 44,49 38,48C32,47 25,43 19,42C13,41 3,40 0,40Z"/>
+    <!-- Dos capas del mismo tamaño, cada una simétrica respecto a su eje
+         horizontal. Comparten frecuencia pero van media vuelta
+         desfasadas: donde una tiene cresta la otra tiene valle, así
+         nunca se superponen. Solo convergen en las puntas, donde la
+         amplitud es cero y no queda otra. -->
+    <path class="music-wave__path music-wave__path--fondo" stroke-width="1" vector-effect="non-scaling-stroke" fill="url(#ondaFondo)" d="M0,40C3,39 13,36 19,34C25,32 32,29 38,28C44,27 50,27 56,27C62,27 69,29 75,30C81,31 88,34 94,35C100,36 107,37 113,36C119,35 126,32 132,29C138,26 145,23 151,20C157,17 163,14 169,13C175,12 182,13 188,14C194,16 201,19 207,22C213,25 220,30 226,32C232,35 239,36 245,37C251,38 258,37 264,36C270,36 276,34 282,34C288,34 295,33 301,34C307,35 317,39 320,40L320,40C317,41 307,45 301,46C295,47 288,46 282,46C276,46 270,45 264,44C258,44 251,42 245,43C239,44 232,46 226,48C220,51 213,55 207,58C201,61 194,65 188,66C182,68 175,68 169,67C163,66 157,63 151,60C145,57 138,54 132,51C126,48 119,45 113,44C107,43 100,44 94,45C88,46 81,49 75,50C69,51 62,53 56,53C50,53 44,53 38,52C32,51 25,48 19,46C13,44 3,41 0,40Z"/>
+    <path class="music-wave__path music-wave__path--frente" stroke-width="1" vector-effect="non-scaling-stroke" fill="url(#ondaFrente)" d="M0,40C3,40 13,38 19,38C25,38 32,39 38,38C44,37 50,36 56,34C62,32 69,29 75,26C81,23 88,19 94,17C100,15 107,13 113,13C119,13 126,16 132,18C138,20 145,24 151,27C157,30 163,33 169,34C175,35 182,35 188,34C194,33 201,29 207,27C213,25 220,21 226,20C232,19 239,18 245,19C251,20 258,22 264,24C270,26 276,30 282,32C288,34 295,37 301,38C307,39 317,40 320,40L320,40C317,40 307,41 301,42C295,43 288,46 282,48C276,50 270,54 264,56C258,58 251,60 245,61C239,62 232,61 226,60C220,59 213,55 207,53C201,51 194,47 188,46C182,45 175,45 169,46C163,47 157,50 151,53C145,56 138,60 132,62C126,64 119,67 113,67C107,67 100,65 94,63C88,61 81,57 75,54C69,51 62,48 56,46C50,44 44,43 38,42C32,41 25,42 19,42C13,42 3,40 0,40Z"/>
   </svg>
 </span>
+  <!-- Cinco barras y no tres: con tres se lee como un icono; con
+       cinco, cada una a su altura y a su ritmo, se lee como una onda
+       de sonido. El CSS las mueve solo mientras suena la música. -->
+  <span class="music-icon"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span></span>
+</button>
 
 <!-- ===================== NAV DE PROGRESO ===================== -->
 <nav class="dot-nav" aria-label="Navegación de secciones">
