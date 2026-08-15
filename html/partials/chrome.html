@@ -15,17 +15,32 @@
   <source src="assets/music/LaPrincesadePapa.mp3" type="audio/mpeg">
 </audio>
 <button id="musicToggle" data-music class="music-toggle" aria-label="Reproducir música" aria-pressed="false">
-  <!-- Telón líquido detrás del ecualizador. Dos manchas girando a
-       distinto ritmo: en un círculo de 52px una onda literal solo
-       dejaría ver un trozo, mientras que estas llenan el disco y dan
-       la misma sensación de fluido. Aparece al sonar y se va al
-       pausar. Decorativo, de ahí el aria-hidden. -->
-  <span class="music-wave" aria-hidden="true"><span class="music-wave__blob"></span><span class="music-wave__blob"></span></span>
   <!-- Cinco barras y no tres: con tres se lee como un icono; con
        cinco, cada una a su altura y a su ritmo, se lee como una onda
        de sonido. El CSS las mueve solo mientras suena la música. -->
   <span class="music-icon"><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span><span class="bar"></span></span>
 </button>
+
+<!-- Onda de fondo. Va FUERA del botón y detrás de él, no dentro:
+     dentro quedaba recortada por el círculo y solo se veía un trozo.
+     Aquí se ve la figura entera, desbordando el botón por los lados.
+
+     Tiene que ir después en el marcado para que el CSS pueda
+     reaccionar a aria-pressed del botón con el selector +, y queda
+     por debajo gracias al z-index, no al orden. -->
+<span class="music-wave" aria-hidden="true">
+  <!-- La silueta no se puede hacer con dos elipses: son dos bordes
+       ondulados que se juntan en punta a los lados. Los trazados
+       están generados con un seno cuya amplitud se apaga hacia los
+       extremos, que es lo que produce esas puntas.
+
+       La rosa va detrás y es la más ancha, así asoma por encima y
+       por debajo de la dorada, como en la referencia. -->
+  <svg class="music-wave__svg" viewBox="0 0 320 80" preserveAspectRatio="none" aria-hidden="true">
+    <path class="music-wave__path music-wave__path--rosa" d="M0,40C4,39 17,35 25,33C33,31 41,28 49,28C57,28 66,30 74,31C82,32 90,35 98,34C106,33 115,29 123,25C131,21 140,14 148,12C156,10 164,10 172,12C180,14 189,21 197,25C205,29 214,33 222,34C230,35 238,32 246,31C254,30 263,28 271,28C279,28 287,31 295,33C303,35 316,39 320,40 L320,40 320,40C316,41 303,43 295,45C287,47 279,52 271,54C263,56 254,58 246,57C238,56 230,52 222,50C214,48 205,46 197,47C189,48 180,54 172,57C164,61 156,67 148,68C140,69 131,68 123,65C115,62 106,55 98,52C90,49 82,46 74,45C66,44 57,47 49,47C41,47 33,47 25,46C17,45 4,41 0,40 Z"/>
+    <path class="music-wave__path music-wave__path--oro" d="M0,40C4,39 17,37 25,36C33,36 41,37 49,37C57,37 66,37 74,36C82,35 90,32 98,29C106,26 115,22 123,20C131,18 140,16 148,16C156,16 164,19 172,21C180,23 189,28 197,30C205,32 214,34 222,35C230,36 238,35 246,34C254,34 263,32 271,32C279,32 287,33 295,34C303,35 316,39 320,40 L320,40 320,40C316,41 303,43 295,45C287,47 279,50 271,51C263,52 254,53 246,53C238,53 230,50 222,49C214,48 205,45 197,45C189,45 180,47 172,49C164,51 156,55 148,57C140,59 131,62 123,62C115,62 106,60 98,58C90,56 82,53 74,50C66,48 57,44 49,43C41,42 33,43 25,42C17,42 4,40 0,40 Z"/>
+  </svg>
+</span>
 
 <!-- ===================== NAV DE PROGRESO ===================== -->
 <nav class="dot-nav" aria-label="Navegación de secciones">

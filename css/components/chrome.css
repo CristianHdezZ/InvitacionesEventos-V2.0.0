@@ -395,13 +395,31 @@
 
 .music-wave{
 
-    position:absolute;
+    /* Fija y centrada sobre el botón, que está en left:22 bottom:22
+       con 62px de lado: su centro cae en 53,53 desde esa esquina.
 
-    inset:0;
+       Mucho más ancha que alta, como la onda de la referencia. Sin
+       overflow:hidden ni border-radius: recortarla era justo lo que
+       impedía ver la figura completa. */
 
-    border-radius:50%;
+    position:fixed;
 
-    overflow:hidden;
+    /* El botón va en left:22 bottom:22 con 62px de lado, así que su
+       centro cae a 53px de las dos esquinas. La onda mide 160x100:
+       para que su centro coincida, left = 53-80 y bottom = 53-50. */
+
+    left:-27px;
+
+    bottom:3px;
+
+    width:160px;
+
+    height:100px;
+
+    /* Por debajo del botón, que va en 40. El orden del marcado no
+       decide aquí: manda el z-index. */
+
+    z-index:39;
 
     opacity:0;
 
@@ -411,7 +429,7 @@
 
 }
 
-.music-toggle[aria-pressed="true"] .music-wave{
+.music-toggle[aria-pressed="true"] + .music-wave{
 
     opacity:1;
 
@@ -427,65 +445,79 @@
    Ahora orbitan: se desplazan, giran y cambian de tamaño a la vez,
    de modo que sus contornos cruzan la zona visible. */
 
-.music-wave__blob{
+.music-wave__svg{
 
-    position:absolute;
+    display:block;
 
-    width:78%;
+    width:100%;
 
-    height:78%;
+    height:100%;
 
-    left:11%;
+    /* Un desenfoque mínimo: redondea el trazo sin deshacer la
+       silueta. A 1.5px los bordes ya perdían definición y las dos
+       ondas se confundían entre sí. */
 
-    top:11%;
-
-    border-radius:42% 58% 63% 37% / 47% 41% 59% 53%;
-
-}
-
-.music-wave__blob:nth-child(1){
-
-    background:var(--rosa, var(--color-primary));
-
-    opacity:.5;
-
-    animation:musicBlobOrbitaA 7s ease-in-out infinite;
+    filter:blur(.8px);
 
 }
 
-.music-wave__blob:nth-child(2){
+/* Rosa y oro. La clave para que se distingan una de otra no es
+   subir las dos por igual, sino separarlas: la de atrás se queda
+   en un rosa claro y la de delante lleva el oro a plena fuerza.
+   Con las dos al mismo tono se leían como una sola mancha. */
 
-    background:var(--rosa-deep, var(--color-primary-dark));
+.music-wave__path{
 
-    opacity:.34;
-
-    border-radius:58% 42% 38% 62% / 55% 62% 38% 45%;
-
-    /* Otro recorrido y otro ritmo: las dos nunca coinciden. */
-
-    animation:musicBlobOrbitaB 9.5s ease-in-out infinite;
+    transform-origin:center;
 
 }
 
-@keyframes musicBlobOrbitaA{
+.music-wave__path--rosa{
 
-    0%,100%{ transform:translate(-24%, 14%) rotate(0deg) scale(1); }
+    fill:var(--rosa, var(--color-primary));
 
-    50%{ transform:translate(20%, -12%) rotate(180deg) scale(1.18); }
+    opacity:.72;
+
+    animation:musicOndaRosa 7s ease-in-out infinite;
 
 }
 
-@keyframes musicBlobOrbitaB{
+.music-wave__path--oro{
 
-    0%,100%{ transform:translate(22%, -16%) rotate(0deg) scale(1.12); }
+    /* El oro oscuro en vez del normal: contra el rosa claro de
+       detrás, el contraste es lo que dibuja las dos siluetas. */
 
-    50%{ transform:translate(-18%, 16%) rotate(-180deg) scale(.92); }
+    fill:var(--color-gold-dark, #8E6C3D);
+
+    opacity:.62;
+
+    animation:musicOndaOro 9.5s ease-in-out infinite;
+
+}
+
+/* Se estiran y se encogen en vertical, con una deriva mínima. Sin
+   girar y sin moverse mucho: la gracia está en la forma, y un
+   desplazamiento grande la sacaría de detrás del botón. */
+
+@keyframes musicOndaRosa{
+
+    0%,100%{ transform:translateX(-3%) scaleY(1); }
+
+    50%{ transform:translateX(3%) scaleY(1.22); }
+
+}
+
+@keyframes musicOndaOro{
+
+    0%,100%{ transform:translateX(3%) scaleY(1.12); }
+
+    50%{ transform:translateX(-3%) scaleY(.86); }
 
 }
 
 @media (prefers-reduced-motion: reduce){
 
-    .music-wave__blob{
+    .music-wave__path{
 
         animation:none;
 
