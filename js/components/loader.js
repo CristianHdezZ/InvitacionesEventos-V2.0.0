@@ -125,6 +125,8 @@ const Loader = (() => {
 
         if (!loader) return;
 
+        aplicarConfig();
+
         updateProgress(0);
 
         listenBootstrap();
@@ -132,6 +134,88 @@ const Loader = (() => {
         animationPromise = runAnimation();
 
         preloadResources();
+
+    }
+
+    /* ==========================================================
+       CONFIGURACIÓN DEL PANEL
+
+       Los textos de esta pantalla se editan desde el admin. Se leen
+       de window.__configInicial, que js/include.js deja puesta antes
+       de arrancar este componente: aquí todavía no existe
+       ConfigService, que se carga con el resto del motor.
+
+       Todo es opcional. Lo que no venga se queda con lo que ya hay
+       escrito en CONFIG y en el partial, así que sin conexión o sin
+       configuración guardada la pantalla se ve igual.
+    ========================================================== */
+
+    function aplicarConfig() {
+
+        const cfg = window.__configInicial;
+
+        if (!cfg) {
+
+            return;
+
+        }
+
+        /* El nombre no es del loader: es el mismo de la invitación.
+           Se compone aquí porque ContentManager llega mucho después. */
+
+        if (name) {
+
+            const completo = [cfg.nombre, cfg.apellido]
+
+                .filter(Boolean)
+
+                .join(" ");
+
+            if (completo) {
+
+                name.textContent = completo;
+
+            }
+
+        }
+
+        const propio = cfg.loader;
+
+        if (!propio) {
+
+            return;
+
+        }
+
+        if (
+
+            Array.isArray(propio.mensajes) &&
+
+            propio.mensajes.length
+
+        ) {
+
+            CONFIG.messages = propio.mensajes;
+
+        }
+
+        if (propio.subtitulo) {
+
+            const sub = document.getElementById("loaderSubtitle");
+
+            if (sub) {
+
+                sub.textContent = propio.subtitulo;
+
+            }
+
+        }
+
+        if (propio.pausaFinal) {
+
+            CONFIG.finishDelay = propio.pausaFinal;
+
+        }
 
     }
 

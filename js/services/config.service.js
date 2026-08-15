@@ -72,6 +72,27 @@ ConfigService.load = async function () {
 
     }
 
+    /* js/include.js ya la pidió antes de arrancar el loader, que
+       necesita sus textos y se ejecuta mucho antes que este servicio.
+       Se aprovecha esa respuesta en vez de hacer una segunda petición
+       idéntica. */
+
+    if (window.__configInicial) {
+
+        this.data = window.__configInicial;
+
+        this.loaded = true;
+
+        if (typeof DataService !== "undefined") {
+
+            DataService.load(this.data);
+
+        }
+
+        return this.data;
+
+    }
+
     const controller =
 
         typeof AbortController !== "undefined"

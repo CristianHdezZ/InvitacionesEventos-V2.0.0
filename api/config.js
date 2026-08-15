@@ -153,6 +153,19 @@ const DEFAULT_CONFIG = {
     mensaje: 'Tu presencia es mi mejor regalo. Si además deseas obsequiarme algo, un sobre con tu cariño será recibido con todo el corazón.',
     detalle: ''
   },
+  // Pantalla de carga. Se lee antes que nada mas —ver js/include.js—,
+  // por eso vive aparte y no depende del resto de la configuracion.
+  loader: {
+    mensajes: [
+      'Cada historia tiene\nun momento inolvidable...',
+      'Hoy comienza el mío.',
+      'Mis XV Años',
+      'Es un placer invitarte.'
+    ],
+    subtitulo: 'Preparando una experiencia especial...',
+    // Milisegundos que se mantiene el ultimo mensaje antes de irse.
+    pausaFinal: 1500
+  },
   ubicacion: {
     nombreLugar: 'Salón de Eventos Imperial Eventos Deluxe',
     direccion: 'Cr 40ªª Nº 48ª -12 Sector UCO Rionegro- Antioquia',
@@ -362,6 +375,20 @@ function sanitizeConfig(body) {
     mapaEmbedEntrante = undefined;
   }
 
+  // Los saltos de linea se conservan: el loader los usa para partir un
+  // mensaje en dos renglones. sanitizeText no los toca.
+  const loaderMensajes = Array.isArray(b?.loader?.mensajes)
+    ? b.loader.mensajes.slice(0, 6).map((m) => sanitizeText(m, 90, '')).filter(Boolean)
+    : null;
+
+  const loader = {
+    // Si se quedan todos vacios se vuelve a los de fabrica: una
+    // pantalla de carga muda no aporta nada.
+    mensajes: loaderMensajes && loaderMensajes.length ? loaderMensajes : d.loader.mensajes,
+    subtitulo: sanitizeText(b?.loader?.subtitulo, 80, d.loader.subtitulo),
+    pausaFinal: sanitizeEntero(b?.loader?.pausaFinal, 300, 6000, d.loader.pausaFinal)
+  };
+
   const ubicacion = {
     nombreLugar: sanitizeText(b?.ubicacion?.nombreLugar, 150, d.ubicacion.nombreLugar),
     direccion: sanitizeText(b?.ubicacion?.direccion, 250, d.ubicacion.direccion),
@@ -424,6 +451,7 @@ function sanitizeConfig(body) {
     itinerario,
     vestimenta,
     regalos,
+    loader,
     ubicacion,
     galeria: galeria.length ? galeria : d.galeria
   };

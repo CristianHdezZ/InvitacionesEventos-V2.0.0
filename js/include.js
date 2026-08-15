@@ -343,6 +343,47 @@ async function loadLoaderScript(){
 }
 
 /* ==========================================================
+   CONFIGURACIÓN INICIAL
+
+   Se deja en window para que la lean tanto el loader —que arranca
+   antes de que exista el motor— como ConfigService después.
+
+   Si falla no se hace nada: cada parte tiene sus valores por
+   defecto y la invitación se ve igual, solo que sin lo que hubiera
+   guardado el panel.
+========================================================== */
+
+async function cargarConfigInicial(){
+
+    try{
+
+        const respuesta = await fetch("/api/config", { cache: "no-cache" });
+
+        if(!respuesta.ok){
+
+            return;
+
+        }
+
+        const cuerpo = await respuesta.json();
+
+        if(cuerpo && cuerpo.ok === true && cuerpo.config){
+
+            window.__configInicial = cuerpo.config;
+
+        }
+
+    }
+
+    catch(error){
+
+        /* Sin conexión o API caída: se sigue con los valores del HTML. */
+
+    }
+
+}
+
+/* ==========================================================
    BOOTSTRAP
 ========================================================== */
 
@@ -360,6 +401,18 @@ async function bootstrap() {
     await loadLoader();
 
     await loadLoaderScript();
+
+    /* La configuración se pide AQUÍ, antes de arrancar el loader, y no
+       más tarde en ConfigService.
+
+       El loader es lo primero que se ve y sus textos también se editan
+       desde el panel, pero cuando arranca todavía no existe
+       ConfigService: se carga con el resto del motor, mucho después.
+
+       No son dos peticiones: lo que se lea aquí queda guardado y
+       ConfigService lo reutiliza en vez de volver a pedirlo. */
+
+    await cargarConfigInicial();
 
     if (window.Loader) {
 
